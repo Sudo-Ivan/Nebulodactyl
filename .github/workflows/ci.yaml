@@ -236,3 +236,45 @@ jobs:
 
       - name: Run tests
         run: php vendor/bin/phpunit
+
+  # sqlite is supported for small deployments but upstream migrations are
+  # not exercised against it by the wider ecosystem, so this job reports
+  # status without gating merges.
+  tests-sqlite:
+    name: Tests (PHP 8.4 / sqlite, experimental)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    continue-on-error: true
+    permissions:
+      contents: read
+    steps:
+      - name: Harden the runner
+        uses: step-security/harden-runner@e14015d583714f6e62063499dc959a02595150a1 # v2.21.1
+        with:
+          egress-policy: audit
+
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
+        with:
+          php-version: '8.4'
+          extensions: bcmath, gd, pdo, pdo_sqlite, zip
+          tools: composer
+
+      - name: Install dependencies
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Prepare environment
+        run: |
+          cp .env.ci .env
+          touch database/testing.sqlite
+          php artisan key:generate
+          echo "DB_CONNECTION=sqlite" >> .env
+          echo "DB_DATABASE=$PWD/database/testing.sqlite" >> .env
+
+      - name: Run tests
+        run: php vendor/bin/phpunit

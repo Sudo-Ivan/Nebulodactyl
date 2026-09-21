@@ -37,6 +37,11 @@ class RouteServiceProvider extends ServiceProvider
         Route::model('database', Database::class);
 
         $this->routes(function () {
+            // Liveness probe for reverse proxies and container platforms
+            // (Traefik, Coolify, kubernetes). Unauthenticated by design: it
+            // reports only that the application is serving requests.
+            Route::get('/healthz', fn () => response()->json(['status' => 'ok']));
+
             Route::middleware('web')->group(function () {
                 Route::middleware(['auth.session', RequireTwoFactorAuthentication::class])
                     ->group(base_path('routes/base.php'));

@@ -100,6 +100,22 @@ return [
             'sslmode' => env('DB_SSLMODE', 'prefer'),
         ],
 
+        // SQLite for small self-hosted deployments where running a
+        // separate database server is overkill. Set DB_CONNECTION=sqlite
+        // and DB_DATABASE to an absolute path, or leave it unset to use
+        // database/database.sqlite.
+        'sqlite' => [
+            'driver' => 'sqlite',
+            'url' => env('DB_URL', env('DATABASE_URL')),
+            'database' => env('DB_DATABASE', database_path('database.sqlite')),
+            'prefix' => env('DB_PREFIX', ''),
+            'prefix_indexes' => true,
+            'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
+            'busy_timeout' => env('DB_BUSY_TIMEOUT'),
+            'journal_mode' => env('DB_JOURNAL_MODE'),
+            'synchronous' => env('DB_SYNCHRONOUS'),
+        ],
+
     ],
 
     /*

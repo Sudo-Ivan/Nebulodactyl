@@ -103,5 +103,7 @@ RUN rm -rf bootstrap/cache/*.php \
     && rm -rf storage/framework/* || true
 
 EXPOSE 80 443
+HEALTHCHECK --interval=30s --timeout=5s --start-period=90s --retries=3 \
+    CMD wget -q -O /dev/null http://127.0.0.1/healthz || exit 1
 ENTRYPOINT [ "/bin/ash", ".github/docker/entrypoint.sh" ]
 CMD [ "supervisord", "-n", "-c", "/etc/supervisord.conf" ]

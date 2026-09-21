@@ -28,6 +28,7 @@ public/assets/manifest.json
 
 # For local development with docker
 docker-compose.yml
+!examples/coolify/docker-compose.yml
 local_docker
 /srv
 /var
@@ -58,3 +59,9 @@ nix/docker/maria/mariadb_data/
 nix/mariadb/
 mariadb_data/
 .env.lerd_override
+
+# Nebula agent and sqlite artifacts
+/nebulod
+/agent/nebulod
+*.sqlite
+*.sqlite-journal
