@@ -57,8 +57,8 @@ jobs:
         with:
           persist-credentials: false
 
-      # version is pinned explicitly: action-setup cannot parse the
-      # sha512 integrity hash appended to the packageManager field.
+      # version is pinned explicitly so action-setup does not have to
+      # resolve the packageManager field.
       - name: Setup pnpm
         uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v5
         with:

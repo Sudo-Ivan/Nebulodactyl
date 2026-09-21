@@ -114,5 +114,5 @@
         "test:integration": "php vendor/bin/phpunit --testsuite=Integration"
     },
     "browserslist": ["> 0.5%", "last 2 versions", "firefox esr", "not dead"],
-    "packageManager": "pnpm@12.5.1+sha512.4/MFvHhKK8ifWtO2E4iJRw+ujSr182thIW7JHCw9ZAiXdfneOKrDMQROpA8kXLDVZmOS399lgk4ZB+9qLGLeXw=="
+    "packageManager": "pnpm@12.5.1"
 }
