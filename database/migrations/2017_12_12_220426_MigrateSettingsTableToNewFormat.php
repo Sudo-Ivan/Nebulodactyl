@@ -13,6 +13,20 @@ class MigrateSettingsTableToNewFormat extends Migration
   public function up(): void
   {
     DB::table('settings')->truncate();
+
+    // SQLite cannot add a primary key column to an existing table. The
+    // data is truncated anyway, so recreate the table with the new schema.
+    if (DB::getDriverName() === 'sqlite') {
+      Schema::drop('settings');
+      Schema::create('settings', function (Blueprint $table) {
+        $table->increments('id');
+        $table->string('key')->unique();
+        $table->text('value');
+      });
+
+      return;
+    }
+
     Schema::table('settings', function (Blueprint $table) {
       $table->increments('id')->first();
     });
