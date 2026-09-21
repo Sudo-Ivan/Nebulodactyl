@@ -1,133 +1,64 @@
-<h1 align="center">Todolist</h1>
+# TODO
 
-<br/>
+Open work for Nebulodactyl. Items are roughly ordered by priority within
+each section.
 
-A living roadmap of the features and improvements planned for Nebulodactyl. Checked items reflect the current state of the `main` branch.
+## Security
 
-> [!NOTE]
-> Nebulodactyl is under active development. This list is not exhaustive - check [DEV.md](./DEV.md) and the open issues on GitHub for the latest status.
+- [ ] Upload session binding to file metadata: bind session ids to
+  expected file size or a content hash so a resumed upload cannot
+  continue into a file another writer truncated or replaced
+- [ ] Orphaned partial upload cleanup: registry entries are swept, but
+  partial files on disk are not; add a periodic cleanup keyed off
+  upload session paths
+- [ ] Subdomain endpoints use allocation.* as a shared permission;
+  decide whether finer-grained keys are worth adding
+- [ ] Structured audit events: remote mutations are covered; extend to
+  panel-side admin mutations that still bypass the activity log
 
-## Wings Automation
+## Features
 
-- [ ] Fully automate Wings configuration
-  - [ ] Automate debug mode configuration
-  - [ ] Automate machine-id configuration
+- [ ] Panel-side bandwidth metering: daemon counters are wired and
+  tested end to end, but nothing aggregates or displays them in the
+  panel
+- [ ] Transfer progress UI: history list and active endpoints exist on
+  the admin manage page; add live per-transfer progress from daemon
+  stats
+- [ ] Backup integrity beyond existence: verify snapshot readability
+  and checksums, not just object presence; surface details in the UI
+- [ ] OIDC group mapping for non-admin roles: root_admin is mapped
+  from groups; extend to subuser or custom roles if needed
 
-## Auth Pages
+## UI
 
-- [x] Login Page
-- [x] Password Reset Page
-- [x] 2FA Page
+- [ ] More showcase screenshots: files, backups, settings, admin node
+  view; current set covers login, dashboard, console, network,
+  schedules
+- [ ] Light mode contrast audit across remaining views
+- [ ] Upload conflict indicators: resumed badge exists; add a warning
+  when a same-name file is skipped or replaced
 
-## Homepage
+## Infra
 
-- [x] Search Bar (server search, sorting & filtering)
-  - [x] Design layout
-  - [x] Keyboard shortcut integration (`Cmd + K`)
-  - [x] Search functionality
-- [x] Servers Page (server list)
-- [x] API Keys Page
-- [x] SSH Keys Page
-- [x] Settings Page
-- [x] Sidebar Navigation
+- [ ] SLSA provenance validation step and documented verification
+  commands for release artifacts
+- [ ] Docker image matrix still pending on latest push; verify
+  buildx matrix completes
+- [ ] k3s manifests need a real deployment test, not just lint
 
-## Server Pages
+## Done
 
-- [x] Sidebar Navigation
-
-### Console
-
-- [x] Console view
-- [x] System resource graphs
-- [x] Power actions
-- [x] Server Features
-  - [x] Minecraft EULA prompt
-  - [x] Java version selector
-  - [x] McLogs integration
-  - [x] Hytale feature support
-  - [x] Steam disk space meter
-
-### Files
-
-- [x] File Explorer System
-  - [ ] Shift + Click range selection
-  - [x] Improved path change handling (breadcrumbs)
-  - [x] Context action menu
-  - [x] File MIME-type icons
-- [ ] File Editor
-  - [ ] Reduce editor bundle size
-
-### Databases
-
-- [x] New database model
-- [x] Redesigned database display UI
-- [x] PostgreSQL support
-
-### Backups
-
-- [x] Redesigned, less cluttered backup list UI
-- [ ] Admin panel setting for backup creation limits per time period
-- [ ] Shift + Click range selection for backups
-
-### Network
-
-- [x] General UI fixes and color scheme updates
-- [x] Subdomain Management (Cloudflare, Bunny.net, and more)
-
-### Users
-
-- [ ] Permission Groups
-- [ ] Permission Presets
-- [ ] Clean up / de-clutter interface
-
-### Startup
-
-- [x] One-click copy for environment variables
-- [x] Redesigned "Startup Command" field
-- [x] Improved Docker Image Selector
-
-### Schedules
-
-- [x] De-clutter "Create New Schedule" modal
-- [ ] Custom Actions system (Admins & Users)
-  - [ ] Send HTTP Request action
-  - [ ] Interact with another owned server
-    - [ ] Add "Actions Interactable" user permission
-- [ ] Failure Alert Notifications
-  - [ ] Email alerts
-  - [ ] Discord webhooks
-  - [ ] Slack integration
-  - [ ] Mattermost integration
-
-### Activity
-
-- [x] Filter system
-- [ ] Fix search restricted to current page (enable global search)
-- [ ] Improve search/filter UX & overall feel
-
-### Software
-
-- [x] Redesigned page with verbose configuration options
-- [x] Modularized code (split into ~200-400 line components)
-- [x] Simplified component logic
-- [ ] Optimize page performance
-
-## Marketplace
-
-- [x] Native plugin/mod installer (Modrinth, Hangar, Spiget)
-- [x] Install history and management
-- [x] Marketplace client API
-
-## General Changes
-
-- [x] Redesigned dropdown menus across pages
-- [x] Backups Page
-- [x] Files Page
-- [x] Software / Shell Page
-- [x] Startup Page
-
-## In Progress
-
-- [ ] Admin Panel Redesign
-  - [ ] Convert Admin Panel pages to React (dashboard overview is done)
-  - [ ] Redesign UI to match Client-side styling
+- [x] Remote API node-binding integration tests
+- [x] Upload session ids, offsets, ownership, TTL sweep
+- [x] Aggregate multipart upload limit
+- [x] Structured audit events for remote API mutations
+- [x] Node health and overlay status on admin node page
+- [x] Backup verification badges in the UI
+- [x] Permission enforcement parity (wildcard routes, elytra,
+  marketplace mod.* keys, dead request classes removed)
+- [x] OIDC group to root_admin mapping
+- [x] Upload resume indicator in file manager
+- [x] Collapsed sidebar width (64px icon rail)
+- [x] Live-data showcase screenshots
+- [x] CI action pins on Node 24 runtimes, checksum attestation
+- [x] Daemon bandwidth counter tests
