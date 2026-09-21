@@ -91,7 +91,7 @@ class OidcController extends Controller
         $externalId = config('oidc.external_id_prefix') . $claims['sub'];
 
         if ($user = User::query()->where('external_id', $externalId)->first()) {
-            return $user;
+            return $this->syncAdminRole($user, $claims, false);
         }
 
         if ($user = User::query()->where('email', $claims['email'])->first()) {
@@ -116,7 +116,7 @@ class OidcController extends Controller
 
             $user->update(['external_id' => $externalId]);
 
-            return $user;
+            return $this->syncAdminRole($user, $claims, true);
         }
 
         if (!config('oidc.auto_register')) {
@@ -126,7 +126,7 @@ class OidcController extends Controller
         // No password is passed so the service generates one and sends the
         // new account email, which also gives the SSO user a way to set a
         // local password for API clients that do not support OIDC.
-        return $this->creationService->handle([
+        $user = $this->creationService->handle([
             'external_id' => $externalId,
             'username' => $this->uniqueUsername($claims),
             'email' => $claims['email'],
@@ -134,6 +134,36 @@ class OidcController extends Controller
             'name_last' => $claims['family_name'] ?? '',
             'password' => Str::random(64),
         ]);
+
+        return $this->syncAdminRole($user, $claims, true);
+    }
+
+    /**
+     * Map provider group membership onto the root_admin role. With sync
+     * enabled the role mirrors the mapped groups on every login and is
+     * removed when the user leaves them. Without sync, membership grants
+     * the role once when the account is first linked or created and is
+     * never revoked.
+     */
+    protected function syncAdminRole(User $user, array $claims, bool $firstLink): User
+    {
+        $adminGroups = config('oidc.admin_groups', []);
+        if (empty($adminGroups)) {
+            return $user;
+        }
+
+        $groups = $claims[config('oidc.groups_claim', 'groups')] ?? [];
+        $isAdmin = is_array($groups) && !empty(array_intersect($groups, $adminGroups));
+
+        if (config('oidc.sync_admin_role')) {
+            if ($user->root_admin !== $isAdmin) {
+                $user->update(['root_admin' => $isAdmin]);
+            }
+        } elseif ($firstLink && $isAdmin && !$user->root_admin) {
+            $user->update(['root_admin' => true]);
+        }
+
+        return $user;
     }
 
     /**

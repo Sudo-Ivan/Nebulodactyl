@@ -140,4 +140,129 @@ class OidcCallbackTest extends IntegrationTestCase
         $this->assertGuest();
         $this->assertNull(User::query()->where('email', 'ghost@example.com')->first());
     }
+
+    public function testGroupMemberIsGrantedRootAdminOnFirstLogin()
+    {
+        $this->subject = 'subject-admin';
+        $this->fakeProvider();
+        config()->set('oidc.auto_register', true);
+        config()->set('oidc.admin_groups', ['panel-admins']);
+        $this->userinfo = [
+            'email' => 'newadmin@example.com',
+            'email_verified' => true,
+            'groups' => ['panel-admins', 'users'],
+        ];
+
+        $this->callbackRequest()->assertRedirect();
+
+        $user = User::query()->where('email', 'newadmin@example.com')->first();
+        $this->assertNotNull($user);
+        $this->assertTrue($user->root_admin);
+    }
+
+    public function testNonMemberIsNotGrantedRootAdmin()
+    {
+        $this->subject = 'subject-member';
+        $this->fakeProvider();
+        config()->set('oidc.auto_register', true);
+        config()->set('oidc.admin_groups', ['panel-admins']);
+        $this->userinfo = [
+            'email' => 'member@example.com',
+            'email_verified' => true,
+            'groups' => ['users'],
+        ];
+
+        $this->callbackRequest()->assertRedirect();
+
+        $user = User::query()->where('email', 'member@example.com')->first();
+        $this->assertNotNull($user);
+        $this->assertFalse($user->root_admin);
+    }
+
+    public function testGroupMemberIsGrantedRootAdminWhenLinkingByEmail()
+    {
+        $this->subject = 'subject-link-admin';
+        $this->fakeProvider();
+        config()->set('oidc.admin_groups', ['panel-admins']);
+
+        $user = User::factory()->create(['email' => 'linked@example.com']);
+
+        $this->userinfo = [
+            'email' => 'linked@example.com',
+            'email_verified' => true,
+            'groups' => ['panel-admins'],
+        ];
+        $this->callbackRequest();
+
+        $this->assertAuthenticated();
+        $this->assertTrue($user->fresh()->root_admin);
+    }
+
+    public function testSyncAdminRoleRemovesRootAdminWhenGroupsNoLongerMatch()
+    {
+        $this->subject = 'subject-ex-admin';
+        $this->fakeProvider();
+        config()->set('oidc.sync_admin_role', true);
+        config()->set('oidc.admin_groups', ['panel-admins']);
+
+        $user = User::factory()->create([
+            'external_id' => 'oidc:' . $this->subject,
+            'root_admin' => true,
+        ]);
+
+        $this->userinfo = [
+            'email' => $user->email,
+            'email_verified' => true,
+            'groups' => ['users'],
+        ];
+        $this->callbackRequest();
+
+        $this->assertAuthenticatedAs($user);
+        $this->assertFalse($user->fresh()->root_admin);
+    }
+
+    public function testSyncAdminRoleGrantsRootAdminOnLogin()
+    {
+        $this->subject = 'subject-sync-admin';
+        $this->fakeProvider();
+        config()->set('oidc.sync_admin_role', true);
+        config()->set('oidc.admin_groups', ['panel-admins']);
+
+        $user = User::factory()->create([
+            'external_id' => 'oidc:' . $this->subject,
+        ]);
+
+        $this->userinfo = [
+            'email' => $user->email,
+            'email_verified' => true,
+            'groups' => ['panel-admins'],
+        ];
+        $this->callbackRequest();
+
+        $this->assertAuthenticatedAs($user);
+        $this->assertTrue($user->fresh()->root_admin);
+    }
+
+    public function testWithoutSyncAdminRoleRootAdminIsNeverRemoved()
+    {
+        $this->subject = 'subject-keep-admin';
+        $this->fakeProvider();
+        config()->set('oidc.sync_admin_role', false);
+        config()->set('oidc.admin_groups', ['panel-admins']);
+
+        $user = User::factory()->create([
+            'external_id' => 'oidc:' . $this->subject,
+            'root_admin' => true,
+        ]);
+
+        $this->userinfo = [
+            'email' => $user->email,
+            'email_verified' => true,
+            'groups' => ['users'],
+        ];
+        $this->callbackRequest();
+
+        $this->assertAuthenticatedAs($user);
+        $this->assertTrue($user->fresh()->root_admin);
+    }
 }

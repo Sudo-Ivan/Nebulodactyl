@@ -39,6 +39,19 @@ return [
     // its email address.
     'require_verified_email' => env('OIDC_REQUIRE_VERIFIED_EMAIL', true),
 
+    // Claim that carries the user's group list as an array of strings.
+    'groups_claim' => env('OIDC_GROUPS_CLAIM', 'groups'),
+
+    // Comma separated provider groups that map to the panel root_admin
+    // role, e.g. OIDC_ADMIN_GROUPS="panel-admins,it-ops".
+    'admin_groups' => array_filter(explode(',', env('OIDC_ADMIN_GROUPS', ''))),
+
+    // When true, root_admin is synced from group membership on every
+    // login and removed when the user leaves the mapped groups. When
+    // false, membership only grants root_admin on first link or create
+    // and is never revoked.
+    'sync_admin_role' => env('OIDC_SYNC_ADMIN_ROLE', false),
+
     // Attribute used to link provider identities to panel accounts.
     'external_id_prefix' => 'oidc:',
 ];
