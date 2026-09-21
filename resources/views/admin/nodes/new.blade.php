@@ -43,7 +43,7 @@
                         <label for="pDaemonType" class="form-label">Daemon</label>
                         <select name="daemonType" id="pDaemonType" class="form-control">
                             @foreach($daemonTypes as $daemon => $label)
-                                <option value="{{ $daemon }}" {{ $daemon == old('daemon_type', 'wings') ? 'selected' : '' }}>
+                                <option value="{{ $daemon }}" {{ $daemon == old('daemon_type', 'comet') ? 'selected' : '' }}>
                                     {{ $label }}
                                 </option>
                             @endforeach
