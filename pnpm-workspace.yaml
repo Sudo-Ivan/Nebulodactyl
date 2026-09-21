@@ -1,3 +1,21 @@
+# Supply-chain hardening (pnpm settings)
+# https://pnpm.io/supply-chain-security
+
+# Do not install package versions younger than one week.
+minimumReleaseAge: 10080
+
+# Fail installs if a dependency requests build scripts not in allowBuilds.
+strictDepBuilds: true
+
+# Transitive deps must resolve from the registry, not git/tarball URLs.
+blockExoticSubdeps: true
+
+# Fail if a package's trust level (trusted publisher/provenance) regresses.
+# Only applies to versions published in the last 30 days; older releases
+# predate provenance/trusted publishing and would false-positive.
+trustPolicy: no-downgrade
+trustPolicyIgnoreAfter: 43200
+
 allowBuilds:
   '@carbon/icon-helpers': true
   '@carbon/icons-react': true

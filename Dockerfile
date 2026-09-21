@@ -2,12 +2,12 @@
 
 # Stage 0:
 # Build the frontend (only if not in dev mode)
-FROM --platform=$TARGETOS/$TARGETARCH node:lts-alpine AS frontend
+FROM --platform=$TARGETOS/$TARGETARCH node:24-alpine AS frontend
 ARG DEV=false
 WORKDIR /app
 RUN if [ "$DEV" = "false" ]; then \
     apk add --no-cache git \
-    && npm install -g corepack@latest turbo \
+    && npm install -g corepack@0.36.0 \
     && corepack enable \
     && echo "Building frontend"; \
     fi
