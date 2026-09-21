@@ -67,6 +67,9 @@ func getServerWebsocket(c *gin.Context) {
 	s.Websockets().Push(handler.Uuid(), &cancel)
 	handler.Logger().Debug("opening connection to server websocket")
 	defer s.Websockets().Remove(handler.Uuid())
+	// Release any open upload session when the loop exits so a dropped
+	// client does not hold the path claim until the session TTL expires.
+	defer handler.CloseUpload()
 
 	go func() {
 		select {

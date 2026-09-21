@@ -67,10 +67,14 @@ type Handler struct {
 	limiter      *LimiterBucket
 
 	// Active chunked upload state. Only one upload is tracked per
-	// connection; a second start request is rejected while one is open.
-	uploadPath   string
-	uploadOffset int64
-	uploading    bool
+	// connection; a second start request is rejected while one is open. The
+	// session ID is issued by the daemon on upload start and must be echoed
+	// back on every chunk so a stale or hijacked stream cannot write into
+	// the file.
+	uploadPath      string
+	uploadOffset    int64
+	uploadSessionID string
+	uploading       bool
 }
 
 var (
@@ -522,32 +526,58 @@ func (h *Handler) handleUploadStart(m Message) error {
 		offset = st.Size()
 	}
 
+	// Claim the path for this connection so a second connection cannot open
+	// its own session on the same file and interleave chunks.
+	sessionID, ok := claimUpload(h.server.ID(), path, h.uuid)
+	if !ok {
+		_ = h.SendJson(Message{Event: ErrorEvent, Args: []string{"an upload to this file is already in progress on another connection"}})
+		return nil
+	}
+
 	h.uploading = true
 	h.uploadPath = path
 	h.uploadOffset = offset
+	h.uploadSessionID = sessionID
 	h.Connection.SetReadLimit(uploadReadLimit)
 
 	_ = h.SendJson(Message{
 		Event: UploadReadyEvent,
-		Args:  []string{path, strconv.FormatInt(offset, 10)},
+		Args:  []string{path, strconv.FormatInt(offset, 10), sessionID},
 	})
 	return nil
 }
 
 // handleUploadChunk writes one base64 encoded chunk at the tracked offset.
 // The client must wait for the progress ack before sending the next chunk,
-// which keeps ordering and offsets simple.
+// which keeps ordering and offsets simple. Args are the session ID issued
+// by upload ready, the offset the client believes it is writing at, and the
+// base64 payload; both are verified against the tracked session state.
 func (h *Handler) handleUploadChunk(m Message) error {
-	if !h.uploading || len(m.Args) < 1 {
+	if !h.uploading || len(m.Args) < 3 {
 		_ = h.SendJson(Message{Event: ErrorEvent, Args: []string{"no upload in progress"}})
 		return nil
 	}
-	if len(m.Args[0]) > maxUploadChunkEncoded {
+
+	// Reject chunks for a different session or a different connection
+	// entirely, and chunks claiming an offset that does not match where the
+	// session actually is. A stale chunk after a resume or truncation would
+	// otherwise corrupt the file silently.
+	if m.Args[0] != h.uploadSessionID || !touchUpload(h.server.ID(), h.uploadPath, m.Args[0], h.uuid) {
+		_ = h.SendJson(Message{Event: ErrorEvent, Args: []string{"invalid upload session"}})
+		return nil
+	}
+	clientOffset, err := strconv.ParseInt(m.Args[1], 10, 64)
+	if err != nil || clientOffset != h.uploadOffset {
+		_ = h.SendJson(Message{Event: ErrorEvent, Args: []string{"upload offset mismatch"}})
+		return nil
+	}
+
+	if len(m.Args[2]) > maxUploadChunkEncoded {
 		_ = h.SendJson(Message{Event: ErrorEvent, Args: []string{"upload chunk exceeds the maximum size"}})
 		return nil
 	}
 
-	data, err := base64.StdEncoding.DecodeString(m.Args[0])
+	data, err := base64.StdEncoding.DecodeString(m.Args[2])
 	if err != nil {
 		_ = h.SendJson(Message{Event: ErrorEvent, Args: []string{"invalid upload chunk encoding"}})
 		return nil
@@ -556,7 +586,7 @@ func (h *Handler) handleUploadChunk(m Message) error {
 	// Enforce the same per-file upload limit as the HTTP endpoints, keyed off
 	// the accumulated offset so a chunked session cannot grow a file past it.
 	maxFileSizeBytes := config.Get().Api.UploadLimit * 1024 * 1024
-	if h.uploadOffset+int64(len(data)) > maxFileSizeBytes {
+	if h.uploadOffset+int64(len(data)) > maxFileSizeBytes || h.uploadOffset+int64(len(data)) < 0 {
 		_ = h.SendJson(Message{Event: ErrorEvent, Args: []string{"file exceeds the maximum upload size"}})
 		return nil
 	}
@@ -599,10 +629,21 @@ func (h *Handler) handleUploadAbort() error {
 }
 
 func (h *Handler) resetUpload() {
+	if h.uploading && h.uploadSessionID != "" {
+		releaseUpload(h.server.ID(), h.uploadPath, h.uploadSessionID, h.uuid)
+	}
 	h.uploading = false
 	h.uploadPath = ""
 	h.uploadOffset = 0
+	h.uploadSessionID = ""
 	h.Connection.SetReadLimit(defaultReadLimit)
+}
+
+// CloseUpload releases any open upload session. Called when the connection
+// read loop exits so a dropped client does not hold the path claim until the
+// session TTL expires.
+func (h *Handler) CloseUpload() {
+	h.resetUpload()
 }
 
 // IsUploading reports whether a chunked upload session is open on this

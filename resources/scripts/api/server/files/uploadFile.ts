@@ -102,6 +102,7 @@ const uploadOverSocket = async (
     directory: string,
     signal: AbortSignal,
     onProgress: (loaded: number) => void,
+    onResume?: (offset: number) => void,
 ): Promise<void> => {
     const { token, socket } = await getSocketCredentials(uuid);
     const path = `${directory.replace(/\/+$/, '')}/${file.name}`;
@@ -127,6 +128,12 @@ const uploadOverSocket = async (
         sendEvent(ws, 'file upload start', [path]);
         const ready = await awaitEvent(ws, ['upload ready'], signal);
         let offset = Number(ready.args?.[1] ?? 0);
+        const session = ready.args?.[2] ?? '';
+        if (!session) {
+            // Older daemons did not issue session IDs; without one the
+            // daemon cannot verify chunk ordering, so fall back to HTTP.
+            throw new Error('daemon did not provide an upload session');
+        }
         if (!Number.isFinite(offset) || offset < 0) {
             offset = 0;
         }
@@ -136,11 +143,14 @@ const uploadOverSocket = async (
             // through the HTTP path which truncates on offset 0.
             throw new Error('stored upload offset exceeds the file size');
         }
+        if (offset > 0) {
+            onResume?.(offset);
+        }
         onProgress(offset);
 
         while (offset < file.size) {
             const buffer = await file.slice(offset, offset + WS_CHUNK_SIZE).arrayBuffer();
-            sendEvent(ws, 'file upload chunk', [toBase64(buffer)]);
+            sendEvent(ws, 'file upload chunk', [session, String(offset), toBase64(buffer)]);
 
             const ack = await awaitEvent(ws, ['upload progress'], signal);
             const acked = Number(ack.args?.[1] ?? 0);
@@ -177,6 +187,7 @@ const uploadOverHttp = async (
     directory: string,
     signal: AbortSignal,
     onProgress: (loaded: number) => void,
+    onResume?: (offset: number) => void,
 ): Promise<void> => {
     const url = await getFileUploadUrl(uuid);
     const params = { directory, name: file.name };
@@ -193,6 +204,9 @@ const uploadOverHttp = async (
     } catch {
         // Daemons without resume support just get a full PUT below.
         offset = 0;
+    }
+    if (offset > 0) {
+        onResume?.(offset);
     }
     onProgress(offset);
 
@@ -230,6 +244,7 @@ export default async function uploadFile(
     directory: string,
     signal: AbortSignal,
     onProgress: (loaded: number) => void,
+    onResume?: (offset: number) => void,
 ): Promise<void> {
     if (daemonType() !== 'comet') {
         const url = await getFileUploadUrl(uuid);
@@ -247,11 +262,11 @@ export default async function uploadFile(
     }
 
     try {
-        await uploadOverSocket(uuid, file, directory, signal, onProgress);
+        await uploadOverSocket(uuid, file, directory, signal, onProgress, onResume);
     } catch (error) {
         if (signal.aborted) {
             throw error;
         }
-        await uploadOverHttp(uuid, file, directory, signal, onProgress);
+        await uploadOverHttp(uuid, file, directory, signal, onProgress, onResume);
     }
 }

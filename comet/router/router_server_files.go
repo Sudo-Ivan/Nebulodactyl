@@ -615,6 +615,13 @@ func postServerUploadFiles(c *gin.Context) {
 		totalSize += header.Size
 	}
 
+	// Fail the whole batch upfront if it cannot fit in the remaining disk
+	// allowance rather than writing part of the set and erroring midway.
+	if err := s.Filesystem().HasSpaceFor(totalSize); err != nil {
+		middleware.CaptureAndAbort(c, err)
+		return
+	}
+
 	for _, header := range headers {
 		// We run this in a different method so I can use defer without any of
 		// the consequences caused by calling it in a loop.

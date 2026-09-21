@@ -27,9 +27,8 @@ const UploadButton = () => {
     const name = ServerContext.useStoreState((state) => state.server.data?.name);
     const uuid = ServerContext.useStoreState((state) => state.server.data?.uuid);
     const directory = ServerContext.useStoreState((state) => state.files.directory);
-    const { clearFileUploads, removeFileUpload, pushFileUpload, setUploadProgress } = ServerContext.useStoreActions(
-        (actions) => actions.files,
-    );
+    const { clearFileUploads, removeFileUpload, pushFileUpload, setUploadProgress, setUploadResumed } =
+        ServerContext.useStoreActions((actions) => actions.files);
 
     useEventListener(
         'dragenter',
@@ -74,12 +73,17 @@ const UploadButton = () => {
             const controller = new AbortController();
             pushFileUpload({
                 name: file.name,
-                data: { abort: controller, loaded: 0, total: file.size },
+                data: { abort: controller, loaded: 0, resumed: false, total: file.size },
             });
 
             return () =>
-                uploadFile(uuid, file, directory, controller.signal, (loaded) =>
-                    setUploadProgress({ name: file.name, loaded }),
+                uploadFile(
+                    uuid,
+                    file,
+                    directory,
+                    controller.signal,
+                    (loaded) => setUploadProgress({ name: file.name, loaded }),
+                    () => setUploadResumed(file.name),
                 ).then(() => timeouts.push(setTimeout(() => removeFileUpload(file.name), 500)));
         });
 

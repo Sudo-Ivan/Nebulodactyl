@@ -74,6 +74,25 @@ const FileUploadList = () => {
                             </Tooltip.Portal>
                         </Tooltip.Root>
                         <Code className={'flex-1 truncate'}>{name}</Code>
+                        {file.resumed && (
+                            <Tooltip.Root delayDuration={200}>
+                                <Tooltip.Trigger asChild>
+                                    <span className='shrink-0 text-xs font-medium px-2 py-0.5 rounded bg-blue-500/15 border border-blue-500/25 text-blue-300'>
+                                        Resumed
+                                    </span>
+                                </Tooltip.Trigger>
+                                <Tooltip.Portal>
+                                    <Tooltip.Content
+                                        side='top'
+                                        className='px-2 py-1 text-sm bg-gray-800 text-cream-100 rounded shadow-lg z-9999'
+                                        sideOffset={5}
+                                    >
+                                        Continuing a partial upload found on the server
+                                        <Tooltip.Arrow className='fill-gray-800' />
+                                    </Tooltip.Content>
+                                </Tooltip.Portal>
+                            </Tooltip.Root>
+                        )}
                         <Tooltip.Root delayDuration={200}>
                             <Tooltip.Trigger asChild>
                                 <Button

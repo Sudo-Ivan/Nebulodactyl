@@ -4,6 +4,7 @@ import { cleanDirectoryPath } from '@/helpers';
 
 interface FileUploadData {
     loaded: number;
+    resumed: boolean;
     readonly abort: AbortController;
     readonly total: number;
 }
@@ -23,6 +24,7 @@ interface ServerFileStore {
 
     pushFileUpload: Action<ServerFileStore, { name: string; data: FileUploadData }>;
     setUploadProgress: Action<ServerFileStore, { name: string; loaded: number }>;
+    setUploadResumed: Action<ServerFileStore, string>;
     clearFileUploads: Action<ServerFileStore>;
     removeFileUpload: Action<ServerFileStore, string>;
     cancelFileUpload: Action<ServerFileStore, string>;
@@ -88,6 +90,15 @@ const files: ServerFileStore = {
         }
 
         upload.loaded = loaded;
+    }),
+
+    setUploadResumed: action((state, payload) => {
+        const upload = state.uploads[payload];
+        if (upload === undefined) {
+            return;
+        }
+
+        upload.resumed = true;
     }),
 
     removeFileUpload: action((state, payload) => {
