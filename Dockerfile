@@ -11,7 +11,9 @@ RUN if [ "$DEV" = "false" ]; then \
     && corepack enable \
     && echo "Building frontend"; \
     fi
-COPY pnpm-lock.yaml package.json ./
+# pnpm-workspace.yaml carries the allowBuilds policy; without it
+# strictDepBuilds makes pnpm fetch fail on packages needing scripts.
+COPY pnpm-lock.yaml package.json pnpm-workspace.yaml ./
 RUN if [ "$DEV" = "false" ]; then \
     pnpm fetch \
     && echo "Fetched dependencies"; \
