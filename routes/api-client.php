@@ -107,7 +107,7 @@ Route::group([
             ->name('api.client.servers.marketplace.resolve');
 
         // Install history. Stored in the panel database (not on the daemon) so
-        // it stays private — invisible in the file manager and out of backups.
+        // it stays private - invisible in the file manager and out of backups.
         Route::get('/installed', [MarketplaceController::class, 'installed'])
             ->name('api.client.servers.marketplace.installed');
         Route::post('/installed', [MarketplaceController::class, 'store']);

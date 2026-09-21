@@ -116,7 +116,7 @@ abstract class AbstractMarketplaceSource implements MarketplaceSource
      * Validate a resolved download URL before it is handed back to the client
      * (and ultimately pulled by the daemon). Upstream marketplace APIs return
      * URLs controlled by project authors, so the panel cannot trust them
-     * blindly — this is the SSRF defense-in-depth boundary.
+     * blindly - this is the SSRF defense-in-depth boundary.
      *
      *  - scheme must be https
      *  - host must be on the per-source allowlist
@@ -149,7 +149,7 @@ abstract class AbstractMarketplaceSource implements MarketplaceSource
         // Always defend against hosts that resolve to internal/link-local
         // addresses, even when the host allowlist is relaxed (e.g. for a
         // redirect-resolved URL whose target we cannot predict). Resolve both A
-        // (IPv4) and AAAA (IPv6) records — gethostbynamel only returns IPv4, so
+        // (IPv4) and AAAA (IPv6) records - gethostbynamel only returns IPv4, so
         // an AAAA-only host would otherwise skip this check. Either call may
         // return false on a transient DNS failure; in that case we do not block.
         $ips = @gethostbynamel($host);
@@ -190,7 +190,7 @@ abstract class AbstractMarketplaceSource implements MarketplaceSource
                     ->withOptions(['allow_redirects' => false])
                     ->head($current);
 
-                // Some hosts reject HEAD — fall back to a non-following GET, which
+                // Some hosts reject HEAD - fall back to a non-following GET, which
                 // for a redirect response still returns only the redirect (no body).
                 if (in_array($response->status(), [403, 405, 501], true)) {
                     $response = Http::withHeaders($headers)
@@ -287,7 +287,7 @@ abstract class AbstractMarketplaceSource implements MarketplaceSource
     /**
      * Loader tags this source recognizes for egg-feature validation. Only the
      * Modrinth source provides these (from GET /tag/loader); the default empty
-     * array means "no validation" — the frontend then trusts the egg as-is.
+     * array means "no validation" - the frontend then trusts the egg as-is.
      *
      * @return string[]
      */

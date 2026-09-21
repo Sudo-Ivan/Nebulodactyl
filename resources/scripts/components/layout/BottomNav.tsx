@@ -19,7 +19,7 @@ interface BottomNavProps {
 }
 
 // Mobile bottom navigation. Renders EVERY item in a horizontally-sliding
-// (scrollable) row — no truncation, no "More" button. On a dashboard with few
+// (scrollable) row - no truncation, no "More" button. On a dashboard with few
 // items they all fit; on a server page with many you slide left/right.
 // Hides its scrollbar for a clean native "sliding tab" feel.
 const BottomNav = memo(({ items }: BottomNavProps) => {

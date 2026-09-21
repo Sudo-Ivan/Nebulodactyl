@@ -83,7 +83,7 @@ export interface ServerRouteDefinition extends RouteDefinition {
     /**
      * Optional gate: the route only appears in navigation when this pattern
      * matches one of the server's egg features (e.g. Minecraft mod/plugin
-     * loaders). The route itself is still mounted — this only controls
+     * loaders). The route itself is still mounted - this only controls
      * navigation visibility.
      */
     eggFeature?: RegExp;

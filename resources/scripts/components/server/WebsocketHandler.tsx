@@ -116,8 +116,8 @@ function WebsocketHandler() {
     useEffect(() => {
         // Mobile browsers suspend/kill the websocket when the tab is backgrounded
         // (e.g. the user returns to the home screen). Sockette's auto-reconnect
-        // doesn't reliably resume in that case — its timers were frozen and a
-        // clean close event may never fire — so the console is left empty until a
+        // doesn't reliably resume in that case - its timers were frozen and a
+        // clean close event may never fire - so the console is left empty until a
         // manual page reload. When the tab becomes visible again (or the network
         // comes back online), give pending close events a moment to settle, then
         // force a reconnect if the socket is no longer live. On reconnect the

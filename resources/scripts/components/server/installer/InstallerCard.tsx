@@ -61,7 +61,7 @@ const InstallerCard = ({ project, installedEntry, onInstall, installing }: Insta
                     <div className='flex flex-wrap items-center gap-2'>
                         <h3
                             className='truncate text-sm font-semibold'
-                            title={project.url ? `${project.title} — open project page` : project.title}
+                            title={project.url ? `${project.title} - open project page` : project.title}
                         >
                             {project.url ? (
                                 <a

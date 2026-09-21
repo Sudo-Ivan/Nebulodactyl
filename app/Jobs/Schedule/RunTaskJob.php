@@ -51,7 +51,7 @@ class RunTaskJob extends Job implements ShouldQueue
         $server = $this->task->server;
         // If we made it to this point and the server status is not null it means the
         // server was likely suspended or marked as reinstalling after the schedule
-        // was queued up. Just end the task right now — this should be a very rare
+        // was queued up. Just end the task right now - this should be a very rare
         // condition.
         if (!is_null($server->status)) {
             $this->failed();

@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * The setup flow is the only unauthenticated endpoint capable of creating an
  * account with administrator privileges. Once any user has been created on the
- * system — administrator or not — this middleware hard-fails every setup route
+ * system - administrator or not - this middleware hard-fails every setup route
  * with a 404, so the surface simply disappears once installation is complete.
  */
 class SetupRequired

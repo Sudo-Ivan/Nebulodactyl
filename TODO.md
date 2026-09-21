@@ -5,7 +5,7 @@
 A living roadmap of the features and improvements planned for Nebulodactyl. Checked items reflect the current state of the `main` branch.
 
 > [!NOTE]
-> Nebulodactyl is under active development. This list is not exhaustive — check [DEV.md](./DEV.md) and the open issues on GitHub for the latest status.
+> Nebulodactyl is under active development. This list is not exhaustive - check [DEV.md](./DEV.md) and the open issues on GitHub for the latest status.
 
 ## Wings Automation
 
@@ -108,7 +108,7 @@ A living roadmap of the features and improvements planned for Nebulodactyl. Chec
 ### Software
 
 - [x] Redesigned page with verbose configuration options
-- [x] Modularized code (split into ~200–400 line components)
+- [x] Modularized code (split into ~200-400 line components)
 - [x] Simplified component logic
 - [ ] Optimize page performance
 

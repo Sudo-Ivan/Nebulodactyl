@@ -124,7 +124,7 @@ trait CreatesTestModels
     }
 
     /**
-     * Almost every test just assumes it is using BungeeCord — this is the critical
+     * Almost every test just assumes it is using BungeeCord - this is the critical
      * egg model for all tests unless specified otherwise.
      */
     private function getBungeecordEgg(): Egg

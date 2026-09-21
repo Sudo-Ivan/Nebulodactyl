@@ -23,7 +23,7 @@ use Pterodactyl\Services\Marketplace\SourceRegistry;
 /**
  * Daemon-agnostic marketplace controller powering the plugin/mod installer.
  *
- * It only proxies browse/resolve calls to upstream providers — the actual file
+ * It only proxies browse/resolve calls to upstream providers - the actual file
  * transfer is performed by the existing per-daemon "pull file" endpoint, which
  * the frontend invokes with the resolved URL and the destination directory.
  */

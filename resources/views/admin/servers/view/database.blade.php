@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Server — {{ $server->name }}: Databases
+    Server - {{ $server->name }}: Databases
 @endsection
 
 @section('content-header')

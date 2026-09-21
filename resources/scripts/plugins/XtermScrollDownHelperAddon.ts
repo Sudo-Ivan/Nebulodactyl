@@ -1,13 +1,13 @@
 import type { ITerminalAddon, Terminal } from '@xterm/xterm';
 
 /**
- * A "scroll to bottom" helper for the xterm console — a small down-arrow
+ * A "scroll to bottom" helper for the xterm console - a small down-arrow
  * button pinned to the bottom-right of the terminal. It appears when the user
  * has scrolled up in the buffer (newer output hidden below the fold) and
  * disappears when they're back at the bottom. Clicking it jumps to the latest
  * output. Ported from upstream Pterodactyl's plugin of the same name.
  *
- * IMPORTANT — why this uses the NATIVE viewport scroll event, not xterm's
+ * IMPORTANT - why this uses the NATIVE viewport scroll event, not xterm's
  * `terminal.onScroll` / `buffer.active.viewportY`:
  *   With console.css routing touches to `.xterm-viewport` (so the compositor
  *   scrolls the buffer natively), the buffer is scrolled by moving the
@@ -17,10 +17,10 @@ import type { ITerminalAddon, Terminal } from '@xterm/xterm';
  *   (those only fire on xterm's own auto-scroll on new output). So
  *   `viewportY === baseY` is unreliable here. Instead we listen to the
  *   viewport element's native `scroll` event and compare `scrollTop` to the
- *   max — which tracks real user/programmatic scroll position correctly.
+ *   max - which tracks real user/programmatic scroll position correctly.
  *
  * The button is appended to `terminal.element` (the `.xterm` host) as a direct
- * child, NOT inside `.xterm-screen` — so the console.css `pointer-events: none`
+ * child, NOT inside `.xterm-screen` - so the console.css `pointer-events: none`
  * rule on `.xterm-screen` doesn't affect it; it stays tappable.
  */
 export class ScrollDownHelperAddon implements ITerminalAddon {
@@ -32,7 +32,7 @@ export class ScrollDownHelperAddon implements ITerminalAddon {
     activate(terminal: Terminal): void {
         this.terminal = terminal;
         // The addon is loaded before terminal.open(), so terminal.element (and
-        // the viewport) don't exist yet — wait for them.
+        // the viewport) don't exist yet - wait for them.
         this.waitForViewport();
 
         // New output while the user is scrolled up → reveal the button so they

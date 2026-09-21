@@ -59,7 +59,7 @@
           <div class="list-group" style="margin-bottom:0;">
             <a href="https://ko-fi.com/naterfute" target="_blank" rel="noopener" class="list-group-item support-item">
               <h4 class="list-group-item-heading"><i class="fa fa-fw fa-coffee"></i> Ko-Fi</h4>
-              <p class="list-group-item-text">Donate to support the maintainer — every bit helps!</p>
+              <p class="list-group-item-text">Donate to support the maintainer - every bit helps!</p>
             </a>
             <a href="https://bpfw.io/donate" target="_blank" rel="noopener" class="list-group-item support-item">
               <h4 class="list-group-item-heading"><i class="fa fa-fw fa-gift"></i> Blueprint</h4>

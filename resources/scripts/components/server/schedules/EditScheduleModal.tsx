@@ -237,7 +237,7 @@ const EditScheduleModal = ({ schedule, visible, onDismissed, ...props }: Props) 
                                     Times are in server timezone (
                                     {formatTimezoneDisplay(timezoneInfo.server.timezone, timezoneInfo.server.offset)})
                                     {timezoneInfo.difference !== 'same time' && (
-                                        <> — the server is {timezoneInfo.difference} your timezone</>
+                                        <> - the server is {timezoneInfo.difference} your timezone</>
                                     )}
                                 </p>
                             )}

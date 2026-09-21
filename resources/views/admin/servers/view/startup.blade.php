@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Server — {{ $server->name }}: Startup
+    Server - {{ $server->name }}: Startup
 @endsection
 
 @section('content-header')

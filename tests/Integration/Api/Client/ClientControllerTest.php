@@ -377,7 +377,7 @@ class ClientControllerTest extends ClientApiIntegrationTestCase
         $charlie = $this->createServerModel(['user_id' => $user->id, 'name' => 'Charlie']);
 
         // Assign created_at so ASC order (Charlie, Alpha, Bravo) does NOT match
-        // insertion/PK order (Alpha, Bravo, Charlie) — otherwise a no-op sort
+        // insertion/PK order (Alpha, Bravo, Charlie) - otherwise a no-op sort
         // returning rows in PK order would coincidentally satisfy the assertion.
         $charlie->forceFill(['created_at' => now()->subDays(2)])->save(); // oldest
         $alpha->forceFill(['created_at' => now()->subDay()])->save(); // middle
@@ -395,7 +395,7 @@ class ClientControllerTest extends ClientApiIntegrationTestCase
     public function testFilteringByOwnerId(): void
     {
         // An admin (type=admin-all) can see servers owned by other users, so the
-        // owner_id filter actually has to discriminate — without it the visible set
+        // owner_id filter actually has to discriminate - without it the visible set
         // is 2; with it the set must narrow to exactly 1. (A non-admin would only
         // ever see their own server, making the filter a no-op and the test a
         // false-green.)

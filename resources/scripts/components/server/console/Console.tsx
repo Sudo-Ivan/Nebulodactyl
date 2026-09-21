@@ -230,7 +230,7 @@ const Console = () => {
                 fitAddon.fit();
 
                 // Lock the terminal canvas. The hidden `.xterm-helper-textarea` is
-                // xterm's only keyboard entry point — disabling it (and dropping it
+                // xterm's only keyboard entry point - disabling it (and dropping it
                 // from the tab order) means the canvas can never gain focus and no
                 // keystrokes reach xterm's input pipeline, so nothing (scroll-on-key,
                 // the copy handler below, IME, etc.) ever fires. This is on top of

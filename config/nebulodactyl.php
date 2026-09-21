@@ -43,7 +43,7 @@ return [
                 'web_url' => 'https://modrinth.com',
                 // CDN hosts a resolved download URL is permitted to point at.
                 // Anything else (loopback, RFC1918, metadata endpoints, etc.) is
-                // rejected before the URL ever reaches the daemon — see
+                // rejected before the URL ever reaches the daemon - see
                 // AbstractMarketplaceSource::assertSafeDownloadUrl().
                 'download_hosts' => ['cdn.modrinth.com', 'cdn-raw.modrinth.com', 'github.com', 'raw.githubusercontent.com'],
             ],
@@ -51,13 +51,13 @@ return [
             // Plugin-only sources.
             'hangar' => [
                 // PaperMC's plugin platform (https://hangar.papermc.io). Always
-                // enabled — it is a public, keyless API.
+                // enabled - it is a public, keyless API.
                 'enabled' => (bool) env('MARKETPLACE_HANGAR_ENABLED', true),
                 'base_url' => 'https://hangar.papermc.io/api/v1',
                 'web_url' => 'https://hangar.papermc.io',
                 // CDN serving project avatars. The projects list endpoint omits
                 // avatar data, but avatars are addressable by numeric project id
-                // at a stable CDN path — see HangarSource::iconUrl().
+                // at a stable CDN path - see HangarSource::iconUrl().
                 'cdn_url' => 'https://hangarcdn.papermc.io',
                 // Download endpoints redirect (302) to the real artifact, so we
                 // allowlist the hangar host and let the daemon follow the redirect.

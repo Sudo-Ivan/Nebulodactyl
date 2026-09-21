@@ -147,7 +147,7 @@ export async function readAllInstalled(uuid: string): Promise<InstalledItem[]> {
                 try {
                     await deleteFiles(uuid, DIRECTORY_FOR_TYPE[type], [LEGACY_MANIFEST]);
                 } catch {
-                    // ignore — best-effort
+                    // ignore - best-effort
                 }
             }
         }),

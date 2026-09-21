@@ -34,7 +34,7 @@ interface VersionPickerProps {
 }
 
 const formatBytes = (bytes: number | null | undefined): string => {
-    if (!bytes) return '—';
+    if (!bytes) return ' - ';
     if (bytes >= 1_000_000) return `${(bytes / 1_000_000).toFixed(1)} MB`;
     if (bytes >= 1_000) return `${(bytes / 1_000).toFixed(0)} KB`;
     return `${bytes} B`;

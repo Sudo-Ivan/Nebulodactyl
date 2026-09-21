@@ -14,7 +14,7 @@ const SetupRouter = () => {
 
     return (
         <div className='absolute w-full h-full flex justify-center items-center rounded-md [--page-padding:--spacing(8)]'>
-            {/* Noise texture — shared with the auth surface for continuity. */}
+            {/* Noise texture - shared with the auth surface for continuity. */}
             <div
                 style={{
                     backgroundImage: 'url(/assets/auth-noise.png)',
@@ -42,12 +42,12 @@ const SetupRouter = () => {
                             Set up your panel.
                         </h1>
                         <p className='text-sm text-secondary max-w-sm leading-relaxed'>
-                            A fresh install has no administrator yet — let&apos;s create your first account and get you
+                            A fresh install has no administrator yet - let&apos;s create your first account and get you
                             signed in.
                         </p>
                     </div>
 
-                    {/* Gradients — same family as the auth surface. */}
+                    {/* Gradients - same family as the auth surface. */}
                     <div className='opacity-50'>
                         <div className='absolute inset-0 bg-gradient-to-tr from-transparent via-brand-400/5 to-brand-600/10' />
                         <div className='absolute inset-0 bg-gradient-to-tr to-transparent via-brand-400/5 from-brand-600/10' />

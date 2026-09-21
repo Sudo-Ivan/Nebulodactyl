@@ -5,12 +5,12 @@ namespace Pterodactyl\Services\Marketplace;
 /**
  * Contract implemented by each marketplace adapter (Modrinth, Hangar, ...).
  *
- * The installer works in two content types — "mod" and "plugin" — and each
+ * The installer works in two content types - "mod" and "plugin" - and each
  * adapter declares which types it can serve. The flow is:
  *
- *   1. search()     — browse projects by query + filters
- *   2. versions()   — list downloadable versions for a project
- *   3. resolve()    — turn a chosen version into a direct download URL + filename
+ *   1. search() - browse projects by query + filters
+ *   2. versions() - list downloadable versions for a project
+ *   3. resolve() - turn a chosen version into a direct download URL + filename
  */
 interface MarketplaceSource
 {

@@ -42,7 +42,7 @@ class ClientController extends ClientApiController
             'daemonType',
             // Foreign-key columns must use exact matching: Spatie turns a bare
             // string filter into AllowedFilter::partial() (LIKE '%value%'), which
-            // would make filter[owner_id]=5 also match 15, 25, 50-59, … — returning
+            // would make filter[owner_id]=5 also match 15, 25, 50-59, … - returning
             // servers that don't belong to the selected owner/nest/egg/node.
             AllowedFilter::exact('owner_id'),
             AllowedFilter::exact('nest_id'),

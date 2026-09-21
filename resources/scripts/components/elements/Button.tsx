@@ -11,7 +11,7 @@ interface Props {
 }
 
 // Only min-height + font-size here. Padding is intentionally owned by each
-// call site's className — emitting padding here would fight it on equal
+// call site's className - emitting padding here would fight it on equal
 // specificity (single-class selectors), making the winner injection-order
 // dependent.
 const SIZES = {

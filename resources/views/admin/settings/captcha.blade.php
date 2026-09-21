@@ -197,7 +197,7 @@
                 <div class="alert alert-info">
                   <strong>Setup Instructions:</strong>
                   <ol>
-                    <li>Set up a Cap server or use the hosted one — see the <a href="https://trycap.dev" target="_blank">Cap website</a> and <a href="https://docs.cap.js.org" target="_blank">Cap documentation</a></li>
+                    <li>Set up a Cap server or use the hosted one - see the <a href="https://trycap.dev" target="_blank">Cap website</a> and <a href="https://docs.cap.js.org" target="_blank">Cap documentation</a></li>
                     <li>Create a new site in your Cap instance</li>
                     <li>Add your panel domain to the site configuration</li>
                     <li>Copy the Site Key and Secret Key from the dashboard</li>

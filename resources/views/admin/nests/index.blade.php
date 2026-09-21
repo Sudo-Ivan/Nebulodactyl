@@ -16,7 +16,7 @@
 <div class="row">
     <div class="col-xs-12">
         <div class="callout callout-warning">
-            <i class="fa fa-warning"></i> <strong>Eggs are powerful</strong> — modifying them incorrectly can break your servers. Avoid editing default eggs unless you know what you're doing.
+            <i class="fa fa-warning"></i> <strong>Eggs are powerful</strong> - modifying them incorrectly can break your servers. Avoid editing default eggs unless you know what you're doing.
         </div>
     </div>
 </div>

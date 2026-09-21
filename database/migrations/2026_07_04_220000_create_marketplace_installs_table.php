@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Schema;
 |--------------------------------------------------------------------------
 |
 | Tracks plugins/mods installed through the native installer. This lives in
-| the panel database — NOT on the daemon filesystem — so the install history
+| the panel database - NOT on the daemon filesystem - so the install history
 | is private to the panel: it never appears in the file manager and is never
 | bundled into a server backup/archive.
 |

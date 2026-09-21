@@ -17,7 +17,7 @@ export interface SetupResponse {
 /**
  * Create the first administrator account through the first-run setup flow.
  * Mirrors the login call: prime the CSRF cookie, then POST to /setup. The
- * backend creates the account, grants admin, and starts the session — so on
+ * backend creates the account, grants admin, and starts the session - so on
  * success the response carries an `intended` path to hard-navigate to.
  */
 export default async (data: SetupData): Promise<SetupResponse> => {

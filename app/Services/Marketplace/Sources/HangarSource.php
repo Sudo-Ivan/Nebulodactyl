@@ -9,7 +9,7 @@ use Pterodactyl\Services\Marketplace\MarketplaceProject;
 use Pterodactyl\Services\Marketplace\MarketplaceVersion;
 
 /**
- * Hangar (https://hangar.papermc.io) adapter — PaperMC's plugin platform.
+ * Hangar (https://hangar.papermc.io) adapter - PaperMC's plugin platform.
  * Plugin-only. Projects are addressed by their namespace "owner/slug" and
  * downloads are platform-specific redirect endpoints.
  */

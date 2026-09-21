@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Server — {{ $server->name }}: Build Details
+    Server - {{ $server->name }}: Build Details
 @endsection
 
 @section('content-header')

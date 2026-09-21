@@ -53,7 +53,7 @@ const readSavedTab = (): MarketplaceType | null => {
         const saved = window.localStorage.getItem(TAB_STORAGE_KEY);
         if (saved === 'plugin' || saved === 'mod') return saved;
     } catch {
-        // localStorage may be unavailable — fall through to the default.
+        // localStorage may be unavailable - fall through to the default.
     }
 
     return null;
@@ -170,7 +170,7 @@ const InstallerContainer = () => {
         try {
             window.localStorage.setItem(TAB_STORAGE_KEY, next);
         } catch {
-            // ignore write failures — the preference just won't persist.
+            // ignore write failures - the preference just won't persist.
         }
     }, []);
     const [sources, setSources] = useState<MarketplaceSourceMeta[]>([]);

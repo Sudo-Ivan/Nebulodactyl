@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Server — {{ $server->name }}: Delete
+    Server - {{ $server->name }}: Delete
 @endsection
 
 @section('content-header')

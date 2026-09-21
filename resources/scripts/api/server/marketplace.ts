@@ -139,7 +139,7 @@ export const resolveMarketplaceInstall = async (
 };
 
 /**
- * The cached Modrinth loader-tag list — the authoritative set of loader names,
+ * The cached Modrinth loader-tag list - the authoritative set of loader names,
  * used to validate the loader extracted from a server's egg features so the
  * installer picks up new loaders Modrinth adds without a code change.
  */

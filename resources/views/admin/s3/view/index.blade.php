@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    S3 — {{ $s3->name }}
+    S3 - {{ $s3->name }}
 @endsection
 
 @section('content-header')

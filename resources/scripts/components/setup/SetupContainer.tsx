@@ -31,14 +31,14 @@ const INITIAL: Values = {
 const STEP_LABELS = ['Welcome', 'Admin account', 'Review'] as const;
 
 // Fields that must be valid before leaving each step. The welcome and review
-// steps have nothing to validate — they advance unconditionally.
+// steps have nothing to validate - they advance unconditionally.
 const STEP_FIELDS: Record<number, (keyof Values)[]> = {
     1: ['email', 'username', 'name_first', 'password', 'password_confirmation'],
 };
 
 // Mirrors the backend Username rule (lowercased before testing). The regex
 // implies a minimum length of 3: a leading char, at least one middle char, and
-// a trailing char — so the frontend enforces the same floor the backend does.
+// a trailing char - so the frontend enforces the same floor the backend does.
 const USERNAME_RE = /^[a-z0-9]([\w.-]+)[a-z0-9]$/;
 
 const schema = object().shape({
@@ -139,7 +139,7 @@ const StepTracker = ({ current }: { current: number }) => (
 const ReviewRow = ({ label, value }: { label: string; value: string }) => (
     <div className='flex items-center justify-between gap-4 py-2.5'>
         <dt className='text-sm text-secondary'>{label}</dt>
-        <dd className='text-sm text-cream-200 text-right truncate'>{value || '—'}</dd>
+        <dd className='text-sm text-cream-200 text-right truncate'>{value || ' - '}</dd>
     </div>
 );
 
@@ -240,7 +240,7 @@ const SetupContainer = () => {
         >
             {({ values, validateForm, setTouched, isSubmitting, handleSubmit }) => {
                 // validateForm() runs the full schema and is what populates the
-                // Formik `errors` the touched <Field>s render against — keep it.
+                // Formik `errors` the touched <Field>s render against - keep it.
                 const advance = async () => {
                     const all = await validateForm(values);
                     const fields = STEP_FIELDS[step] ?? [];
@@ -280,7 +280,7 @@ const SetupContainer = () => {
                                             Welcome.
                                         </h2>
                                         <p className='text-sm text-secondary leading-relaxed'>
-                                            This is a fresh Nebulodactyl installation — no administrator account exists
+                                            This is a fresh Nebulodactyl installation - no administrator account exists
                                             yet. We&apos;ll create your first account, grant it full panel access, and
                                             sign you right in. It only takes a moment.
                                         </p>

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    S3 — {{ $s3->name }}: Delete
+    S3 - {{ $s3->name }}: Delete
 @endsection
 
 @section('content-header')

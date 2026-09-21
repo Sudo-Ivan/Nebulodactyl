@@ -20,16 +20,16 @@ Nebulodactyl is a game server management panel forked from Hydrodactyl (itself a
 
 ## Features
 
-- **Space theme** — a custom nebula-inspired color scheme with deep-space backgrounds, starfield accents, and a violet/cyan brand palette.
-- **Nebula overlay network** — optional integration for running panel-to-node traffic over a mutually authenticated Nebula overlay instead of exposing daemons on public addresses. See `config/nebula.php` and `examples/nebula/`.
-- **Reimagined client panel** — a redesigned interface for console, files, databases, backups, network, users, startup, schedules, activity, and software.
-- **Marketplace** — a native plugin and mod installer for Minecraft servers backed by Modrinth, Hangar, and Spiget.
-- **Setup wizard** — guided first-run configuration for new installations.
-- **Logo customization** — custom branding for your panel from the admin dashboard.
-- **S3-compatible backups** — per-node backup storage with any S3-compatible provider.
-- **PostgreSQL support** — run the panel on MySQL, MariaDB, or PostgreSQL.
-- **OpenAPI documentation** — API reference powered by Scalar.
-- **Modern stack** — Laravel 13, React 19, TypeScript, and Tailwind CSS, formatted and linted with Biome.
+- Space theme: a nebula-inspired color scheme with deep-space backgrounds, starfield accents, and a violet/cyan palette.
+- Nebula overlay network: optional integration for running panel-to-node traffic over a mutually authenticated Nebula overlay instead of exposing daemons on public addresses. See `config/nebula.php` and `examples/nebula/`.
+- Reimagined client panel for console, files, databases, backups, network, users, startup, schedules, activity, and software.
+- Marketplace: a native plugin and mod installer for Minecraft servers backed by Modrinth, Hangar, and Spiget.
+- Setup wizard for guided first-run configuration.
+- Logo customization from the admin dashboard.
+- S3-compatible backups with per-node storage on any S3-compatible provider.
+- MySQL, MariaDB, or PostgreSQL for the panel database.
+- OpenAPI documentation powered by Scalar.
+- Laravel 13, React 19, TypeScript, and Tailwind CSS, formatted and linted with Biome.
 
 > [!WARNING]
 > **Pre-release Software:** Nebulodactyl is currently under active development. Some UI elements may appear broken and bugs may exist.
@@ -64,11 +64,11 @@ You are free to use, modify, and redistribute Nebulodactyl under the terms of th
 
 Nebulodactyl is built upon the work of previous open-source projects and their contributors:
 
-- **Pterodactyl®**: Copyright © 2015–2022 Dane Everitt and contributors.
-- **Pyrodactyl™**: Copyright © 2023–2025 Pyro Inc. and contributors.
-- **Pyrodactyl™**: Copyright © 2025–2026 Pyrodactyl-oss and contributors.
-- **Hydrodactyl**: Copyright © 2026–present Naterfute, Blueprint Framework, and contributors.
-- **Nebulodactyl**: Copyright © 2026–present Ivan and contributors.
+- **Pterodactyl®**: Copyright © 2015-2022 Dane Everitt and contributors.
+- **Pyrodactyl™**: Copyright © 2023-2025 Pyro Inc. and contributors.
+- **Pyrodactyl™**: Copyright © 2025-2026 Pyrodactyl-oss and contributors.
+- **Hydrodactyl**: Copyright © 2026-present Naterfute, Blueprint Framework, and contributors.
+- **Nebulodactyl**: Copyright © 2026-present Ivan and contributors.
 
 All original copyright notices, license notices, and attributions must remain intact when redistributing this software.
 

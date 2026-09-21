@@ -73,7 +73,7 @@ export default function CreateApiKeyModal({ open, onClose, onSubmit, isSubmittin
                             />
                         </FormikFieldWrapper>
 
-                        {/* Hidden submit button — triggered by Dialog confirm */}
+                        {/* Hidden submit button - triggered by Dialog confirm */}
                         <button type='submit' className='hidden' />
                     </Form>
                 )}

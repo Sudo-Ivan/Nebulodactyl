@@ -8,7 +8,7 @@ use Illuminate\Container\Container;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * @deprecated — this class will be dropped in a future version, use the activity log
+ * @deprecated - this class will be dropped in a future version, use the activity log
  */
 class AuditLog extends Model
 {
