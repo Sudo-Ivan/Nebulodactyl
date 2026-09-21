@@ -23,6 +23,7 @@ const UploadButton = () => {
     const { mutate } = useFileManagerSwr();
     const { addError, clearAndAddHttpError } = useFlashKey('files');
 
+    const store = ServerContext.useStore();
     const name = ServerContext.useStoreState((state) => state.server.data?.name);
     const uuid = ServerContext.useStoreState((state) => state.server.data?.uuid);
     const directory = ServerContext.useStoreState((state) => state.files.directory);
@@ -59,7 +60,17 @@ const UploadButton = () => {
             return addError('Folder uploads are not supported at this time.', 'Error');
         }
 
-        const uploads = list.map((file) => {
+        // Skip files that are already uploading under the same name. Two
+        // concurrent sessions targeting one path race the resumable offset and
+        // interleave chunks, corrupting the file on the daemon.
+        const pending = store.getState().files.uploads;
+        const fresh = list.filter((file) => pending[file.name] === undefined);
+        const skipped = list.length - fresh.length;
+        if (skipped > 0) {
+            addError(`${skipped} file(s) skipped because an upload with the same name is already in progress.`);
+        }
+
+        const uploads = fresh.map((file) => {
             const controller = new AbortController();
             pushFileUpload({
                 name: file.name,

@@ -138,7 +138,10 @@ export class Websocket extends EventEmitter {
     }
 
     send(event: string, payload?: string | string[]) {
-        if (this.socket) {
+        // Guard on the underlying socket state. Sending while the socket is
+        // CONNECTING or CLOSED throws an InvalidStateError that propagates to
+        // callers (like the console command handler) as an uncaught exception.
+        if (this.socket && this.socket.ws?.readyState === WebSocket.OPEN) {
             this.socket.send(
                 JSON.stringify({
                     event,

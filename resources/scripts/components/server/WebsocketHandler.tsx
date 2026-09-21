@@ -19,8 +19,10 @@ function WebsocketHandler() {
     // listener below can read the latest values without re-registering.
     const connectedRef = useRef(connected);
     const instanceRef = useRef(instance);
+    const uuidRef = useRef(uuid);
     connectedRef.current = connected;
     instanceRef.current = instance;
+    uuidRef.current = uuid;
 
     const updateToken = (uuid: string, socket: Websocket) => {
         if (updatingToken) {
@@ -83,6 +85,15 @@ function WebsocketHandler() {
 
         getWebsocketToken(uuid)
             .then((data) => {
+                // If the user navigated to a different server while the token
+                // request was in flight, this socket belongs to the old one.
+                // Drop it instead of installing a connection that would stream
+                // the wrong server's events into the store.
+                if (uuidRef.current !== uuid) {
+                    socket.close();
+                    return;
+                }
+
                 // Connect and then set the authentication token.
                 socket.setToken(data.token).connect(data.socket);
 

@@ -1,6 +1,6 @@
 import { TriangleExclamation } from '@gravity-ui/icons';
 import type React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { type OperationStatus, type ServerOperation, useOperationPolling } from '@/api/server/serverOperations';
 import { Dialog } from '@/components/elements/dialog';
 import Spinner from '@/components/elements/Spinner';
@@ -42,7 +42,12 @@ const OperationProgressModal: React.FC<Props> = ({
     const uuid = ServerContext.useStoreState((state) => state.server.data?.uuid);
     const [operation, setOperation] = useState<ServerOperation | null>(null);
     const [error, setError] = useState<string | null>(null);
-    const [autoCloseTimer, setAutoCloseTimer] = useState<NodeJS.Timeout | null>(null);
+    // The auto-close timer lives in a ref rather than state. Storing it in
+    // state put it in this effect's dependency list, so scheduling the timer
+    // re-ran the effect, restarted polling on the finished operation, and the
+    // next completion cancelled the pending close. The loop never let the
+    // modal close.
+    const autoCloseTimer = useRef<NodeJS.Timeout | null>(null);
     const { startPolling, stopPolling } = useOperationPolling();
 
     useEffect(() => {
@@ -50,9 +55,9 @@ const OperationProgressModal: React.FC<Props> = ({
             stopPolling(operationId || '');
             setOperation(null);
             setError(null);
-            if (autoCloseTimer) {
-                clearTimeout(autoCloseTimer);
-                setAutoCloseTimer(null);
+            if (autoCloseTimer.current) {
+                clearTimeout(autoCloseTimer.current);
+                autoCloseTimer.current = null;
             }
             return;
         }
@@ -70,10 +75,9 @@ const OperationProgressModal: React.FC<Props> = ({
             }
 
             if (op.is_completed) {
-                const timer = setTimeout(() => {
+                autoCloseTimer.current = setTimeout(() => {
                     onClose();
                 }, UI_CONFIG.AUTO_CLOSE_DELAY);
-                setAutoCloseTimer(timer);
             }
         };
 
@@ -90,11 +94,12 @@ const OperationProgressModal: React.FC<Props> = ({
 
         return () => {
             stopPolling(operationId);
-            if (autoCloseTimer) {
-                clearTimeout(autoCloseTimer);
+            if (autoCloseTimer.current) {
+                clearTimeout(autoCloseTimer.current);
+                autoCloseTimer.current = null;
             }
         };
-    }, [visible, operationId, uuid, startPolling, stopPolling, onComplete, onError, onClose, autoCloseTimer]);
+    }, [visible, operationId, uuid, startPolling, stopPolling, onComplete, onError, onClose]);
 
     const renderStatusIcon = (status: string) => {
         const iconType = getStatusIconType(status as OperationStatus);
@@ -121,9 +126,9 @@ const OperationProgressModal: React.FC<Props> = ({
     const statusStyling = operation ? getStatusStyling(operation.status) : null;
 
     const handleClose = () => {
-        if (autoCloseTimer) {
-            clearTimeout(autoCloseTimer);
-            setAutoCloseTimer(null);
+        if (autoCloseTimer.current) {
+            clearTimeout(autoCloseTimer.current);
+            autoCloseTimer.current = null;
         }
         onClose();
     };
@@ -206,11 +211,7 @@ const OperationProgressModal: React.FC<Props> = ({
                                         Operation completed successfully
                                     </p>
                                 </div>
-                                {autoCloseTimer && (
-                                    <p className='text-xs text-green-200 text-center'>
-                                        Closing automatically in 3 seconds
-                                    </p>
-                                )}
+                                <p className='text-xs text-green-200 text-center'>Closing automatically in 3 seconds</p>
                             </div>
                         )}
 

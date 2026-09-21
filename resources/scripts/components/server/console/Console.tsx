@@ -241,28 +241,32 @@ const Console = () => {
                     terminal.textarea.tabIndex = -1;
                     terminal.textarea.disabled = true;
                 }
-
-                // Set up ResizeObserver to watch for container size changes
-                resizeObserverRef.current = new ResizeObserver(debouncedFit);
-
-                if (ref.current) {
-                    resizeObserverRef.current.observe(ref.current);
-                }
             }
+
+            // Set up ResizeObserver to watch for container size changes. This
+            // sits outside the attach check above because the effect cleanup
+            // disconnects it on every reconnect while the terminal element
+            // itself stays attached.
+            resizeObserverRef.current = new ResizeObserver(debouncedFit);
+            resizeObserverRef.current.observe(ref.current);
         }
 
-        // Cleanup function to dispose terminal when component unmounts
+        // Cleanup function for this effect only detaches the observer. The
+        // terminal is a memoized singleton shared by every console callback,
+        // so disposing it here would kill it on every reconnect; a disposed
+        // xterm instance cannot be reopened.
         return () => {
-            if (terminal.element) {
-                terminal.dispose();
-            }
-            // Clean up the ResizeObserver
             if (resizeObserverRef.current) {
                 resizeObserverRef.current.disconnect();
                 resizeObserverRef.current = null;
             }
         };
     }, [terminal, connected, fitAddon, searchAddon, webLinksAddon, scrollDownHelperAddon, debouncedFit]);
+
+    // The terminal is only disposed when the component unmounts for good.
+    useEffect(() => {
+        return () => terminal.dispose();
+    }, [terminal]);
 
     // useEventListener(
     //     'resize',

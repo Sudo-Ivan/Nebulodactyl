@@ -62,6 +62,10 @@ const awaitEvent = (ws: WebSocket, wanted: string[], signal: AbortSignal): Promi
                 resolve(msg);
             }
         };
+        const onClose = () => {
+            cleanup();
+            reject(new Error('websocket closed while waiting for an event'));
+        };
         const onAbort = () => {
             cleanup();
             reject(new DOMException('Aborted', 'AbortError'));
@@ -69,10 +73,18 @@ const awaitEvent = (ws: WebSocket, wanted: string[], signal: AbortSignal): Promi
         const cleanup = () => {
             clearTimeout(timer);
             ws.removeEventListener('message', onMessage);
+            ws.removeEventListener('close', onClose);
             signal.removeEventListener('abort', onAbort);
         };
 
+        // An already-aborted signal never fires the abort listener.
+        if (signal.aborted) {
+            reject(new DOMException('Aborted', 'AbortError'));
+            return;
+        }
+
         ws.addEventListener('message', onMessage);
+        ws.addEventListener('close', onClose);
         signal.addEventListener('abort', onAbort);
     });
 

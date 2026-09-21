@@ -102,7 +102,6 @@
     "scripts": {
         "lint": "biome lint --write",
         "check": "biome check",
-        "postinstall": "npx @biomejs/biome migrate --write",
         "lint:turbo": "turbo lint",
         "dev": "vite",
         "dev:setup": "bash ./bin/devSetup.sh",
