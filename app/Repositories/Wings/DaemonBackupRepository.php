@@ -6,6 +6,8 @@ use Webmozart\Assert\Assert;
 use Pterodactyl\Models\Backup;
 use Pterodactyl\Models\Server;
 use Psr\Http\Message\ResponseInterface;
+use GuzzleHttp\Exception\ClientException;
+use Symfony\Component\HttpFoundation\Response;
 use GuzzleHttp\Exception\TransferException;
 use Pterodactyl\Exceptions\Http\Connection\DaemonConnectionException;
 
@@ -47,6 +49,35 @@ class DaemonBackupRepository extends DaemonRepository
                     ],
                 ]
             );
+        } catch (TransferException $exception) {
+            throw new DaemonConnectionException($exception);
+        }
+    }
+
+    /**
+     * Checks whether a local backup archive still exists on the daemon.
+     * Only call this against daemons that expose the HEAD backup route
+     * (Comet); on Wings a missing route is indistinguishable from a
+     * missing backup.
+     *
+     * @throws DaemonConnectionException
+     */
+    public function exists(Backup $backup): bool
+    {
+        Assert::isInstanceOf($this->server, Server::class);
+
+        try {
+            $this->getHttpClient()->head(
+                sprintf('/api/servers/%s/backup/%s', $this->server->uuid, $backup->uuid)
+            );
+
+            return true;
+        } catch (ClientException $exception) {
+            if ($exception->getResponse()->getStatusCode() === Response::HTTP_NOT_FOUND) {
+                return false;
+            }
+
+            throw new DaemonConnectionException($exception);
         } catch (TransferException $exception) {
             throw new DaemonConnectionException($exception);
         }

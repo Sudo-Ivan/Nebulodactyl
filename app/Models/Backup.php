@@ -55,6 +55,7 @@ class Backup extends Model
         'bytes' => 'int',
         'disk' => BackupAdapter::class,
         'completed_at' => 'datetime',
+        'verified_at' => 'datetime',
     ];
 
     protected $attributes = [

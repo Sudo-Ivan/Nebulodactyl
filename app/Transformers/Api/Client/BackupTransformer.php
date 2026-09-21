@@ -34,6 +34,8 @@ class BackupTransformer extends BaseClientTransformer
             'snapshot_id' => $backup->snapshot_id,
             'created_at' => $backup->created_at->toAtomString(),
             'completed_at' => $backup->completed_at ? $backup->completed_at->toAtomString() : null,
+            'verified_at' => $backup->verified_at ? $backup->verified_at->toAtomString() : null,
+            'verify_state' => $backup->verify_state,
         ];
 
         // Add server state information if available
