@@ -159,6 +159,21 @@ func (c *client) GetBackupRemoteUploadURLs(ctx context.Context, backup string, s
 	return data, nil
 }
 
+// GetRusticConfig returns the rustic repository configuration for a server.
+// The repository password is derived panel-side from the server UUID and the
+// application key, so it is stable across requests.
+func (c *client) GetRusticConfig(ctx context.Context, uuid string, repositoryType string) (RusticConfig, error) {
+	var config RusticConfig
+	res, err := c.Get(ctx, fmt.Sprintf("/servers/%s/rustic-config", uuid), q{"type": repositoryType})
+	if err != nil {
+		return config, err
+	}
+	defer res.Body.Close()
+
+	err = res.BindJSON(&config)
+	return config, err
+}
+
 func (c *client) SetBackupStatus(ctx context.Context, backup string, data BackupRequest) error {
 	resp, err := c.Post(ctx, fmt.Sprintf("/backups/%s", backup), data)
 	if err != nil {

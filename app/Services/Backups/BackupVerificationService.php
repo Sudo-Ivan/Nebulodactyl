@@ -69,7 +69,10 @@ class BackupVerificationService
     {
         return match (true) {
             $backup->disk === BackupAdapter::S3 => $this->checkS3($backup),
-            $backup->disk === BackupAdapter::Wings || $backup->disk === BackupAdapter::Elytra => $this->checkDaemonLocal($backup),
+            $backup->disk === BackupAdapter::Wings
+                || $backup->disk === BackupAdapter::Elytra
+                || $backup->disk === BackupAdapter::RusticLocal
+                || $backup->disk === BackupAdapter::RusticS3 => $this->checkDaemonLocal($backup),
             default => self::STATE_UNVERIFIABLE,
         };
     }

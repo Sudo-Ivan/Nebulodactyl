@@ -12,6 +12,12 @@ type BackupPayload struct {
 	UserUuid   string `json:"user_uuid"`
 	BackupUuid string `json:"backup_uuid"`
 	UniqueId   string `json:"unique_id"`
+
+	// Rustic fields populated by the Panel for deduplicated backups. They let
+	// the daemon materialize a snapshot without a local archive file.
+	BackupDisk     string `json:"backup_disk"`
+	RepositoryType string `json:"repository_type"`
+	SnapshotID     string `json:"snapshot_id"`
 }
 
 // Returns the JWT payload.

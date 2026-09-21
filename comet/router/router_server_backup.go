@@ -55,10 +55,12 @@ func postServerBackup(c *gin.Context) {
 
 	var adapter backup.BackupInterface
 	switch data.Adapter {
-	case backup.LocalBackupAdapter:
+	case backup.LocalBackupAdapter, backup.WingsBackupAdapter:
 		adapter = backup.NewLocal(client, backupUuid, data.Ignore)
 	case backup.S3BackupAdapter:
 		adapter = backup.NewS3(client, backupUuid, data.Ignore)
+	case backup.RusticLocalAdapter, backup.RusticS3Adapter:
+		adapter = backup.NewRustic(client, s.ID(), backupUuid, data.Ignore, data.Adapter)
 	default:
 		middleware.CaptureAndAbort(c, errors.New("router/backups: provided adapter is not valid: "+string(data.Adapter)))
 		return
@@ -95,7 +97,7 @@ func postServerRestoreBackup(c *gin.Context) {
 	logger := middleware.ExtractLogger(c)
 
 	var data struct {
-		Adapter           backup.AdapterType `binding:"required,oneof=comet s3" json:"adapter"`
+		Adapter           backup.AdapterType `binding:"required,oneof=comet wings s3 rustic_local rustic_s3" json:"adapter"`
 		TruncateDirectory bool               `json:"truncate_directory"`
 		// A UUID is always required for this endpoint, however the download URL
 		// is only present when the given adapter type is s3.
@@ -140,7 +142,27 @@ func postServerRestoreBackup(c *gin.Context) {
 
 	// Now that we've cleaned up the data directory if necessary, grab the backup file
 	// and attempt to restore it into the server directory.
-	if data.Adapter == backup.LocalBackupAdapter {
+	if data.Adapter == backup.RusticLocalAdapter || data.Adapter == backup.RusticS3Adapter {
+		b, _, err := backup.LocateRustic(client, s.ID(), backupUuid)
+		if err != nil {
+			middleware.CaptureAndAbort(c, err)
+			return
+		}
+		go func(s *server.Server, b backup.BackupInterface, logger *log.Entry) {
+			logger.Info("starting restoration process for server backup using rustic driver")
+			if err := s.RestoreBackup(b, nil); err != nil {
+				logger.WithField("error", err).Error("failed to restore rustic backup to server")
+			}
+			s.Events().Publish(server.DaemonMessageEvent, "Completed server restoration from rustic backup.")
+			s.Events().Publish(server.BackupRestoreCompletedEvent, "")
+			logger.Info("completed server restoration from rustic backup")
+			s.SetRestoring(false)
+		}(s, b, logger)
+		hasError = false
+		c.Status(http.StatusAccepted)
+		return
+	}
+	if data.Adapter == backup.LocalBackupAdapter || data.Adapter == backup.WingsBackupAdapter {
 		b, _, err := backup.LocateLocal(client, backupUuid)
 		if err != nil {
 			middleware.CaptureAndAbort(c, err)
@@ -216,13 +238,23 @@ func postServerRestoreBackup(c *gin.Context) {
 }
 
 // headServerBackup reports whether a local backup archive exists on this
-// machine. The panel uses it for scheduled backup verification sweeps.
+// machine. The panel uses it for scheduled backup verification sweeps. Rustic
+// backups are located by their snapshot sidecar.
 func headServerBackup(c *gin.Context) {
 	backupUuid, ok := parseBackupUuid(c, c.Param("backup"))
 	if !ok {
 		return
 	}
-	if _, _, err := backup.LocateLocal(middleware.ExtractApiClient(c), backupUuid); err != nil {
+	s := middleware.ExtractServer(c)
+	client := middleware.ExtractApiClient(c)
+	if _, _, err := backup.LocateRustic(client, s.ID(), backupUuid); err == nil {
+		c.Status(http.StatusNoContent)
+		return
+	} else if !errors.Is(err, os.ErrNotExist) {
+		middleware.CaptureAndAbort(c, err)
+		return
+	}
+	if _, _, err := backup.LocateLocal(client, backupUuid); err != nil {
 		if errors.Is(err, os.ErrNotExist) {
 			c.AbortWithStatus(http.StatusNotFound)
 			return
@@ -242,8 +274,21 @@ func deleteServerBackup(c *gin.Context) {
 	if !ok {
 		return
 	}
-	b, _, err := backup.LocateLocal(middleware.ExtractApiClient(c), backupUuid)
-	if err != nil {
+	s := middleware.ExtractServer(c)
+	client := middleware.ExtractApiClient(c)
+	var b backup.BackupInterface
+	var err error
+	if rb, _, lerr := backup.LocateRustic(client, s.ID(), backupUuid); lerr == nil {
+		b = rb
+	} else {
+		lb, _, lerr := backup.LocateLocal(client, backupUuid)
+		if lerr != nil {
+			err = lerr
+		} else {
+			b = lb
+		}
+	}
+	if b == nil {
 		// Just return from the function at this point if the backup was not located.
 		if errors.Is(err, os.ErrNotExist) {
 			c.AbortWithStatusJSON(http.StatusNotFound, gin.H{

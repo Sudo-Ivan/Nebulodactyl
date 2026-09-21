@@ -24,6 +24,13 @@ enum Adapters: string
         self::ADAPTER_WINGS_S3,
     ];
 
+    private const COMET = [
+        self::ADAPTER_WINGS, // local storage; Comet accepts wings as an alias
+        self::ADAPTER_WINGS_S3,
+        self::ADAPTER_RUSTIC_LOCAL,
+        self::ADAPTER_RUSTIC_S3,
+    ];
+
     public static function all(): array
     {
         return array_column(self::cases(), 'value', 'value');
@@ -31,7 +38,11 @@ enum Adapters: string
 
     public static function all_sorted(): array
     {
-        return ['elytra' => self::all_elytra(), 'wings' => self::all_wings()];
+        return [
+            'elytra' => self::all_elytra(),
+            'wings' => self::all_wings(),
+            'comet' => self::all_comet(),
+        ];
     }
 
 
@@ -43,6 +54,11 @@ enum Adapters: string
     public static function all_wings(): array
     {
         return array_column(self::WINGS, "value");
+    }
+
+    public static function all_comet(): array
+    {
+        return array_column(self::COMET, "value");
     }
 
     public static function values(): array

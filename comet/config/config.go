@@ -293,6 +293,11 @@ type Backups struct {
 	// RestoreHostAllowlist allows backup restore downloads to connect to otherwise blocked
 	// private/internal destinations. Entries may be hostnames, IP addresses, or CIDR ranges.
 	RestoreHostAllowlist []string `yaml:"restore_host_allowlist"`
+
+	// RusticBinary is the path to the rustic executable used for deduplicated
+	// backups (the rustic_local and rustic_s3 adapters). When not found on the
+	// host those adapters fail with a clear error at backup time.
+	RusticBinary string `default:"rustic" yaml:"rustic_binary"`
 }
 
 type Transfers struct {

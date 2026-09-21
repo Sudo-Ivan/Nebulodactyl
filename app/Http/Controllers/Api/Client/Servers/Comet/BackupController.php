@@ -161,7 +161,7 @@ class BackupController extends ClientApiController
             throw new AuthorizationException();
         }
 
-        if ($backup->disk !== BackupAdapter::S3 && $backup->disk !== BackupAdapter::Wings) {
+        if ($backup->disk !== BackupAdapter::S3 && $backup->disk !== BackupAdapter::Wings && !$backup->isRustic()) {
             throw new BadRequestHttpException('The backup requested references an unknown disk driver type and cannot be downloaded.');
         }
 

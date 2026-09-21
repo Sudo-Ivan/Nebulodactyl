@@ -116,9 +116,14 @@ class InitiateBackupService
 
         return $this->connection->transaction(function () use ($server, $name) {
             $disk = BackupAdapter::tryFrom($server->node->backupDisk);
-            $adapter = in_array($disk, [BackupAdapter::Wings, BackupAdapter::S3], true)
-                ? $disk
-                : BackupAdapter::Wings;
+            // Comet nodes additionally support the deduplicating rustic
+            // adapters; everything else falls back to the local driver.
+            $allowed = [BackupAdapter::Wings, BackupAdapter::S3];
+            if (strtolower($server->node->daemonType ?? '') === 'comet') {
+                $allowed[] = BackupAdapter::RusticLocal;
+                $allowed[] = BackupAdapter::RusticS3;
+            }
+            $adapter = in_array($disk, $allowed, true) ? $disk : BackupAdapter::Wings;
 
             /** @var Backup $backup */
             $backup = $this->repository->create([

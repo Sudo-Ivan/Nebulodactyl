@@ -31,7 +31,13 @@ type AdapterType string
 
 const (
 	LocalBackupAdapter AdapterType = "comet"
+	// WingsBackupAdapter is the value the Panel sends for local backups on
+	// nodes configured with the wings disk. Comet accepts it as an alias for
+	// the local adapter so existing nodes keep working.
+	WingsBackupAdapter AdapterType = "wings"
 	S3BackupAdapter    AdapterType = "s3"
+	RusticLocalAdapter AdapterType = "rustic_local"
+	RusticS3Adapter    AdapterType = "rustic_s3"
 )
 
 // RestoreCallback is a generic restoration callback that exists for both local
@@ -202,6 +208,7 @@ type ArchiveDetails struct {
 	ChecksumType string              `json:"checksum_type"`
 	Size         int64               `json:"size"`
 	Parts        []remote.BackupPart `json:"parts"`
+	SnapshotID   string              `json:"snapshot_id,omitempty"`
 }
 
 // ToRequest returns a request object.
@@ -212,5 +219,6 @@ func (ad *ArchiveDetails) ToRequest(successful bool) remote.BackupRequest {
 		Size:         ad.Size,
 		Successful:   successful,
 		Parts:        ad.Parts,
+		SnapshotID:   ad.SnapshotID,
 	}
 }

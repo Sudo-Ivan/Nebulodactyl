@@ -17,6 +17,13 @@ class RusticConfigController extends Controller
     {
         $server = Server::where('uuid', $uuid)->firstOrFail();
 
+        // The repository password and S3 credentials are node scoped
+        // secrets, so the requesting node must actually own the server.
+        $node = $request->attributes->get('node');
+        if (is_null($node) || $server->node_id !== $node->id) {
+            return response()->json(['error' => 'The requested resource was not found on this server.'], 404);
+        }
+
         $type = $request->query('type', 'local');
 
         if (!in_array($type, ['local', 's3'])) {

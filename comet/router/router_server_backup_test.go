@@ -46,6 +46,10 @@ func (c backupTestRemoteClient) GetServers(context.Context, int) ([]remote.RawSe
 	return nil, nil
 }
 
+func (c backupTestRemoteClient) GetRusticConfig(context.Context, string, string) (remote.RusticConfig, error) {
+	return remote.RusticConfig{}, nil
+}
+
 func (c backupTestRemoteClient) ResetServersState(context.Context) error {
 	return nil
 }

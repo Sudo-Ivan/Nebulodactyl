@@ -168,6 +168,25 @@ type BackupRequest struct {
 	Size         int64        `json:"size"`
 	Successful   bool         `json:"successful"`
 	Parts        []BackupPart `json:"parts"`
+	// SnapshotID carries the rustic snapshot identifier when the backup was
+	// produced by a deduplicating repository adapter.
+	SnapshotID string `json:"snapshot_id,omitempty"`
+}
+
+// RusticConfig is the repository configuration handed to the daemon by the
+// Panel so it can drive the rustic binary for deduplicated backups.
+type RusticConfig struct {
+	BackupType         string `json:"backup_type"`
+	RepositoryPassword string `json:"repository_password"`
+	RepositoryPath     string `json:"repository_path"`
+	S3Credentials      *struct {
+		AccessKeyID     string `json:"access_key_id"`
+		SecretAccessKey string `json:"secret_access_key"`
+		Region          string `json:"region"`
+		Bucket          string `json:"bucket"`
+		Endpoint        string `json:"endpoint"`
+		ForcePathStyle  bool   `json:"force_path_style"`
+	} `json:"s3_credentials"`
 }
 
 type InstallStatusRequest struct {
