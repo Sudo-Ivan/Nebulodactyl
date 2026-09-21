@@ -16,6 +16,15 @@ return new class extends Migration
             });
         }
 
+        // information_schema does not exist on sqlite. SQLite also cannot
+        // add foreign keys to existing tables, so the constraint is skipped
+        // there and enforced at the application level.
+        $driver = Schema::getConnection()->getDriverName();
+
+        if ($driver === 'sqlite') {
+            return;
+        }
+
         $hasFK = DB::select(
             "SELECT COUNT(*) as cnt FROM information_schema.TABLE_CONSTRAINTS WHERE CONSTRAINT_SCHEMA = ? AND TABLE_NAME = ? AND CONSTRAINT_NAME = ? AND CONSTRAINT_TYPE = 'FOREIGN KEY'",
             [config('database.connections.mariadb.database', 'panel'), 'servers', 'servers_group_id_foreign']

@@ -16,15 +16,28 @@ class CreateBackupsTable extends Migration
     // There exists a backups plugin for the 0.7 version of the Panel. However, it didn't properly
     // namespace itself so now we have to deal with these tables being in the way of tables we're trying
     // to use. For now, just rename them to maintain the data.
-    $results = DB::select('SELECT TABLE_NAME FROM information_schema.tables WHERE table_schema = ? AND table_name LIKE ? AND table_name NOT LIKE \'%_plugin_bak\'', [
-      config("database.connections.{$db}.database"),
-      'backup%',
-    ]);
+    $driver = DB::getDriverName();
+    if ($driver === 'sqlite') {
+      $results = DB::select("SELECT name AS TABLE_NAME FROM sqlite_master WHERE type = 'table' AND name LIKE ? AND name NOT LIKE '%_plugin_bak'", [
+        'backup%',
+      ]);
+    } elseif ($driver === 'pgsql') {
+      $results = DB::select('SELECT TABLE_NAME FROM information_schema.tables WHERE table_schema = ? AND table_name LIKE ? AND table_name NOT LIKE \'%_plugin_bak\'', [
+        config("database.connections.{$db}.schema", 'public'),
+        'backup%',
+      ]);
+    } else {
+      $results = DB::select('SELECT TABLE_NAME FROM information_schema.tables WHERE table_schema = ? AND table_name LIKE ? AND table_name NOT LIKE \'%_plugin_bak\'', [
+        config("database.connections.{$db}.database"),
+        'backup%',
+      ]);
+    }
 
     // Take any of the results, most likely "backups" and "backup_logs" and rename them to have a
     // suffix so data isn't completely lost, but they're no longer in the way of this migration...
     foreach ($results as $result) {
-      Schema::rename($result->TABLE_NAME, $result->TABLE_NAME . '_plugin_bak');
+      $name = $result->TABLE_NAME ?? $result->table_name;
+      Schema::rename($name, $name . '_plugin_bak');
     }
 
     Schema::create('backups', function (Blueprint $table) {
