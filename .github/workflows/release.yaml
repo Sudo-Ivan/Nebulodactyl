@@ -25,6 +25,8 @@ jobs:
     timeout-minutes: 30
     permissions:
       contents: write
+      id-token: write
+      attestations: write
     env:
       VERSION: ${{ inputs.version }}
       RELEASE_TYPE: ${{ inputs.release_type }}
@@ -38,6 +40,7 @@ jobs:
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
           ref: master
+          persist-credentials: false
 
       - name: Validate inputs
         run: |
@@ -68,6 +71,28 @@ jobs:
           echo "$sum  panel.tar.gz" > checksum.txt
           echo "checksum=$sum" >> "$GITHUB_OUTPUT"
 
+      - name: Generate source SBOM
+        uses: anchore/sbom-action@e22c389904149dbc22b58101806040fa8d37a610 # v0
+        with:
+          path: .
+          format: spdx-json
+          output-file: sbom.spdx.json
+
+      - name: Install cosign
+        uses: sigstore/cosign-installer@6f9f17788090df1f26f669e9d70d6ae9567deba6 # v4.1.2
+
+      # Keyless signing via GitHub OIDC -> Fulcio, recorded in Rekor.
+      # The bundle contains the signature, certificate and log entry.
+      - name: Sign release artifacts (keyless)
+        run: |
+          cosign sign-blob --yes --bundle panel.tar.gz.sigstore.json panel.tar.gz
+          cosign sign-blob --yes --bundle checksum.txt.sigstore.json checksum.txt
+
+      - name: Attest artifact provenance
+        uses: actions/attest-build-provenance@977bb373ede98d70efdf65b84cb5f73e068dcc2a # v3
+        with:
+          subject-path: panel.tar.gz
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65 # v2
         with:
@@ -80,6 +105,12 @@ jobs:
           files: |
             panel.tar.gz
             checksum.txt
+            panel.tar.gz.sigstore.json
+            checksum.txt.sigstore.json
+            sbom.spdx.json
           body: |
             **SHA256 checksum:**
             `${{ steps.checksum.outputs.checksum }}`
+
+            **Verification:**
+            `cosign verify-blob --bundle panel.tar.gz.sigstore.json panel.tar.gz`
