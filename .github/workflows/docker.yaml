@@ -14,8 +14,22 @@ concurrency:
 
 jobs:
   build:
-    name: Build, scan, sign and attest image
+    name: Build, scan, sign and attest ${{ matrix.name }}
     runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: panel
+            image: nebulodactyl
+            context: .
+            file: Dockerfile
+            version: ""
+          - name: comet
+            image: nebulodactyl-comet
+            context: comet
+            file: comet/Dockerfile
+            version: ${{ github.ref_name }}
     timeout-minutes: 60
     permissions:
       contents: read
@@ -54,7 +68,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@c299e40c65443455700f0fdfc63efafe5b349051 # v5
         with:
-          images: ghcr.io/${{ github.repository }}
+          images: ghcr.io/${{ github.repository_owner }}/${{ matrix.image }}
           tags: |
             type=raw,value=canary,enable=${{ github.ref_name == 'master' }}
             type=semver,pattern={{version}}
@@ -66,7 +80,10 @@ jobs:
         id: build
         uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6
         with:
-          context: .
+          context: ${{ matrix.context }}
+          file: ${{ matrix.file }}
+          build-args: |
+            VERSION=${{ matrix.version }}
           push: true
           platforms: linux/amd64,linux/arm64
           tags: ${{ steps.meta.outputs.tags }}
@@ -85,7 +102,7 @@ jobs:
         env:
           DIGEST: ${{ steps.build.outputs.digest }}
         run: |
-          name="ghcr.io/${GITHUB_REPOSITORY,,}"
+          name="ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/${{ matrix.image }}"
           echo "name=$name" >> "$GITHUB_OUTPUT"
           echo "ref=$name@$DIGEST" >> "$GITHUB_OUTPUT"
 
@@ -109,7 +126,7 @@ jobs:
         uses: github/codeql-action/upload-sarif@1c5b675653bb5c22dbe9b12b556ec555138e09fd # v4
         with:
           sarif_file: trivy-results.sarif
-          category: container
+          category: container-${{ matrix.name }}
 
       - name: Scan image (JSON for OpenVEX)
         uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1 # 0.35.0
@@ -167,7 +184,7 @@ jobs:
       - name: Upload scan artifacts
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:
-          name: image-security-${{ github.sha }}
+          name: image-security-${{ matrix.name }}-${{ github.sha }}
           path: |
             trivy-results.json
             trivy-results.sarif

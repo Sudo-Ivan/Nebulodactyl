@@ -59,6 +59,21 @@ jobs:
           git add config/app.php
           git commit -m "ci: bump v${VERSION}" || echo "No changes to commit"
 
+      - name: Setup Go
+        uses: actions/setup-go@4dc6199c7b1a012772edbd06daecab0f50c9053c # v6.1.0
+        with:
+          go-version-file: comet/go.mod
+          cache-dependency-path: comet/go.sum
+
+      - name: Build comet binaries
+        working-directory: comet
+        run: |
+          for arch in amd64 arm64; do
+            CGO_ENABLED=0 GOOS=linux GOARCH=$arch go build \
+              -ldflags="-s -w -X github.com/Sudo-Ivan/Nebulodactyl/comet/system.Version=v${VERSION}" \
+              -trimpath -o "../comet_linux_${arch}" .
+          done
+
       - name: Create release archive
         run: |
           rm -rf node_modules tests CODE_OF_CONDUCT.md CONTRIBUTING.md
@@ -67,8 +82,8 @@ jobs:
       - name: Generate checksum
         id: checksum
         run: |
+          sha256sum panel.tar.gz comet_linux_amd64 comet_linux_arm64 > checksum.txt
           sum=$(sha256sum panel.tar.gz | cut -d' ' -f1)
-          echo "$sum  panel.tar.gz" > checksum.txt
           echo "checksum=$sum" >> "$GITHUB_OUTPUT"
 
       - name: Generate source SBOM
@@ -85,13 +100,17 @@ jobs:
       # The bundle contains the signature, certificate and log entry.
       - name: Sign release artifacts (keyless)
         run: |
-          cosign sign-blob --yes --bundle panel.tar.gz.sigstore.json panel.tar.gz
-          cosign sign-blob --yes --bundle checksum.txt.sigstore.json checksum.txt
+          for f in panel.tar.gz checksum.txt comet_linux_amd64 comet_linux_arm64; do
+            cosign sign-blob --yes --bundle "$f.sigstore.json" "$f"
+          done
 
       - name: Attest artifact provenance
         uses: actions/attest-build-provenance@977bb373ede98d70efdf65b84cb5f73e068dcc2a # v3
         with:
-          subject-path: panel.tar.gz
+          subject-path: |
+            panel.tar.gz
+            comet_linux_amd64
+            comet_linux_arm64
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65 # v2
@@ -104,8 +123,12 @@ jobs:
           prerelease: ${{ inputs.release_type == 'prerelease' }}
           files: |
             panel.tar.gz
+            comet_linux_amd64
+            comet_linux_arm64
             checksum.txt
             panel.tar.gz.sigstore.json
+            comet_linux_amd64.sigstore.json
+            comet_linux_arm64.sigstore.json
             checksum.txt.sigstore.json
             sbom.spdx.json
           body: |
