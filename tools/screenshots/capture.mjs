@@ -73,9 +73,14 @@ await page.waitForFunction(() => document.body.innerText.includes('GiB'), { time
 await page.waitForTimeout(500);
 await shot('panel-dark.png');
 
-// 3. Server console, if a demo server was seeded
+// 3. Server console, if a demo server was seeded. The console is filled by
+// the daemon websocket (auth -> log stream), so wait until the terminal
+// shows real log lines before shooting.
 if (SERVER_ID) {
     await page.goto(`${BASE}/server/${SERVER_ID}`, { waitUntil: 'networkidle' });
+    await page
+        .waitForFunction(() => document.body.innerText.includes('Done ('), { timeout: 20000 })
+        .catch(() => undefined);
     await settle();
     await shot('panel-console.png');
 

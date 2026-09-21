@@ -8,7 +8,7 @@
     --sidebar-margin-base: 0.75rem;
     --sidebar-padding: 2rem;
     --sidebar-full-width: 300px;
-    --sidebar-minimized-width: 76px;
+    --sidebar-minimized-width: 64px;
 }
 
 body[data-sidebar-minimized="true"] {
@@ -105,7 +105,7 @@ body[data-sidebar-minimized="false"] .sidebar-logo-name {
         width var(--sidebar-transition-indicator);
 }
 
-/* In the slim rail the nav item is a 48px chip centered in 76px, so the
+/* In the slim rail the nav item is a 48px chip centered in 64px, so the
    indicator matches the chip instead of spanning the padded width. */
 body[data-sidebar-minimized="true"] .sidebar-indicator {
     width: 48px;
