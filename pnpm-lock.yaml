@@ -435,6 +435,12 @@ importers:
         specifier: ^0.2.0
         version: 0.2.0
 
+  tools/screenshots:
+    dependencies:
+      playwright-core:
+        specifier: 1.63.0
+        version: 1.63.0
+
 packages:
 
   '@alloc/quick-lru@5.3.0':
@@ -2549,6 +2555,11 @@ packages:
   picomatch@4.0.7:
     resolution: {integrity: sha512-qcJu88Q2IWqJsDD529JKMdwGm/dvInW4HvQnRwiH9JtihJvzGOscDtHE3x1pBKeUOTysQ8kVmLnJ2kJu7yhcGA==}
     engines: {node: '>=12'}
+
+  playwright-core@1.63.0:
+    resolution: {integrity: sha512-rYCsBF/M5HjUch52bbtVONEFjv6Xu8sm8h72dNlR5bzIE1fvC/bxgspzkjSfU+MweEMmPM8KJebG6nnyxo5mCg==}
+    engines: {node: '>=20'}
+    hasBin: true
 
   postcss-import@17.0.0:
     resolution: {integrity: sha512-qzVMJhcq39KweT7Fp0HcjE5YxL5yI854Q3CtufxDuZKO9HLQUp2rptB9+U0MIj3pT1ZEVXoqnpeC1mSkfYuz4Q==}
@@ -5076,6 +5087,8 @@ snapshots:
   picomatch@2.3.2: {}
 
   picomatch@4.0.7: {}
+
+  playwright-core@1.63.0: {}
 
   postcss-import@17.0.0(postcss@8.5.28):
     dependencies:

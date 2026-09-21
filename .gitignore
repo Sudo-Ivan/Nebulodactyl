@@ -65,3 +65,6 @@ mariadb_data/
 /agent/nebulod
 *.sqlite
 *.sqlite-journal
+
+# Deploy-time copy of showcase/ for the Pages site
+marketing/showcase/

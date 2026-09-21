@@ -1,3 +1,7 @@
+packages:
+    - '.'
+    - 'tools/screenshots'
+
 # Supply-chain hardening (pnpm settings)
 # https://pnpm.io/supply-chain-security
 
