@@ -59,9 +59,9 @@ type Environment struct {
 
 	// Caches the last container health status read so polling endpoints do
 	// not hit the engine on every request.
-	healthMx   sync.Mutex
-	health     string
-	healthAt   time.Time
+	healthMx sync.Mutex
+	health   string
+	healthAt time.Time
 }
 
 // New creates a new base Docker environment. The ID passed through will be the

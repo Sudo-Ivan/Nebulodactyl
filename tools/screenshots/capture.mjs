@@ -69,9 +69,7 @@ await page.waitForLoadState('networkidle');
 await settle();
 // Rows poll the daemon REST endpoint on mount; wait until at least one
 // row shows real memory usage instead of the zeroed placeholder.
-await page
-    .waitForFunction(() => document.body.innerText.includes('GiB'), { timeout: 10000 })
-    .catch(() => {});
+await page.waitForFunction(() => document.body.innerText.includes('GiB'), { timeout: 10000 }).catch(() => undefined);
 await page.waitForTimeout(500);
 await shot('panel-dark.png');
 

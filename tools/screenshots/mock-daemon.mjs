@@ -101,7 +101,6 @@ wss.on('connection', (ws, req) => {
     }
 
     const uuid = match[1];
-    let authed = false;
     let tick = 0;
     let statsTimer = null;
     let logTimer = null;
@@ -115,7 +114,9 @@ wss.on('connection', (ws, req) => {
         logTimer = setInterval(pushLog, 2200);
         pushStats();
         send(ws, 'status', 'running');
-        lines.slice(0, 6).forEach((line) => send(ws, 'console output', line));
+        for (const line of lines.slice(0, 6)) {
+            send(ws, 'console output', line);
+        }
     };
 
     ws.on('message', (raw) => {
@@ -128,7 +129,6 @@ wss.on('connection', (ws, req) => {
 
         switch (msg.event) {
             case 'auth':
-                authed = true;
                 send(ws, 'auth success');
                 beginStream();
                 break;
@@ -136,7 +136,9 @@ wss.on('connection', (ws, req) => {
                 pushStats();
                 break;
             case 'send logs':
-                lines.forEach((line) => send(ws, 'console output', line));
+                for (const line of lines) {
+                    send(ws, 'console output', line);
+                }
                 break;
             case 'send command':
                 send(ws, 'console output', `[Server thread/INFO]: ${msg.args?.[0] ?? ''}`);
