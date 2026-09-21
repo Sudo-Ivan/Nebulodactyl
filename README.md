@@ -20,14 +20,15 @@ Nebulodactyl is a game server management panel forked from Hydrodactyl (itself a
 
 ## Features
 
-- Space theme: a nebula-inspired color scheme with deep-space backgrounds, starfield accents, and a violet/cyan palette.
-- Nebula overlay network: optional integration for running panel-to-node traffic over a mutually authenticated Nebula overlay instead of exposing daemons on public addresses. See `config/nebula.php` and `examples/nebula/`.
+- Space theme: a monochrome color scheme with a twinkling starfield and ambient glow, in the style of quad4.io.
+- Nebula overlay network: the panel signs node certificates and routes daemon traffic over a mutually authenticated Nebula mesh. Nodes enroll themselves with the `nebulod` agent in `agent/`. See `config/nebula.php`, `agent/`, and `examples/nebula/`.
+- Reverse proxy friendly: works behind Coolify, Traefik, nginx, or Caddy with `TRUSTED_PROXIES` and a `/healthz` endpoint. See `examples/coolify/`.
 - Reimagined client panel for console, files, databases, backups, network, users, startup, schedules, activity, and software.
 - Marketplace: a native plugin and mod installer for Minecraft servers backed by Modrinth, Hangar, and Spiget.
 - Setup wizard for guided first-run configuration.
 - Logo customization from the admin dashboard.
 - S3-compatible backups with per-node storage on any S3-compatible provider.
-- MySQL, MariaDB, or PostgreSQL for the panel database.
+- MySQL, MariaDB, PostgreSQL, or SQLite for the panel database.
 - OpenAPI documentation powered by Scalar.
 - Laravel 13, React 19, TypeScript, and Tailwind CSS, formatted and linted with Biome.
 
