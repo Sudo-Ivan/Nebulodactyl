@@ -16,6 +16,7 @@ use Pterodactyl\Services\Helpers\SoftwareVersionService;
 use Pterodactyl\Repositories\Eloquent\LocationRepository;
 use Pterodactyl\Repositories\Eloquent\AllocationRepository;
 use Illuminate\Support\Facades\DB;
+use Pterodactyl\Models\NebulaHost;
 use Pterodactyl\Enums\Daemon\DaemonType;
 use Pterodactyl\Enums\Daemon\Adapters;
 use Pterodactyl\Models\S3;
@@ -48,6 +49,10 @@ class NodeViewController extends Controller
             'node' => $node,
             'stats' => $stats,
             'version' => $this->versionService,
+            'nebulaHost' => NebulaHost::query()
+                ->where('node_id', $node->id)
+                ->whereNull('revoked_at')
+                ->first(),
         ]);
     }
 

@@ -374,6 +374,15 @@ class Server extends Model
         return $this->hasOne(ServerTransfer::class)->whereNull('successful')->orderByDesc('id');
     }
 
+    /**
+     * Returns all transfer records for this server, including completed and
+     * failed ones.
+     */
+    public function transfers(): HasMany
+    {
+        return $this->hasMany(ServerTransfer::class);
+    }
+
     public function bucket(): BelongsTo
     {
         return $this->belongsTo(S3::class, 'bucket');

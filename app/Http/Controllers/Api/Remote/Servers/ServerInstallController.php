@@ -8,6 +8,7 @@ use Illuminate\Http\Response;
 use Pterodactyl\Models\Server;
 use Illuminate\Http\JsonResponse;
 use Pterodactyl\Http\Controllers\Controller;
+use Pterodactyl\Facades\Activity;
 use Pterodactyl\Repositories\Eloquent\ServerRepository;
 use Pterodactyl\Exceptions\Http\HttpForbiddenException;
 use Pterodactyl\Events\Server\Installed as ServerInstalled;
@@ -66,6 +67,11 @@ class ServerInstallController extends Controller
         }
 
         $this->repository->update($server->id, ['status' => $status, 'installed_at' => CarbonImmutable::now()], true, true);
+
+        Activity::event($request->boolean('successful') ? 'server:install.completed' : 'server:install.failed')
+            ->subject($server)
+            ->property('reinstall', $request->boolean('reinstall'))
+            ->log();
 
         // If the server successfully installed, fire installed event.
         // This logic allows individually disabling install and reinstall notifications separately.

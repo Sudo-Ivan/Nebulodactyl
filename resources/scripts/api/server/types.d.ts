@@ -21,6 +21,8 @@ export interface ServerBackup {
     snapshotId: string | null;
     createdAt: Date;
     completedAt: Date | null;
+    verifiedAt: Date | null;
+    verifyState: 'ok' | 'missing' | 'unverifiable' | 'error' | null;
     // Async job fields
     jobId: string | null;
     jobStatus: 'pending' | 'running' | 'completed' | 'failed';

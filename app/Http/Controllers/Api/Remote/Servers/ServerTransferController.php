@@ -12,6 +12,7 @@ use Illuminate\Database\ConnectionInterface;
 use Pterodactyl\Http\Controllers\Controller;
 use Pterodactyl\Repositories\Eloquent\ServerRepository;
 use Pterodactyl\Repositories\Wings\DaemonServerRepository;
+use Pterodactyl\Facades\Activity;
 use Pterodactyl\Exceptions\Http\HttpForbiddenException;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 use Pterodactyl\Exceptions\Http\Connection\DaemonConnectionException;
@@ -42,6 +43,11 @@ class ServerTransferController extends Controller
         }
 
         $this->assertTransferNode($request, $transfer);
+
+        Activity::event('server:transfer.failed')
+            ->subject($server)
+            ->property(['old_node' => $transfer->old_node, 'new_node' => $transfer->new_node])
+            ->log();
 
         return $this->processFailedTransfer($transfer);
     }
@@ -89,6 +95,11 @@ class ServerTransferController extends Controller
         } catch (DaemonConnectionException $exception) {
             Log::warning($exception, ['transfer_id' => $server->transfer->id]);
         }
+
+        Activity::event('server:transfer.completed')
+            ->subject($server)
+            ->property(['old_node' => $transfer->old_node, 'new_node' => $transfer->new_node])
+            ->log();
 
         return new JsonResponse([], Response::HTTP_NO_CONTENT);
     }

@@ -69,6 +69,8 @@ export const rawDataToServerBackup = ({ attributes }: FractalResponseData): Serv
     snapshotId: attributes.snapshot_id,
     createdAt: new Date(attributes.created_at),
     completedAt: attributes.completed_at ? new Date(attributes.completed_at) : null,
+    verifiedAt: attributes.verified_at ? new Date(attributes.verified_at) : null,
+    verifyState: attributes.verify_state || null,
     // Async job fields
     jobId: attributes.job_id || null,
     jobStatus: attributes.job_status || 'completed',

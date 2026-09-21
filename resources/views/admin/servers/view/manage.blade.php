@@ -117,14 +117,20 @@
             </div>
         @else
             <div class="col-sm-4">
-                <div class="box box-success">
+                <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Transfer Server</h3>
+                        <h3 class="box-title">Transfer In Progress</h3>
                     </div>
                     <div class="box-body">
                         <p>
-                            This server is currently being transferred to another node.
-                            Transfer was initiated at <strong>{{ $server->transfer->created_at }}</strong>
+                            This server is being transferred from
+                            <strong>{{ $server->transfer->oldNode->name ?? 'unknown' }}</strong> to
+                            <strong>{{ $server->transfer->newNode->name ?? 'unknown' }}</strong>.
+                        </p>
+                        <p class="no-margin">
+                            Started <strong>{{ $server->transfer->created_at->diffForHumans() }}</strong>
+                            ({{ $server->transfer->created_at->toDayDateTimeString() }}).
+                            The server is unavailable until the transfer completes or fails.
                         </p>
                     </div>
 
@@ -135,6 +141,44 @@
             </div>
         @endif
     </div>
+
+    @if($transferHistory->isNotEmpty())
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-default">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Transfer History</h3>
+                    </div>
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover">
+                            <tr>
+                                <th>From</th>
+                                <th>To</th>
+                                <th>Result</th>
+                                <th>Started</th>
+                                <th>Finished</th>
+                            </tr>
+                            @foreach($transferHistory as $transfer)
+                                <tr>
+                                    <td>{{ $transfer->oldNode->name ?? 'deleted node' }}</td>
+                                    <td>{{ $transfer->newNode->name ?? 'deleted node' }}</td>
+                                    <td>
+                                        @if($transfer->successful)
+                                            <span class="label label-success">Completed</span>
+                                        @else
+                                            <span class="label label-danger">Failed</span>
+                                        @endif
+                                    </td>
+                                    <td>{{ $transfer->created_at->toDayDateTimeString() }}</td>
+                                    <td>{{ $transfer->updated_at->toDayDateTimeString() }}</td>
+                                </tr>
+                            @endforeach
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
 
     <div class="modal fade" id="transferServerModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">

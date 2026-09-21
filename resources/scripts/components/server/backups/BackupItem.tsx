@@ -99,6 +99,46 @@ const BackupItem = ({ backup, isSelected = false, onToggleSelect, isSelectable =
         }
     };
 
+    const getVerifyBadge = () => {
+        if (backup.status !== 'completed' || backup.isLiveOnly) return null;
+
+        if (backup.verifyState === 'ok') {
+            return (
+                <span
+                    className='bg-emerald-500/20 border border-emerald-500/30 py-0.5 px-2 rounded text-emerald-300 text-xs font-medium'
+                    title={
+                        backup.verifiedAt
+                            ? `Integrity checked ${format(backup.verifiedAt, 'yyyy-MM-dd HH:mm')}`
+                            : 'Integrity checked'
+                    }
+                >
+                    Verified
+                </span>
+            );
+        }
+        if (backup.verifyState === 'missing') {
+            return (
+                <span
+                    className='bg-red-500/20 border border-red-500/30 py-0.5 px-2 rounded text-red-300 text-xs font-medium'
+                    title='This backup could not be found on its backing storage'
+                >
+                    Missing
+                </span>
+            );
+        }
+        if (backup.verifyState === 'error') {
+            return (
+                <span
+                    className='bg-yellow-500/20 border border-yellow-500/30 py-0.5 px-2 rounded text-yellow-300 text-xs font-medium'
+                    title='The last integrity check errored'
+                >
+                    Unverified
+                </span>
+            );
+        }
+        return null;
+    };
+
     const isActive = backup.status === 'running' || backup.status === 'pending';
     const showProgressBar = isActive || (backup.status === 'completed' && backup.isLiveOnly);
 
@@ -124,6 +164,7 @@ const BackupItem = ({ backup, isSelected = false, onToggleSelect, isSelectable =
             <div className='flex-1 min-w-0'>
                 <div className='flex items-center gap-2 mb-1.5'>
                     {getStatusBadge()}
+                    {getVerifyBadge()}
                     <h3 className='text-sm font-medium text-cream-100 truncate'>{backup.name}</h3>
                     {backup.isAutomatic && (
                         <span className='text-xs text-blue-400 font-medium bg-blue-500/10 border border-blue-500/20 px-2 py-0.5 rounded'>

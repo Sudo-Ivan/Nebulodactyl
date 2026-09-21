@@ -11,6 +11,8 @@ export interface UnifiedBackup {
     bytes?: number;
     createdAt: Date;
     completedAt?: Date | null;
+    verifiedAt?: Date | null;
+    verifyState?: 'ok' | 'missing' | 'unverifiable' | 'error' | null;
     canRetry: boolean;
     canDelete: boolean;
     canDownload: boolean;

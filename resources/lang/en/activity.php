@@ -40,6 +40,14 @@ return [
     ],
     'server' => [
         'reinstall' => 'Reinstalled server',
+        'transfer' => [
+            'completed' => 'Completed transfer to a new node',
+            'failed' => 'Transfer to a new node failed',
+        ],
+        'install' => [
+            'completed' => 'Finished installing the server',
+            'failed' => 'Server installation failed',
+        ],
         'console' => [
             'command' => 'Executed ":command" on the server',
         ],

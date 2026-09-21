@@ -138,9 +138,15 @@ class ServerViewController extends Controller
         ]);
 
         return $this->view->make('admin.servers.view.manage', [
-            'server' => $server,
+            'server' => $server->loadMissing('transfer.oldNode', 'transfer.newNode'),
             'locations' => $this->locationRepository->all(),
             'canTransfer' => $canTransfer,
+            'transferHistory' => $server->transfers()
+                ->with('oldNode:id,name', 'newNode:id,name')
+                ->whereNotNull('successful')
+                ->orderByDesc('id')
+                ->limit(10)
+                ->get(),
         ]);
     }
 

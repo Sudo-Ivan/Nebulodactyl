@@ -55,6 +55,74 @@
         </div>
       </div>
       </div>
+      <div class="col-xs-12">
+      <div class="box box-primary">
+        <div class="box-header with-border">
+        <h3 class="box-title">Nebula Overlay</h3>
+        </div>
+        <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+          @if (!config('nebula.enabled'))
+          <tr>
+          <td colspan="2" class="text-muted">Nebula overlay support is not enabled on this panel.</td>
+          </tr>
+          @elseif (is_null($nebulaHost))
+          <tr>
+          <td colspan="2" class="text-muted">This node has not enrolled on the overlay. Run the node agent (nebulod) on the machine to join it.</td>
+          </tr>
+          @else
+          @php
+            $seenRecently = $nebulaHost->last_seen_at && $nebulaHost->last_seen_at->gt(now()->subMinutes(10));
+            $expiringSoon = $nebulaHost->expires_at && $nebulaHost->expires_at->lt(now()->addDays(7));
+          @endphp
+          <tr>
+          <td>Overlay Address</td>
+          <td><code>{{ $nebulaHost->ip }}</code></td>
+          </tr>
+          <tr>
+          <td>Status</td>
+          <td>
+            @if (!$nebulaHost->isActive())
+            <span class="label label-danger">Expired</span>
+            @elseif ($seenRecently)
+            <span class="label label-success">Connected</span>
+            @else
+            <span class="label label-warning">Enrolled, not seen recently</span>
+            @endif
+          </td>
+          </tr>
+          <tr>
+          <td>Last Seen</td>
+          <td>{{ $nebulaHost->last_seen_at ? $nebulaHost->last_seen_at->diffForHumans() : 'never' }}</td>
+          </tr>
+          <tr>
+          <td>Certificate Expires</td>
+          <td>
+            {{ $nebulaHost->expires_at ? $nebulaHost->expires_at->toDayDateTimeString() : 'never' }}
+            @if ($expiringSoon)
+            <span class="label label-warning">expires soon</span>
+            @endif
+          </td>
+          </tr>
+          <tr>
+          <td>Certificate Fingerprint</td>
+          <td><code>{{ $nebulaHost->fingerprint }}</code></td>
+          </tr>
+          <tr>
+          <td>Firewall Groups</td>
+          <td>
+            @forelse ($nebulaHost->groups ?? [] as $group)
+            <span class="label label-default">{{ $group }}</span>
+            @empty
+            <span class="text-muted">none</span>
+            @endforelse
+          </td>
+          </tr>
+          @endif
+        </table>
+        </div>
+      </div>
+      </div>
       @if ($node->description)
       <div class="col-xs-12">
       <div class="box box-default">
