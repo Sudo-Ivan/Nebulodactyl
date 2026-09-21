@@ -9,6 +9,7 @@ use Pterodactyl\Enums\Daemon\DaemonType;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Encryption\Encrypter;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
@@ -184,6 +185,14 @@ class Node extends Model
 
 
     /**
+     * The active Nebula overlay certificate for this node, if enrolled.
+     */
+    public function nebulaHost(): HasOne
+    {
+        return $this->hasOne(NebulaHost::class)->whereNull('revoked_at');
+    }
+
+    /**
      * Get the connection address to use when making calls to this node.
      * This will use the internal FQDN if separate FQDNs are enabled and internal_fqdn is set,
      * otherwise it will fall back to the regular fqdn.
@@ -208,6 +217,16 @@ class Node extends Model
      */
     public function getInternalFqdn(): string
     {
+        // When the Nebula overlay is enabled and this node has an enrolled
+        // address, daemon traffic rides the encrypted overlay instead of the
+        // public or internal FQDN.
+        if (config('nebula.enabled') && config('nebula.prefer_overlay')) {
+            $ip = $this->nebulaHost?->ip;
+            if (!empty($ip)) {
+                return $ip;
+            }
+        }
+
         // Use internal FQDN if it's provided and not empty
         if (!empty($this->internal_fqdn)) {
             return $this->internal_fqdn;

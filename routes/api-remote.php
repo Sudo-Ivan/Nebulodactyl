@@ -12,6 +12,7 @@ use Pterodactyl\Http\Controllers\Api\Remote\Servers\ServerDetailsController;
 use Pterodactyl\Http\Controllers\Api\Remote\Servers\ServerInstallController;
 use Pterodactyl\Http\Controllers\Api\Remote\Servers\ServerTransferController;
 use Pterodactyl\Http\Controllers\Api\Remote\Backups;
+use Pterodactyl\Http\Controllers\Api\Remote\NebulaEnrollmentController;
 
 // Routes for the Wings daemon.
 Route::post('/sftp/auth', SftpAuthenticationController::class);
@@ -43,4 +44,12 @@ Route::group(['prefix' => '/backups'], function () {
 
 Route::group(['prefix' => '/elytra-jobs'], function () {
     Route::put('/{jobId}', [ElytraJobCompletionController::class, 'update']);
+});
+
+// Nebula overlay enrollment for node agents (nebulod). Authenticated with
+// the node daemon token like every other remote route.
+Route::group(['prefix' => '/nebula'], function () {
+    Route::get('/', [NebulaEnrollmentController::class, 'show']);
+    Route::post('/enroll', [NebulaEnrollmentController::class, 'enroll']);
+    Route::delete('/', [NebulaEnrollmentController::class, 'destroy']);
 });

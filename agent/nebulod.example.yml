@@ -1,0 +1,25 @@
+# nebulod agent configuration. Copy to /etc/nebulod.yml.
+#
+# The token is the node daemon token in the form "token_id.secret", the
+# same credential wings uses. Prefer token_file so the secret can come
+# from a mounted secret instead of sitting in this file.
+
+panel:
+  url: https://panel.example.com
+  token_file: /run/secrets/node_token
+  # groups: [nebulodactyl]
+
+nebula:
+  binary: nebula
+  work_dir: /var/lib/nebulod
+  interface: nebula1
+  listen_port: 4242
+
+api:
+  # Bind to the node overlay address so the status API is only reachable
+  # inside the mesh, or 127.0.0.1 for local only access.
+  listen: 127.0.0.1:9770
+  # token: optional bearer token required on every endpoint
+
+reenroll_interval: 12h
+reenroll_before: 48h
