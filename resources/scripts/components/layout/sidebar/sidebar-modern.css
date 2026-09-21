@@ -14,8 +14,10 @@
 body[data-sidebar-minimized="true"] {
     --sidebar-width: var(--sidebar-minimized-width);
     --sidebar-padding: 0.5rem;
+    /* size-12 is a 48px border-box chip, so the 2px bottom padding lives
+       inside the stride rather than adding to it. */
     --nav-item-height: 48px;
-    --nav-item-spacing: 2px;
+    --nav-item-spacing: 0px;
     --indicator-height: 48px;
 }
 
@@ -98,8 +100,16 @@ body[data-sidebar-minimized="false"] .sidebar-logo-name {
     transition:
         opacity var(--sidebar-transition-indicator),
         top var(--sidebar-transition-indicator),
+        left var(--sidebar-transition-indicator),
         height var(--sidebar-transition-indicator),
         width var(--sidebar-transition-indicator);
+}
+
+/* In the slim rail the nav item is a 48px chip centered in 76px, so the
+   indicator matches the chip instead of spanning the padded width. */
+body[data-sidebar-minimized="true"] .sidebar-indicator {
+    width: 48px;
+    left: calc((var(--sidebar-width) - 48px) / 2);
 }
 
 .nav-item {
@@ -109,8 +119,8 @@ body[data-sidebar-minimized="false"] .sidebar-logo-name {
 }
 
 body[data-sidebar-minimized="true"] .nav-item {
-    /* 48px chip inside the slim rail */
-    @apply size-12 flex-col justify-center text-center;
+    /* 48px chip, centered inside the slim rail */
+    @apply size-12 flex-col justify-center text-center mx-auto;
 }
 body[data-sidebar-minimized="false"] .nav-item {
     /* 32px height, 8px used for padding */
