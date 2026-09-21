@@ -8,12 +8,16 @@
 # Requirements: php 8.4+ with pdo_sqlite, composer dependencies installed,
 # frontend assets built (pnpm build), node, and a Chromium binary.
 #
+# A mock daemon (mock-daemon.mjs) runs alongside the panel so the console
+# and resource views show a live server.
+#
 # Usage:
 #   tools/screenshots/screenshot.sh
 #
 # Environment:
-#   PORT           port for the temporary panel (default 8899)
-#   CHROMIUM_PATH  path to a chromium/chrome binary
+#   PORT              port for the temporary panel (default 8899)
+#   MOCK_DAEMON_PORT  port for the mock daemon (default 8898)
+#   CHROMIUM_PATH     path to a chromium/chrome binary
 
 set -euo pipefail
 
@@ -21,11 +25,14 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 cd "$ROOT"
 
 PORT="${PORT:-8899}"
+MOCK_DAEMON_PORT="${MOCK_DAEMON_PORT:-8898}"
 DB_FILE="$(mktemp -u /tmp/nebulodactyl-shots.XXXXXX.sqlite)"
 SERVER_PID=""
+DAEMON_PID=""
 
 cleanup() {
     [ -n "$SERVER_PID" ] && kill "$SERVER_PID" 2>/dev/null || true
+    [ -n "$DAEMON_PID" ] && kill "$DAEMON_PID" 2>/dev/null || true
     rm -f "$DB_FILE"
 }
 trap cleanup EXIT
@@ -50,6 +57,7 @@ export APP_KEY
 export DB_CONNECTION=sqlite DB_DATABASE="$DB_FILE"
 export CACHE_DRIVER=file SESSION_DRIVER=file QUEUE_CONNECTION=sync
 export APP_URL="http://127.0.0.1:${PORT}"
+export MOCK_DAEMON_PORT
 
 touch "$DB_FILE"
 
@@ -59,6 +67,10 @@ php artisan migrate --seed --force --quiet
 info "creating demo data"
 SERVER_ID="$(php tools/screenshots/seed.php | grep '^SERVER_ID=' | cut -d= -f2)"
 [ -n "$SERVER_ID" ] || die "demo seed did not return a server id"
+
+info "starting mock daemon on port $MOCK_DAEMON_PORT"
+node tools/screenshots/mock-daemon.mjs "$MOCK_DAEMON_PORT" >/tmp/nebulodactyl-shots-daemon.log 2>&1 &
+DAEMON_PID=$!
 
 info "serving panel on port $PORT"
 php artisan serve --port="$PORT" >/tmp/nebulodactyl-shots-serve.log 2>&1 &

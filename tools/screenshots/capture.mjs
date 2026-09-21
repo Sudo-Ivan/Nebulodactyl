@@ -60,12 +60,19 @@ await page.goto(`${BASE}/auth/login`, { waitUntil: 'networkidle' });
 await settle();
 await shot('panel-login.png');
 
-// 2. Sign in, then the server list dashboard
+// 2. Sign in, then the server list dashboard. Each row polls the daemon
+// REST endpoint for stats, so give them a moment to land.
 await page.fill('input[name="user"]', USER);
 await page.fill('input[name="password"]', PASS);
 await Promise.all([page.waitForURL(`${BASE}/`, { timeout: 15000 }), page.click('button[type="submit"]')]);
 await page.waitForLoadState('networkidle');
 await settle();
+// Rows poll the daemon REST endpoint on mount; wait until at least one
+// row shows real memory usage instead of the zeroed placeholder.
+await page
+    .waitForFunction(() => document.body.innerText.includes('GiB'), { timeout: 10000 })
+    .catch(() => {});
+await page.waitForTimeout(500);
 await shot('panel-dark.png');
 
 // 3. Server console, if a demo server was seeded

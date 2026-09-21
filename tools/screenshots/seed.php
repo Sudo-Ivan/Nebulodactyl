@@ -5,6 +5,7 @@
 // with realistic settings. Only run this against a throwaway database.
 
 use Ramsey\Uuid\Uuid;
+use Illuminate\Support\Facades\Crypt;
 use Pterodactyl\Models\Egg;
 use Pterodactyl\Models\Node;
 use Pterodactyl\Models\Task;
@@ -59,8 +60,10 @@ $nodeMain = Node::query()->firstOrCreate(
     [
         'uuid' => Uuid::uuid4()->toString(),
         'location_id' => $home->id,
-        'fqdn' => 'node-01.internal',
-        'internal_fqdn' => '10.42.0.11',
+        // Point at the local mock daemon (mock-daemon.mjs) so the console
+        // and resource views render a live server during captures.
+        'fqdn' => '127.0.0.1',
+        'internal_fqdn' => '127.0.0.1',
         'scheme' => 'http',
         'behind_proxy' => false,
         'public' => true,
@@ -71,9 +74,11 @@ $nodeMain = Node::query()->firstOrCreate(
         'disk_overallocate' => 0,
         'upload_size' => 100,
         'daemon_token_id' => 'demo',
-        'daemon_token' => 'demo',
+        // getDecryptedKey runs Encrypter::decrypt which unserializes the
+        // payload, so this must be Crypt::encrypt output, not encryptString.
+        'daemon_token' => Crypt::encrypt('screenshot-node-token-0123456789abcdef'),
         'daemonType' => 'comet',
-        'daemonListen' => 8080,
+        'daemonListen' => (int) getenv('MOCK_DAEMON_PORT') ?: 8898,
         'daemonSFTP' => 2022,
         'daemonBase' => '/var/lib/comet/volumes',
     ]
@@ -96,7 +101,7 @@ $nodeOverlay = Node::query()->firstOrCreate(
         'disk_overallocate' => 0,
         'upload_size' => 100,
         'daemon_token_id' => 'demo2',
-        'daemon_token' => 'demo2',
+        'daemon_token' => Crypt::encrypt('screenshot-node-token-fedcba9876543210'),
         'daemonType' => 'comet',
         'daemonListen' => 8080,
         'daemonSFTP' => 2022,
