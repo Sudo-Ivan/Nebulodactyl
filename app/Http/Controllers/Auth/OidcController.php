@@ -11,14 +11,17 @@ use Illuminate\Http\RedirectResponse;
 use Pterodactyl\Services\Auth\OidcService;
 use Pterodactyl\Exceptions\DisplayException;
 use Pterodactyl\Http\Controllers\Controller;
+use Pterodactyl\Services\Users\UserCreationService;
 
 class OidcController extends Controller
 {
     /**
      * OidcController constructor.
      */
-    public function __construct(private OidcService $oidc)
-    {
+    public function __construct(
+        private OidcService $oidc,
+        private UserCreationService $creationService,
+    ) {
     }
 
     /**
@@ -92,7 +95,25 @@ class OidcController extends Controller
         }
 
         if ($user = User::query()->where('email', $claims['email'])->first()) {
-            // Link the provider identity to the existing account.
+            // Linking by email is only safe when the provider asserts that
+            // it verified the address. Without that claim an IdP that lets
+            // users pick arbitrary emails could hand out control of any
+            // panel account, including admins.
+            if (
+                config('oidc.require_verified_email', true)
+                && !filter_var($claims['email_verified'] ?? false, FILTER_VALIDATE_BOOLEAN)
+            ) {
+                throw new DisplayException(
+                    'Your identity provider did not confirm ownership of this email address. '
+                    . 'Ask an administrator to link your account or enable email verification at the provider.'
+                );
+            }
+
+            // Never overwrite a link to a different provider identity.
+            if (!is_null($user->external_id) && $user->external_id !== $externalId) {
+                throw new DisplayException('This account is already linked to a different identity provider.');
+            }
+
             $user->update(['external_id' => $externalId]);
 
             return $user;
@@ -102,17 +123,16 @@ class OidcController extends Controller
             throw new DisplayException('No panel account is linked to this identity. Ask an administrator to create your account first.');
         }
 
-        return User::query()->create([
-            'uuid' => Str::uuid()->toString(),
+        // No password is passed so the service generates one and sends the
+        // new account email, which also gives the SSO user a way to set a
+        // local password for API clients that do not support OIDC.
+        return $this->creationService->handle([
             'external_id' => $externalId,
             'username' => $this->uniqueUsername($claims),
             'email' => $claims['email'],
             'name_first' => $claims['given_name'] ?? $claims['name'] ?? $claims['preferred_username'] ?? 'User',
             'name_last' => $claims['family_name'] ?? '',
-            'password' => bcrypt(Str::random(64)),
-            'language' => config('app.locale', 'en'),
-            'root_admin' => false,
-            'use_totp' => false,
+            'password' => Str::random(64),
         ]);
     }
 

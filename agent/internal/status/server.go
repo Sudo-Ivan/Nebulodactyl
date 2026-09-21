@@ -4,6 +4,7 @@
 package status
 
 import (
+	"crypto/subtle"
 	"encoding/json"
 	"fmt"
 	"net"
@@ -60,7 +61,11 @@ func (s *Server) Run() error {
 func (s *Server) wrap(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if s.token != "" {
-			if !strings.EqualFold("Bearer "+s.token, r.Header.Get("Authorization")) {
+			// Scheme match is case insensitive per RFC 9110, but the token
+			// itself must match exactly and in constant time.
+			scheme, token, found := strings.Cut(r.Header.Get("Authorization"), " ")
+			if !found || !strings.EqualFold(scheme, "Bearer") ||
+				subtle.ConstantTimeCompare([]byte(token), []byte(s.token)) != 1 {
 				http.Error(w, "unauthorized", http.StatusUnauthorized)
 				return
 			}

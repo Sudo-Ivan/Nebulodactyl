@@ -235,7 +235,10 @@ func (fs *Filesystem) WriteAt(p string, r io.Reader, offset int64, mode ufs.File
 		return 0, err
 	}
 
-	file, err := fs.unixFS.Touch(p, ufs.O_RDWR, mode)
+	// Open through the quota-aware wrapper so each write reserves disk space
+	// before it lands and the final size is reconciled on close. Using the raw
+	// unixFS handle here would let chunked uploads exceed the disk limit.
+	file, err := fs.Touch(p, ufs.O_RDWR)
 	if err != nil {
 		return 0, fmt.Errorf("error touching file: %w", err)
 	}
@@ -252,13 +255,6 @@ func (fs *Filesystem) WriteAt(p string, r io.Reader, offset int64, mode ufs.File
 	}
 
 	n, err := io.Copy(file, r)
-
-	// Reconcile the disk usage against the real file size. This handles both
-	// appends and truncation followed by an append without special casing.
-	if fst, statErr := file.Stat(); statErr == nil {
-		fs.unixFS.Add(fst.Size() - currentSize)
-	}
-
 	if err != nil {
 		return n, err
 	}

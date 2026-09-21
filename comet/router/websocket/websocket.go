@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"path/filepath"
 	"strconv"
 	"strings"
 	"sync"
@@ -567,7 +568,10 @@ func (h *Handler) handleUploadFinish() error {
 	h.resetUpload()
 
 	_ = h.SendJson(Message{Event: UploadCompleteEvent, Args: []string{path}})
-	h.server.SaveActivity(h.ra, server.ActivityFileUploaded, models.ActivityMeta{"file": path, "directory": "/"})
+	h.server.SaveActivity(h.ra, server.ActivityFileUploaded, models.ActivityMeta{
+		"file":      filepath.Base(path),
+		"directory": filepath.Dir(path),
+	})
 	return nil
 }
 

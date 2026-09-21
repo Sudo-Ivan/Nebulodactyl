@@ -26,7 +26,7 @@ class NodeDrainController extends Controller
     public function __invoke(Request $request, Node $node): RedirectResponse
     {
         $validated = $request->validate([
-            'target_node_id' => 'required|exists:nodes,id|different:node_id',
+            'target_node_id' => 'required|exists:nodes,id|not_in:' . $node->id,
         ]);
 
         $target = Node::findOrFail($validated['target_node_id']);

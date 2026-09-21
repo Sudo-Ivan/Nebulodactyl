@@ -354,6 +354,25 @@ func TestFilesystem_WriteAt(t *testing.T) {
 			g.Assert(err).IsNotNil()
 		})
 
+		g.It("enforces the disk quota on chunked writes", func() {
+			tmpDir, err := os.MkdirTemp(os.TempDir(), "comet-quota")
+			g.Assert(err).IsNil()
+			defer os.RemoveAll(tmpDir)
+
+			qfs, err := New(tmpDir, 16, []string{})
+			g.Assert(err).IsNil()
+			qfs.isTest = true
+
+			n, err := qfs.WriteAt("f.bin", bytes.NewReader([]byte("0123456789")), 0, 0o644)
+			g.Assert(err).IsNil()
+			g.Assert(n).Equal(int64(10))
+
+			// The next chunk would push the file past the 16 byte limit and
+			// must be refused even though the write itself is only 10 bytes.
+			_, err = qfs.WriteAt("f.bin", bytes.NewReader([]byte("0123456789")), 10, 0o644)
+			g.Assert(err).IsNotNil()
+		})
+
 		g.It("reports the stored size for resume discovery", func() {
 			size, err := fs.Size("missing.bin")
 			g.Assert(err).IsNil()

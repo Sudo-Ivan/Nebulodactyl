@@ -7,12 +7,15 @@ package enroll
 import (
 	"bytes"
 	"context"
+	"crypto/sha256"
 	"crypto/tls"
+	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
 	"path/filepath"
+	"strings"
 	"time"
 
 	"github.com/Sudo-Ivan/Nebulodactyl/agent/internal/config"
@@ -96,6 +99,14 @@ func (c *Client) Enroll(ctx context.Context, publicKeyB64 string) (*Enrollment, 
 	}
 	if enrollment.Certificate == "" || enrollment.CACertificate == "" || enrollment.IP == "" {
 		return nil, fmt.Errorf("enroll: response missing certificate fields")
+	}
+
+	// The panel reports sha256 of the public key we sent as the host
+	// fingerprint. A mismatch means the bundle was corrupted or does not
+	// belong to this keypair.
+	sum := sha256.Sum256([]byte(strings.TrimSpace(publicKeyB64)))
+	if enrollment.Fingerprint != "" && !strings.EqualFold(hex.EncodeToString(sum[:]), enrollment.Fingerprint) {
+		return nil, fmt.Errorf("enroll: fingerprint does not match the submitted public key")
 	}
 
 	return &enrollment, nil

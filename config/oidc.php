@@ -32,6 +32,13 @@ return [
     // accounts linked by email or external_id may sign in.
     'auto_register' => env('OIDC_AUTO_REGISTER', true),
 
+    // Existing accounts are linked to a provider identity by email only
+    // when the provider asserts email_verified. Providers that let users
+    // claim arbitrary email addresses without verification must not be
+    // used for linking, or anyone could take over an account by claiming
+    // its email address.
+    'require_verified_email' => env('OIDC_REQUIRE_VERIFIED_EMAIL', true),
+
     // Attribute used to link provider identities to panel accounts.
     'external_id_prefix' => 'oidc:',
 ];

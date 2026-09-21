@@ -2,6 +2,7 @@ package router
 
 import (
 	"bufio"
+	"bytes"
 	"context"
 	"fmt"
 	"io"
@@ -662,6 +663,13 @@ func headServerUploadFile(c *gin.Context) {
 		return
 	}
 
+	if c.Query("name") == "" {
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
+			"error": "A file name must be provided.",
+		})
+		return
+	}
+
 	p := filepath.Join(c.Query("directory"), c.Query("name"))
 	size, err := s.Filesystem().Size(p)
 	if err != nil {
@@ -711,7 +719,11 @@ func putServerUploadFile(c *gin.Context) {
 	}
 
 	maxFileSizeBytes := config.Get().Api.UploadLimit * 1024 * 1024
-	if total >= 0 && total > maxFileSizeBytes {
+	// Reject oversized uploads whether the total comes from Content-Range or
+	// from Content-Length, so a missing or wildcard total cannot bypass the
+	// configured limit.
+	if (total >= 0 && total > maxFileSizeBytes) ||
+		(total < 0 && c.Request.ContentLength > 0 && start+c.Request.ContentLength > maxFileSizeBytes) {
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
 			"error": "File is larger than the maximum file upload size of " + strconv.FormatInt(config.Get().Api.UploadLimit, 10) + " MB.",
 		})
@@ -736,6 +748,18 @@ func putServerUploadFile(c *gin.Context) {
 	n, err := s.Filesystem().WriteAt(p, c.Request.Body, start, 0o644)
 	if err != nil {
 		middleware.CaptureAndAbort(c, err)
+		return
+	}
+
+	// A chunked body without a Content-Range total has no declared size to
+	// check upfront, so verify the stored size after the write. Rewriting an
+	// empty chunk at the original offset truncates the file back to its
+	// previous state.
+	if start+n > maxFileSizeBytes {
+		_, _ = s.Filesystem().WriteAt(p, bytes.NewReader(nil), start, 0o644)
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
+			"error": "File is larger than the maximum file upload size of " + strconv.FormatInt(config.Get().Api.UploadLimit, 10) + " MB.",
+		})
 		return
 	}
 
