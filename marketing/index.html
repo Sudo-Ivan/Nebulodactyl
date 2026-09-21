@@ -78,8 +78,9 @@
     header {
         border-bottom: 1px solid var(--border);
         padding: 20px 0;
-        position: relative;
-        z-index: 1;
+        position: sticky;
+        top: 0;
+        z-index: 10;
         background: rgb(10 10 11 / 0.78);
         backdrop-filter: blur(14px);
     }
@@ -375,6 +376,14 @@
                 <figure class="shot">
                     <img class="shot-img" src="showcase/panel-console.png" alt="Nebulodactyl server console view in the dark theme" loading="lazy">
                     <figcaption>Server console</figcaption>
+                </figure>
+                <figure class="shot">
+                    <img class="shot-img" src="showcase/panel-network.png" alt="Nebulodactyl network allocation management view" loading="lazy">
+                    <figcaption>Network allocations</figcaption>
+                </figure>
+                <figure class="shot">
+                    <img class="shot-img" src="showcase/panel-schedules.png" alt="Nebulodactyl scheduled tasks view" loading="lazy">
+                    <figcaption>Schedules</figcaption>
                 </figure>
             </div>
         </div>

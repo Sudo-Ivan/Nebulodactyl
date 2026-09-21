@@ -73,6 +73,16 @@ if (SERVER_ID) {
     await page.goto(`${BASE}/server/${SERVER_ID}`, { waitUntil: 'networkidle' });
     await settle();
     await shot('panel-console.png');
+
+    // 4. Networking view with the seeded allocations
+    await page.goto(`${BASE}/server/${SERVER_ID}/network`, { waitUntil: 'networkidle' });
+    await settle();
+    await shot('panel-network.png');
+
+    // 5. Schedules view with the seeded restart schedule
+    await page.goto(`${BASE}/server/${SERVER_ID}/schedules`, { waitUntil: 'networkidle' });
+    await settle();
+    await shot('panel-schedules.png');
 }
 
 await browser.close();
