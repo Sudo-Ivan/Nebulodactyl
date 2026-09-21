@@ -279,6 +279,8 @@ abstract class EloquentRepository extends Repository implements RepositoryInterf
       $statement = "INSERT IGNORE INTO $table ($columns) VALUES $parameters";
     } elseif ($driver === 'pgsql') {
       $statement = "INSERT INTO $table ($columns) VALUES $parameters ON CONFLICT DO NOTHING";
+    } elseif ($driver === 'sqlite') {
+      $statement = "INSERT OR IGNORE INTO $table ($columns) VALUES $parameters";
     } else {
       throw new \RuntimeException("Unsupported database driver: $driver");
     }
