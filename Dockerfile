@@ -104,8 +104,8 @@ COPY --chown=nginx:nginx .github/docker/supervisord.conf /etc/supervisord.conf
 RUN rm -rf bootstrap/cache/*.php \
     && rm -rf storage/framework/* || true
 
-EXPOSE 80 443
+EXPOSE 8080 8443
 HEALTHCHECK --interval=30s --timeout=5s --start-period=90s --retries=3 \
-    CMD wget -q -O /dev/null http://127.0.0.1/healthz || exit 1
+    CMD wget -q -O /dev/null http://127.0.0.1:8080/healthz || exit 1
 ENTRYPOINT [ "/bin/ash", ".github/docker/entrypoint.sh" ]
 CMD [ "supervisord", "-n", "-c", "/etc/supervisord.conf" ]

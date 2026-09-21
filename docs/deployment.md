@@ -27,6 +27,17 @@ The installer prefers podman and falls back to docker. It asks for the install
 directory and panel URL, writes a compose file and `.env`, starts the stack,
 and prints your first-run setup link.
 
+The panel container only binds unprivileged ports: nginx listens on 8080 and
+8443 inside the container, and compose publishes `HTTP_PORT` (default 8080)
+and `HTTPS_PORT` (default 8443) on the host. The stack therefore runs under
+rootless podman or docker with no `NET_BIND_SERVICE` capability. Put a
+reverse proxy in front for public 80/443.
+
+For the built-in Let's Encrypt flow (`LE_EMAIL`), certbot uses standalone
+mode on container port 8080 during the entrypoint, before nginx starts.
+Publish host port 80 to container 8080 during issuance and renewal, or
+terminate TLS at your reverse proxy instead and leave `LE_EMAIL` unset.
+
 Manual compose install: copy `docker-compose.example.yml` to
 `docker-compose.yml`, copy `.env.example` to `.env`, fill in the required
 values, then `podman compose up -d` (or `docker compose up -d`).
@@ -80,6 +91,27 @@ Comet is a single Go binary. On the node machine:
    - compose: `podman compose -f docker-compose.example.yml up -d`
 
 3. The node shows as online (green) in the panel once Comet connects back.
+
+## Deduplicated backups
+
+Comet supports rustic-backed backups (`rustic_local`, `rustic_s3` on the
+node's backup disk setting), which store restic-compatible snapshots:
+content-addressed, deduplicated, compressed, and encrypted. Repeated backups
+of the same server only store changed chunks, so a week of daily backups of
+a mostly-idle server costs a fraction of one full archive.
+
+Requirements on the node:
+
+- the `rustic` binary on PATH (or `system.backups.rustic_binary` in
+  `config.yml` pointing at it)
+- for `rustic_s3`, an S3 bucket assigned to the node in the admin area
+
+The repository password is derived per-server by the panel and fetched over
+the remote API, so no backup credentials live in the node config. Local
+repositories default to `/var/lib/pterodactyl/rustic-repos/<server>` (set
+`backups.disks.rustic_local.repository_base_path` to change it). Downloads
+still produce a plain `.tar.gz` stream, and the scheduled verification sweep
+checks rustic sidecars the same as plain archives.
 
 ## Podman
 

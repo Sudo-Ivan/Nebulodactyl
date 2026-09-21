@@ -81,7 +81,7 @@ if [ -f /etc/nginx/http.d/panel.conf ]; then
   echo "Using nginx config already in place."
   if [ $LE_EMAIL ]; then
     echo "Checking for cert update"
-    certbot certonly -d $(echo $APP_URL | sed 's~http[s]*://~~g')  --standalone -m $LE_EMAIL --agree-tos -n
+    certbot certonly -d $(echo $APP_URL | sed 's~http[s]*://~~g') --standalone --http-01-port 8080 -m $LE_EMAIL --agree-tos -n
   else
     echo "No letsencrypt email is set"
   fi
@@ -96,7 +96,7 @@ else
     echo "updating ssl config for domain"
     sed -i "s|<domain>|$(echo $APP_URL | sed 's~http[s]*://~~g')|g" /etc/nginx/http.d/panel.conf
     echo "generating certs"
-    certbot certonly -d $(echo $APP_URL | sed 's~http[s]*://~~g')  --standalone -m $LE_EMAIL --agree-tos -n
+    certbot certonly -d $(echo $APP_URL | sed 's~http[s]*://~~g') --standalone --http-01-port 8080 -m $LE_EMAIL --agree-tos -n
   fi
   echo "Removing the default nginx config"
   rm -rf /etc/nginx/http.d/default.conf

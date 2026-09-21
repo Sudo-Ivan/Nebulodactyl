@@ -146,9 +146,9 @@ if [ -z "$TRUSTED_PROXIES" ]; then
 fi
 
 if [ -z "$HTTP_PORT" ]; then
-    HTTP_PORT="$(ask "HTTP port to expose" "80")"
+    HTTP_PORT="$(ask "HTTP port to expose" "8080")"
 fi
-HTTPS_PORT="${HTTPS_PORT:-443}"
+HTTPS_PORT="${HTTPS_PORT:-8443}"
 
 # ----------------------------------------------------------------------------
 # Write files

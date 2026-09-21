@@ -93,10 +93,12 @@ services:
             cache:
                 condition: service_healthy
         ports:
-            # Behind a reverse proxy you can bind these to 127.0.0.1 instead:
-            #   - '127.0.0.1:8080:80'
-            - '${HTTP_PORT:-80}:80'
-            - '${HTTPS_PORT:-443}:443'
+            # The panel listens on unprivileged ports inside the container, so
+            # the whole stack runs under rootless Podman or Docker without
+            # NET_BIND_SERVICE. Behind a reverse proxy bind to localhost only:
+            #   - '127.0.0.1:8080:8080'
+            - '${HTTP_PORT:-8080}:8080'
+            - '${HTTPS_PORT:-8443}:8443'
         volumes:
             - './data/var/:/app/var/'
             - './data/nginx/:/etc/nginx/http.d/'
@@ -126,7 +128,7 @@ services:
             #   NEBULA_LIGHTHOUSES: '10.42.0.1'
             # See config/nebula.php for the full list.
         healthcheck:
-            test: ['CMD', 'curl', '-fsS', 'http://127.0.0.1/healthz']
+            test: ['CMD', 'curl', '-fsS', 'http://127.0.0.1:8080/healthz']
             interval: 15s
             timeout: 5s
             retries: 12

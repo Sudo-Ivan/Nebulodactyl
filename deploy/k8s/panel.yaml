@@ -41,7 +41,7 @@ spec:
         - name: panel
           image: ghcr.io/sudo-ivan/nebulodactyl:canary
           ports:
-            - containerPort: 80
+            - containerPort: 8080
           env:
             - name: APP_URL
               value: "https://panel.example.com"
@@ -95,13 +95,13 @@ spec:
           readinessProbe:
             httpGet:
               path: /healthz
-              port: 80
+              port: 8080
             periodSeconds: 10
             initialDelaySeconds: 15
           livenessProbe:
             httpGet:
               path: /healthz
-              port: 80
+              port: 8080
             periodSeconds: 30
           resources:
             requests:
@@ -124,8 +124,8 @@ spec:
   selector:
     app: panel
   ports:
-    - port: 80
-      targetPort: 80
+    - port: 8080
+      targetPort: 8080
 ---
 # Traefik IngressRoute works on k3s out of the box. For a plain Ingress
 # controller swap this for a networking.k8s.io/v1 Ingress with the same
@@ -143,6 +143,6 @@ spec:
       kind: Rule
       services:
         - name: panel
-          port: 80
+          port: 8080
   tls:
     certResolver: letsencrypt
