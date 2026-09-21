@@ -109,8 +109,6 @@ func diagnosticsCmdRun(*cobra.Command, []string) {
 	}
 
 	printHeader(output, "Comet Configuration")
-	if err := config.FromFile(config.DefaultLocation); err != nil {
-	}
 	cfg := config.Get()
 	fmt.Fprintln(output, "      Panel Location:", redact(cfg.PanelLocation))
 	fmt.Fprintln(output, "")
@@ -229,11 +227,21 @@ func uploadToHastebin(hbUrl, content string) (string, error) {
 	if err != nil {
 		return "", err
 	}
+	// The report can contain sensitive runtime details, so refuse to send it
+	// anywhere other than an HTTP(S) endpoint.
+	if u.Scheme != "https" && u.Scheme != "http" {
+		return "", fmt.Errorf("unsupported hastebin URL scheme %q", u.Scheme)
+	}
 	u.Path = path.Join(u.Path, "documents")
 	res, err := http.Post(u.String(), "text/plain", r)
-	if err != nil || res.StatusCode < 200 || res.StatusCode >= 300 {
+	if err != nil {
 		fmt.Println("Failed to upload report to ", u.String(), err)
 		return "", err
+	}
+	defer res.Body.Close()
+	if res.StatusCode < 200 || res.StatusCode >= 300 {
+		fmt.Println("Failed to upload report to ", u.String(), "status:", res.StatusCode)
+		return "", fmt.Errorf("unexpected status %d", res.StatusCode)
 	}
 	pres := make(map[string]interface{})
 	body, err := io.ReadAll(res.Body)

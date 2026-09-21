@@ -30,6 +30,10 @@ import (
 
 const DefaultLocation = "/etc/comet/config.yml"
 
+// systemUsernameRegex restricts the system account name to characters that
+// are safe to pass as a single argument to useradd/adduser.
+var systemUsernameRegex = regexp.MustCompile(`^[a-z_][a-z0-9_-]*$`)
+
 // DefaultTLSConfig sets sane defaults to use when configuring the internal
 // webserver to listen for public connections.
 //
@@ -570,6 +574,14 @@ func EnsureCometUser() error {
 		_config.System.User.Uid = system.MustInt(u.Uid)
 		_config.System.User.Gid = system.MustInt(u.Gid)
 		return nil
+	}
+
+	// The username can arrive over the wire in the panel-provided config, so
+	// validate it as a conventional account name before it reaches a command
+	// line. A value containing spaces or dashes would otherwise inject extra
+	// arguments into useradd.
+	if !systemUsernameRegex.MatchString(_config.System.Username) {
+		return fmt.Errorf("invalid system username %q: must match %s", _config.System.Username, systemUsernameRegex.String())
 	}
 
 	command := fmt.Sprintf("useradd --system --no-create-home --shell /usr/sbin/nologin %s", _config.System.Username)

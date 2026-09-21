@@ -47,12 +47,17 @@ func init() {
 
 func configureCmdRun(cmd *cobra.Command, args []string) {
 	if configureArgs.AllowInsecure {
-		http.DefaultTransport.(*http.Transport).TLSClientConfig = &tls.Config{
-			InsecureSkipVerify: true,
-		}
+		fmt.Fprintln(os.Stderr, "WARNING: certificate checking is disabled for the panel request.")
 	}
 
-	if _, err := os.Stat(configureArgs.ConfigPath); err == nil && !configureArgs.Override {
+	// The --config-path flag is specific to this command while --config is a
+	// persistent root flag; honor whichever one the user actually provided.
+	target := configPath
+	if cmd.Flags().Changed("config-path") {
+		target = configureArgs.ConfigPath
+	}
+
+	if _, err := os.Stat(target); err == nil && !configureArgs.Override {
 		survey.AskOne(&survey.Confirm{Message: "Override existing configuration file"}, &configureArgs.Override)
 		if !configureArgs.Override {
 			fmt.Println("Aborting process; a configuration file already exists for this node.")
@@ -115,13 +120,14 @@ func configureCmdRun(cmd *cobra.Command, args []string) {
 		panic(err)
 	}
 
-	b, err := fetchNodeConfiguration(configureArgs.PanelURL, configureArgs.Token, configureArgs.Node)
+	warnInsecurePanelURL(configureArgs.PanelURL)
+	b, err := fetchNodeConfiguration(configureArgs.PanelURL, configureArgs.Token, configureArgs.Node, configureArgs.AllowInsecure)
 	if err != nil {
 		fmt.Println("Failed to fetch configuration from the panel.\n", err.Error())
 		os.Exit(1)
 	}
 
-	cfg, err := config.NewAtPath(configPath)
+	cfg, err := config.NewAtPath(target)
 	if err != nil {
 		panic(err)
 	}
@@ -140,9 +146,18 @@ func configureCmdRun(cmd *cobra.Command, args []string) {
 	fmt.Println("Successfully configured comet.")
 }
 
+// warnInsecurePanelURL prints a warning when the panel URL uses plaintext
+// HTTP, which sends the deployment token and the returned node credentials
+// in the clear.
+func warnInsecurePanelURL(panelURL string) {
+	if u, err := url.Parse(panelURL); err == nil && u.Scheme == "http" {
+		fmt.Fprintln(os.Stderr, "WARNING: the panel URL uses plaintext HTTP. The deployment token and node credentials will be sent unencrypted.")
+	}
+}
+
 // fetchNodeConfiguration retrieves the remote daemon configuration for a node
 // from the panel using a deployment token. Returns the raw JSON response body.
-func fetchNodeConfiguration(panelURL, token, nodeID string) ([]byte, error) {
+func fetchNodeConfiguration(panelURL, token, nodeID string, insecure bool) ([]byte, error) {
 	u, err := url.Parse(panelURL)
 	if err != nil {
 		return nil, err
@@ -159,8 +174,15 @@ func fetchNodeConfiguration(panelURL, token, nodeID string) ([]byte, error) {
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", token))
 
+	// Use a dedicated transport so the insecure flag never mutates the shared
+	// default client for the rest of the process.
+	transport := http.DefaultTransport.(*http.Transport).Clone()
+	if insecure {
+		transport.TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
+	}
 	c := &http.Client{
-		Timeout: time.Second * 30,
+		Timeout:   time.Second * 30,
+		Transport: transport,
 	}
 
 	res, err := c.Do(req)

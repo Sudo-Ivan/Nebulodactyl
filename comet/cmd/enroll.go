@@ -1,11 +1,9 @@
 package cmd
 
 import (
-	"crypto/tls"
 	"encoding/json"
 	"fmt"
 	"net"
-	"net/http"
 	"net/url"
 	"os"
 	"os/exec"
@@ -50,9 +48,7 @@ func init() {
 
 func enrollCmdRun(cmd *cobra.Command, args []string) {
 	if enrollArgs.AllowInsecure {
-		http.DefaultTransport.(*http.Transport).TLSClientConfig = &tls.Config{
-			InsecureSkipVerify: true,
-		}
+		fmt.Fprintln(os.Stderr, "WARNING: certificate checking is disabled for the panel request.")
 	}
 
 	if enrollArgs.PanelURL == "" || enrollArgs.Token == "" || enrollArgs.Node == "" {
@@ -74,8 +70,9 @@ func enrollCmdRun(cmd *cobra.Command, args []string) {
 		os.Exit(1)
 	}
 
+	warnInsecurePanelURL(enrollArgs.PanelURL)
 	fmt.Printf("Fetching node %s configuration from %s ...\n", enrollArgs.Node, enrollArgs.PanelURL)
-	b, err := fetchNodeConfiguration(enrollArgs.PanelURL, enrollArgs.Token, enrollArgs.Node)
+	b, err := fetchNodeConfiguration(enrollArgs.PanelURL, enrollArgs.Token, enrollArgs.Node, enrollArgs.AllowInsecure)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "Enrollment failed:", err.Error())
 		os.Exit(1)
