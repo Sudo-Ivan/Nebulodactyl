@@ -512,9 +512,14 @@ func (fs *UnixFS) Rename(oldpath, newpath string) error {
 
 // Stat returns a FileInfo describing the named file.
 //
+// The final path component is never followed when it is a symlink: every
+// other sandboxed operation in this package forces O_NOFOLLOW, so reporting
+// the link itself keeps metadata access consistent and prevents leaking the
+// size or timestamps of host files through an in-root symlink.
+//
 // If there is an error, it will be of type *PathError.
 func (fs *UnixFS) Stat(name string) (FileInfo, error) {
-	return fs._fstat("stat", name, 0)
+	return fs._fstat("stat", name, AT_SYMLINK_NOFOLLOW)
 }
 
 // Statat is like Stat but allows passing an existing directory file
@@ -689,7 +694,8 @@ func (fs *UnixFS) openat(dirfd int, name string, flag int, mode FileMode) (int, 
 	finalPath, err := filepath.EvalSymlinks(filepath.Join("/proc/self/fd/", strconv.Itoa(fd)))
 	if err != nil {
 		if !errors.Is(err, ErrNotExist) {
-			return fd, fmt.Errorf("failed to evaluate symlink: %w", convertErrorType(err))
+			unix.Close(fd)
+			return -1, fmt.Errorf("failed to evaluate symlink: %w", convertErrorType(err))
 		}
 
 		// The target of one of the symlinks (EvalSymlinks is recursive)
@@ -697,7 +703,8 @@ func (fs *UnixFS) openat(dirfd int, name string, flag int, mode FileMode) (int, 
 		// that for further validation instead.
 		var pErr *PathError
 		if !errors.As(err, &pErr) {
-			return fd, fmt.Errorf("failed to evaluate symlink: %w", convertErrorType(err))
+			unix.Close(fd)
+			return -1, fmt.Errorf("failed to evaluate symlink: %w", convertErrorType(err))
 		}
 
 		// Update the final path to whatever directory or path didn't exist while
@@ -713,7 +720,8 @@ func (fs *UnixFS) openat(dirfd int, name string, flag int, mode FileMode) (int, 
 		if fs.useOpenat2 {
 			op = "openat2"
 		}
-		return fd, &PathError{
+		unix.Close(fd)
+		return -1, &PathError{
 			Op:   op,
 			Path: name,
 			Err:  ErrBadPathResolution,

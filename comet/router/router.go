@@ -23,7 +23,6 @@ func Configure(m *wserver.Manager, client remote.Client) *gin.Engine {
 	router.Use(gin.Recovery())
 	if err := router.SetTrustedProxies(config.Get().Api.TrustedProxies); err != nil {
 		panic(errors.WithStack(err))
-		return nil
 	}
 	router.Use(middleware.AttachRequestID(), middleware.CaptureErrors(), middleware.SetAccessControlHeaders())
 	router.Use(middleware.AttachServerManager(m), middleware.AttachApiClient(client))
@@ -70,7 +69,7 @@ func Configure(m *wserver.Manager, client remote.Client) *gin.Engine {
 	protected.GET("/api/system", getSystemInformation)
 	protected.GET("/api/servers", getAllServers)
 	protected.POST("/api/servers", postCreateServer)
-	protected.DELETE("/api/transfers/:server", deleteTransfer)
+	protected.DELETE("/api/transfers/:server", middleware.ServerExists(), deleteTransfer)
 	protected.POST("/api/deauthorize-user", postDeauthorizeUser)
 
 	// These are server specific routes, and require that the request be authorized, and

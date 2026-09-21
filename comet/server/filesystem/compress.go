@@ -35,20 +35,21 @@ func (fs *Filesystem) CompressFiles(dir string, paths []string) (ufs.FileInfo, e
 		dir,
 		fmt.Sprintf("archive-%s.tar.gz", strings.ReplaceAll(time.Now().Format(time.RFC3339), ":", "")),
 	)
-	f, err := fs.unixFS.OpenFile(d, ufs.O_WRONLY|ufs.O_CREATE, 0o644)
+	f, err := fs.unixFS.OpenFile(d, ufs.O_WRONLY|ufs.O_CREATE|ufs.O_TRUNC, 0o644)
 	if err != nil {
 		return nil, err
 	}
-	defer f.Close()
-	cw := ufs.NewCountedWriter(f)
+	// Wrap the archive in the quota file so space is reserved atomically as
+	// the stream lands instead of checking once after the whole archive has
+	// already been written to disk.
+	qf := newQuotaFile(fs, f, 0)
+	defer qf.Close()
+	cw := ufs.NewCountedWriter(qf)
 	if err := a.Stream(context.Background(), cw); err != nil {
+		_ = qf.Close()
+		_ = fs.unixFS.Remove(d)
 		return nil, err
 	}
-	if cw.BytesWritten() < 0 || !fs.unixFS.CanFit(cw.BytesWritten()) {
-		_ = fs.unixFS.Remove(d)
-		return nil, newFilesystemError(ErrCodeDiskSpace, nil)
-	}
-	fs.unixFS.Add(cw.BytesWritten())
 	return f.Stat()
 }
 
@@ -232,31 +233,25 @@ func (fs *Filesystem) extractStream(ctx context.Context, opts extractStreamOptio
 		}
 		defer reader.Close()
 
-		// Open the file for creation/writing
-		f, err := fs.unixFS.OpenFile(p, ufs.O_WRONLY|ufs.O_CREATE, 0o644)
+		// Open the file for creation/writing. O_TRUNC keeps a shorter
+		// replacement from leaving stale tail bytes behind.
+		f, err := fs.unixFS.OpenFile(p, ufs.O_WRONLY|ufs.O_CREATE|ufs.O_TRUNC, 0o644)
 		if err != nil {
 			return err
 		}
-		defer f.Close()
+		// The quota wrapper reserves space atomically per write so a
+		// concurrent extract cannot race past the disk limit.
+		qf := newQuotaFile(fs, f, 0)
+		defer qf.Close()
 
 		// Read in 4 KB chunks
 		buf := make([]byte, 4096)
 		for {
 			n, err := reader.Read(buf)
 			if n > 0 {
-
-				// Check quota before writing the chunk
-				if quotaErr := fs.HasSpaceFor(int64(n)); quotaErr != nil {
-					return quotaErr
-				}
-
-				// Write the chunk
-				if _, writeErr := f.Write(buf[:n]); writeErr != nil {
+				if _, writeErr := qf.Write(buf[:n]); writeErr != nil {
 					return writeErr
 				}
-
-				// Add to quota
-				fs.addDisk(int64(n))
 			}
 
 			if err != nil {

@@ -671,6 +671,10 @@ func headServerUploadFile(c *gin.Context) {
 	}
 
 	p := filepath.Join(c.Query("directory"), c.Query("name"))
+	if err := s.Filesystem().IsIgnored(p); err != nil {
+		middleware.CaptureAndAbort(c, err)
+		return
+	}
 	size, err := s.Filesystem().Size(p)
 	if err != nil {
 		middleware.CaptureAndAbort(c, err)
@@ -742,6 +746,10 @@ func putServerUploadFile(c *gin.Context) {
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
 			"error": "A file name must be provided.",
 		})
+		return
+	}
+	if err := s.Filesystem().IsIgnored(p); err != nil {
+		middleware.CaptureAndAbort(c, err)
 		return
 	}
 

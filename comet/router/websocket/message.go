@@ -31,3 +31,14 @@ type Message struct {
 	// should either omit the field or pass an empty value as it is ignored.
 	Args []string `json:"args,omitempty"`
 }
+
+// IsUploadEvent reports whether the message belongs to the chunked upload
+// session. These events mutate per-connection upload state and must be
+// handled sequentially rather than dispatched to separate goroutines.
+func (m Message) IsUploadEvent() bool {
+	switch m.Event {
+	case UploadStartEvent, UploadChunkEvent, UploadFinishEvent, UploadAbortEvent:
+		return true
+	}
+	return false
+}

@@ -64,7 +64,9 @@ func (t *Transfer) PushArchiveToTarget(url, token string) ([]byte, error) {
 
 	// Create a new goroutine to write the archive to the pipe used by the
 	// multipart writer.
-	errChan := make(chan error)
+	// Both channels are buffered so a send on an early-return error path can
+	// never block forever after the reader has stopped waiting.
+	errChan := make(chan error, 1)
 	go func() {
 		defer close(errChan)
 		defer writer.Close()
@@ -83,7 +85,7 @@ func (t *Transfer) PushArchiveToTarget(url, token string) ([]byte, error) {
 			return
 		}
 
-		ch := make(chan error)
+		ch := make(chan error, 1)
 		go func() {
 			defer close(ch)
 

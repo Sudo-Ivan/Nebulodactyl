@@ -30,7 +30,23 @@ type Filesystem struct {
 	diskCheckInterval time.Duration
 	denylist          *ignore.GitIgnore
 
+	// writeLocks serializes append-style writes to the same file so
+	// concurrent resumable uploads cannot interleave chunks at overlapping
+	// offsets. Striped rather than per-path to keep memory bounded.
+	writeLocks [256]sync.Mutex
+
 	isTest bool
+}
+
+// lockPath returns an unlock function holding a striped mutex for p.
+func (fs *Filesystem) lockPath(p string) func() {
+	var h uint64
+	for i := 0; i < len(p); i++ {
+		h = h*31 + uint64(p[i])
+	}
+	m := &fs.writeLocks[h%uint64(len(fs.writeLocks))]
+	m.Lock()
+	return m.Unlock
 }
 
 // New creates a new Filesystem instance for a given server.
@@ -93,6 +109,12 @@ func (fs *Filesystem) UnixFS() *ufs.UnixFS {
 // already. If  it is present, the file is opened using the defaults which will truncate
 // the contents. The opened file is then returned to the caller.
 func (fs *Filesystem) Touch(p string, flag int) (ufs.File, error) {
+	return fs.TouchMode(p, flag, 0o644)
+}
+
+// TouchMode is like Touch but allows the file mode to be specified. The
+// returned file enforces the disk quota atomically per write.
+func (fs *Filesystem) TouchMode(p string, flag int, mode ufs.FileMode) (ufs.File, error) {
 	var currentSize int64
 	st, err := fs.unixFS.Stat(p)
 	if err != nil && !errors.Is(err, ufs.ErrNotExist) {
@@ -101,7 +123,7 @@ func (fs *Filesystem) Touch(p string, flag int) (ufs.File, error) {
 		currentSize = st.Size()
 	}
 
-	file, err := fs.unixFS.Touch(p, flag, 0o644)
+	file, err := fs.unixFS.Touch(p, flag, mode)
 	if err != nil {
 		return nil, err
 	}
@@ -114,22 +136,16 @@ func (fs *Filesystem) Touch(p string, flag int) (ufs.File, error) {
 //
 // DEPRECATED: use `Write` instead.
 func (fs *Filesystem) Writefile(p string, r io.Reader) error {
-	var currentSize int64
 	st, err := fs.unixFS.Stat(p)
 	if err != nil && !errors.Is(err, ufs.ErrNotExist) {
 		return errors.Wrap(err, "server/filesystem: writefile: failed to stat file")
-	} else if err == nil {
-		if st.IsDir() {
-			// TODO: resolved
-			return errors.WithStack(&Error{code: ErrCodeIsDirectory, resolved: ""})
-		}
-		currentSize = st.Size()
+	} else if err == nil && st.IsDir() {
+		return errors.WithStack(&Error{code: ErrCodeIsDirectory, resolved: ""})
 	}
 
-	// Touch the file and return the handle to it at this point. This will
-	// create or truncate the file, and create any necessary parent directories
-	// if they are missing.
-	file, err := fs.unixFS.Touch(p, ufs.O_RDWR|ufs.O_TRUNC, 0o644)
+	// Touch the file through the quota-aware wrapper so each write reserves
+	// space atomically and the final size is reconciled on close.
+	file, err := fs.TouchMode(p, ufs.O_RDWR|ufs.O_TRUNC, 0o644)
 	if err != nil {
 		return fmt.Errorf("error touching file: %w", err)
 	}
@@ -137,10 +153,7 @@ func (fs *Filesystem) Writefile(p string, r io.Reader) error {
 
 	// Do not use CopyBuffer here, it is wasteful as the file implements
 	// io.ReaderFrom, which causes it to not use the buffer anyways.
-	n, err := io.Copy(file, r)
-
-	// Adjust the disk usage to account for the old size and the new size of the file.
-	fs.unixFS.Add(n - currentSize)
+	_, err = io.Copy(file, r)
 
 	if err := fs.chownFile(p); err != nil {
 		return fmt.Errorf("error chowning file: %w", err)
@@ -177,26 +190,19 @@ func (fs *Filesystem) Write(p string, r io.Reader, newSize int64, mode ufs.FileM
 		return err
 	}
 
-	// Touch the file and return the handle to it at this point. This will
-	// create or truncate the file, and create any necessary parent directories
-	// if they are missing.
-	file, err := fs.unixFS.Touch(p, ufs.O_RDWR|ufs.O_TRUNC, mode)
+	// Touch the file through the quota-aware wrapper so writes reserve space
+	// atomically. Two writers racing for the remaining quota can no longer
+	// both pass a check-then-add sequence.
+	file, err := fs.TouchMode(p, ufs.O_RDWR|ufs.O_TRUNC, mode)
 	if err != nil {
 		return err
 	}
 	defer file.Close()
 
-	if newSize == 0 {
-		// Subtract the previous size of the file if the new size is 0.
-		fs.unixFS.Add(-currentSize)
-	} else {
+	if newSize != 0 {
 		// Do not use CopyBuffer here, it is wasteful as the file implements
 		// io.ReaderFrom, which causes it to not use the buffer anyways.
-		var n int64
-		n, err = io.Copy(file, io.LimitReader(r, newSize))
-
-		// Adjust the disk usage to account for the old size and the new size of the file.
-		fs.unixFS.Add(n - currentSize)
+		_, err = io.Copy(file, io.LimitReader(r, newSize))
 	}
 
 	if err := fs.chownFile(p); err != nil {
@@ -216,6 +222,11 @@ func (fs *Filesystem) Write(p string, r io.Reader, newSize int64, mode ufs.FileM
 // The number of bytes written is returned so callers can report the stored
 // offset to clients resuming an upload.
 func (fs *Filesystem) WriteAt(p string, r io.Reader, offset int64, mode ufs.FileMode) (int64, error) {
+	// Serialize writers to the same path. Two resumable uploads racing the
+	// stat and offset checks below would otherwise interleave chunks.
+	unlock := fs.lockPath(p)
+	defer unlock()
+
 	var currentSize int64
 	st, err := fs.unixFS.Stat(p)
 	if err != nil && !errors.Is(err, ufs.ErrNotExist) {
@@ -453,16 +464,18 @@ func (fs *Filesystem) Copy(p string) error {
 	if err != nil {
 		return err
 	}
-	dst, err := fs.unixFS.OpenFileat(dirfd, newName, ufs.O_WRONLY|ufs.O_CREATE, info.Mode())
+	dst, err := fs.unixFS.OpenFileat(dirfd, newName, ufs.O_WRONLY|ufs.O_CREATE|ufs.O_TRUNC, info.Mode())
 	if err != nil {
 		return err
 	}
-	defer dst.Close()
+	// Wrap the destination in the quota file so the copy reserves space
+	// atomically per write rather than relying on the check-then-add above.
+	qdst := newQuotaFile(fs, dst, 0)
+	defer qdst.Close()
 
 	// Do not use CopyBuffer here, it is wasteful as the file implements
 	// io.ReaderFrom, which causes it to not use the buffer anyways.
-	n, err := io.Copy(dst, io.LimitReader(source, currentSize))
-	fs.unixFS.Add(n)
+	_, err = io.Copy(qdst, io.LimitReader(source, currentSize))
 
 	if !fs.isTest {
 		if err := fs.unixFS.Lchownat(dirfd, newName, config.Get().System.User.Uid, config.Get().System.User.Gid); err != nil {

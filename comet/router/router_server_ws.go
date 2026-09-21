@@ -123,21 +123,16 @@ func getServerWebsocket(c *gin.Context) {
 			break
 		}
 
-		if !rl.Allow() {
-			if !throttled {
-				throttled = true
-				_ = handler.Connection.WriteJSON(websocket.Message{Event: websocket.ThrottledEvent, Args: []string{"global"}})
-			}
-			continue
-		}
-
-		throttled = false
-
 		// If the message isn't a format we expect, or the length of the message is far larger
 		// than we'd ever expect, drop it. The websocket upgrader logic does enforce a maximum
 		// _compressed_ message size of 4Kb but that could decompress to a much larger amount
-		// of data.
-		if t != ws.TextMessage || len(p) > 32_768 {
+		// of data. While a chunked upload session is open a much larger frame is allowed so
+		// base64 chunks are not silently discarded.
+		maxFrame := 32_768
+		if handler.IsUploading() {
+			maxFrame = websocket.MaxUploadFrame
+		}
+		if t != ws.TextMessage || len(p) > maxFrame {
 			continue
 		}
 
@@ -149,7 +144,7 @@ func getServerWebsocket(c *gin.Context) {
 			continue
 		}
 
-		go func(msg websocket.Message) {
+		handle := func(msg websocket.Message) {
 			if err := handler.HandleInbound(ctx, msg); err != nil {
 				if errors.Is(err, server.ErrSuspended) {
 					cancel()
@@ -157,6 +152,28 @@ func getServerWebsocket(c *gin.Context) {
 					_ = handler.SendErrorJson(msg, err)
 				}
 			}
-		}(j)
+		}
+
+		// Upload events mutate per-connection session state and must run
+		// sequentially in this read loop so chunk offsets stay ordered. They
+		// are also exempt from the global flood limiter: the client only sends
+		// the next chunk after an upload progress ack, so the flow is already
+		// self-limiting, and dropping a chunk would stall the transfer.
+		if j.IsUploadEvent() {
+			handle(j)
+			continue
+		}
+
+		if !rl.Allow() {
+			if !throttled {
+				throttled = true
+				_ = handler.Connection.WriteJSON(websocket.Message{Event: websocket.ThrottledEvent, Args: []string{"global"}})
+			}
+			continue
+		}
+
+		throttled = false
+
+		go handle(j)
 	}
 }

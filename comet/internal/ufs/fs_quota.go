@@ -180,11 +180,20 @@ func (fs *Quota) removeAll(path string) error {
 }
 
 func (fs *Quota) unlinkat(dirfd int, name string, flags int) error {
+	// Stat first but only decrement the usage counter after the unlink
+	// actually succeeds, otherwise a failed delete would permanently
+	// undercount the disk usage.
+	var size int64
 	if flags == 0 {
-		s, err := fs.Lstatat(dirfd, name)
-		if err == nil && s.Mode().IsRegular() {
-			fs.Add(-s.Size())
+		if s, err := fs.Lstatat(dirfd, name); err == nil && s.Mode().IsRegular() {
+			size = s.Size()
 		}
 	}
-	return fs.UnixFS.unlinkat(dirfd, name, flags)
+	if err := fs.UnixFS.unlinkat(dirfd, name, flags); err != nil {
+		return err
+	}
+	if size > 0 {
+		fs.Add(-size)
+	}
+	return nil
 }

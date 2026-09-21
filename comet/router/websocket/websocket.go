@@ -50,6 +50,11 @@ const (
 	defaultReadLimit      = 4096
 	uploadReadLimit       = 8 << 20
 	maxUploadChunkEncoded = 6 << 20 // 6MiB base64 ~= 4.5MiB decoded
+
+	// MaxUploadFrame is the largest websocket frame accepted while an upload
+	// session is open. It must fit one max-size base64 chunk plus the JSON
+	// envelope.
+	MaxUploadFrame = 8 << 20
 )
 
 type Handler struct {
@@ -504,6 +509,10 @@ func (h *Handler) handleUploadStart(m Message) error {
 	}
 
 	path := m.Args[0]
+	if err := h.server.Filesystem().IsIgnored(path); err != nil {
+		_ = h.SendJson(Message{Event: ErrorEvent, Args: []string{"the requested file is on the denylist"}})
+		return nil
+	}
 	var offset int64
 	if st, err := h.server.Filesystem().UnixFS().Stat(path); err == nil {
 		if st.IsDir() {
@@ -541,6 +550,14 @@ func (h *Handler) handleUploadChunk(m Message) error {
 	data, err := base64.StdEncoding.DecodeString(m.Args[0])
 	if err != nil {
 		_ = h.SendJson(Message{Event: ErrorEvent, Args: []string{"invalid upload chunk encoding"}})
+		return nil
+	}
+
+	// Enforce the same per-file upload limit as the HTTP endpoints, keyed off
+	// the accumulated offset so a chunked session cannot grow a file past it.
+	maxFileSizeBytes := config.Get().Api.UploadLimit * 1024 * 1024
+	if h.uploadOffset+int64(len(data)) > maxFileSizeBytes {
+		_ = h.SendJson(Message{Event: ErrorEvent, Args: []string{"file exceeds the maximum upload size"}})
 		return nil
 	}
 
@@ -586,4 +603,11 @@ func (h *Handler) resetUpload() {
 	h.uploadPath = ""
 	h.uploadOffset = 0
 	h.Connection.SetReadLimit(defaultReadLimit)
+}
+
+// IsUploading reports whether a chunked upload session is open on this
+// connection. It is read from the connection read loop, the same goroutine
+// that runs the upload handlers, so no locking is required.
+func (h *Handler) IsUploading() bool {
+	return h.uploading
 }

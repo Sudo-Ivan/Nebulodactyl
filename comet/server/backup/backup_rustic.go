@@ -224,7 +224,13 @@ func (b *RusticBackup) Restore(ctx context.Context, _ io.Reader, callback Restor
 		if err != nil {
 			return err
 		}
-		if d.IsDir() {
+		// Only regular files may leave the scratch dir. A snapshot can
+		// contain real symlinks, and opening them here would read whatever
+		// host path they point at.
+		if !d.Type().IsRegular() {
+			if !d.IsDir() {
+				b.log().WithField("path", p).Warn("skipping non-regular file in restored snapshot")
+			}
 			return nil
 		}
 		info, err := d.Info()
@@ -467,7 +473,9 @@ func collectFiles(root string) ([]archives.FileInfo, error) {
 		if err != nil {
 			return err
 		}
-		if d.IsDir() {
+		// Skip symlinks and other special entries so a snapshot cannot carry
+		// a link to a host path into the downloaded archive.
+		if !d.Type().IsRegular() {
 			return nil
 		}
 		info, err := d.Info()

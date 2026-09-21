@@ -238,6 +238,13 @@ func (fs *UnixFS) readDir(fd int, name, relative string, b []byte) ([]DirEntry, 
 
 		// "Go is like C, except that you just put `unsafe` all over the place".
 		copy((*[unsafe.Sizeof(unix.Dirent{})]byte)(unsafe.Pointer(&sde))[:], workBuffer)
+		// Reclen comes straight from the kernel; a hostile or corrupted
+		// filesystem (FUSE, damaged image) could return a record length that
+		// overruns the buffer or never advances it. The minimum valid record
+		// is the fixed header up to the name field.
+		if int(sde.Reclen) < int(unsafe.Offsetof(sde.Name)) || int(sde.Reclen) > len(workBuffer) {
+			return nil, &PathError{Op: "getdents", Path: name, Err: unix.EIO}
+		}
 		workBuffer = workBuffer[sde.Reclen:] // advance buffer for next iteration through loop
 
 		if sde.Ino == 0 {

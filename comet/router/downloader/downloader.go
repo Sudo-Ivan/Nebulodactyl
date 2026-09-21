@@ -8,6 +8,7 @@ import (
 	"mime"
 	"net"
 	"net/http"
+	"net/netip"
 	"net/url"
 	"path/filepath"
 	"strings"
@@ -43,7 +44,18 @@ func init() {
 		if ip == nil {
 			return c, errors.WithStack(ErrInvalidIPAddress)
 		}
-		if ip.IsLoopback() || ip.IsLinkLocalUnicast() || ip.IsLinkLocalMulticast() || ip.IsInterfaceLocalMulticast() {
+		parsed, ok := netip.AddrFromSlice(ip)
+		if !ok {
+			return c, errors.WithStack(ErrInvalidIPAddress)
+		}
+		parsed = parsed.Unmap()
+		// Only allow clearly public destinations. IsGlobalUnicast alone is not
+		// enough since private ranges are also global unicast, which is why the
+		// individual properties are checked alongside the explicit blocklist
+		// for ranges like CGNAT that sit between the two.
+		if !parsed.IsGlobalUnicast() || parsed.IsPrivate() || parsed.IsLoopback() ||
+			parsed.IsLinkLocalUnicast() || parsed.IsLinkLocalMulticast() || parsed.IsInterfaceLocalMulticast() ||
+			parsed.IsMulticast() || parsed.IsUnspecified() {
 			return c, errors.WithStack(ErrInternalResolution)
 		}
 		for _, block := range internalRanges {
@@ -83,12 +95,18 @@ var instance = &Downloader{
 }
 
 // Internal IP ranges that should be blocked if the resource requested resolves within.
+// This list supplements the netip property checks above with ranges that are
+// technically global unicast but not routable on the public internet.
 var internalRanges = []*net.IPNet{
 	mustParseCIDR("127.0.0.1/8"),
 	mustParseCIDR("10.0.0.0/8"),
 	mustParseCIDR("172.16.0.0/12"),
 	mustParseCIDR("192.168.0.0/16"),
 	mustParseCIDR("169.254.0.0/16"),
+	mustParseCIDR("100.64.0.0/10"),
+	mustParseCIDR("192.0.0.0/24"),
+	mustParseCIDR("198.18.0.0/15"),
+	mustParseCIDR("240.0.0.0/4"),
 	mustParseCIDR("::1/128"),
 	mustParseCIDR("fe80::/10"),
 	mustParseCIDR("fc00::/7"),
@@ -162,8 +180,7 @@ func ByID(dlid string) *Download {
 	return instance.find(dlid)
 }
 
-//goland:noinspection GoVetCopyLock
-func (dl Download) MarshalJSON() ([]byte, error) {
+func (dl *Download) MarshalJSON() ([]byte, error) {
 	return json.Marshal(struct {
 		Identifier string
 		Progress   float64
