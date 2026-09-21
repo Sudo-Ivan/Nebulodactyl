@@ -1,4 +1,7 @@
 import { useCallback, useContext } from 'react';
+import http from '@/api/http';
+import { deleteServerBackup, restoreServerBackup, retryBackup as retryBackupApi } from '@/api/server/backups';
+import createServerBackup from '@/api/server/backups/createServerBackup';
 import { getGlobalDaemonType } from '@/api/server/getServer';
 import getServerBackups from '@/api/swr/getServerBackups';
 import { ServerContext } from '@/state/server';
@@ -14,7 +17,6 @@ export const useUnifiedBackups = () => {
 
     const createBackup = useCallback(
         async (name: string, ignored: string, isLocked: boolean) => {
-            const { default: createServerBackup } = await import('@/api/server/backups/createServerBackup');
             const result = await createServerBackup(uuid, {
                 name,
                 ignored,
@@ -28,7 +30,6 @@ export const useUnifiedBackups = () => {
 
     const deleteBackup = useCallback(
         async (backupUuid: string) => {
-            const { deleteServerBackup } = await import('@/api/server/backups');
             const result = await deleteServerBackup(uuid, backupUuid);
             mutate();
             return result;
@@ -38,7 +39,6 @@ export const useUnifiedBackups = () => {
 
     const retryBackup = useCallback(
         async (backupUuid: string) => {
-            const { retryBackup: retryBackupApi } = await import('@/api/server/backups');
             await retryBackupApi(uuid, backupUuid);
             mutate();
         },
@@ -47,7 +47,6 @@ export const useUnifiedBackups = () => {
 
     const restoreBackup = useCallback(
         async (backupUuid: string) => {
-            const { restoreServerBackup } = await import('@/api/server/backups');
             const result = await restoreServerBackup(uuid, backupUuid);
             mutate();
             return result;
@@ -57,7 +56,6 @@ export const useUnifiedBackups = () => {
 
     const renameBackup = useCallback(
         async (backupUuid: string, newName: string) => {
-            const http = (await import('@/api/http')).default;
             await http.post(`/api/client/servers/${daemonType}/${uuid}/backups/${backupUuid}/rename`, {
                 name: newName,
             });
@@ -68,7 +66,6 @@ export const useUnifiedBackups = () => {
 
     const toggleBackupLock = useCallback(
         async (backupUuid: string) => {
-            const http = (await import('@/api/http')).default;
             await http.post(`/api/client/servers/${daemonType}/${uuid}/backups/${backupUuid}/lock`);
             mutate();
         },

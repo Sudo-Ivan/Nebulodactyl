@@ -27,6 +27,17 @@ export class Websocket extends EventEmitter {
 
     // Connects to the websocket instance and sets the token for the initial request.
     connect(url: string): this {
+        // A reconnect timer from a previous connect() call must not fire
+        // against the socket we are about to create, and the previous
+        // Sockette instance must be closed or it keeps its own reconnect
+        // loop running in parallel.
+        if (this.timer) {
+            clearTimeout(this.timer);
+            this.timer = null;
+        }
+        if (this.socket) {
+            this.socket.close();
+        }
         this.url = url;
 
         this.socket = new Sockette(`${this.url}`, {
@@ -66,6 +77,9 @@ export class Websocket extends EventEmitter {
         });
 
         this.timer = setTimeout(() => {
+            // Bail out if close() ran while this timer was pending. Otherwise a
+            // deliberately closed socket resurrects and reconnects forever.
+            if (!this.url || this.url !== url) return;
             this.backoff = this.backoff + 2500 >= 20000 ? 20000 : this.backoff + 2500;
             if (this.socket) this.socket.close();
             clearTimeout(this.timer);
@@ -99,6 +113,10 @@ export class Websocket extends EventEmitter {
         this.url = null;
         this.token = '';
         this.connected = false;
+        if (this.timer) {
+            clearTimeout(this.timer);
+            this.timer = null;
+        }
         if (this.socket) this.socket.close(code, reason);
     }
 

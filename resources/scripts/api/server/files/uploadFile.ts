@@ -118,6 +118,12 @@ const uploadOverSocket = async (
         if (!Number.isFinite(offset) || offset < 0) {
             offset = 0;
         }
+        if (offset > file.size) {
+            // A stale partial larger than this upload would be left in
+            // place. The websocket protocol can only append, so restart
+            // through the HTTP path which truncates on offset 0.
+            throw new Error('stored upload offset exceeds the file size');
+        }
         onProgress(offset);
 
         while (offset < file.size) {
@@ -167,6 +173,11 @@ const uploadOverHttp = async (
     try {
         const head = await axios.head(url, { params, signal });
         offset = Number(head.headers['x-upload-offset'] ?? 0) || 0;
+        if (!Number.isFinite(offset) || offset < 0 || offset > file.size) {
+            // A stored offset beyond the file size means a stale larger
+            // partial sits at the path; rewriting from zero truncates it.
+            offset = 0;
+        }
     } catch {
         // Daemons without resume support just get a full PUT below.
         offset = 0;

@@ -92,7 +92,11 @@ const ServerRow = ({ server, className, hideGroup }: { server: Server; className
         if (isSuspended) return;
 
         getStats();
-        const interval = setInterval(getStats, 30000);
+        // Skip the tick while the tab is hidden so a backgrounded dashboard
+        // with many servers does not keep firing requests.
+        const interval = setInterval(() => {
+            if (!document.hidden) getStats();
+        }, 30000);
 
         return () => clearInterval(interval);
     }, [isSuspended, getStats]);
