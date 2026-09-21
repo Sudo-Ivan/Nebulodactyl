@@ -373,6 +373,7 @@ func (s *Server) IsRunning() bool {
 type APIResponse struct {
 	State         string        `json:"state"`
 	IsSuspended   bool          `json:"is_suspended"`
+	Health        string        `json:"health,omitempty"`
 	Utilization   ResourceUsage `json:"utilization"`
 	Configuration Configuration `json:"configuration"`
 }
@@ -380,9 +381,17 @@ type APIResponse struct {
 // ToAPIResponse returns the server struct as an API object that can be consumed
 // by callers.
 func (s *Server) ToAPIResponse() APIResponse {
+	health := ""
+	if h, ok := s.Environment.(interface {
+		Health(ctx context.Context) string
+	}); ok {
+		health = h.Health(context.Background())
+	}
+
 	return APIResponse{
 		State:         s.Environment.State(),
 		IsSuspended:   s.IsSuspended(),
+		Health:        health,
 		Utilization:   s.Proc(),
 		Configuration: *s.Config(),
 	}

@@ -45,6 +45,6 @@ class Comet implements Daemon
     {
         $debugFlag = config('app.debug') ? ' --allow-insecure' : '';
 
-        return "cd /etc/comet && sudo comet configure --panel-url " . escapeshellarg(config('app.url')) . " --token " . escapeshellarg($token) . " --node " . escapeshellarg((string) $node->id) . $debugFlag . "";
+        return "cd /etc/comet && sudo comet enroll --panel-url " . escapeshellarg(config('app.url')) . " --token " . escapeshellarg($token) . " --node " . escapeshellarg((string) $node->id) . $debugFlag . "";
     }
 }

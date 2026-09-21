@@ -215,6 +215,24 @@ func postServerRestoreBackup(c *gin.Context) {
 	c.Status(http.StatusAccepted)
 }
 
+// headServerBackup reports whether a local backup archive exists on this
+// machine. The panel uses it for scheduled backup verification sweeps.
+func headServerBackup(c *gin.Context) {
+	backupUuid, ok := parseBackupUuid(c, c.Param("backup"))
+	if !ok {
+		return
+	}
+	if _, _, err := backup.LocateLocal(middleware.ExtractApiClient(c), backupUuid); err != nil {
+		if errors.Is(err, os.ErrNotExist) {
+			c.AbortWithStatus(http.StatusNotFound)
+			return
+		}
+		middleware.CaptureAndAbort(c, err)
+		return
+	}
+	c.Status(http.StatusNoContent)
+}
+
 // deleteServerBackup deletes a local backup of a server. If the backup is not
 // found on the machine just return a 404 error. The service calling this
 // endpoint can make its own decisions as to how it wants to handle that

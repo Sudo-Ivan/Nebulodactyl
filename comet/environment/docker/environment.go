@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"sync"
+	"time"
 
 	"emperror.dev/errors"
 	"github.com/apex/log"
@@ -55,6 +56,12 @@ type Environment struct {
 
 	// Tracks the environment state.
 	st *system.AtomicString
+
+	// Caches the last container health status read so polling endpoints do
+	// not hit the engine on every request.
+	healthMx   sync.Mutex
+	health     string
+	healthAt   time.Time
 }
 
 // New creates a new base Docker environment. The ID passed through will be the
@@ -191,6 +198,34 @@ func (e *Environment) SetImage(i string) {
 
 func (e *Environment) State() string {
 	return e.st.Load()
+}
+
+// Health returns the container engine's health status for this instance:
+// "healthy", "unhealthy", "starting", or an empty string when the
+// container has no healthcheck configured or is not running. Results are
+// cached briefly so frequent API polls do not inspect the container
+// every time.
+func (e *Environment) Health(ctx context.Context) string {
+	if e.State() != environment.ProcessRunningState {
+		return ""
+	}
+
+	e.healthMx.Lock()
+	defer e.healthMx.Unlock()
+
+	if time.Since(e.healthAt) < 10*time.Second {
+		return e.health
+	}
+
+	c, err := e.ContainerInspect(ctx)
+	if err != nil || c.State == nil || c.State.Health == nil {
+		e.health = ""
+	} else {
+		e.health = c.State.Health.Status
+	}
+	e.healthAt = time.Now()
+
+	return e.health
 }
 
 // SetState sets the state of the environment. This emits an event that server's

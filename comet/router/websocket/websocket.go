@@ -1,10 +1,13 @@
 package websocket
 
 import (
+	"bytes"
 	"context"
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strconv"
 	"strings"
 	"sync"
 	"time"
@@ -36,6 +39,16 @@ const (
 	PermissionReceiveInstall   = "admin.websocket.install"
 	PermissionReceiveTransfer  = "admin.websocket.transfer"
 	PermissionReceiveBackups   = "backup.read"
+	PermissionFileCreate       = "file.create"
+	PermissionFileUpdate       = "file.update"
+)
+
+// The default 4KB frame limit is raised while an upload session is open so
+// base64 chunks can be a useful size, then restored when it closes.
+const (
+	defaultReadLimit      = 4096
+	uploadReadLimit       = 8 << 20
+	maxUploadChunkEncoded = 6 << 20 // 6MiB base64 ~= 4.5MiB decoded
 )
 
 type Handler struct {
@@ -46,6 +59,12 @@ type Handler struct {
 	ra           server.RequestActivity
 	uuid         uuid.UUID
 	limiter      *LimiterBucket
+
+	// Active chunked upload state. Only one upload is tracked per
+	// connection; a second start request is rejected while one is open.
+	uploadPath   string
+	uploadOffset int64
+	uploading    bool
 }
 
 var (
@@ -111,7 +130,7 @@ func GetHandler(s *server.Server, w http.ResponseWriter, r *http.Request, c *gin
 		return nil, err
 	}
 
-	conn.SetReadLimit(4096)
+	conn.SetReadLimit(defaultReadLimit)
 	_ = conn.SetCompressionLevel(5)
 
 	return &Handler{
@@ -453,7 +472,114 @@ func (h *Handler) HandleInbound(ctx context.Context, m Message) error {
 			})
 			return nil
 		}
+	case UploadStartEvent:
+		return h.handleUploadStart(m)
+	case UploadChunkEvent:
+		return h.handleUploadChunk(m)
+	case UploadFinishEvent:
+		return h.handleUploadFinish()
+	case UploadAbortEvent:
+		return h.handleUploadAbort()
 	}
 
 	return nil
+}
+
+// handleUploadStart opens a chunked upload session over the websocket. The
+// path is resolved against the server root and any existing bytes are
+// reported back as the resume offset so interrupted uploads can continue
+// instead of restarting.
+func (h *Handler) handleUploadStart(m Message) error {
+	if !h.GetJwt().HasPermission(PermissionFileCreate) && !h.GetJwt().HasPermission(PermissionFileUpdate) {
+		return nil
+	}
+	if h.uploading {
+		_ = h.SendJson(Message{Event: ErrorEvent, Args: []string{"an upload is already in progress on this connection"}})
+		return nil
+	}
+	if len(m.Args) < 1 || m.Args[0] == "" {
+		_ = h.SendJson(Message{Event: ErrorEvent, Args: []string{"missing upload path"}})
+		return nil
+	}
+
+	path := m.Args[0]
+	var offset int64
+	if st, err := h.server.Filesystem().UnixFS().Stat(path); err == nil {
+		if st.IsDir() {
+			_ = h.SendJson(Message{Event: ErrorEvent, Args: []string{"cannot upload over a directory"}})
+			return nil
+		}
+		offset = st.Size()
+	}
+
+	h.uploading = true
+	h.uploadPath = path
+	h.uploadOffset = offset
+	h.Connection.SetReadLimit(uploadReadLimit)
+
+	_ = h.SendJson(Message{
+		Event: UploadReadyEvent,
+		Args:  []string{path, strconv.FormatInt(offset, 10)},
+	})
+	return nil
+}
+
+// handleUploadChunk writes one base64 encoded chunk at the tracked offset.
+// The client must wait for the progress ack before sending the next chunk,
+// which keeps ordering and offsets simple.
+func (h *Handler) handleUploadChunk(m Message) error {
+	if !h.uploading || len(m.Args) < 1 {
+		_ = h.SendJson(Message{Event: ErrorEvent, Args: []string{"no upload in progress"}})
+		return nil
+	}
+	if len(m.Args[0]) > maxUploadChunkEncoded {
+		_ = h.SendJson(Message{Event: ErrorEvent, Args: []string{"upload chunk exceeds the maximum size"}})
+		return nil
+	}
+
+	data, err := base64.StdEncoding.DecodeString(m.Args[0])
+	if err != nil {
+		_ = h.SendJson(Message{Event: ErrorEvent, Args: []string{"invalid upload chunk encoding"}})
+		return nil
+	}
+
+	n, err := h.server.Filesystem().WriteAt(h.uploadPath, bytes.NewReader(data), h.uploadOffset, 0o644)
+	if err != nil {
+		_ = h.SendJson(Message{Event: ErrorEvent, Args: []string{err.Error()}})
+		return nil
+	}
+	h.uploadOffset += n
+
+	_ = h.SendJson(Message{
+		Event: UploadProgressEvent,
+		Args:  []string{h.uploadPath, strconv.FormatInt(h.uploadOffset, 10)},
+	})
+	return nil
+}
+
+func (h *Handler) handleUploadFinish() error {
+	if !h.uploading {
+		_ = h.SendJson(Message{Event: ErrorEvent, Args: []string{"no upload in progress"}})
+		return nil
+	}
+
+	path := h.uploadPath
+	h.resetUpload()
+
+	_ = h.SendJson(Message{Event: UploadCompleteEvent, Args: []string{path}})
+	h.server.SaveActivity(h.ra, server.ActivityFileUploaded, models.ActivityMeta{"file": path, "directory": "/"})
+	return nil
+}
+
+func (h *Handler) handleUploadAbort() error {
+	h.resetUpload()
+	_ = h.SendJson(Message{Event: UploadAbortEvent})
+	return nil
+}
+
+func (h *Handler) resetUpload() {
+	h.uploading = false
+	h.uploadPath = ""
+	h.uploadOffset = 0
+	h.Connection.SetReadLimit(defaultReadLimit)
 }

@@ -115,36 +115,11 @@ func configureCmdRun(cmd *cobra.Command, args []string) {
 		panic(err)
 	}
 
-	c := &http.Client{
-		Timeout: time.Second * 30,
-	}
-
-	req, err := getRequest()
-	if err != nil {
-		panic(err)
-	}
-
-	fmt.Printf("%+v", req.Header)
-	fmt.Println(req.URL.String())
-
-	res, err := c.Do(req)
+	b, err := fetchNodeConfiguration(configureArgs.PanelURL, configureArgs.Token, configureArgs.Node)
 	if err != nil {
 		fmt.Println("Failed to fetch configuration from the panel.\n", err.Error())
 		os.Exit(1)
 	}
-	defer res.Body.Close()
-
-	if res.StatusCode == http.StatusForbidden || res.StatusCode == http.StatusUnauthorized {
-		fmt.Println("The authentication credentials provided were not valid.")
-		os.Exit(1)
-	} else if res.StatusCode != http.StatusOK {
-		b, _ := io.ReadAll(res.Body)
-
-		fmt.Println("An error occurred while processing this request.\n", string(b))
-		os.Exit(1)
-	}
-
-	b, err := io.ReadAll(res.Body)
 
 	cfg, err := config.NewAtPath(configPath)
 	if err != nil {
@@ -165,22 +140,41 @@ func configureCmdRun(cmd *cobra.Command, args []string) {
 	fmt.Println("Successfully configured comet.")
 }
 
-func getRequest() (*http.Request, error) {
-	u, err := url.Parse(configureArgs.PanelURL)
-	if err != nil {
-		panic(err)
-	}
-
-	u.Path = path.Join(u.Path, fmt.Sprintf("api/application/nodes/%s/configuration", configureArgs.Node))
-
-	r, err := http.NewRequest(http.MethodGet, u.String(), nil)
+// fetchNodeConfiguration retrieves the remote daemon configuration for a node
+// from the panel using a deployment token. Returns the raw JSON response body.
+func fetchNodeConfiguration(panelURL, token, nodeID string) ([]byte, error) {
+	u, err := url.Parse(panelURL)
 	if err != nil {
 		return nil, err
 	}
 
-	r.Header.Set("Accept", "application/vnd.pterodactyl.v1+json")
-	r.Header.Set("Content-Type", "application/json")
-	r.Header.Set("Authorization", fmt.Sprintf("Bearer %s", configureArgs.Token))
+	u.Path = path.Join(u.Path, fmt.Sprintf("api/application/nodes/%s/configuration", nodeID))
 
-	return r, nil
+	req, err := http.NewRequest(http.MethodGet, u.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Set("Accept", "application/vnd.pterodactyl.v1+json")
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", token))
+
+	c := &http.Client{
+		Timeout: time.Second * 30,
+	}
+
+	res, err := c.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer res.Body.Close()
+
+	if res.StatusCode == http.StatusForbidden || res.StatusCode == http.StatusUnauthorized {
+		return nil, fmt.Errorf("the authentication credentials provided were not valid")
+	} else if res.StatusCode != http.StatusOK {
+		b, _ := io.ReadAll(res.Body)
+		return nil, fmt.Errorf("panel responded with status %d: %s", res.StatusCode, string(b))
+	}
+
+	return io.ReadAll(res.Body)
 }
