@@ -16,7 +16,7 @@ export default createGlobalStyle`
     }
 
     body {
-        /* quad4 scheme: near-black canvas with a faint white glow */
+        /* near-black canvas with a faint white glow */
         background-color: #0a0a0b;
         background-image:
             radial-gradient(24rem 12rem at 88% -15%, rgb(255 255 255 / 0.10), transparent 70%),

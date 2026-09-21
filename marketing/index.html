@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Nebulodactyl - game server panel with Nebula overlay support</title>
-<meta name="description" content="Nebulodactyl is a Hydrodactyl/Pterodactyl-based game server management panel with Nebula overlay networking and a monochrome space theme.">
+<title>Nebulodactyl - self-hosted game server panel</title>
+<meta name="description" content="Nebulodactyl is a self-hosted game server management panel based on Hydrodactyl and Pterodactyl, with optional Nebula overlay networking for private node fleets.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <style>
     :root {
@@ -109,7 +109,7 @@
 
     .hero {
         text-align: center;
-        padding: 110px 0 90px;
+        padding: 100px 0 80px;
         animation: rise 0.6s ease-out both;
     }
     .hero img.logo { width: 110px; height: auto; margin-bottom: 28px; }
@@ -150,8 +150,14 @@
     h2 {
         font-size: 26px;
         font-weight: 700;
-        margin-bottom: 28px;
+        margin-bottom: 12px;
         letter-spacing: 0.5px;
+    }
+    .section-lead {
+        color: var(--muted);
+        max-width: 720px;
+        margin-bottom: 28px;
+        font-size: 15px;
     }
     .grid {
         display: grid;
@@ -167,6 +173,23 @@
         transition: border-color 0.2s;
     }
     .card:hover { border-color: #2a2a31; }
+    .card .icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        border-radius: 9px;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        margin-bottom: 14px;
+    }
+    .card .icon img {
+        width: 19px;
+        height: 19px;
+        filter: invert(1);
+        opacity: 0.85;
+    }
     .card h3 {
         font-size: 15px;
         color: var(--text);
@@ -174,6 +197,29 @@
         font-weight: 600;
     }
     .card p { color: var(--muted); font-size: 14px; }
+
+    .shots {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 20px;
+    }
+    figure.shot {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+        background: var(--surface);
+    }
+    figure.shot img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+    figure.shot figcaption {
+        padding: 12px 16px;
+        color: var(--muted);
+        font-size: 13px;
+        border-top: 1px solid var(--border);
+    }
 
     pre {
         background: var(--surface);
@@ -183,8 +229,13 @@
         overflow-x: auto;
         font-size: 14px;
         color: var(--text);
+        margin-bottom: 16px;
     }
     code { font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+    .steps { margin: 0 0 20px; }
+    .steps h3 { font-size: 15px; color: var(--text); margin: 22px 0 10px; font-weight: 600; }
+    .steps h3:first-child { margin-top: 0; }
+    .steps p { color: var(--muted); font-size: 14px; margin-bottom: 10px; max-width: 720px; }
 
     .note {
         border-left: 3px solid var(--warn);
@@ -195,6 +246,22 @@
         font-size: 14px;
         margin-top: 24px;
     }
+    .note code { color: var(--text); }
+
+    table.ports {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+        margin-top: 8px;
+    }
+    table.ports th, table.ports td {
+        text-align: left;
+        padding: 9px 12px;
+        border-bottom: 1px solid var(--border);
+        color: var(--muted);
+    }
+    table.ports th { color: var(--text); font-weight: 600; }
+    table.ports td code { color: var(--text); }
 
     footer {
         border-top: 1px solid var(--border);
@@ -218,7 +285,8 @@
         </a>
         <nav>
             <a href="#features">Features</a>
-            <a href="#nebula">Nebula</a>
+            <a href="#screenshots">Screenshots</a>
+            <a href="#networking">Networking</a>
             <a href="#install">Install</a>
             <a href="https://github.com/Sudo-Ivan/Nebulodactyl">GitHub</a>
         </nav>
@@ -231,85 +299,153 @@
             <img class="logo" src="favicon.svg" alt="">
             <h1>NEBULODACTYL</h1>
             <p class="tagline">
-                A game server management panel forked from Hydrodactyl, with a
-                monochrome space theme and first-class Nebula overlay networking.
+                A self-hosted panel for running game servers. Based on Hydrodactyl and
+                Pterodactyl, with optional Nebula overlay networking for nodes that sit
+                behind NAT or on private networks.
             </p>
             <div class="actions">
                 <a class="btn btn-primary" href="https://github.com/Sudo-Ivan/Nebulodactyl">View on GitHub</a>
-                <a class="btn btn-ghost" href="https://hydrodactyl.dev/docs/hydrodactyl/installation">Installation guide</a>
+                <a class="btn btn-ghost" href="#install">Install guide</a>
             </div>
         </div>
     </section>
 
     <section id="features">
         <div class="wrap">
-            <h2>What you get</h2>
+            <h2>Features</h2>
+            <p class="section-lead">Everything Hydrodactyl ships, plus the additions below.</p>
             <div class="grid">
                 <div class="card">
+                    <span class="icon"><img src="icons/network.svg" alt=""></span>
                     <h3>Nebula overlay</h3>
-                    <p>The panel signs node certificates and routes daemon traffic over a mutually authenticated Nebula mesh. Nodes enroll themselves with the nebulod agent.</p>
+                    <p>Panel-to-node traffic can run over a mutually authenticated Nebula mesh. Nodes enroll themselves and get a signed certificate and an overlay IP from the panel.</p>
                 </div>
                 <div class="card">
+                    <span class="icon"><img src="icons/hard-drive.svg" alt=""></span>
                     <h3>nebulod agent</h3>
-                    <p>A small Go daemon on each node: enrolls with the panel, renders the nebula config, supervises the tunnel, and serves health and metrics on the overlay.</p>
+                    <p>A small Go service that runs on each node. It enrolls with the panel, writes the Nebula config, keeps the tunnel up, and exposes a local status endpoint.</p>
                 </div>
                 <div class="card">
-                    <h3>Space theme</h3>
-                    <p>Monochrome void palette with a twinkling starfield and ambient glow, matching the quad4.io aesthetic.</p>
+                    <span class="icon"><img src="icons/moon-star.svg" alt=""></span>
+                    <h3>Dark interface</h3>
+                    <p>Monochrome dark theme with a subtle starfield. Readable at night, no color noise.</p>
                 </div>
                 <div class="card">
-                    <h3>Client panel</h3>
-                    <p>Console, files, databases, backups, network, users, startup, schedules, activity, and software in one interface.</p>
+                    <span class="icon"><img src="icons/layout-dashboard.svg" alt=""></span>
+                    <h3>Full client panel</h3>
+                    <p>Console, file manager, databases, backups, networking, subusers, startup config, schedules, and activity logs in one place.</p>
                 </div>
                 <div class="card">
-                    <h3>Marketplace</h3>
-                    <p>Native plugin and mod installer for Minecraft servers backed by Modrinth, Hangar, and Spiget.</p>
+                    <span class="icon"><img src="icons/package-open.svg" alt=""></span>
+                    <h3>Plugin marketplace</h3>
+                    <p>Install plugins and mods for Minecraft servers directly from Modrinth, Hangar, and Spiget.</p>
                 </div>
                 <div class="card">
-                    <h3>Runs anywhere</h3>
-                    <p>Behind Coolify, Traefik, nginx, or Caddy with trusted proxy support and a health endpoint built in.</p>
+                    <span class="icon"><img src="icons/globe.svg" alt=""></span>
+                    <h3>Reverse proxy ready</h3>
+                    <p>Runs behind Coolify, Traefik, nginx, or Caddy. Trusted proxy handling and a /healthz endpoint are built in.</p>
                 </div>
                 <div class="card">
-                    <h3>Your database</h3>
-                    <p>MySQL, MariaDB, PostgreSQL, or SQLite for small self-hosted installs.</p>
+                    <span class="icon"><img src="icons/database.svg" alt=""></span>
+                    <h3>Database options</h3>
+                    <p>MySQL, MariaDB, or PostgreSQL for production. SQLite for small or single-user installs.</p>
                 </div>
                 <div class="card">
-                    <h3>Signed artifacts</h3>
-                    <p>Images and releases ship with Cosign keyless signatures, SBOMs, SLSA provenance, and OpenVEX documents.</p>
+                    <span class="icon"><img src="icons/shield-check.svg" alt=""></span>
+                    <h3>Signed builds</h3>
+                    <p>Container images and release tarballs ship with Cosign keyless signatures, SBOMs, and provenance attestations you can verify.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="nebula">
+    <section id="screenshots">
         <div class="wrap">
-            <h2>Nebula overlay networking</h2>
-            <p style="color: var(--muted); max-width: 720px;">
-                Nebula is a mutually authenticated, peer-to-peer overlay network originally
-                built at Slack. The panel acts as the certificate authority: each node
-                enrolls once with its daemon token, receives a signed certificate and an
-                allocated overlay address, and the panel then prefers the overlay IP for
-                all daemon traffic. Lighthouses handle discovery and NAT traversal, and
-                group-based firewall rules keep node ports closed to anything outside
-                your fleet.
+            <h2>Screenshots</h2>
+            <p class="section-lead">The panel interface in the default dark theme.</p>
+            <div class="shots">
+                <figure class="shot">
+                    <img src="showcase/panel-login.png" alt="Nebulodactyl login screen in the dark theme" loading="lazy">
+                    <figcaption>Login</figcaption>
+                </figure>
+                <figure class="shot">
+                    <img src="showcase/panel-dark.png" alt="Nebulodactyl server list dashboard in the dark theme" loading="lazy">
+                    <figcaption>Server dashboard</figcaption>
+                </figure>
+                <figure class="shot">
+                    <img src="showcase/panel-console.png" alt="Nebulodactyl server console view in the dark theme" loading="lazy">
+                    <figcaption>Server console</figcaption>
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    <section id="networking">
+        <div class="wrap">
+            <h2>Networking</h2>
+            <p class="section-lead">
+                The panel works on a public domain behind a reverse proxy, or entirely
+                inside a private network. Panel-to-node traffic does not need to cross
+                the public internet.
             </p>
+            <div class="grid">
+                <div class="card">
+                    <span class="icon"><img src="icons/globe.svg" alt=""></span>
+                    <h3>Public deployment</h3>
+                    <p>Point a domain at the panel, put your proxy in front, set TRUSTED_PROXIES, and terminate TLS wherever you like. This is the standard setup.</p>
+                </div>
+                <div class="card">
+                    <span class="icon"><img src="icons/lock.svg" alt=""></span>
+                    <h3>Private network or VPN</h3>
+                    <p>Nodes on a LAN, WireGuard, or Tailscale work fine. Give each node its private address or internal hostname and the panel talks to it directly.</p>
+                </div>
+                <div class="card">
+                    <span class="icon"><img src="icons/network.svg" alt=""></span>
+                    <h3>Nebula overlay</h3>
+                    <p>For fleets spread across sites or NATs, enable the built-in Nebula support. The panel runs a CA, nodes enroll with their daemon token, and daemon traffic moves to overlay IPs automatically.</p>
+                </div>
+            </div>
+            <table class="ports">
+                <tr><th>Port</th><th>Purpose</th></tr>
+                <tr><td><code>80/443</code> TCP</td><td>Panel web interface, behind your reverse proxy</td></tr>
+                <tr><td><code>8080</code> TCP</td><td>Node daemon API (game server control, WebSocket console)</td></tr>
+                <tr><td><code>2022</code> TCP</td><td>Node SFTP file access</td></tr>
+                <tr><td><code>4242</code> UDP</td><td>Nebula overlay traffic, when enabled</td></tr>
+                <tr><td><code>9770</code> TCP</td><td>nebulod agent status endpoint, overlay only</td></tr>
+            </table>
             <div class="note">
-                Panel config lives in config/nebula.php. Initialize the CA with
-                php artisan nebula:init-ca, then run agent/nebulod on each node.
+                Overlay setup: run <code>php artisan nebula:init-ca</code> on the panel,
+                then run <code>nebulod</code> on each node. Nodes enroll with their existing
+                daemon token and the panel prefers the overlay IP for daemon traffic.
+                See <code>config/nebula.php</code> and <code>agent/README.md</code>.
             </div>
         </div>
     </section>
 
     <section id="install">
         <div class="wrap">
-            <h2>Quick start</h2>
-            <pre><code>git clone https://github.com/Sudo-Ivan/Nebulodactyl.git
+            <h2>Install</h2>
+            <div class="steps">
+                <h3>Docker, one command</h3>
+                <p>Requires Docker and the Compose plugin. The script asks a few questions, generates secrets, and starts the stack.</p>
+                <pre><code>curl -fsSL https://raw.githubusercontent.com/Sudo-Ivan/Nebulodactyl/master/install.sh | bash</code></pre>
+
+                <h3>Manual compose</h3>
+                <p>If you prefer to review everything first:</p>
+                <pre><code>git clone https://github.com/Sudo-Ivan/Nebulodactyl.git
 cd Nebulodactyl
+cp docker-compose.example.yml docker-compose.yml
 cp .env.example .env
 docker compose up -d</code></pre>
+
+                <h3>After it is up</h3>
+                <pre><code>docker compose exec panel php artisan p:user:make</code></pre>
+                <p>That walks you through creating the first admin account. Then add a location and a node in the admin area.</p>
+            </div>
             <div class="note">
-                Pre-release software under active development. Review the upstream
-                Hydrodactyl docs before installing. See examples/coolify/ for a
+                This is pre-release software under active development. The upstream
+                Hydrodactyl documentation covers game server setup, wings configuration,
+                and egg management. See <code>examples/coolify/</code> for a ready-made
                 reverse proxy deployment.
             </div>
         </div>
@@ -319,12 +455,13 @@ docker compose up -d</code></pre>
 <footer>
     <div class="wrap">
         <p>
-            Nebulodactyl is Apache-2.0 licensed. Forked from Hydrodactyl, built on
-            Pterodactyl and Pyrodactyl.
+            Nebulodactyl is Apache-2.0 licensed. Forked from Hydrodactyl, which is built
+            on Pterodactyl and Pyrodactyl. Icons are Lucide, ISC licensed.
         </p>
         <p style="margin-top: 8px;">
             <a href="https://github.com/Sudo-Ivan/Nebulodactyl">Repository</a> &middot;
-            <a href="https://hydrodactyl.dev/docs/hydrodactyl">Upstream docs</a>
+            <a href="https://hydrodactyl.dev/docs/hydrodactyl">Upstream documentation</a> &middot;
+            <a href="https://github.com/Sudo-Ivan/Nebulodactyl/security">Security policy</a>
         </p>
     </div>
 </footer>

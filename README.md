@@ -16,12 +16,15 @@
 
 <br/>
 
-Nebulodactyl is a game server management panel forked from Hydrodactyl (itself a Pterodactyl fork) with a space-themed interface and support for joining nodes over a [Nebula](https://github.com/slackhq/nebula) overlay network.
+Nebulodactyl is a game server management panel forked from Hydrodactyl (itself a Pterodactyl fork) with a dark interface and support for joining nodes over a [Nebula](https://github.com/slackhq/nebula) overlay network.
+
+![Nebulodactyl server dashboard in the dark theme](showcase/panel-dark.png)
 
 ## Features
 
-- Space theme: a monochrome color scheme with a twinkling starfield and ambient glow, in the style of quad4.io.
-- Nebula overlay network: the panel signs node certificates and routes daemon traffic over a mutually authenticated Nebula mesh. Nodes enroll themselves with the `nebulod` agent in `agent/`. See `config/nebula.php`, `agent/`, and `examples/nebula/`.
+- Dark theme: a monochrome color scheme with a subtle starfield and ambient glow.
+- Nebula overlay network: the panel signs node certificates and routes daemon traffic over a mutually authenticated Nebula mesh. Nodes enroll themselves with the `nebulod` agent in `agent/`. See `config/nebula.php`, `agent/`, `examples/nebula/`, and `docs/networking.md`.
+- Private network friendly: works on a LAN, behind a VPN, or over the Nebula overlay. Panel-to-node traffic does not need public addresses. See `docs/networking.md`.
 - Reverse proxy friendly: works behind Coolify, Traefik, nginx, or Caddy with `TRUSTED_PROXIES` and a `/healthz` endpoint. See `examples/coolify/`.
 - Reimagined client panel for console, files, databases, backups, network, users, startup, schedules, activity, and software.
 - Marketplace: a native plugin and mod installer for Minecraft servers backed by Modrinth, Hangar, and Spiget.
@@ -42,12 +45,21 @@ Nebulodactyl is a game server management panel forked from Hydrodactyl (itself a
 
 ## Quick start
 
+Requires Docker with the Compose plugin:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Sudo-Ivan/Nebulodactyl/master/install.sh | bash
+```
+
+Or manually:
+
 ```bash
 git clone https://github.com/Sudo-Ivan/Nebulodactyl.git
 cd Nebulodactyl
-cp .env.example .env
 cp docker-compose.example.yml docker-compose.yml
+cp .env.example .env   # set APP_URL, DB_PASSWORD, DB_ROOT_PASSWORD
 docker compose up -d
+docker compose exec panel php artisan p:user:make
 ```
 
 See the upstream [Installation Guide](https://hydrodactyl.dev/docs/hydrodactyl/installation) and [Local Development Guide](https://hydrodactyl.dev/docs/hydrodactyl/local-development) for detailed instructions.

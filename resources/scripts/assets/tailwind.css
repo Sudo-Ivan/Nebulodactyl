@@ -6,7 +6,7 @@
 @theme {
     --color-ring: #a1a1aa;
 
-    /* Monochrome accent ramp (primary brand accent, quad4 scheme) */
+    /* Monochrome accent ramp (primary brand accent) */
     --color-brand-50: #ffffff;
     --color-brand-100: #fafafa;
     --color-brand-200: #f4f4f5;
@@ -86,7 +86,7 @@
     }
 }
 
-/* quad4.io style ambient motion */
+/* ambient glow motion */
 @keyframes twinkle {
     0%,
     100% {

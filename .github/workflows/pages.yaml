@@ -5,6 +5,7 @@ on:
     branches: [master]
     paths:
       - 'marketing/**'
+      - 'showcase/**'
       - '.github/workflows/pages.yaml'
   workflow_dispatch:
 
@@ -39,6 +40,11 @@ jobs:
 
       - name: Configure Pages
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
+
+      - name: Copy showcase images
+        run: |
+          mkdir -p marketing/showcase
+          cp showcase/*.png marketing/showcase/
 
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
