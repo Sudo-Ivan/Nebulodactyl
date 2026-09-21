@@ -209,6 +209,8 @@ if curl -fsS "$HEALTH_URL" >/dev/null 2>&1; then
     ok "panel is healthy"
 fi
 
+SETUP_URL="$(docker compose exec -T panel php artisan p:setup:link 2>/dev/null | grep -o 'http[^ ]*/setup?key=[^ ]*' | head -1 || true)"
+
 cat <<EOF
 
   Panel URL:        ${C_BOLD}${APP_URL}${C_RESET}
@@ -216,10 +218,20 @@ cat <<EOF
   Compose file:     ${INSTALL_DIR}/docker-compose.yml
   Settings/secrets: ${INSTALL_DIR}/.env
 
-  Create your first admin account:
+EOF
 
-      ${C_CYAN}cd ${INSTALL_DIR} && docker compose exec panel php artisan p:user:make${C_RESET}
+if [ -n "$SETUP_URL" ]; then
+    printf '  %sCreate your admin account here:%s\n\n' "$C_BOLD" "$C_RESET"
+    printf '      %s%s%s\n\n' "$C_GREEN" "$SETUP_URL" "$C_RESET"
+    printf '  The link expires in one hour. If it lapses, mint a new one:\n\n'
+    printf '      %scd %s && docker compose exec panel php artisan p:setup:link%s\n\n' "$C_CYAN" "$INSTALL_DIR" "$C_RESET"
+else
+    printf '  An account already exists, or the setup link could not be read.\n'
+    printf '  Mint a fresh link any time with:\n\n'
+    printf '      %scd %s && docker compose exec panel php artisan p:setup:link%s\n\n' "$C_CYAN" "$INSTALL_DIR" "$C_RESET"
+fi
 
+cat <<EOF
   Useful commands:
 
       docker compose logs -f panel     # watch the panel logs

@@ -65,14 +65,15 @@ class SetupController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
-        // The cross-process lock below only serializes on an atomic cache driver
-        // (redis/memcached/database/dynamodb). Refuse to run on a non-atomic driver
-        // (e.g. array/file) rather than silently degrading the race protection.
-        if (!in_array(config('cache.default'), ['redis', 'memcached', 'database', 'dynamodb'], true)) {
-            Log::critical('Setup endpoint invoked with a non-atomic cache driver.', [
+        // The cross-process lock below needs a cache store that can take real
+        // locks (redis, memcached, database, dynamodb, or file via flock).
+        // Refuse to run on a store without lock support (e.g. array) rather
+        // than silently degrading the race protection.
+        if (!Cache::getStore() instanceof \Illuminate\Contracts\Cache\LockProvider) {
+            Log::critical('Setup endpoint invoked with a cache store that cannot lock.', [
                 'driver' => config('cache.default'),
             ]);
-            abort(500, 'The setup flow requires an atomic cache driver.');
+            abort(500, 'The setup flow requires a cache driver with lock support.');
         }
 
         // Serialize creation across concurrent requests. Two near-simultaneous

@@ -59,8 +59,13 @@ cd Nebulodactyl
 cp docker-compose.example.yml docker-compose.yml
 cp .env.example .env   # set APP_URL, DB_PASSWORD, DB_ROOT_PASSWORD
 docker compose up -d
-docker compose exec panel php artisan p:user:make
 ```
+
+On first boot the container prints a setup link (`/setup?key=...`, valid for
+one hour) to its logs. Open it to create the admin account in the browser.
+If the link expires, mint a new one with
+`docker compose exec panel php artisan p:setup:link`, or skip the UI entirely
+with `docker compose exec panel php artisan p:user:make`.
 
 See the upstream [Installation Guide](https://hydrodactyl.dev/docs/hydrodactyl/installation) and [Local Development Guide](https://hydrodactyl.dev/docs/hydrodactyl/local-development) for detailed instructions.
 

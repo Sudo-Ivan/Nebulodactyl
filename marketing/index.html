@@ -439,8 +439,15 @@ cp .env.example .env
 docker compose up -d</code></pre>
 
                 <h3>After it is up</h3>
-                <pre><code>docker compose exec panel php artisan p:user:make</code></pre>
-                <p>That walks you through creating the first admin account. Then add a location and a node in the admin area.</p>
+                <p>
+                    On first boot the panel prints a setup link to its logs
+                    (<code>docker compose logs panel</code>). Open it to create
+                    the admin account in the browser. The link is only valid
+                    while no users exist and expires after one hour. If it
+                    lapses, mint a new one:
+                </p>
+                <pre><code>docker compose exec panel php artisan p:setup:link</code></pre>
+                <p>Then add a location and a node in the admin area.</p>
             </div>
             <div class="note">
                 This is pre-release software under active development. The upstream

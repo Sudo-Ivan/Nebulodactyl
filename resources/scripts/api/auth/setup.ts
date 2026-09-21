@@ -23,7 +23,10 @@ export interface SetupResponse {
 export default async (data: SetupData): Promise<SetupResponse> => {
     await http.get('/sanctum/csrf-cookie');
 
-    const response = await http.post('/setup', data);
+    // The setup key from the page URL goes back on the POST so the
+    // SetupRequired middleware can validate it.
+    const key = new URLSearchParams(window.location.search).get('key');
+    const response = await http.post(key ? `/setup?key=${encodeURIComponent(key)}` : '/setup', data);
 
     return {
         complete: response.data?.data?.complete ?? response.data?.complete ?? false,

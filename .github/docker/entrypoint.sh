@@ -126,6 +126,11 @@ if [ "$SKIP_SEED" != "True" ]; then
 else
   echo -e "Skipping database seeding (SKIP_SEED=True)"
 fi
+
+## print a first-run setup link while no user accounts exist.
+## the link expires after one hour; php artisan p:setup:link mints a new one.
+echo -e "First-run setup link (valid for one hour):"
+php artisan p:setup:link || true
 ## start cronjobs for the queue
 echo -e "Starting cron jobs."
 crond -L /var/log/crond -l 5
