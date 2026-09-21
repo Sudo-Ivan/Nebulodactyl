@@ -64,12 +64,14 @@ class Permission extends Model
     public const ACTION_STARTUP_SOFTWARE = 'startup.software';
 
     public const ACTION_SETTINGS_RENAME = 'settings.rename';
-    public const ACTION_SETTINGS_MODR = 'settings.mod';
     public const ACTION_SETTINGS_REINSTALL = 'settings.reinstall';
 
     public const ACTION_ACTIVITY_READ = 'activity.read';
 
+    public const ACTION_MOD_VERSION = 'mod.version';
+    public const ACTION_MOD_LOADER = 'mod.loader';
     public const ACTION_MOD_DOWNLOAD = 'mod.download';
+    public const ACTION_MOD_RESOLVER = 'mod.resolver';
 
     /**
      * Should timestamps be used on this model.
@@ -219,11 +221,10 @@ class Permission extends Model
         'mod' => [
             'description' => 'Permissions that control a user\'s access to downloading and updating mods.',
             'keys' => [
-                'version' => 'Allows a user to change what version to download for',
-                'loader' => 'Allows a user to change what loader to download for',
+                'version' => 'Allows a user to view the available game versions when browsing the marketplace',
+                'loader' => 'Allows a user to view the available mod loaders when browsing the marketplace',
                 'download' => 'Allows a user to download mods to the server',
                 'resolver' => 'Allows a user to access the Dependency Resolver',
-                'update' => 'Allows a user to update Currently installed mods',
             ],
         ],
     ];

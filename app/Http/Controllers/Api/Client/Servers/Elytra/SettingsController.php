@@ -3,9 +3,12 @@
 namespace Pterodactyl\Http\Controllers\Api\Client\Servers\Elytra;
 
 use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Pterodactyl\Models\Server;
+use Pterodactyl\Models\Permission;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Log;
 use Pterodactyl\Facades\Activity;
 use Pterodactyl\Repositories\Eloquent\ServerRepository;
@@ -240,8 +243,12 @@ class SettingsController extends ClientApiController
     /**
      * Get operation status
      */
-    public function getOperationStatus(Server $server, string $operationId): JsonResponse
+    public function getOperationStatus(Request $request, Server $server, string $operationId): JsonResponse
     {
+        if (!$request->user()->can(Permission::ACTION_STARTUP_READ, $server)) {
+            throw new AuthorizationException();
+        }
+
         $operation = $this->operationService->getOperation($server, $operationId);
         return new JsonResponse($this->operationService->formatOperationResponse($operation));
     }
@@ -249,8 +256,12 @@ class SettingsController extends ClientApiController
     /**
      * List server operations
      */
-    public function getServerOperations(Server $server): JsonResponse
+    public function getServerOperations(Request $request, Server $server): JsonResponse
     {
+        if (!$request->user()->can(Permission::ACTION_STARTUP_READ, $server)) {
+            throw new AuthorizationException();
+        }
+
         $operations = $this->operationService->getServerOperations($server);
         return new JsonResponse(['operations' => $operations]);
     }

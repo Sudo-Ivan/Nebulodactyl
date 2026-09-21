@@ -10,7 +10,7 @@ class ResolveInstallRequest extends ClientApiRequest implements ClientPermission
 {
     public function permission(): string
     {
-        return Permission::ACTION_MOD_DOWNLOAD;
+        return Permission::ACTION_MOD_RESOLVER;
     }
 
     public function rules(): array

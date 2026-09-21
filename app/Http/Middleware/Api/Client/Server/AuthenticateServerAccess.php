@@ -11,9 +11,11 @@ class AuthenticateServerAccess
 {
     /**
      * Routes that this middleware should not apply to if the user is an admin.
+     * The daemon segment is wildcarded so wings, comet, and elytra routes all
+     * match.
      */
     protected array $except = [
-        'api:client:server.ws',
+        'api:client:server.*.ws',
     ];
 
     /**
@@ -49,8 +51,8 @@ class AuthenticateServerAccess
         } catch (ServerStateConflictException $exception) {
             // Still allow users to get information about their server if it is installing or
             // being transferred.
-            if (!$request->routeIs('api:client:server.view')) {
-                if (($server->isSuspended() || $server->node->isUnderMaintenance()) && !$request->routeIs('api:client:server.resources')) {
+            if (!$request->routeIs('api:client:server.*.view')) {
+                if (($server->isSuspended() || $server->node->isUnderMaintenance()) && !$request->routeIs('api:client:server.*.resources')) {
                     throw $exception;
                 }
                 if (!$user->root_admin || !$request->routeIs($this->except)) {

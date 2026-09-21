@@ -10,7 +10,7 @@ class GameVersionsRequest extends ClientApiRequest implements ClientPermissionsR
 {
     public function permission(): string
     {
-        return Permission::ACTION_MOD_DOWNLOAD;
+        return Permission::ACTION_MOD_VERSION;
     }
 
     public function rules(): array

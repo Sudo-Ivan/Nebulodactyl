@@ -10,7 +10,7 @@ class LoadersRequest extends ClientApiRequest implements ClientPermissionsReques
 {
     public function permission(): string
     {
-        return Permission::ACTION_MOD_DOWNLOAD;
+        return Permission::ACTION_MOD_LOADER;
     }
 
     public function rules(): array

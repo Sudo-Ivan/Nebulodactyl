@@ -4,6 +4,7 @@ namespace Pterodactyl\Http\Controllers\Api\Client\Servers\Elytra;
 
 use Illuminate\Http\Request;
 use Pterodactyl\Models\Server;
+use Pterodactyl\Models\Permission;
 use Illuminate\Http\JsonResponse;
 use Pterodactyl\Facades\Activity;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -25,14 +26,16 @@ class ElytraJobsController extends ClientApiController
     {
         $jobType = $request->query('type');
 
-        if ($jobType) {
-            $handler = $this->elytraJobService->getJobHandler($jobType);
-            $requiredPermissions = $handler->getRequiredPermissions('index');
+        // An unfiltered listing exposes every job on the server, so it must
+        // be gated the same way as a typed listing. Only the backup handler
+        // exists today; gate unfiltered reads on backup.read.
+        $requiredPermissions = $jobType
+            ? $this->elytraJobService->getJobHandler($jobType)->getRequiredPermissions('index')
+            : [Permission::ACTION_BACKUP_READ];
 
-            foreach ($requiredPermissions as $permission) {
-                if (!$request->user()->can($permission, $server)) {
-                    throw new AuthorizationException();
-                }
+        foreach ($requiredPermissions as $permission) {
+            if (!$request->user()->can($permission, $server)) {
+                throw new AuthorizationException();
             }
         }
 
