@@ -16,11 +16,11 @@ import {
     DropdownMenuTrigger,
 } from '@/components/elements/DropdownMenu';
 import ErrorBoundary from '@/components/elements/ErrorBoundary';
-import Logo from '@/components/elements/NebulaLogo';
 import MainSidebar from '@/components/elements/MainSidebar';
 import MainWrapper from '@/components/elements/MainWrapper';
 import { ServerMobileMenu } from '@/components/elements/MobileFullScreenMenu';
 import MobileTopBar from '@/components/elements/MobileTopBar';
+import Logo from '@/components/elements/NebulaLogo';
 import PermissionRoute from '@/components/elements/PermissionRoute';
 import { NotFound, ServerError } from '@/components/elements/ScreenBlock';
 import ConflictStateRenderer from '@/components/server/ConflictStateRenderer';
