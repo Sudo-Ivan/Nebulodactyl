@@ -89,6 +89,7 @@ class Node extends Model
         'public' => 'boolean',
         'trust_alias' => 'boolean',
         'maintenance_mode' => 'boolean',
+        'draining' => 'boolean',
         'use_separate_fqdns' => 'boolean',
         'bucket' => 'integer',
     ];
@@ -119,6 +120,7 @@ class Node extends Model
         'daemon_token',
         'description',
         'maintenance_mode',
+        'draining',
         'daemonType',
         'backupDisk',
         'bucket',
@@ -143,6 +145,7 @@ class Node extends Model
         'daemonSFTP' => 'required|numeric|between:1,65535',
         'daemonListen' => 'required|numeric|between:1,65535',
         'maintenance_mode' => 'boolean',
+        'draining' => 'boolean',
         'upload_size' => 'int|between:1,1024',
         'daemonType' => 'nullable|string',
         'backupDisk' => 'nullable|string',
@@ -162,6 +165,7 @@ class Node extends Model
         'daemonSFTP' => 2022,
         'daemonListen' => 8080,
         'maintenance_mode' => false,
+        'draining' => false,
         'use_separate_fqdns' => false,
         'daemonType' => 'comet',
         'backupDisk' => 'wings',
@@ -282,6 +286,15 @@ class Node extends Model
     public function isUnderMaintenance(): bool
     {
         return $this->maintenance_mode;
+    }
+
+    /**
+     * A draining node stays live for existing servers but is excluded from
+     * new deployments, typically while its servers are being migrated away.
+     */
+    public function isDraining(): bool
+    {
+        return $this->draining;
     }
 
     public function mounts(): HasManyThrough

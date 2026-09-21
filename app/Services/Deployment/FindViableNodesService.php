@@ -122,6 +122,8 @@ class FindViableNodesService
                      ->where('servers.exclude_from_resource_calculation', '=', false);
             })
             ->where('nodes.public', true)
+            ->where('nodes.maintenance_mode', false)
+            ->where('nodes.draining', false)
             ->when(
                 $this->locations !== [],
                 fn (Builder $q) => $q->whereIn('nodes.location_id', $this->locations)

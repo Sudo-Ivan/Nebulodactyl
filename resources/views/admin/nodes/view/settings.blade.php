@@ -169,6 +169,21 @@
         <p class="text-muted small">If the node is marked as 'Under Maintenance' users won't be able to access
           servers that are on this node.</p>
         </div>
+        <div class="form-group col-xs-12">
+        <label class="form-label"><span class="label label-warning"><i class="fa fa-sign-out"></i></span> Draining</label>
+        <div>
+          <div class="radio radio-success radio-inline">
+          <input type="radio" id="pDrainingFalse" value="0" name="draining" {{ (old('draining', $node->draining) == false) ? 'checked' : '' }}>
+          <label for="pDrainingFalse"> Disabled</label>
+          </div>
+          <div class="radio radio-warning radio-inline">
+          <input type="radio" id="pDrainingTrue" value="1" name="draining" {{ (old('draining', $node->draining) == true) ? 'checked' : '' }}>
+          <label for="pDrainingTrue"> Enabled</label>
+          </div>
+        </div>
+        <p class="text-muted small">Draining blocks new deployments on this node while leaving existing servers
+          running. Use the drain action on the Servers tab to also move them elsewhere.</p>
+        </div>
       </div>
       </div>
     </div>

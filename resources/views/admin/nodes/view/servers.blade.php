@@ -60,4 +60,40 @@
         </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="box {{ $node->draining ? 'box-warning' : 'box-default' }}">
+            <div class="box-header with-border">
+                <h3 class="box-title">Drain Node</h3>
+            </div>
+            <div class="box-body">
+                @if($node->draining)
+                    <p class="text-warning"><strong>This node is draining.</strong> New deployments are blocked and its servers are being moved away.</p>
+                @else
+                    <p>Draining marks this node so no new deployments land on it, then starts a transfer for every server to the target node using automatically selected allocations. Servers that cannot be transferred are listed afterwards.</p>
+                @endif
+            </div>
+            <div class="box-footer">
+                @if($targets->isEmpty())
+                    <p class="text-muted no-margin">Draining requires at least one other node.</p>
+                @else
+                    <form action="{{ route('admin.nodes.view.drain', $node->id) }}" method="POST" onsubmit="return confirm('Drain {{ addslashes($node->name) }} and transfer its servers to the selected node?');">
+                        {!! csrf_field() !!}
+                        <input type="hidden" name="node_id" value="{{ $node->id }}" />
+                        <div class="input-group">
+                            <select name="target_node_id" class="form-control">
+                                @foreach($targets as $target)
+                                    <option value="{{ $target->id }}">{{ $target->name }} ({{ $target->fqdn }})</option>
+                                @endforeach
+                            </select>
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn-warning">Drain to this node</button>
+                            </span>
+                        </div>
+                    </form>
+                @endif
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

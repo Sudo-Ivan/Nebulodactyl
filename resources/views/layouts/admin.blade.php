@@ -135,6 +135,11 @@
               <i class="bi bi-globe"></i> <span>Application API</span>
             </a>
           </li>
+          <li class="{{ !starts_with(Route::currentRouteName(), 'admin.audit') ?: 'active' }}">
+            <a href="{{ route('admin.audit')}}">
+              <i class="bi bi-journal-text"></i> <span>Audit Log</span>
+            </a>
+          </li>
           <li class="header">MANAGEMENT</li>
           <li class="{{ !starts_with(Route::currentRouteName(), 'admin.databases') ?: 'active' }}">
             <a href="{{ route('admin.databases') }}">

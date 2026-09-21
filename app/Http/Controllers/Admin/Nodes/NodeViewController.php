@@ -115,6 +115,12 @@ class NodeViewController extends Controller
         return $this->view->make('admin.nodes.view.servers', [
             'node' => $node,
             'servers' => $this->serverRepository->loadAllServersForNode($node->id, 25),
+            'targets' => Node::query()
+                ->whereKeyNot($node->id)
+                ->where('draining', false)
+                ->where('maintenance_mode', false)
+                ->orderBy('name')
+                ->get(['id', 'name', 'fqdn']),
         ]);
     }
 }
