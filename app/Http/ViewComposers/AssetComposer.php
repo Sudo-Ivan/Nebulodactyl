@@ -53,6 +53,14 @@ class AssetComposer
         'serverUrl' => $this->getServerUrlForCurrentProvider(),
         'scriptIncludes' => $this->captcha->getScriptIncludes(),
       ],
+      // The frontend SDK is loaded lazily only when a DSN is configured.
+      // Sentry, GlitchTip, and Bugsink all speak the same protocol.
+      'sentry' => [
+        'dsn' => config('sentry.dsn'),
+        'environment' => config('sentry.environment'),
+        'release' => config('sentry.release'),
+        'tracesSampleRate' => config('sentry.traces_sample_rate'),
+      ],
     ]);
   }
 

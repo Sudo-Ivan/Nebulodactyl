@@ -124,3 +124,15 @@ cosign verify ghcr.io/sudo-ivan/nebulodactyl:canary \
   --certificate-identity-regexp 'https://github.com/Sudo-Ivan/Nebulodactyl' \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com
 ```
+
+## Error reporting
+
+The panel, web frontend, and Comet daemon all support Sentry-protocol error
+reporting, which covers Sentry itself as well as self-hosted compatible
+backends like GlitchTip and Bugsink.
+
+Set `SENTRY_DSN` in the panel environment to enable backend and frontend
+reporting, and export the same variable for the `comet` process (for example
+in the systemd unit or quadlet) to capture daemon errors. `send_default_pii`
+stays off by default, so no IPs or user data are attached unless you opt in
+with `SENTRY_SEND_DEFAULT_PII=true`.

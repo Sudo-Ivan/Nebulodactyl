@@ -44,6 +44,7 @@
         "psr/cache": "~3.0.0",
         "s1lentium/iptools": "~1.2.0",
         "scalar/laravel": "^0.2.1",
+        "sentry/sentry-laravel": "^4.27",
         "spatie/laravel-fractal": "^6.2",
         "spatie/laravel-query-builder": "^6.3",
         "staudenmeir/belongs-to-through": "^2.17",

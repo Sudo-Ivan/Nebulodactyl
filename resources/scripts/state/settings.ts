@@ -15,6 +15,12 @@ export interface SiteSettings {
         accentForeground?: string | null;
         defaultTheme?: 'dark' | 'light' | 'system';
     };
+    sentry?: {
+        dsn?: string | null;
+        environment?: string | null;
+        release?: string | null;
+        tracesSampleRate?: number | null;
+    };
 }
 
 export interface SettingsStore {

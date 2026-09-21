@@ -21,6 +21,7 @@ import (
 	"github.com/apex/log/handlers/multi"
 	"github.com/docker/docker/client"
 	"github.com/gammazero/workerpool"
+	"github.com/getsentry/sentry-go"
 	"github.com/mitchellh/colorstring"
 	"github.com/spf13/cobra"
 	"golang.org/x/crypto/acme"
@@ -92,6 +93,24 @@ func init() {
 
 func rootCmdRun(cmd *cobra.Command, _ []string) {
 	printLogo()
+
+	// Sentry-compatible error reporting (Sentry, GlitchTip, Bugsink). Enabled
+	// by setting SENTRY_DSN; error and fatal log entries are captured through
+	// the sentryLogHandler added to the multi-handler in writeLogToFile.
+	if dsn := os.Getenv("SENTRY_DSN"); dsn != "" {
+		if err := sentry.Init(sentry.ClientOptions{
+			Dsn:         dsn,
+			Environment: os.Getenv("SENTRY_ENVIRONMENT"),
+			Release:     "comet@" + system.Version,
+		}); err != nil {
+			log.WithField("error", err).Warn("failed to initialize sentry")
+		} else {
+			defer sentry.Flush(5 * time.Second)
+			sentryEnabled = true
+			log.Info("sentry error reporting enabled")
+		}
+	}
+
 	log.Debug("running in debug mode")
 	log.WithField("config_file", configPath).Info("loading configuration from file")
 
@@ -429,8 +448,39 @@ func initLogging() {
 	if config.Get().Debug {
 		log.SetLevel(log.DebugLevel)
 	}
-	log.SetHandler(multi.New(cli.Default, cli.New(w, false)))
+	handlers := []log.Handler{cli.Default, cli.New(w, false)}
+	if sentryEnabled {
+		handlers = append(handlers, sentryLogHandler{})
+	}
+	log.SetHandler(multi.New(handlers...))
 	log.WithField("path", p).Info("writing log files to disk")
+}
+
+// sentryEnabled is set when SENTRY_DSN resolved and the SDK initialised.
+var sentryEnabled bool
+
+// sentryLogHandler forwards error and fatal log entries to Sentry so daemon
+// crashes surface upstream. sentry-go is only active when a DSN was provided.
+type sentryLogHandler struct{}
+
+func (sentryLogHandler) HandleLog(e *log.Entry) error {
+	if e.Level < log.ErrorLevel {
+		return nil
+	}
+	sentry.WithScope(func(scope *sentry.Scope) {
+		fields := make(sentry.Context, len(e.Fields)+1)
+		for k, v := range e.Fields {
+			fields[k] = fmt.Sprint(v)
+		}
+		fields["log_message"] = e.Message
+		scope.SetContext("log", fields)
+		if err, ok := e.Fields.Get("error").(error); ok {
+			sentry.CaptureException(err)
+			return
+		}
+		sentry.CaptureMessage(e.Message)
+	})
+	return nil
 }
 
 // Prints the comet logo, nothing special here!
