@@ -102,11 +102,26 @@ printf '\n%s%s  Nebulodactyl installer%s\n\n' "$C_BOLD" "$C_CYAN" "$C_RESET"
 
 step "Checking requirements"
 
-command -v docker >/dev/null 2>&1 || die "docker is not installed. See https://docs.docker.com/engine/install/"
-docker info >/dev/null 2>&1 || die "cannot talk to the Docker daemon. Is it running, and is your user in the docker group?"
-docker compose version >/dev/null 2>&1 || die "the Docker Compose plugin is missing. See https://docs.docker.com/compose/install/"
+# Prefer podman, fall back to docker. COMPOSE carries the full compose command.
+if command -v podman >/dev/null 2>&1; then
+    if podman compose version >/dev/null 2>&1; then
+        COMPOSE="podman compose"
+    elif command -v podman-compose >/dev/null 2>&1; then
+        COMPOSE="podman-compose"
+    else
+        die "podman is installed but has no compose support. Install podman-compose or enable the podman compose provider."
+    fi
+    ENGINE="podman"
+elif command -v docker >/dev/null 2>&1; then
+    docker info >/dev/null 2>&1 || die "cannot talk to the Docker daemon. Is it running, and is your user in the docker group?"
+    docker compose version >/dev/null 2>&1 || die "the Docker Compose plugin is missing. See https://docs.docker.com/compose/install/"
+    COMPOSE="docker compose"
+    ENGINE="docker"
+else
+    die "neither podman nor docker is installed. Podman is preferred: https://podman.io/docs/installation"
+fi
 command -v curl >/dev/null 2>&1 || die "curl is not installed"
-ok "docker $(docker version --format '{{.Server.Version}}' 2>/dev/null || echo '?'), compose plugin $(docker compose version --short 2>/dev/null || echo '?')"
+ok "$ENGINE with compose support found"
 
 # ----------------------------------------------------------------------------
 # Questions
@@ -186,8 +201,8 @@ fi
 
 step "Starting the panel"
 
-docker compose pull
-docker compose up -d
+$COMPOSE pull
+$COMPOSE up -d
 
 info "waiting for the panel to come up (first start runs migrations, can take a minute)"
 
@@ -197,7 +212,7 @@ until curl -fsS "$HEALTH_URL" >/dev/null 2>&1; do
     TRIES=$((TRIES + 1))
     if [ "$TRIES" -gt 60 ]; then
         warn "the panel is not answering on $HEALTH_URL yet"
-        warn "check logs with: docker compose logs panel"
+        warn "check logs with: $COMPOSE logs panel"
         break
     fi
     sleep 5
@@ -209,7 +224,7 @@ if curl -fsS "$HEALTH_URL" >/dev/null 2>&1; then
     ok "panel is healthy"
 fi
 
-SETUP_URL="$(docker compose exec -T panel php artisan p:setup:link 2>/dev/null | grep -o 'http[^ ]*/setup?key=[^ ]*' | head -1 || true)"
+SETUP_URL="$($COMPOSE exec -T panel php artisan p:setup:link 2>/dev/null | grep -o 'http[^ ]*/setup?key=[^ ]*' | head -1 || true)"
 
 cat <<EOF
 
@@ -224,19 +239,19 @@ if [ -n "$SETUP_URL" ]; then
     printf '  %sCreate your admin account here:%s\n\n' "$C_BOLD" "$C_RESET"
     printf '      %s%s%s\n\n' "$C_GREEN" "$SETUP_URL" "$C_RESET"
     printf '  The link expires in one hour. If it lapses, mint a new one:\n\n'
-    printf '      %scd %s && docker compose exec panel php artisan p:setup:link%s\n\n' "$C_CYAN" "$INSTALL_DIR" "$C_RESET"
+    printf '      %scd %s && %s exec panel php artisan p:setup:link%s\n\n' "$C_CYAN" "$INSTALL_DIR" "$COMPOSE" "$C_RESET"
 else
     printf '  An account already exists, or the setup link could not be read.\n'
     printf '  Mint a fresh link any time with:\n\n'
-    printf '      %scd %s && docker compose exec panel php artisan p:setup:link%s\n\n' "$C_CYAN" "$INSTALL_DIR" "$C_RESET"
+    printf '      %scd %s && %s exec panel php artisan p:setup:link%s\n\n' "$C_CYAN" "$INSTALL_DIR" "$COMPOSE" "$C_RESET"
 fi
 
 cat <<EOF
   Useful commands:
 
-      docker compose logs -f panel     # watch the panel logs
-      docker compose restart panel     # restart after changing .env
-      docker compose down              # stop everything
+      $COMPOSE logs -f panel     # watch the panel logs
+      $COMPOSE restart panel     # restart after changing .env
+      $COMPOSE down              # stop everything
 
 EOF
 

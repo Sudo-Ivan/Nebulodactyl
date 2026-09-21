@@ -1,0 +1,148 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: panel-data
+  namespace: nebulodactyl
+spec:
+  accessModes: ["ReadWriteOnce"]
+  resources:
+    requests:
+      storage: 5Gi
+---
+# /app/var holds the generated .env (APP_KEY etc) when it is not provided
+# through the secret. Keep it on a volume so restarts do not mint new keys.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: panel-var
+  namespace: nebulodactyl
+spec:
+  accessModes: ["ReadWriteOnce"]
+  resources:
+    requests:
+      storage: 256Mi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: panel
+  namespace: nebulodactyl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: panel
+  template:
+    metadata:
+      labels:
+        app: panel
+    spec:
+      containers:
+        - name: panel
+          image: ghcr.io/sudo-ivan/nebulodactyl:canary
+          ports:
+            - containerPort: 80
+          env:
+            - name: APP_URL
+              value: "https://panel.example.com"
+            - name: APP_ENV
+              value: "production"
+            - name: DB_CONNECTION
+              value: "mysql"
+            - name: DB_HOST
+              value: "mariadb"
+            - name: DB_PORT
+              value: "3306"
+            - name: DB_DATABASE
+              value: "panel"
+            - name: DB_USERNAME
+              value: "nebulodactyl"
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: nebulodactyl
+                  key: DB_PASSWORD
+            - name: REDIS_HOST
+              value: "redis"
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: nebulodactyl
+                  key: REDIS_PASSWORD
+            - name: CACHE_DRIVER
+              value: "redis"
+            - name: SESSION_DRIVER
+              value: "redis"
+            - name: QUEUE_CONNECTION
+              value: "redis"
+            - name: TRUSTED_PROXIES
+              value: "10.0.0.0/8"
+            - name: APP_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: nebulodactyl
+                  key: APP_KEY
+            - name: APP_SERVICE_AUTHORIZATION
+              valueFrom:
+                secretKeyRef:
+                  name: nebulodactyl
+                  key: APP_SERVICE_AUTHORIZATION
+          volumeMounts:
+            - name: data
+              mountPath: /app/storage
+            - name: var
+              mountPath: /app/var
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+            periodSeconds: 10
+            initialDelaySeconds: 15
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+            periodSeconds: 30
+          resources:
+            requests:
+              memory: 256Mi
+              cpu: 100m
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: panel-data
+        - name: var
+          persistentVolumeClaim:
+            claimName: panel-var
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: panel
+  namespace: nebulodactyl
+spec:
+  selector:
+    app: panel
+  ports:
+    - port: 80
+      targetPort: 80
+---
+# Traefik IngressRoute works on k3s out of the box. For a plain Ingress
+# controller swap this for a networking.k8s.io/v1 Ingress with the same
+# host and service.
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: panel
+  namespace: nebulodactyl
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`panel.example.com`)
+      kind: Rule
+      services:
+        - name: panel
+          port: 80
+  tls:
+    certResolver: letsencrypt
