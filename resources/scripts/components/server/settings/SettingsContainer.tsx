@@ -29,7 +29,7 @@ const SettingsContainer = () => {
             <ServerHeader />
             <FlashMessageRender byKey={'settings'} />
             <MainPageHeader direction='column' title={'Settings'}>
-                <p className='text-sm text-neutral-400 leading-relaxed'>
+                <p className='text-sm text-cream-500 leading-relaxed'>
                     Configure your server settings, manage SFTP access, and access debug information. Make changes to
                     server name and reinstall when needed.
                 </p>
@@ -77,7 +77,7 @@ const SettingsContainer = () => {
                         <div className={`mt-6 flex items-center`}>
                             <div className={`flex-1`}>
                                 <div className={`border-l-4 border-brand p-3`}>
-                                    <p className={`text-xs text-zinc-200`}>
+                                    <p className={`text-xs text-cream-100`}>
                                         Your SFTP password is the same as the password you use to access this panel.
                                     </p>
                                 </div>

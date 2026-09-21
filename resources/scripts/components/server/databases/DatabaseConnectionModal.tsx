@@ -10,7 +10,7 @@ import RotatePasswordButton from '@/components/server/databases/RotatePasswordBu
 
 const Label = styled.label`
   display: inline-block;
-  color: #ffffff77;
+  color: color-mix(in srgb, var(--color-cream-50) 47%, transparent);
   font-size: 0.875rem;
   padding-bottom: 0.5rem;
 `;

@@ -38,10 +38,10 @@ export const STATUS_CONFIG = {
         textColor: 'text-red-300',
     },
     [OPERATION_STATUS.CANCELLED]: {
-        color: 'text-gray-400',
+        color: 'text-cream-500',
         bgColor: 'bg-gray-500/10',
         borderColor: 'border-gray-500/20',
-        textColor: 'text-gray-300',
+        textColor: 'text-cream-400',
     },
 } as const;
 

@@ -218,16 +218,16 @@ const EditScheduleModal = ({ schedule, visible, onDismissed, ...props }: Props) 
                                 href='https://crontab.guru/'
                                 target='_blank'
                                 rel='noreferrer'
-                                className='text-zinc-500 text-xs hover:text-zinc-300 transition-colors'
+                                className='text-zinc-500 text-xs hover:text-cream-400 transition-colors'
                             >
                                 Need help with cron syntax? Use Crontab Guru
                             </a>
 
                             <div className={`mt-1 p-3 rounded-lg bg-zinc-800/50 border border-zinc-700/50`}>
-                                <p className={`text-sm text-zinc-200 font-medium`}>{cronDescription}</p>
+                                <p className={`text-sm text-cream-100 font-medium`}>{cronDescription}</p>
                             </div>
 
-                            <p className={`text-zinc-400 text-xs mt-2`}>
+                            <p className={`text-cream-500 text-xs mt-2`}>
                                 The schedule system uses Cronjob syntax when defining when tasks should begin running.
                                 Use the fields above to specify when these tasks should begin running.
                             </p>

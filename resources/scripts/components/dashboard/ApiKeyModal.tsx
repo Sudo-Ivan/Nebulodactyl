@@ -19,7 +19,7 @@ const ApiKeyModal = ({ apiKey }: Props) => {
             <FlashMessageRender byKey='account' />
 
             {/* Modal Header */}
-            <p className='text-sm text-white-600 mt-2'>
+            <p className='text-sm text-secondary mt-2'>
                 The API key you have requested is shown below. Please store it in a safe place, as it will not be shown
                 again.
             </p>

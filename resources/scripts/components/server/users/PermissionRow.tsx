@@ -19,7 +19,7 @@ const PermissionRow = ({ permission, disabled }: Props) => {
         <label
             htmlFor={`permission_${permission}`}
             className={`flex items-start gap-3 p-2 rounded-lg transition-colors ${
-                disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:bg-[#ffffff06]'
+                disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:bg-cream-50/2'
             }`}
         >
             <Checkbox
@@ -38,9 +38,9 @@ const PermissionRow = ({ permission, disabled }: Props) => {
                 className='mt-0.5'
             />
             <div className='flex-1 min-w-0'>
-                <p className='text-sm font-medium text-zinc-200'>{pkey}</p>
+                <p className='text-sm font-medium text-cream-100'>{pkey}</p>
                 {(permissions[key]?.keys?.[pkey]?.length ?? 0) > 0 && (
-                    <p className='text-xs text-zinc-400 mt-0.5'>{permissions[key]?.keys?.[pkey] ?? ''}</p>
+                    <p className='text-xs text-cream-500 mt-0.5'>{permissions[key]?.keys?.[pkey] ?? ''}</p>
                 )}
             </div>
         </label>

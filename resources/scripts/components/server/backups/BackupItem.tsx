@@ -90,7 +90,7 @@ const BackupItem = ({ backup, isSelected = false, onToggleSelect, isSelectable =
                 ) : null;
             case 'cancelled':
                 return (
-                    <span className='bg-gray-500/20 border border-gray-500/30 py-0.5 px-2 rounded text-gray-300 text-xs font-medium'>
+                    <span className='bg-gray-500/20 border border-gray-500/30 py-0.5 px-2 rounded text-cream-400 text-xs font-medium'>
                         Cancelled
                     </span>
                 );
@@ -117,14 +117,14 @@ const BackupItem = ({ backup, isSelected = false, onToggleSelect, isSelectable =
                 )}
             </div>
 
-            <div className='flex-shrink-0 w-9 h-9 rounded-lg bg-[#ffffff11] flex items-center justify-center'>
+            <div className='flex-shrink-0 w-9 h-9 rounded-lg bg-cream-50/7 flex items-center justify-center'>
                 {getStatusIcon()}
             </div>
 
             <div className='flex-1 min-w-0'>
                 <div className='flex items-center gap-2 mb-1.5'>
                     {getStatusBadge()}
-                    <h3 className='text-sm font-medium text-zinc-100 truncate'>{backup.name}</h3>
+                    <h3 className='text-sm font-medium text-cream-100 truncate'>{backup.name}</h3>
                     {backup.isAutomatic && (
                         <span className='text-xs text-blue-400 font-medium bg-blue-500/10 border border-blue-500/20 px-2 py-0.5 rounded'>
                             Automatic
@@ -140,7 +140,7 @@ const BackupItem = ({ backup, isSelected = false, onToggleSelect, isSelectable =
                 {/* Progress bar for active backups */}
                 {showProgressBar && (
                     <div className='mb-2'>
-                        <div className='flex justify-between text-xs text-zinc-400 mb-1.5'>
+                        <div className='flex justify-between text-xs text-cream-500 mb-1.5'>
                             <span>{backup.message || 'Processing...'}</span>
                             <span>{backup.progress}%</span>
                         </div>
@@ -160,7 +160,7 @@ const BackupItem = ({ backup, isSelected = false, onToggleSelect, isSelectable =
                     <p className='text-xs text-red-400 truncate mb-1.5'>{backup.message}</p>
                 )}
 
-                {backup.checksum && <p className='text-xs text-zinc-400 font-mono truncate'>{backup.checksum}</p>}
+                {backup.checksum && <p className='text-xs text-cream-500 font-mono truncate'>{backup.checksum}</p>}
             </div>
 
             {/* Size info for completed backups */}
@@ -168,7 +168,7 @@ const BackupItem = ({ backup, isSelected = false, onToggleSelect, isSelectable =
                 {backup.completedAt && backup.isSuccessful && backup.bytes ? (
                     <>
                         <p className='text-xs text-zinc-500 uppercase tracking-wide mb-1'>Size</p>
-                        <p className='text-sm text-zinc-300 font-medium'>{bytesToString(backup.bytes)}</p>
+                        <p className='text-sm text-cream-400 font-medium'>{bytesToString(backup.bytes)}</p>
                     </>
                 ) : (
                     <>
@@ -182,7 +182,7 @@ const BackupItem = ({ backup, isSelected = false, onToggleSelect, isSelectable =
             <div className='hidden sm:block flex-shrink-0 text-right min-w-[130px]'>
                 <p className='text-xs text-zinc-500 uppercase tracking-wide mb-1'>Created</p>
                 <p
-                    className='text-sm text-zinc-300 font-medium'
+                    className='text-sm text-cream-400 font-medium'
                     title={format(backup.createdAt, 'ddd, MMMM do, yyyy HH:mm:ss')}
                 >
                     {formatDistanceToNow(backup.createdAt, {

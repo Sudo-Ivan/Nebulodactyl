@@ -124,7 +124,7 @@ const DashboardRouter = () => {
                             <DropdownMenuTrigger asChild>
                                 <button
                                     type='button'
-                                    className='w-10 h-10 flex items-center justify-center rounded-md text-white hover:bg-white/10 p-2 cursor-pointer'
+                                    className='w-10 h-10 flex items-center justify-center rounded-md text-cream-50 hover:bg-cream-50/10 p-2 cursor-pointer'
                                 >
                                     {' '}
                                     <Ellipsis fill='currentColor' width={26} height={22} />
@@ -134,7 +134,7 @@ const DashboardRouter = () => {
                                 {rootAdmin && (
                                     <DropdownMenuItem onSelect={onSelectAdminPanel}>
                                         Admin Panel
-                                        <span className='ml-2 z-10 rounded-full bg-brand px-2 py-1 text-xs text-white'>
+                                        <span className='ml-2 z-10 rounded-full bg-brand px-2 py-1 text-xs text-accent-foreground'>
                                             Staff
                                         </span>
                                     </DropdownMenuItem>
@@ -144,7 +144,7 @@ const DashboardRouter = () => {
                             </DropdownMenuContent>
                         </DropdownMenu>
                     </div>
-                    <div aria-hidden className='mt-8 mb-4 bg-[#ffffff33] min-h-[1px] w-6'></div>
+                    <div aria-hidden className='mt-8 mb-4 bg-cream-50/20 min-h-[1px] w-6'></div>
                     <ul data-nebulodactyl-subnav-routes-wrapper='' className='nebulodactyl-subnav-routes-wrapper'>
                         <NavLink to={'/'} end className='flex flex-row items-center' ref={NavigationHome}>
                             <House width={22} height={22} fill='currentColor' />

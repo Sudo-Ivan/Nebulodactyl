@@ -153,7 +153,7 @@ const UserFormComponent = ({ subuser, onSuccess, onCancel, flashKey, isSubmittin
                                                 className='w-5 h-5 text-brand'
                                             />
                                         </div>
-                                        <h3 className='text-xl font-semibold text-zinc-100'>User Information</h3>
+                                        <h3 className='text-xl font-semibold text-cream-100'>User Information</h3>
                                     </div>
                                     <Field
                                         name='email'
@@ -174,7 +174,7 @@ const UserFormComponent = ({ subuser, onSuccess, onCancel, flashKey, isSubmittin
                                                 className='w-5 h-5 text-brand'
                                             />
                                         </div>
-                                        <h3 className='text-xl font-semibold text-zinc-100'>Detailed Permissions</h3>
+                                        <h3 className='text-xl font-semibold text-cream-100'>Detailed Permissions</h3>
                                     </div>
                                     {canEditUser && (
                                         <Button
@@ -201,7 +201,7 @@ const UserFormComponent = ({ subuser, onSuccess, onCancel, flashKey, isSubmittin
                                                 Permission Restriction
                                             </span>
                                         </div>
-                                        <p className='text-sm text-zinc-300 leading-relaxed'>
+                                        <p className='text-sm text-cream-400 leading-relaxed'>
                                             You can only assign permissions that you currently have access to.
                                         </p>
                                     </div>
@@ -211,15 +211,15 @@ const UserFormComponent = ({ subuser, onSuccess, onCancel, flashKey, isSubmittin
                                     {Object.keys(permissions)
                                         .filter((key) => key !== 'websocket')
                                         .map((key) => (
-                                            <div key={key} className='border border-[#ffffff12] rounded-lg p-4'>
+                                            <div key={key} className='border border-cream-50/7 rounded-lg p-4'>
                                                 <div className='flex items-start justify-between mb-3'>
                                                     <div className='flex items-start gap-3 flex-1 min-w-0'>
                                                         <PermissionIcon name={key} />
                                                         <div className='flex-1 min-w-0'>
-                                                            <h4 className='font-medium text-zinc-200 capitalize'>
+                                                            <h4 className='font-medium text-cream-100 capitalize'>
                                                                 {key}
                                                             </h4>
-                                                            <p className='text-xs text-zinc-400 mt-1 break-words'>
+                                                            <p className='text-xs text-cream-500 mt-1 break-words'>
                                                                 {permissions[key]?.description}
                                                             </p>
                                                         </div>
@@ -254,7 +254,7 @@ const UserFormComponent = ({ subuser, onSuccess, onCancel, flashKey, isSubmittin
                             </div>
 
                             <Can action={subuser ? 'user.update' : 'user.create'}>
-                                <div className='flex gap-3 justify-end pt-4 border-t border-[#ffffff12]'>
+                                <div className='flex gap-3 justify-end pt-4 border-t border-cream-50/7'>
                                     <Button variant='secondary' type='button' onClick={onCancel}>
                                         Cancel
                                     </Button>

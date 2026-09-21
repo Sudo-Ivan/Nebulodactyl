@@ -25,7 +25,7 @@ const MobileFullScreenMenu = ({ isVisible, onClose, children }: MobileFullScreen
             <button
                 type='button'
                 onClick={onClose}
-                className='absolute top-4 right-4 p-2 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200'
+                className='absolute top-4 right-4 p-2 text-cream-50/70 hover:text-cream-50 hover:bg-cream-50/10 rounded-lg transition-all duration-200'
                 aria-label='Close menu'
             >
                 <Xmark width={22} height={22} fill='currentColor' />
@@ -57,8 +57,8 @@ const NavigationItem = ({ to, icon: Icon, children, end = false, onClick }: Navi
         className={({ isActive }) =>
             `flex items-center gap-4 p-4 rounded-md transition-all duration-200 ${
                 isActive
-                    ? 'bg-gradient-to-r from-brand/20 to-brand/10 border-l-4 border-brand text-white'
-                    : 'text-white/80 hover:text-white hover:bg-[#ffffff11] border-l-4 border-transparent'
+                    ? 'bg-gradient-to-r from-brand/20 to-brand/10 border-l-4 border-brand text-cream-50'
+                    : 'text-cream-50/80 hover:text-cream-50 hover:bg-cream-50/7 border-l-4 border-transparent'
             }`
         }
         onClick={onClick}

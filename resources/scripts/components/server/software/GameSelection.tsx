@@ -14,7 +14,7 @@ interface Props {
 const GameSelection = ({ nests, onSelectNest, onBack }: Props) => (
     <TitledGreyBox title='Select Category'>
         <div className='space-y-4'>
-            <p className='text-sm text-neutral-400'>Choose the type of game or software you want to run</p>
+            <p className='text-sm text-cream-500'>Choose the type of game or software you want to run</p>
 
             <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4'>
                 {nests?.map((nest) =>
@@ -23,9 +23,9 @@ const GameSelection = ({ nests, onSelectNest, onBack }: Props) => (
                             type='button'
                             key={nest?.attributes?.uuid}
                             onClick={() => onSelectNest(nest)}
-                            className='p-4 sm:p-5 bg-[#ffffff08] border border-[#ffffff12] rounded-lg hover:border-[#ffffff20] transition-all text-left active:bg-[#ffffff12] touch-manipulation'
+                            className='p-4 sm:p-5 bg-cream-50/3 border border-cream-50/7 rounded-lg hover:border-cream-50/13 transition-all text-left active:bg-cream-50/7 touch-manipulation'
                         >
-                            <h3 className='font-semibold text-neutral-200 mb-2 text-base sm:text-lg'>
+                            <h3 className='font-semibold text-cream-100 mb-2 text-base sm:text-lg'>
                                 {nest?.attributes?.name}
                             </h3>
                             <DescriptionText

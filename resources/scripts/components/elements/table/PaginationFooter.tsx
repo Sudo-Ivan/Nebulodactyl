@@ -33,10 +33,10 @@ const PaginationFooter = ({ pagination, className, onPageSelect }: Props) => {
         <div className={clsx('flex items-center justify-between my-2', className)}>
             <p className={'text-sm text-zinc-500'}>
                 Showing&nbsp;
-                <span className={'font-semibold text-zinc-400'}>{Math.max(start, Math.min(pagination.total, 1))}</span>
+                <span className={'font-semibold text-cream-500'}>{Math.max(start, Math.min(pagination.total, 1))}</span>
                 &nbsp;to&nbsp;
-                <span className={'font-semibold text-zinc-400'}>{end}</span> of&nbsp;
-                <span className={'font-semibold text-zinc-400'}>{pagination.total}</span> results.
+                <span className={'font-semibold text-cream-500'}>{end}</span> of&nbsp;
+                <span className={'font-semibold text-cream-500'}>{pagination.total}</span> results.
             </p>
             {pagination.totalPages > 1 && (
                 <div className={'flex space-x-1'}>

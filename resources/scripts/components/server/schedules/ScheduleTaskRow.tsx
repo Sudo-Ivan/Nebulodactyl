@@ -90,13 +90,13 @@ const ScheduleTaskRow = ({ schedule, task }: Props) => {
             >
                 Are you sure you want to delete this task? This action cannot be undone.
             </ConfirmationModal>
-            {/* <FontAwesomeIcon icon={icon} className={`text-lg text-white hidden md:block`} /> */}
+            {/* <FontAwesomeIcon icon={icon} className={`text-lg text-cream-50 hidden md:block`} /> */}
             {/* <div className={`flex-none sm:flex-1 w-full sm:w-auto overflow-x-auto`}>
-        <p className={`md:ml-6 text-zinc-200 uppercase text-sm`}>{title}</p>
+        <p className={`md:ml-6 text-cream-100 uppercase text-sm`}>{title}</p>
         {task.payload && (
           <div className={`md:ml-6 mt-2`}>
             {task.action === 'backup' && (
-              <p className={`text-xs uppercase text-zinc-400 mb-1`}>Ignoring files & folders:</p>
+              <p className={`text-xs uppercase text-cream-500 mb-1`}>Ignoring files & folders:</p>
             )}
             <div
               className={`font-mono bg-zinc-800 rounded-sm py-1 px-2 text-sm w-auto inline-block whitespace-pre-wrap break-all`}

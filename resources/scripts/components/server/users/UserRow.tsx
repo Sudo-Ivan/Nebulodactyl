@@ -24,28 +24,28 @@ const UserRow = ({ subuser }: Props) => {
 
     return (
         <div className='flex items-center gap-3 w-full'>
-            <div className='flex-shrink-0 w-9 h-9 rounded-lg bg-[#ffffff11] flex items-center justify-center overflow-hidden'>
+            <div className='flex-shrink-0 w-9 h-9 rounded-lg bg-cream-50/7 flex items-center justify-center overflow-hidden'>
                 {subuser.image ? (
                     <img className='w-full h-full object-cover' src={`${subuser.image}?s=400`} alt='' />
                 ) : (
-                    <Person width={22} height={22} fill='currentColor' className='text-zinc-400' />
+                    <Person width={22} height={22} fill='currentColor' className='text-cream-500' />
                 )}
             </div>
 
             <div className='flex-1 min-w-0'>
                 <div className='flex items-center gap-2 mb-1.5'>
-                    <h3 className='text-sm font-medium text-zinc-100 truncate'>{subuser.email}</h3>
+                    <h3 className='text-sm font-medium text-cream-100 truncate'>{subuser.email}</h3>
                     <span
                         className={`text-xs font-medium px-2 py-0.5 rounded ${
                             subuser.twoFactorEnabled
                                 ? 'text-green-300 bg-green-500/20 border border-green-500/30'
-                                : 'text-zinc-400 bg-zinc-500/20 border border-zinc-500/30'
+                                : 'text-cream-500 bg-zinc-500/20 border border-zinc-500/30'
                         }`}
                     >
                         {subuser.twoFactorEnabled ? 'MFA Enabled' : 'MFA Disabled'}
                     </span>
                 </div>
-                <p className='text-xs text-zinc-400'>
+                <p className='text-xs text-cream-500'>
                     {subuser.permissions.filter((permission) => permission !== 'websocket.connect').length} permissions
                     assigned
                 </p>

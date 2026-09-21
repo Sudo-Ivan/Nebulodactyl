@@ -51,7 +51,7 @@ const FileManagerBreadcrumbs = ({ renderLeft, withinFileEditor, isNewFile }: Pro
     return (
         <div className={`group select-none flex grow-0 items-center text-sm overflow-x-hidden`}>
             {renderLeft || <div className={`w-12`} />}
-            <NavLink to={`/server/${id}/files`} className={`px-1 text-zinc-200 no-underline hover:text-zinc-100`}>
+            <NavLink to={`/server/${id}/files`} className={`px-1 text-cream-100 no-underline hover:text-cream-100`}>
                 root
             </NavLink>
             <svg
@@ -70,7 +70,7 @@ const FileManagerBreadcrumbs = ({ renderLeft, withinFileEditor, isNewFile }: Pro
                     <Fragment key={index}>
                         <NavLink
                             to={`/server/${id}/files#${encodePathSegments(crumb.path)}`}
-                            className={`px-1 text-zinc-200 no-underline hover:text-zinc-100`}
+                            className={`px-1 text-cream-100 no-underline hover:text-cream-100`}
                         >
                             {crumb.name}
                         </NavLink>
@@ -87,12 +87,12 @@ const FileManagerBreadcrumbs = ({ renderLeft, withinFileEditor, isNewFile }: Pro
                         </svg>
                     </Fragment>
                 ) : (
-                    <span key={index} className={`px-1 text-zinc-300`}>
+                    <span key={index} className={`px-1 text-cream-400`}>
                         {crumb.name}
                     </span>
                 ),
             )}
-            {file && <span className={`px-1 text-zinc-300`}>{file}</span>}
+            {file && <span className={`px-1 text-cream-400`}>{file}</span>}
         </div>
     );
 };

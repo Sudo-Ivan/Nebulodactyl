@@ -24,7 +24,7 @@ position: relative;
     }
 
     &:hover {
-    border: 1px solid #ffffff11;
+    border: 1px solid color-mix(in srgb, var(--color-cream-50) 7%, transparent);
 }
 
     & .status-bar {
@@ -32,7 +32,7 @@ position: relative;
     height: 12px;
     min-width: 12px;
     min-height: 12px;
-    background-color: #ffffff11;
+    background-color: color-mix(in srgb, var(--color-cream-50) 7%, transparent);
     z-index: 20;
     border-radius: 9999px;
     transition: all 250ms ease-in-out;
@@ -120,7 +120,7 @@ const ServerRow = ({ server, className, hideGroup }: { server: Server; className
                         <div className={'status-bar'} />
                     </div>
                     <div className='flex items-center gap-2 min-w-0'>
-                        <p className={`text-sm text-[#ffffff66] truncate`}>
+                        <p className={`text-sm text-cream-50/40 truncate`}>
                             {server.allocations
                                 .filter((alloc) => alloc.isDefault)
                                 .map((allocation) => (
@@ -138,7 +138,7 @@ const ServerRow = ({ server, className, hideGroup }: { server: Server; className
                 </div>
             </div>
             <div
-                className={`h-full hidden sm:flex items-center justify-center bg-mocha-500 border-[1px] border-[#ffffff11] shadow-xs rounded-md w-fit whitespace-nowrap px-4 py-2 text-sm gap-4`}
+                className={`h-full hidden sm:flex items-center justify-center bg-mocha-500 border-[1px] border-cream-50/7 shadow-xs rounded-md w-fit whitespace-nowrap px-4 py-2 text-sm gap-4`}
             >
                 {!stats || isSuspended || isInstalling ? (
                     isSuspended ? (
@@ -149,7 +149,7 @@ const ServerRow = ({ server, className, hideGroup }: { server: Server; className
                         </div>
                     ) : server.isTransferring || server.status ? (
                         <div className={`flex-1 text-center`}>
-                            <span className={`text-zinc-100 text-xs`}>
+                            <span className={`text-cream-100 text-xs`}>
                                 {server.isTransferring
                                     ? 'Transferring'
                                     : server.status === 'installing'
@@ -166,13 +166,13 @@ const ServerRow = ({ server, className, hideGroup }: { server: Server; className
                     <Fragment>
                         <div className={`sm:flex hidden`}>
                             <div className={`flex justify-center gap-2 w-fit`}>
-                                <p className='text-sm text-[#ffffff66] font-bold w-fit whitespace-nowrap'>CPU:</p>
+                                <p className='text-sm text-cream-50/40 font-bold w-fit whitespace-nowrap'>CPU:</p>
                                 <p className='font-bold w-fit whitespace-nowrap'>{stats.cpuUsagePercent.toFixed(2)}%</p>
                             </div>
                         </div>
                         <div className={`sm:flex hidden`}>
                             <div className={`flex justify-center gap-2 w-fit`}>
-                                <p className='text-sm text-[#ffffff66] font-bold w-fit whitespace-nowrap'>RAM:</p>
+                                <p className='text-sm text-cream-50/40 font-bold w-fit whitespace-nowrap'>RAM:</p>
                                 <p className='font-bold w-fit whitespace-nowrap'>
                                     {bytesToString(stats.memoryUsageInBytes, 0)}
                                 </p>
@@ -180,7 +180,7 @@ const ServerRow = ({ server, className, hideGroup }: { server: Server; className
                         </div>
                         <div className={`sm:flex hidden`}>
                             <div className={`flex justify-center gap-2 w-fit`}>
-                                <p className='text-sm text-[#ffffff66] font-bold w-fit whitespace-nowrap'>Storage:</p>
+                                <p className='text-sm text-cream-50/40 font-bold w-fit whitespace-nowrap'>Storage:</p>
                                 <p className='font-bold w-fit whitespace-nowrap'>
                                     {bytesToString(stats.diskUsageInBytes, 0)}
                                 </p>

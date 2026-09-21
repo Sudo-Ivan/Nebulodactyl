@@ -6,7 +6,7 @@ import { tags as t } from '@lezer/highlight';
 const highlightBackground = 'transparent';
 const background = 'transparent';
 const selection = '#34455A';
-const cursor = '#ffffff';
+const cursor = 'var(--color-cream-50)';
 
 export const ayuMirageTheme: Extension = EditorView.theme(
     {

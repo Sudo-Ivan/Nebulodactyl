@@ -305,7 +305,7 @@ export default createGlobalStyle`
     }
 
     input::placeholder {
-        color: #ffffff55 !important;
+        color: color-mix(in srgb, var(--color-cream-50) 33%, transparent) !important;
     }
 
     html[data-theme='light'] input::placeholder {

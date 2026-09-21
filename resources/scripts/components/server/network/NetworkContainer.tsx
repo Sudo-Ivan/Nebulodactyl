@@ -104,7 +104,7 @@ const NetworkContainer = () => {
                                         </Button>
                                     )}
                                     <span
-                                        className={`text-sm ${allocationLimit === 0 ? 'text-red-400' : 'text-zinc-300'} gap-0.5`}
+                                        className={`text-sm ${allocationLimit === 0 ? 'text-red-400' : 'text-cream-400'} gap-0.5`}
                                     >
                                         {allocationLimit === null
                                             ? `${data.length} allocations `
@@ -121,7 +121,7 @@ const NetworkContainer = () => {
                         <div className='flex items-center justify-center py-12'>
                             <div className='flex flex-col items-center gap-3'>
                                 <div className='animate-spin rounded-full h-6 w-6 border-b-2 border-brand'></div>
-                                <p className='text-sm text-neutral-400'>Loading allocations...</p>
+                                <p className='text-sm text-cream-500'>Loading allocations...</p>
                             </div>
                         </div>
                     ) : data.length > 0 ? (
@@ -134,9 +134,9 @@ const NetworkContainer = () => {
                     ) : (
                         <div className='flex flex-col items-center justify-center py-12'>
                             <div className='text-center'>
-                                <div className='w-12 h-12 mx-auto mb-4 rounded-full bg-[#ffffff11] flex items-center justify-center'>
+                                <div className='w-12 h-12 mx-auto mb-4 rounded-full bg-cream-50/7 flex items-center justify-center'>
                                     <svg
-                                        className='w-6 h-6 text-zinc-400'
+                                        className='w-6 h-6 text-cream-500'
                                         fill='currentColor'
                                         viewBox='0 0 20 20'
                                         aria-hidden='true'
@@ -148,10 +148,10 @@ const NetworkContainer = () => {
                                         />
                                     </svg>
                                 </div>
-                                <h4 className='text-lg font-medium text-zinc-200 mb-2'>
+                                <h4 className='text-lg font-medium text-cream-100 mb-2'>
                                     {allocationLimit === 0 ? 'Allocations unavailable' : 'No allocations found'}
                                 </h4>
-                                <p className='text-sm text-zinc-400 max-w-sm text-center'>
+                                <p className='text-sm text-cream-500 max-w-sm text-center'>
                                     {allocationLimit === 0
                                         ? 'Network allocations cannot be created for this server.'
                                         : 'Create your first allocation to get started.'}

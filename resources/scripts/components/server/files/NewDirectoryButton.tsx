@@ -74,7 +74,7 @@ const NewDirectoryDialog = asDialog({
                     <Form className={`m-0`}>
                         <Field autoFocus id={'directoryName'} name={'directoryName'} label={'Name'} />
                         <p className={`mt-2 text-xs! break-all`}>
-                            <span className={`text-zinc-200`}>This folder will be created as&nbsp;</span>
+                            <span className={`text-cream-100`}>This folder will be created as&nbsp;</span>
                             <Code>
                                 /root/
                                 <span className={`text-blue-200`}>

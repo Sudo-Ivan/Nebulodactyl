@@ -33,7 +33,7 @@ describe('@/lib/server-operations.ts', () => {
 
         it('should return cancelled styling for cancelled status', () => {
             const result = getStatusStyling(OPERATION_STATUS.CANCELLED);
-            expect(result.color).toBe('text-gray-400');
+            expect(result.color).toBe('text-cream-500');
         });
 
         it('should default to pending for unknown status', () => {

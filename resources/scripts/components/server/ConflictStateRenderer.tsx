@@ -15,7 +15,7 @@ const ConflictStateRenderer = () => {
         <div className={'flex flex-col items-center justify-center h-full'}>
             <Spinner size={'large'} />
             <div className='flex flex-col mt-4 text-center'>
-                <span className='text-neutral-100 text-lg font-bold'>Server is Installing</span>
+                <span className='text-cream-100 text-lg font-bold'>Server is Installing</span>
                 <span className='text-neutral-500 text-md font-semibold mt-1'>
                     Your server should be ready soon, for more details visit the home page.
                 </span>

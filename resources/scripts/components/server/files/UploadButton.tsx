@@ -118,7 +118,7 @@ const UploadButton = () => {
                                 'relative flex flex-col items-center gap-4 bg-brand w-full rounded-2xl py-12 px-4 mx-10 max-w-sm'
                             }
                         >
-                            <div className='absolute inset-4 border-dashed border-[#ffffff88] border-2 rounded-xl'></div>
+                            <div className='absolute inset-4 border-dashed border-cream-50/53 border-2 rounded-xl'></div>
                             <svg
                                 width='24'
                                 height='24'

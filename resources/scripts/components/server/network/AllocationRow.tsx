@@ -102,14 +102,14 @@ const AllocationRow = ({ allocation }: Props) => {
             <div className='flex items-center gap-3 w-full'>
                 <div className='shrink-0 w-5' />
 
-                <div className='shrink-0 w-9 h-9 rounded-lg bg-[#ffffff11] flex items-center justify-center'>
-                    <AntennaSignal width={22} height={22} fill='currentColor' className='text-zinc-400' />
+                <div className='shrink-0 w-9 h-9 rounded-lg bg-cream-50/7 flex items-center justify-center'>
+                    <AntennaSignal width={22} height={22} fill='currentColor' className='text-cream-500' />
                 </div>
 
                 <div className='flex-1 min-w-0'>
                     <div className='flex items-center gap-2 mb-1.5'>
                         <CopyOnClick text={allocationString}>
-                            <h3 className='text-sm font-medium text-zinc-100 font-mono truncate cursor-pointer hover:text-zinc-50 transition-colors'>
+                            <h3 className='text-sm font-medium text-cream-100 font-mono truncate cursor-pointer hover:text-cream-50 transition-colors'>
                                 {allocation.alias ? allocation.alias : ip(allocation.ip)}:{allocation.port}
                             </h3>
                         </CopyOnClick>
@@ -126,7 +126,7 @@ const AllocationRow = ({ allocation }: Props) => {
                             <InputSpinner visible={loading}>
                                 <Textarea
                                     ref={textareaRef}
-                                    className='w-full bg-[#ffffff06] border border-[#ffffff08] rounded-lg p-3 text-sm text-zinc-300 placeholder-zinc-500 resize-none focus:ring-1 focus:ring-[#ffffff20] focus:border-[#ffffff20] transition-all'
+                                    className='w-full bg-cream-50/2 border border-cream-50/3 rounded-lg p-3 text-sm text-cream-400 placeholder-zinc-500 resize-none focus:ring-1 focus:ring-cream-50/13 focus:border-cream-50/13 transition-all'
                                     placeholder='Add notes for this allocation...'
                                     value={notesValue}
                                     onChange={(e) => setNotesValue(e.currentTarget.value)}
@@ -153,7 +153,7 @@ const AllocationRow = ({ allocation }: Props) => {
                             <button
                                 type='button'
                                 onClick={startEdit}
-                                className='w-full text-left text-xs text-zinc-500 truncate hover:text-zinc-300 transition-colors'
+                                className='w-full text-left text-xs text-zinc-500 truncate hover:text-cream-400 transition-colors'
                             >
                                 {allocation.notes || 'Click to add notes...'}
                             </button>
@@ -168,7 +168,7 @@ const AllocationRow = ({ allocation }: Props) => {
                             disabled={allocation.isDefault}
                             variant={'secondary'}
                             className={`p-2 transition-colors ${
-                                allocation.isDefault ? ' text-zinc-600 cursor-not-allowed' : ' text-zinc-400'
+                                allocation.isDefault ? ' text-zinc-600 cursor-not-allowed' : ' text-cream-500'
                             }`}
                             title={
                                 allocation.isDefault

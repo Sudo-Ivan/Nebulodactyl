@@ -165,7 +165,7 @@ function WebsocketHandler() {
                         </p>
                     </>
                 ) : (
-                    <p className={`ml-2 text-sm text-white`}>{error}</p>
+                    <p className={`ml-2 text-sm text-cream-50`}>{error}</p>
                 )}
             </div>
         </FadeTransition>

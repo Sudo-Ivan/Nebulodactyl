@@ -63,7 +63,7 @@ const HytaleOauthRequireFeature = () => {
         >
             <FlashMessageRender key='feature:hytaleOauth' />
             <div>
-                <div className='text-center text-zinc-300 mb-6'>
+                <div className='text-center text-cream-400 mb-6'>
                     <p className='mb-4 text-md'>
                         Server requires authentication to start. Click below to verify this device.
                     </p>
@@ -77,20 +77,20 @@ const HytaleOauthRequireFeature = () => {
                 </Button>
                 <div className='relative my-6'>
                     <div className='absolute inset-0 flex items-center'>
-                        <div className='w-full h-px bg-[#ffffff33]'></div>
+                        <div className='w-full h-px bg-white/20'></div>
                     </div>
 
-                    <div className='relative flex justify-center text-zinc-400 uppercase text-sm tracking-wider'>
+                    <div className='relative flex justify-center text-cream-500 uppercase text-sm tracking-wider'>
                         <span className='bg-zinc-900 px-5'>OR ENTER CODE MANUALLY</span>
                     </div>
                 </div>
 
                 <div className='bg-zinc-900 border border-zinc-700 rounded p-4 text-center'>
-                    <div className='text-zinc-400 text-sm mb-2'>DEVICE CODE</div>
+                    <div className='text-cream-500 text-sm mb-2'>DEVICE CODE</div>
                     {userCode ? (
                         <button
                             type='button'
-                            className='text-3xl font-mono text-white tracking-wider mb-2 cursor-pointer hover:text-zinc-300 transition-colors w-full text-center bg-transparent border-none'
+                            className='text-3xl font-mono text-white tracking-wider mb-2 cursor-pointer hover:text-cream-400 transition-colors w-full text-center bg-transparent border-none'
                             onClick={() => navigator.clipboard.writeText(userCode)}
                         >
                             {userCode}

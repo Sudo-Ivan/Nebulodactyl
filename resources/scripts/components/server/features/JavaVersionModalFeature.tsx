@@ -99,7 +99,7 @@ const JavaVersionModalFeature = () => {
                             <DropdownMenuTrigger asChild>
                                 <button
                                     type='button'
-                                    className='flex items-center justify-center h-8 px-4 text-sm font-medium text-white transition-colors duration-150 bg-linear-to-b from-[#ffffff10] to-[#ffffff09] border border-[#ffffff15] rounded-xl shadow-xs hover:from-[#ffffff05] hover:to-[#ffffff04] cursor-pointer'
+                                    className='flex items-center justify-center h-8 px-4 text-sm font-medium text-cream-50 transition-colors duration-150 bg-linear-to-b from-cream-50/6 to-cream-50/4 border border-cream-50/8 rounded-xl shadow-xs hover:from-cream-50/2 hover:to-cream-50/2 cursor-pointer'
                                     disabled={!data}
                                 >
                                     {selectedVersion

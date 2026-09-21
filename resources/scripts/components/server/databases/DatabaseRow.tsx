@@ -42,20 +42,20 @@ const DatabaseRow = ({ database }: Props) => {
 
             <div className='flex items-center gap-3 w-full'>
                 <div className='shrink-0 w-5' />
-                <div className='shrink-0 w-9 h-9 rounded-lg bg-[#ffffff11] flex items-center justify-center'>
-                    <Database width={22} height={22} fill='currentColor' className='text-zinc-400' />
+                <div className='shrink-0 w-9 h-9 rounded-lg bg-cream-50/7 flex items-center justify-center'>
+                    <Database width={22} height={22} fill='currentColor' className='text-cream-500' />
                 </div>
 
                 <div className='flex-1 min-w-0'>
                     <div className='flex items-center gap-2 mb-1.5'>
                         <CopyOnClick text={database.name}>
-                            <h3 className='text-sm font-medium text-zinc-100 font-mono truncate cursor-pointer hover:text-zinc-50 transition-colors'>
+                            <h3 className='text-sm font-medium text-cream-100 font-mono truncate cursor-pointer hover:text-cream-50 transition-colors'>
                                 {database.name}
                             </h3>
                         </CopyOnClick>
                     </div>
                     <CopyOnClick text={`${database.username}@${database.connectionString}`}>
-                        <p className='text-xs text-zinc-400 font-mono truncate'>
+                        <p className='text-xs text-cream-500 font-mono truncate'>
                             {database.username}@{database.connectionString} · from {database.allowConnectionsFrom}
                         </p>
                     </CopyOnClick>

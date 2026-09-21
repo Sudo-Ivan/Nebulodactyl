@@ -65,7 +65,7 @@ const FileUploadList = () => {
                             <Tooltip.Portal>
                                 <Tooltip.Content
                                     side='left'
-                                    className='px-2 py-1 text-sm bg-gray-800 text-gray-100 rounded shadow-lg z-9999'
+                                    className='px-2 py-1 text-sm bg-gray-800 text-cream-100 rounded shadow-lg z-9999'
                                     sideOffset={5}
                                 >
                                     {`${Math.floor((file.loaded / file.total) * 100)}%`}
@@ -141,7 +141,7 @@ const FileManagerStatus = () => {
                             }}
                         >
                             <svg
-                                className='animate-spin h-5 w-5 text-white'
+                                className='animate-spin h-5 w-5 text-cream-50'
                                 xmlns='http://www.w3.org/2000/svg'
                                 fill='none'
                                 viewBox='0 0 24 24'
@@ -166,7 +166,7 @@ const FileManagerStatus = () => {
                     <Tooltip.Portal>
                         <Tooltip.Content
                             side='top'
-                            className='px-2 py-1 text-sm bg-gray-800 text-gray-100 rounded shadow-lg'
+                            className='px-2 py-1 text-sm bg-gray-800 text-cream-100 rounded shadow-lg'
                             sideOffset={5}
                         >
                             {`${count} files are uploading, click to view`}

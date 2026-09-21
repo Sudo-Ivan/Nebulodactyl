@@ -115,7 +115,7 @@ function ResetPasswordContainer() {
                                 <Logo />
                             </div>
                         </Link>
-                        <div aria-hidden className='my-8 bg-[#ffffff33] min-h-[1px]'></div>
+                        <div aria-hidden className='my-8 bg-cream-50/20 min-h-[1px]'></div>
 
                         <div className='text-center'>
                             <Input className='text-center' value={email} disabled />
@@ -144,7 +144,7 @@ function ResetPasswordContainer() {
 
                         <div className={`mt-6`}>
                             <Button
-                                className='w-full mt-4 rounded-full bg-brand border-0 ring-0 outline-hidden capitalize font-bold text-sm py-2'
+                                className='w-full mt-4 rounded-full bg-brand text-accent-foreground border-0 ring-0 outline-hidden capitalize font-bold text-sm py-2'
                                 size={'xlarge'}
                                 type={'submit'}
                                 disabled={isSubmitting}
@@ -153,14 +153,14 @@ function ResetPasswordContainer() {
                                 Reset Password
                             </Button>
                         </div>
-                        <div aria-hidden className='my-8 bg-[#ffffff33] min-h-[1px]'></div>
+                        <div aria-hidden className='my-8 bg-cream-50/20 min-h-[1px]'></div>
 
                         <div
-                            className={`text-center w-full rounded-lg bg-[#ffffff33] border-0 ring-0 outline-hidden capitalize font-bold text-sm py-3`}
+                            className={`text-center w-full rounded-lg bg-cream-50/20 border-0 ring-0 outline-hidden capitalize font-bold text-sm py-3`}
                         >
                             <Link
                                 to={'/auth/login'}
-                                className={`text-sm text-white tracking-wide uppercase no-underline hover:text-neutral-700 border-color-[#ffffff33]`}
+                                className={`text-sm text-cream-100 tracking-wide uppercase no-underline hover:text-cream-300 border-cream-50/20`}
                             >
                                 Return to Login
                             </Link>

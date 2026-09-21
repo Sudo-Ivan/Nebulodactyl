@@ -193,7 +193,7 @@ export default function UserDropdown({ serverId }: UserDropdownProps) {
                                 {IconComponent && <IconComponent className='size-4' />}
                                 {item.label}
                                 {item.badge && (
-                                    <span className='ml-auto z-10 rounded-full bg-brand px-2 py-1 text-xs text-white'>
+                                    <span className='ml-auto z-10 rounded-full bg-brand px-2 py-1 text-xs text-accent-foreground'>
                                         {item.badge}
                                     </span>
                                 )}

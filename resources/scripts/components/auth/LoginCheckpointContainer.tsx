@@ -49,7 +49,7 @@ function LoginCheckpointForm() {
 
             <div className='flex w-full flex-col gap-3 sm:flex-row sm:justify-between sm:items-center'>
                 <Button
-                    className={`bg-mocha-100 rounded-full p-2 px-4 text-black hover:cursor-pointer hover:bg-mocha-200 hover:scale-102 ease-in-out w-full sm:w-auto`}
+                    className={`bg-cream-400 rounded-full p-2 px-4 text-mocha-500 hover:cursor-pointer hover:bg-cream-300 hover:scale-102 ease-in-out w-full sm:w-auto`}
                     size={'xlarge'}
                     type={'submit'}
                     disabled={isSubmitting}
@@ -65,7 +65,7 @@ function LoginCheckpointForm() {
                         setIsMissingDevice((s) => !s);
                     }}
                     className={
-                        'block text-center w-full sm:w-auto py-2.5 px-4 text-xs font-medium tracking-wide uppercase text-white hover:text-white/80 transition-colors duration-200 border border-white/20 rounded-full hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/30'
+                        'block text-center w-full sm:w-auto py-2.5 px-4 text-xs font-medium tracking-wide uppercase text-cream-50 hover:text-cream-50/80 transition-colors duration-200 border border-cream-50/20 rounded-full hover:bg-cream-50/10 focus:outline-none focus:ring-2 focus:ring-cream-50/30'
                     }
                 >
                     {!isMissingDevice ? "I've Lost My Device" : 'I Have My Device'}

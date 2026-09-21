@@ -50,7 +50,7 @@ const ConfirmPasswordModal = ({
         <Dialog open={open} onClose={handleClose} title={title}>
             <FlashMessageRender byKey={flashKey} />
             <div className='space-y-4'>
-                {description && <p className='text-sm text-zinc-300'>{description}</p>}
+                {description && <p className='text-sm text-cream-400'>{description}</p>}
 
                 {showWarning && warningItems && warningItems.length > 0 && (
                     <div className='p-2 bg-red-500/10 border border-red-500/20 rounded-lg'>
@@ -77,14 +77,14 @@ const ConfirmPasswordModal = ({
                     <div>
                         <label
                             htmlFor={`${flashKey}-password`}
-                            className='block text-sm font-medium text-zinc-300 mb-1'
+                            className='block text-sm font-medium text-cream-400 mb-1'
                         >
                             Password
                         </label>
                         <input
                             id={`${flashKey}-password`}
                             type='password'
-                            className='w-full px-4 py-2 rounded-lg outline-hidden bg-[#ffffff17] text-sm border border-zinc-700 focus:border-brand'
+                            className='w-full px-4 py-2 rounded-lg outline-hidden bg-cream-50/9 text-sm border border-zinc-700 focus:border-brand'
                             placeholder='Enter your password'
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
@@ -96,14 +96,14 @@ const ConfirmPasswordModal = ({
                         <div>
                             <label
                                 htmlFor={`${flashKey}-totp`}
-                                className='block text-sm font-medium text-zinc-300 mb-1'
+                                className='block text-sm font-medium text-cream-400 mb-1'
                             >
                                 Two-Factor Authentication Code
                             </label>
                             <input
                                 id={`${flashKey}-totp`}
                                 type='text'
-                                className='w-full px-4 py-2 rounded-lg outline-hidden bg-[#ffffff17] text-sm border border-zinc-700 focus:border-brand'
+                                className='w-full px-4 py-2 rounded-lg outline-hidden bg-cream-50/9 text-sm border border-zinc-700 focus:border-brand'
                                 placeholder='6-digit code'
                                 maxLength={6}
                                 value={totpCode}

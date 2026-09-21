@@ -27,7 +27,7 @@ const ToggleContainer = styled.div``;
 //         transition: all 75ms linear;
 
 //         &::before {
-//             ${tw`absolute block bg-white border h-5 w-5 rounded-full`};
+//             ${tw`absolute block bg-cream-50 border h-5 w-5 rounded-full`};
 //             top: 0.125rem;
 //             right: calc(50% + 0.125rem);
 //             //width: 1.25rem;
@@ -69,7 +69,7 @@ const Switch = ({ name, label, description, defaultChecked, readOnly, onChange, 
             {(label || description) && (
                 <div className={`ml-4 w-full`}>
                     {label && <Label htmlFor={uuid}>{label}</Label>}
-                    {description && <p className={`text-zinc-400 text-sm mt-2`}>{description}</p>}
+                    {description && <p className={`text-cream-500 text-sm mt-2`}>{description}</p>}
                 </div>
             )}
         </div>

@@ -48,7 +48,7 @@ const ModalContent = ({ ...props }: RequiredModalProps) => {
                     >
                         <FormikField
                             as={Textarea}
-                            className='px-4 py-2 rounded-lg outline-hidden bg-[#ffffff17] text-sm'
+                            className='px-4 py-2 rounded-lg outline-hidden bg-cream-50/9 text-sm'
                             name={'ignored'}
                             rows={6}
                         />

@@ -37,7 +37,7 @@ const theme = {
     brightBlue: '#82AAFF',
     brightMagenta: '#C792EA',
     brightCyan: '#89DDFF',
-    brightWhite: '#ffffff',
+    brightWhite: 'var(--color-cream-50)',
     selection: '#FAF089',
 };
 
@@ -349,7 +349,7 @@ const Console = () => {
                 </div>
 
                 {canSendCommands && (
-                    <div className='w-full shrink-0 rounded-b-2xl rounded-t-none border border-t-0 border-mocha-300 bg-mocha-400 p-2 text-zinc-100 flex px-(--padding-x) relative [--padding-x:--spacing(4)] text-sm'>
+                    <div className='w-full shrink-0 rounded-b-2xl rounded-t-none border border-t-0 border-mocha-300 bg-mocha-400 p-2 text-cream-100 flex px-(--padding-x) relative [--padding-x:--spacing(4)] text-sm'>
                         <input
                             ref={inputRef}
                             className='w-full'

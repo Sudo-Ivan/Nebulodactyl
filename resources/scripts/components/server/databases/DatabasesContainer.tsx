@@ -95,12 +95,12 @@ const DatabasesContainer = () => {
                     </Can>
                 )}
                 {databaseLimit === null && (
-                    <p className='text-sm text-zinc-300 text-center sm:text-right'>
+                    <p className='text-sm text-cream-400 text-center sm:text-right'>
                         {databases.length} databases (unlimited)
                     </p>
                 )}
                 {databaseLimit > 0 && (
-                    <p className='text-sm text-zinc-300 text-center sm:text-right'>
+                    <p className='text-sm text-cream-400 text-center sm:text-right'>
                         {databases.length} of {databaseLimit} databases
                     </p>
                 )}
@@ -172,13 +172,13 @@ const DatabasesContainer = () => {
             ) : (
                 <div className='flex flex-col items-center justify-center min-h-[60vh] py-12 px-4'>
                     <div className='text-center'>
-                        <div className='w-16 h-16 mx-auto mb-4 rounded-full bg-[#ffffff11] flex items-center justify-center'>
-                            <Database className='w-8 h-8 text-zinc-400' fill='currentColor' />
+                        <div className='w-16 h-16 mx-auto mb-4 rounded-full bg-cream-50/7 flex items-center justify-center'>
+                            <Database className='w-8 h-8 text-cream-500' fill='currentColor' />
                         </div>
-                        <h3 className='text-lg font-medium text-zinc-200 mb-2'>
+                        <h3 className='text-lg font-medium text-cream-100 mb-2'>
                             {databaseLimit === 0 ? 'Databases unavailable' : 'No databases found'}
                         </h3>
-                        <p className='text-sm text-zinc-400 max-w-sm'>
+                        <p className='text-sm text-cream-500 max-w-sm'>
                             {databaseLimit === 0
                                 ? 'Databases cannot be created for this server.'
                                 : 'Your server does not have any databases. Create one to get started.'}

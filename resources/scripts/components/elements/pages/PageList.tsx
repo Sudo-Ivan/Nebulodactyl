@@ -11,7 +11,7 @@ const PageListContainer = ({ className, children }: Props) => {
             style={{
                 background: 'radial-gradient(124.75% 124.75% at 50.01% -10.55%, rgb(16, 16, 16) 0%, rgb(4, 4, 4) 100%)',
             }}
-            className={clsx(className, 'p-2 border-[1px] border-[#ffffff12] rounded-xl')}
+            className={clsx(className, 'p-2 border-[1px] border-cream-50/7 rounded-xl')}
         >
             <div className='flex h-full w-full flex-col gap-3 overflow-hidden rounded-lg'>{children}</div>
         </div>
@@ -24,7 +24,7 @@ const PageListItem = ({ className, children }: Props) => {
         <div
             className={clsx(
                 className,
-                'bg-linear-to-b from-[#ffffff08] to-[#ffffff05] border-[1px] border-[#ffffff15] px-5 py-4 rounded-xl hover:border-[#ffffff20] transition-all flex items-center gap-3 flex-col sm:flex-row',
+                'bg-linear-to-b from-cream-50/3 to-cream-50/2 border-[1px] border-cream-50/8 px-5 py-4 rounded-xl hover:border-cream-50/13 transition-all flex items-center gap-3 flex-col sm:flex-row',
             )}
         >
             {children}

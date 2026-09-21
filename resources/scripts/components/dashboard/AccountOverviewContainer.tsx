@@ -70,7 +70,7 @@ const AccountOverviewContainer = () => {
                         }}
                     >
                         <ContentBox title={'Panel Version'}>
-                            <p className='text-sm mb-4 text-zinc-300'>
+                            <p className='text-sm mb-4 text-cream-400'>
                                 This is useful to provide Service Administrators if you run into an unexpected issue.
                             </p>
                             <div className='flex flex-col gap-4'>

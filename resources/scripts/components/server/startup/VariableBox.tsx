@@ -65,7 +65,7 @@ const VariableBox = ({ variable }: Props) => {
     const selectValues = variable.rules.find((v) => v.startsWith('in:'))?.split(',') || [];
 
     return (
-        <div className='flex flex-col justify-between gap-4 bg-linear-to-b from-[#ffffff08] to-[#ffffff05] border-[1px] border-[#ffffff15] p-4 sm:p-5 rounded-xl hover:border-[#ffffff20] transition-all'>
+        <div className='flex flex-col justify-between gap-4 bg-linear-to-b from-cream-50/3 to-cream-50/2 border-[1px] border-cream-50/8 p-4 sm:p-5 rounded-xl hover:border-cream-50/13 transition-all'>
             <FlashMessageRender byKey={FLASH_KEY} />
             <div className='space-y-3'>
                 <div className='flex flex-col items-baseline sm:flex-row sm:justify-between gap-2 sm:gap-3'>
@@ -78,20 +78,18 @@ const VariableBox = ({ variable }: Props) => {
                                 className='text-neutral-500 w-4 h-4 flex-shrink-0'
                             />
                         )}
-                        <span className='text-sm font-medium text-neutral-200 break-words'>{variable.name}</span>
+                        <span className='text-sm font-medium text-cream-100 break-words'>{variable.name}</span>
                     </div>
                     <div className='text-xs leading-5 text-neutral-500 font-mono rounded w-fit'>
                         {variable.envVariable}
                     </div>
                 </div>
-                <p className='text-xs sm:text-sm text-neutral-400 leading-relaxed break-words'>
-                    {variable.description}
-                </p>
+                <p className='text-xs sm:text-sm text-cream-500 leading-relaxed break-words'>{variable.description}</p>
             </div>
             <InputSpinner visible={loading}>
                 {useSwitch ? (
-                    <div className='flex items-center justify-between p-3 sm:p-4 bg-linear-to-b from-[#ffffff06] to-[#ffffff03] border border-[#ffffff10] rounded-xl'>
-                        <span className='text-sm font-medium text-neutral-300'>
+                    <div className='flex items-center justify-between p-3 sm:p-4 bg-linear-to-b from-cream-50/2 to-cream-50/1 border border-cream-50/6 rounded-xl'>
+                        <span className='text-sm font-medium text-cream-400'>
                             {isStringSwitch
                                 ? variable.serverValue === 'true'
                                     ? 'Enabled'
@@ -122,10 +120,10 @@ const VariableBox = ({ variable }: Props) => {
                         <DropdownMenuTrigger asChild>
                             <button
                                 type='button'
-                                className='w-full flex items-center justify-between gap-3 h-11 sm:h-12 px-3 sm:px-4 text-sm font-medium text-white transition-all duration-200 bg-linear-to-b from-[#ffffff10] to-[#ffffff09] border border-[#ffffff15] rounded-xl hover:from-[#ffffff15] hover:to-[#ffffff10] hover:border-[#ffffff25] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation'
+                                className='w-full flex items-center justify-between gap-3 h-11 sm:h-12 px-3 sm:px-4 text-sm font-medium text-cream-50 transition-all duration-200 bg-linear-to-b from-cream-50/6 to-cream-50/4 border border-cream-50/8 rounded-xl hover:from-cream-50/8 hover:to-cream-50/6 hover:border-cream-50/15 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation'
                                 disabled={!canEdit || !variable.isEditable}
                             >
-                                <span className='font-mono text-neutral-200 truncate text-left'>
+                                <span className='font-mono text-cream-100 truncate text-left'>
                                     {variable.serverValue}
                                 </span>
                                 {dropDownOpen ? (

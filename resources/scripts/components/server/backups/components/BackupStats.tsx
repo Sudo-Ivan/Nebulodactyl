@@ -28,7 +28,7 @@ const StorageBreakdown = ({ storage }: { storage: BackupStorageInfo }) => {
     if (!hasBothUsages) return null;
 
     return (
-        <p className='text-xs text-zinc-400'>
+        <p className='text-xs text-cream-500'>
             {storage.repository_usage_mb > 0 ? `${formatBackupStorage(storage.repository_usage_mb)} deduplicated` : ''}
             {hasBothUsages && ' + '}
             {storage.legacy_usage_mb > 0 ? `${formatBackupStorage(storage.legacy_usage_mb)} legacy` : ''}
@@ -57,9 +57,9 @@ const StorageTooltip = ({
 const BackupStats = ({ backupCount, backupLimit, storage, backupStorageLimit = null }: BackupStatsProps) => {
     return (
         <div>
-            {backupLimit === null && <p className='text-sm text-zinc-300'>{backupCount} backups</p>}
+            {backupLimit === null && <p className='text-sm text-cream-400'>{backupCount} backups</p>}
             {backupLimit !== null && backupLimit > 0 && (
-                <p className='text-sm text-zinc-300'>
+                <p className='text-sm text-cream-400'>
                     {backupCount} of {backupLimit} backups
                 </p>
             )}
@@ -68,7 +68,7 @@ const BackupStats = ({ backupCount, backupLimit, storage, backupStorageLimit = n
             {storage && (
                 <div className='flex flex-col gap-0.5'>
                     <p
-                        className='text-sm text-zinc-300 cursor-help'
+                        className='text-sm text-cream-400 cursor-help'
                         title={StorageTooltip({ storage, backupStorageLimit })}
                     >
                         <span className='font-medium'>{formatBackupStorage(storage.used_mb)}</span>{' '}

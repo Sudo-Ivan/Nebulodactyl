@@ -205,7 +205,7 @@ const ServerActivityLogContainer = () => {
                                 </div>
                             }
                         >
-                            <p className='text-sm text-neutral-400 leading-relaxed'>
+                            <p className='text-sm text-cream-500 leading-relaxed'>
                                 Monitor all server activity and track user actions. Filter events, search for specific
                                 activities, and export logs for audit purposes.
                             </p>
@@ -223,24 +223,24 @@ const ServerActivityLogContainer = () => {
                                     'linear(0,0.01,0.04 1.6%,0.161 3.3%,0.816 9.4%,1.046,1.189 14.4%,1.231,1.254 17%,1.259,1.257 18.6%,1.236,1.194 22.3%,1.057 27%,0.999 29.4%,0.955 32.1%,0.942,0.935 34.9%,0.933,0.939 38.4%,1 47.3%,1.011,1.017 52.6%,1.016 56.4%,1 65.2%,0.996 70.2%,1.001 87.2%,1)',
                             }}
                         >
-                            <div className='bg-gradient-to-b from-[#ffffff08] to-[#ffffff05] border-[1px] border-[#ffffff12] rounded-xl p-4 hover:border-[#ffffff20] transition-all duration-150 shadow-sm'>
+                            <div className='bg-gradient-to-b from-cream-50/3 to-cream-50/2 border-[1px] border-cream-50/7 rounded-xl p-4 hover:border-cream-50/13 transition-all duration-150 shadow-sm'>
                                 <div className='flex items-center gap-2 mb-4'>
-                                    <div className='w-5 h-5 rounded-lg bg-[#ffffff11] flex items-center justify-center'>
+                                    <div className='w-5 h-5 rounded-lg bg-cream-50/7 flex items-center justify-center'>
                                         <Funnel
                                             width={22}
                                             height={22}
-                                            className='w-2.5 h-2.5 text-zinc-400'
+                                            className='w-2.5 h-2.5 text-cream-500'
                                             fill='currentColor'
                                         />
                                     </div>
-                                    <h3 className='text-base font-semibold text-zinc-100'>Filters</h3>
+                                    <h3 className='text-base font-semibold text-cream-100'>Filters</h3>
                                 </div>
 
                                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
                                     <div>
                                         <label
                                             htmlFor='server-activity-search'
-                                            className='block text-sm font-medium text-zinc-300 mb-2'
+                                            className='block text-sm font-medium text-cream-400 mb-2'
                                         >
                                             Search
                                         </label>
@@ -248,7 +248,7 @@ const ServerActivityLogContainer = () => {
                                             <Magnifier
                                                 width={22}
                                                 height={22}
-                                                className='absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-zinc-400 pointer-events-none z-10'
+                                                className='absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-cream-500 pointer-events-none z-10'
                                                 fill='currentColor'
                                             />
                                             <Input.Text
@@ -265,7 +265,7 @@ const ServerActivityLogContainer = () => {
                                     <div>
                                         <label
                                             htmlFor='server-activity-event-type'
-                                            className='block text-sm font-medium text-zinc-300 mb-2'
+                                            className='block text-sm font-medium text-cream-400 mb-2'
                                         >
                                             Event Type
                                         </label>
@@ -273,7 +273,7 @@ const ServerActivityLogContainer = () => {
                                             id='server-activity-event-type'
                                             value={selectedEventType}
                                             onChange={(e) => setSelectedEventType(e.target.value)}
-                                            className='w-full px-3 py-2 bg-zinc-800 border border-zinc-600 rounded-lg text-zinc-100 focus:border-brand focus:ring-1 focus:ring-brand hover:border-zinc-500 transition-colors duration-150'
+                                            className='w-full px-3 py-2 bg-zinc-800 border border-zinc-600 rounded-lg text-cream-100 focus:border-brand focus:ring-1 focus:ring-brand hover:border-zinc-500 transition-colors duration-150'
                                         >
                                             <option value='' style={{ backgroundColor: '#27272a', color: '#f4f4f5' }}>
                                                 All Events
@@ -293,7 +293,7 @@ const ServerActivityLogContainer = () => {
                                     <div>
                                         <label
                                             htmlFor='server-activity-time-range'
-                                            className='block text-sm font-medium text-zinc-300 mb-2'
+                                            className='block text-sm font-medium text-cream-400 mb-2'
                                         >
                                             Time Range
                                         </label>
@@ -301,7 +301,7 @@ const ServerActivityLogContainer = () => {
                                             id='server-activity-time-range'
                                             value={dateRange}
                                             onChange={(e) => setDateRange(e.target.value)}
-                                            className='w-full px-3 py-2 bg-zinc-800 border border-zinc-600 rounded-lg text-zinc-100 focus:border-brand focus:ring-1 focus:ring-brand hover:border-zinc-500 transition-colors duration-150'
+                                            className='w-full px-3 py-2 bg-zinc-800 border border-zinc-600 rounded-lg text-cream-100 focus:border-brand focus:ring-1 focus:ring-brand hover:border-zinc-500 transition-colors duration-150'
                                         >
                                             <option
                                                 value='all'
@@ -355,19 +355,19 @@ const ServerActivityLogContainer = () => {
                                 'linear(0,0.01,0.04 1.6%,0.161 3.3%,0.816 9.4%,1.046,1.189 14.4%,1.231,1.254 17%,1.259,1.257 18.6%,1.236,1.194 22.3%,1.057 27%,0.999 29.4%,0.955 32.1%,0.942,0.935 34.9%,0.933,0.939 38.4%,1 47.3%,1.011,1.017 52.6%,1.016 56.4%,1 65.2%,0.996 70.2%,1.001 87.2%,1)',
                         }}
                     >
-                        <div className='bg-gradient-to-b from-[#ffffff08] to-[#ffffff05] border-[1px] border-[#ffffff12] rounded-xl p-4 hover:border-[#ffffff20] transition-all duration-150 shadow-sm'>
+                        <div className='bg-gradient-to-b from-cream-50/3 to-cream-50/2 border-[1px] border-cream-50/7 rounded-xl p-4 hover:border-cream-50/13 transition-all duration-150 shadow-sm'>
                             <div className='flex items-center gap-2 mb-4'>
-                                <div className='w-5 h-5 rounded-lg bg-[#ffffff11] flex items-center justify-center'>
+                                <div className='w-5 h-5 rounded-lg bg-cream-50/7 flex items-center justify-center'>
                                     <ClockArrowRotateLeft
                                         width={22}
                                         height={22}
-                                        className=' text-zinc-400'
+                                        className=' text-cream-500'
                                         fill='currentColor'
                                     />
                                 </div>
-                                <h3 className='text-base font-semibold text-zinc-100'>Events</h3>
+                                <h3 className='text-base font-semibold text-cream-100'>Events</h3>
                                 {filteredData?.items && (
-                                    <span className='text-sm text-zinc-400'>
+                                    <span className='text-sm text-cream-500'>
                                         ({filteredData.items.length}{' '}
                                         {filteredData.items.length === 1 ? 'event' : 'events'})
                                     </span>
@@ -378,10 +378,10 @@ const ServerActivityLogContainer = () => {
                                 <Spinner centered />
                             ) : !filteredData?.items?.length ? (
                                 <div className='text-center py-12'>
-                                    <h3 className='text-lg font-semibold text-zinc-300 mb-2'>
+                                    <h3 className='text-lg font-semibold text-cream-400 mb-2'>
                                         {hasActiveFilters ? 'No Matching Activity' : 'No Server Activity Yet'}
                                     </h3>
-                                    <p className='text-sm text-zinc-400 mb-4 max-w-lg mx-auto leading-relaxed'>
+                                    <p className='text-sm text-cream-500 mb-4 max-w-lg mx-auto leading-relaxed'>
                                         {hasActiveFilters
                                             ? "Try adjusting your filters or search terms to find the activity you're looking for."
                                             : 'Server activity logs will appear here as you manage your server. Start your server or perform actions to see them here.'}

@@ -27,7 +27,7 @@ const ActivityLogMetaButton = ({ meta }: { meta: Record<string, unknown> }) => {
             <Dialog open={open} onClose={() => setOpen(false)} hideCloseIcon title={'Event Metadata'}>
                 <div className='space-y-4'>
                     <div className='flex items-center justify-between'>
-                        <h4 className='text-sm font-medium text-zinc-300'>Formatted View</h4>
+                        <h4 className='text-sm font-medium text-cream-400'>Formatted View</h4>
                         <Button
                             variant='secondary'
                             onClick={copyToClipboard}
@@ -39,15 +39,15 @@ const ActivityLogMetaButton = ({ meta }: { meta: Record<string, unknown> }) => {
                     </div>
 
                     <div className='bg-zinc-900 rounded-lg p-4 border border-zinc-800 max-h-96 overflow-auto'>
-                        <pre className='font-mono text-sm leading-relaxed whitespace-pre-wrap text-zinc-300'>
+                        <pre className='font-mono text-sm leading-relaxed whitespace-pre-wrap text-cream-400'>
                             {metadataString}
                         </pre>
                     </div>
 
                     <div>
-                        <h4 className='text-sm font-medium text-zinc-300 mb-2'>Raw JSON</h4>
+                        <h4 className='text-sm font-medium text-cream-400 mb-2'>Raw JSON</h4>
                         <div className='bg-zinc-900 rounded-lg p-4 border border-zinc-800 max-h-64 overflow-auto'>
-                            <pre className='font-mono text-xs leading-relaxed whitespace-pre-wrap text-zinc-400'>
+                            <pre className='font-mono text-xs leading-relaxed whitespace-pre-wrap text-cream-500'>
                                 {metadataJson}
                             </pre>
                         </div>
@@ -64,7 +64,7 @@ const ActivityLogMetaButton = ({ meta }: { meta: Record<string, unknown> }) => {
             <button
                 type='button'
                 aria-label='View additional event metadata'
-                className='w-6 h-6 rounded text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/50 transition-colors duration-150 flex items-center justify-center'
+                className='w-6 h-6 rounded text-cream-500 hover:text-cream-100 hover:bg-zinc-800/50 transition-colors duration-150 flex items-center justify-center'
                 onClick={() => setOpen(true)}
             >
                 <Code width={22} height={22} />

@@ -78,7 +78,7 @@ const ContextMenuItem = React.forwardRef<
     <ContextMenuPrimitive.Item
         ref={ref}
         className={cn(
-            'font-bold relative flex cursor-default select-none items-center rounded-lg px-2 py-1.5 text-sm outline-hidden transition focus:duration-0 focus:bg-[#ffffff33] data-disabled:pointer-events-none data-disabled:opacity-50',
+            'font-bold relative flex cursor-default select-none items-center rounded-lg px-2 py-1.5 text-sm outline-hidden transition focus:duration-0 focus:bg-cream-50/20 data-disabled:pointer-events-none data-disabled:opacity-50',
             inset && 'pl-8',
             className,
         )}
@@ -94,7 +94,7 @@ const ContextMenuCheckboxItem = React.forwardRef<
     <ContextMenuPrimitive.CheckboxItem
         ref={ref}
         className={cn(
-            'relative flex cursor-default select-none items-center rounded-xs py-1.5 pl-8 pr-2 text-sm outline-hidden transition focus:duration-0 focus:bg-[#ffffff33] focus:text-accent-foreground data-disabled:pointer-events-none data-disabled:opacity-50',
+            'relative flex cursor-default select-none items-center rounded-xs py-1.5 pl-8 pr-2 text-sm outline-hidden transition focus:duration-0 focus:bg-cream-50/20 focus:text-accent-foreground data-disabled:pointer-events-none data-disabled:opacity-50',
             className,
         )}
         checked={checked}
@@ -117,7 +117,7 @@ const ContextMenuRadioItem = React.forwardRef<
     <ContextMenuPrimitive.RadioItem
         ref={ref}
         className={cn(
-            'relative flex cursor-default select-none items-center rounded-xs py-1.5 pl-8 pr-2 text-sm outline-hidden transition focus:duration-0 focus:bg-[#ffffff33] focus:text-accent-foreground data-disabled:pointer-events-none data-disabled:opacity-50',
+            'relative flex cursor-default select-none items-center rounded-xs py-1.5 pl-8 pr-2 text-sm outline-hidden transition focus:duration-0 focus:bg-cream-50/20 focus:text-accent-foreground data-disabled:pointer-events-none data-disabled:opacity-50',
             className,
         )}
         {...props}

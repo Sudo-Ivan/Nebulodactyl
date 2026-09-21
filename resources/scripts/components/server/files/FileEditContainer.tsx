@@ -128,7 +128,7 @@ const FileEditContainer = () => {
 
             <ErrorBoundary>
                 <div
-                    className={`flex py-6 bg-[#ffffff11] rounded-md rounded-b-none border-[1px] border-[#ffffff07] border-b-0`}
+                    className={`flex py-6 bg-cream-50/7 rounded-md rounded-b-none border-[1px] border-cream-50/3 border-b-0`}
                 >
                     <span className='-ml-[2rem]'></span>
                     <FileManagerBreadcrumbs withinFileEditor isNewFile={action !== 'edit'} />
@@ -137,7 +137,7 @@ const FileEditContainer = () => {
 
             {['.nebulaignore', '.pteroignore'].includes(filename) ? (
                 <div className={`mb-4 p-4 border-l-4 bg-neutral-900 rounded-sm border-cyan-400`}>
-                    <p className={`text-neutral-300 text-sm`}>
+                    <p className={`text-cream-400 text-sm`}>
                         You&apos;re editing a{' '}
                         <code className={`font-mono bg-black rounded-sm py-px px-1`}>{filename}</code> file. Any files
                         or directories listed in here will be excluded from backups. Wildcards are supported by using an
@@ -158,7 +158,7 @@ const FileEditContainer = () => {
                 }}
             />
 
-            <div className='h-full relative bg-[#ffffff11] border-[1px] border-[#ffffff07] border-t-0 [&>div>div]:h-full [&>div>div]:outline-hidden! w-full flex-grow order-20 lg:order-none'>
+            <div className='h-full relative bg-cream-50/7 border-[1px] border-cream-50/3 border-t-0 [&>div>div]:h-full [&>div>div]:outline-hidden! w-full flex-grow order-20 lg:order-none'>
                 <Editor
                     filename={filename}
                     initialContent={content}
@@ -182,7 +182,7 @@ const FileEditContainer = () => {
 
             <div className='flex flex-row flex-wrap items-center justify-between gap-2 px-1 py-2 order-10 lg:order-none lg:flex-nowrap lg:justify-start lg:px-0 lg:py-0 lg:absolute lg:top-2.5 lg:right-2 lg:gap-4'>
                 <DropdownMenu>
-                    <DropdownMenuTrigger className='flex items-center gap-2 font-bold text-sm px-3 py-1 rounded-md h-fit bg-[#ffffff11]'>
+                    <DropdownMenuTrigger className='flex items-center gap-2 font-bold text-sm px-3 py-1 rounded-md h-fit bg-cream-50/7'>
                         <svg
                             xmlns='http://www.w3.org/2000/svg'
                             width='24'

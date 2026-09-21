@@ -30,7 +30,7 @@ const CleanInput = React.forwardRef<HTMLInputElement, React.InputHTMLAttributes<
     ({ className = '', ...props }, ref) => (
         <input
             ref={ref}
-            className={`border-0 bg-transparent focus:ring-0 outline-none text-white placeholder-zinc-400 ${className}`}
+            className={`border-0 bg-transparent focus:ring-0 outline-none text-cream-50 placeholder-cream-500 ${className}`}
             {...props}
         />
     ),
@@ -41,7 +41,7 @@ const CleanSelect = React.forwardRef<HTMLSelectElement, React.SelectHTMLAttribut
     ({ className = '', children, ...props }, ref) => (
         <select
             ref={ref}
-            className={`border-0 bg-transparent focus:ring-0 outline-none text-zinc-300 ${className}`}
+            className={`border-0 bg-transparent focus:ring-0 outline-none text-cream-400 ${className}`}
             {...props}
         >
             {children}
@@ -206,7 +206,7 @@ const SubdomainManagement = ({ onClose: _onClose }: Props) => {
             <div className='flex items-center justify-center py-12'>
                 <div className='flex flex-col items-center gap-3'>
                     <div className='animate-spin rounded-full h-6 w-6 border-b-2 border-brand'></div>
-                    <p className='text-sm text-neutral-400'>Loading subdomain configuration...</p>
+                    <p className='text-sm text-cream-500'>Loading subdomain configuration...</p>
                 </div>
             </div>
         );
@@ -220,9 +220,9 @@ const SubdomainManagement = ({ onClose: _onClose }: Props) => {
         return (
             <div className='flex flex-col items-center justify-center py-12'>
                 <div className='text-center'>
-                    <div className='w-12 h-12 mx-auto mb-3 rounded-full bg-[#ffffff11] flex items-center justify-center'>
+                    <div className='w-12 h-12 mx-auto mb-3 rounded-full bg-cream-50/7 flex items-center justify-center'>
                         <svg
-                            className='w-6 h-6 text-zinc-400'
+                            className='w-6 h-6 text-cream-500'
                             fill='currentColor'
                             viewBox='0 0 20 20'
                             aria-hidden='true'
@@ -234,8 +234,8 @@ const SubdomainManagement = ({ onClose: _onClose }: Props) => {
                             />
                         </svg>
                     </div>
-                    <h4 className='text-md font-medium text-zinc-200 mb-1'>No domains configured</h4>
-                    <p className='text-sm text-zinc-400 max-w-sm'>
+                    <h4 className='text-md font-medium text-cream-100 mb-1'>No domains configured</h4>
+                    <p className='text-sm text-cream-500 max-w-sm'>
                         Contact your administrator to configure subdomain support for this server.
                     </p>
                 </div>
@@ -265,17 +265,17 @@ const SubdomainManagement = ({ onClose: _onClose }: Props) => {
             {subdomainInfo?.current_subdomain && !isEditing ? (
                 /* Current Subdomain Display Mode */
                 <div className='space-y-4'>
-                    <div className='bg-[#ffffff08] border border-[#ffffff15] rounded-lg p-4'>
+                    <div className='bg-cream-50/3 border border-cream-50/8 rounded-lg p-4'>
                         <div className='flex items-center justify-between'>
                             <div>
-                                <p className='text-sm text-zinc-400 mb-2'>Current Subdomain</p>
-                                <p className='text-lg font-medium text-white font-mono'>
+                                <p className='text-sm text-cream-500 mb-2'>Current Subdomain</p>
+                                <p className='text-lg font-medium text-cream-50 font-mono'>
                                     {subdomainInfo?.current_subdomain?.attributes?.full_domain}
                                 </p>
                             </div>
                         </div>
                     </div>
-                    <div className='flex items-center justify-end gap-3 pt-4 border-t border-[#ffffff15]'>
+                    <div className='flex items-center justify-end gap-3 pt-4 border-t border-cream-50/8'>
                         <Button type='button' variant='attention' onClick={handleDeleteSubdomain} disabled={loading}>
                             {loading ? 'Deleting...' : 'Delete Subdomain'}
                         </Button>
@@ -309,7 +309,7 @@ const SubdomainManagement = ({ onClose: _onClose }: Props) => {
                                     label='Subdomain'
                                     description='Choose a unique name for your subdomain. Only lowercase letters, numbers, and hyphens are allowed.'
                                 >
-                                    <div className='flex items-center border border-[#ffffff15] overflow-hidden hover:border-[#ffffff25] transition-colors'>
+                                    <div className='flex items-center border border-cream-50/8 overflow-hidden hover:border-cream-50/15 transition-colors'>
                                         <Field
                                             as={CleanInput}
                                             name='subdomain'
@@ -328,7 +328,7 @@ const SubdomainManagement = ({ onClose: _onClose }: Props) => {
                                                 }
                                             }}
                                         />
-                                        <div className='border-l border-[#ffffff15]'>
+                                        <div className='border-l border-cream-50/8'>
                                             <Field
                                                 as={CleanSelect}
                                                 name='domain_id'
@@ -380,7 +380,7 @@ const SubdomainManagement = ({ onClose: _onClose }: Props) => {
                             </div>
 
                             {/* Action Buttons */}
-                            <div className='flex items-center justify-end gap-3 pt-6 border-t border-[#ffffff15]'>
+                            <div className='flex items-center justify-end gap-3 pt-6 border-t border-cream-50/8'>
                                 {isEditing ? (
                                     <>
                                         <Button

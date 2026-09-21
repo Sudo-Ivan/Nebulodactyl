@@ -27,7 +27,7 @@ const ActivityLogEntry = ({ activity, children }: Props) => {
                 {actor?.image ? (
                     <img src={actor.image} alt={actor.username || 'System'} className='w-full h-full object-cover' />
                 ) : (
-                    <div className='w-full h-full flex items-center justify-center text-zinc-300 text-xs font-semibold'>
+                    <div className='w-full h-full flex items-center justify-center text-cream-400 text-xs font-semibold'>
                         {(actor?.username || 'S').charAt(0).toUpperCase()}
                     </div>
                 )}
@@ -36,11 +36,11 @@ const ActivityLogEntry = ({ activity, children }: Props) => {
             {/* Main Content - Compact Layout */}
             <div className='flex-1 min-w-0'>
                 <div className='flex items-center gap-2 text-sm'>
-                    <span className='font-medium text-zinc-100 truncate'>{actor?.username || 'System'}</span>
+                    <span className='font-medium text-cream-100 truncate'>{actor?.username || 'System'}</span>
                     <span className='text-zinc-500'>•</span>
                     <Link
                         to={`#${pathTo({ event: activity.event })}`}
-                        className='font-mono text-xs bg-zinc-800/50 text-zinc-300 px-2 py-1 rounded hover:bg-zinc-700/50 hover:text-brand transition-colors duration-150 truncate'
+                        className='font-mono text-xs bg-zinc-800/50 text-cream-400 px-2 py-1 rounded hover:bg-zinc-700/50 hover:text-brand transition-colors duration-150 truncate'
                     >
                         {activity.event}
                     </Link>
@@ -58,7 +58,7 @@ const ActivityLogEntry = ({ activity, children }: Props) => {
                 </div>
 
                 {/* Compact metadata and timestamp */}
-                <div className='flex items-center gap-3 mt-1 text-xs text-zinc-400'>
+                <div className='flex items-center gap-3 mt-1 text-xs text-cream-500'>
                     {activity.ip && (
                         <span className='font-mono bg-zinc-800/30 px-1.5 py-0.5 rounded'>{activity.ip}</span>
                     )}

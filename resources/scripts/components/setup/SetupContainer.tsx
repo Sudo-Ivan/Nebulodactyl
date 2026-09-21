@@ -77,7 +77,7 @@ const StepTracker = ({ current }: { current: number }) => (
                             'h-1.5 w-8 rounded-full transition-colors duration-200',
                             state === 'active' && 'bg-brand-500',
                             state === 'done' && 'bg-brand-500/40',
-                            state === 'upcoming' && 'bg-white/8',
+                            state === 'upcoming' && 'bg-cream-50/8',
                         )}
                     />
                     <span
@@ -243,7 +243,7 @@ const SetupContainer = () => {
                                             sign you right in. It only takes a moment.
                                         </p>
                                     </div>
-                                    <p className='text-xs text-secondary leading-relaxed border-t border-white/10 pt-4'>
+                                    <p className='text-xs text-secondary leading-relaxed border-t border-cream-50/10 pt-4'>
                                         You won&apos;t see this again. Once an account exists, this setup screen
                                         disappears entirely.
                                     </p>

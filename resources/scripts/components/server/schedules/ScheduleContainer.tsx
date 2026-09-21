@@ -41,7 +41,7 @@ function ScheduleContainer() {
                                     <Plus width={22} height={22} className='w-4 h-4' fill='currentColor' />
                                     New Schedule
                                 </Button>
-                                <span className='text-sm text-zinc-300'>{schedules.length} schedule(s)</span>
+                                <span className='text-sm text-cream-400'>{schedules.length} schedule(s)</span>
                             </div>
                         </Can>
                     )}
@@ -50,15 +50,15 @@ function ScheduleContainer() {
                     <div className='flex items-center justify-center py-12'>
                         <div className='flex flex-col items-center gap-3'>
                             <div className='animate-spin rounded-full h-6 w-6 border-b-2 border-brand' />
-                            <p className='text-sm text-neutral-400'>Loading schedules...</p>
+                            <p className='text-sm text-cream-500'>Loading schedules...</p>
                         </div>
                     </div>
                 ) : schedules.length === 0 ? (
                     <div className='flex flex-col items-center justify-center py-12'>
                         <div className='text-center'>
-                            <div className='w-12 h-12 mx-auto mb-4 rounded-full bg-[#ffffff11] flex items-center justify-center'>
+                            <div className='w-12 h-12 mx-auto mb-4 rounded-full bg-cream-50/7 flex items-center justify-center'>
                                 <svg
-                                    className='w-6 h-6 text-zinc-400'
+                                    className='w-6 h-6 text-cream-500'
                                     fill='currentColor'
                                     viewBox='0 0 20 20'
                                     aria-hidden='true'
@@ -70,8 +70,8 @@ function ScheduleContainer() {
                                     />
                                 </svg>
                             </div>
-                            <h4 className='text-lg font-medium text-zinc-200 mb-2'>No schedules found</h4>
-                            <p className='text-sm text-zinc-400 max-w-sm text-center'>
+                            <h4 className='text-lg font-medium text-cream-100 mb-2'>No schedules found</h4>
+                            <p className='text-sm text-cream-500 max-w-sm text-center'>
                                 Your server does not have any scheduled tasks. Create one to automate server management.
                             </p>
                         </div>

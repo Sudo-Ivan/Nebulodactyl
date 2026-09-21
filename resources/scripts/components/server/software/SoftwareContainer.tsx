@@ -341,7 +341,7 @@ const SoftwareContainer = () => {
                 <div className='flex items-center justify-center h-64'>
                     <div className='flex flex-col items-center text-center'>
                         <Spinner size='large' />
-                        <p className='text-neutral-400 mt-4'>Loading server information...</p>
+                        <p className='text-cream-500 mt-4'>Loading server information...</p>
                     </div>
                 </div>
             </ServerContentBlock>
@@ -353,20 +353,20 @@ const SoftwareContainer = () => {
             <ServerHeader />
             <div className='space-y-6'>
                 <MainPageHeader direction='column' title='Software Management'>
-                    <p className='text-neutral-400 leading-relaxed'>
+                    <p className='text-cream-500 leading-relaxed'>
                         Change your server&apos;s game or software with our guided configuration wizard
                     </p>
                 </MainPageHeader>
 
                 {currentStep !== 'overview' && (
-                    <div className='p-4 bg-[#ffffff08] border border-[#ffffff12] rounded-lg'>
+                    <div className='p-4 bg-cream-50/3 border border-cream-50/7 rounded-lg'>
                         <div className='flex items-center justify-between mb-2'>
-                            <span className='text-sm font-medium text-neutral-200 capitalize'>
+                            <span className='text-sm font-medium text-cream-100 capitalize'>
                                 {currentStep.replace('-', ' ')}
                             </span>
-                            <span className='text-sm text-neutral-400'>Step {steps.indexOf(currentStep)} of 4</span>
+                            <span className='text-sm text-cream-500'>Step {steps.indexOf(currentStep)} of 4</span>
                         </div>
-                        <div className='w-full bg-[#ffffff12] rounded-full h-2'>
+                        <div className='w-full bg-cream-50/7 rounded-full h-2'>
                             <div
                                 className='bg-brand h-2 rounded-full transition-all duration-300'
                                 style={{

@@ -11,7 +11,7 @@ const Alert = ({ type, className, children }: AlertProps) => {
     return (
         <div
             className={clsx(
-                'flex items-center border-l-8 text-zinc-50 rounded-md shadow-sm px-4 py-3',
+                'flex items-center border-l-8 text-cream-50 rounded-md shadow-sm px-4 py-3',
                 {
                     'border-red-500 bg-red-500/25': type === 'danger',
                     'border-yellow-500 bg-yellow-500/25': type === 'warning',

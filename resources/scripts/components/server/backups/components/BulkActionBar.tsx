@@ -23,10 +23,10 @@ const BulkActionBar = ({
     const allSelected = selectedBackups.size === selectableBackups.length && selectableBackups.length > 0;
 
     return (
-        <div className='mb-8 flex items-center justify-between px-4 py-3.5 rounded-xl bg-[#ffffff08] border border-zinc-700'>
+        <div className='mb-8 flex items-center justify-between px-4 py-3.5 rounded-xl bg-cream-50/3 border border-zinc-700'>
             <div className='flex items-center gap-4'>
                 <Checkbox checked={allSelected} onCheckedChange={onSelectAll} />
-                <span className='text-sm text-zinc-300'>
+                <span className='text-sm text-cream-400'>
                     {selectedBackups.size > 0 ? (
                         <>
                             <span className='font-medium'>{selectedBackups.size}</span> selected

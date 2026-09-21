@@ -207,7 +207,7 @@ export const CrashAnalysisCard = () => {
 
     return (
         <>
-            <div className='bg-gradient-to-b from-[#ffffff08] to-[#ffffff05] border-[1px] border-[#ffffff12] rounded-xl p-3 sm:p-4 hover:border-[#ffffff20] transition-all duration-150 shadow-sm'>
+            <div className='bg-gradient-to-b from-cream-50/3 to-cream-50/2 border-[1px] border-cream-50/7 rounded-xl p-3 sm:p-4 hover:border-cream-50/13 transition-all duration-150 shadow-sm'>
                 <Alert type={getCardType()}>
                     <div className='flex items-center justify-between gap-3'>
                         <div className='flex-1'>
@@ -267,8 +267,8 @@ const AnalysisModal = ({
     const renderLoadingState = () => (
         <div className='flex flex-col items-center justify-center py-12' aria-busy='true'>
             <Spinner size='large' />
-            <h3 className='text-lg font-medium text-neutral-200 mt-4'>Analyzing Server Logs</h3>
-            <p className='text-neutral-400 mt-2 text-center max-w-md'>
+            <h3 className='text-lg font-medium text-cream-100 mt-4'>Analyzing Server Logs</h3>
+            <p className='text-cream-500 mt-2 text-center max-w-md'>
                 We&apos;re analyzing your server logs with mclo.gs to identify potential issues and provide solutions.
             </p>
         </div>
@@ -287,9 +287,9 @@ const AnalysisModal = ({
                     />
                     <div className='flex-1'>
                         <h3 className='font-semibold text-red-400 text-lg'>Analysis Failed</h3>
-                        <p className='text-neutral-300 mt-2'>{error}</p>
+                        <p className='text-cream-400 mt-2'>{error}</p>
                         {(/latest\.log/i.test(error ?? '') || /no log content/i.test(error ?? '')) && (
-                            <p className='text-neutral-400 mt-3 text-sm'>
+                            <p className='text-cream-500 mt-3 text-sm'>
                                 This usually means the log file doesn&apos;t exist yet. Try starting your server to
                                 generate logs first.
                             </p>
@@ -326,7 +326,7 @@ const AnalysisModal = ({
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
                     <div className='bg-blue-500/5 rounded-lg p-3'>
                         <p className='text-blue-400 font-medium text-sm mb-1'>Server Type</p>
-                        <p className='text-neutral-200'>
+                        <p className='text-cream-100'>
                             {serverType} {serverVersion}
                         </p>
                     </div>
@@ -334,7 +334,7 @@ const AnalysisModal = ({
                     {information.slice(0, 3).map((info, idx) => (
                         <div key={idx} className='bg-blue-500/5 rounded-lg p-3'>
                             <p className='text-blue-400 font-medium text-sm mb-1'>{info.label}</p>
-                            <p className='text-neutral-200 break-all'>{info.value}</p>
+                            <p className='text-cream-100 break-all'>{info.value}</p>
                         </div>
                     ))}
                 </div>
@@ -348,7 +348,7 @@ const AnalysisModal = ({
                             {information.slice(3).map((info, idx) => (
                                 <div key={idx} className='bg-blue-500/5 rounded-lg p-3'>
                                     <p className='text-blue-400 font-medium text-sm mb-1'>{info.label}</p>
-                                    <p className='text-neutral-200 break-all'>{info.value}</p>
+                                    <p className='text-cream-100 break-all'>{info.value}</p>
                                 </div>
                             ))}
                         </div>
@@ -376,7 +376,7 @@ const AnalysisModal = ({
                         />
                         <div>
                             <h3 className='font-semibold text-green-400 text-lg'>No Issues Detected</h3>
-                            <p className='text-neutral-300 mt-2'>
+                            <p className='text-cream-400 mt-2'>
                                 No specific issues were found in your server logs. The crash may be due to configuration
                                 problems or resource limitations.
                             </p>
@@ -457,7 +457,7 @@ const AnalysisModal = ({
                                     />
                                 </div>
                                 <div className='flex-1'>
-                                    <p className='text-neutral-200 leading-relaxed'>{solution.message}</p>
+                                    <p className='text-cream-100 leading-relaxed'>{solution.message}</p>
                                 </div>
                             </div>
                         ))}
@@ -474,7 +474,7 @@ const AnalysisModal = ({
         if (!analysis) {
             return (
                 <div className='text-center py-12'>
-                    <p className='text-neutral-400'>No analysis data available</p>
+                    <p className='text-cream-500'>No analysis data available</p>
                 </div>
             );
         }

@@ -22,7 +22,7 @@ import { ServerContext } from '@/state/server';
 
 const Label = styled.label`
   display: inline-block;
-  color: #ffffff77;
+  color: color-mix(in srgb, var(--color-cream-50) 47%, transparent);
   font-size: 0.875rem;
   padding-bottom: 0.5rem;
 `;
@@ -150,7 +150,7 @@ const TaskDetailsModal = ({ schedule, task, visible, onDismissed, ...props }: Pr
                                 <ActionListener />
                                 <FormikFieldWrapper name={'action'}>
                                     <FormikField
-                                        className='px-4 py-2 bg-[#ffffff11] rounded-lg min-w-full'
+                                        className='px-4 py-2 bg-cream-50/7 rounded-lg min-w-full'
                                         as={Select}
                                         name={'action'}
                                     >
@@ -182,7 +182,7 @@ const TaskDetailsModal = ({ schedule, task, visible, onDismissed, ...props }: Pr
                                     <Label>Payload</Label>
                                     <FormikFieldWrapper name={'payload'}>
                                         <FormikField
-                                            className='w-full rounded-xl p-2 bg-[#ffffff11]'
+                                            className='w-full rounded-xl p-2 bg-cream-50/7'
                                             as={Textarea}
                                             name={'payload'}
                                             rows={6}
@@ -194,7 +194,7 @@ const TaskDetailsModal = ({ schedule, task, visible, onDismissed, ...props }: Pr
                                     <Label>Payload</Label>
                                     <FormikFieldWrapper name={'payload'}>
                                         <FormikField
-                                            className='px-4 py-2 bg-[#ffffff11] rounded-lg min-w-full'
+                                            className='px-4 py-2 bg-cream-50/7 rounded-lg min-w-full'
                                             as={Select}
                                             name={'payload'}
                                         >
@@ -223,7 +223,7 @@ const TaskDetailsModal = ({ schedule, task, visible, onDismissed, ...props }: Pr
                                         }
                                     >
                                         <FormikField
-                                            className='w-full rounded-2xl bg-[#ffffff11]'
+                                            className='w-full rounded-2xl bg-cream-50/7'
                                             as={Textarea}
                                             name={'payload'}
                                             rows={6}

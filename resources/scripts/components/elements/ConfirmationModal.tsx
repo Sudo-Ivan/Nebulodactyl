@@ -18,7 +18,7 @@ const ConfirmationModal: React.FC<Props> = ({ children, buttonText, onConfirmed,
 
     return (
         <div className='flex flex-col w-full'>
-            <div className={`text-zinc-300`}>{children}</div>
+            <div className={`text-cream-400`}>{children}</div>
             <div className={`flex gap-4 items-center justify-end my-6`}>
                 <Button variant='secondary' onClick={() => dismiss()}>
                     Cancel

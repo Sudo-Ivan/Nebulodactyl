@@ -12,7 +12,7 @@ interface Props {
 const TitledGreyBox = ({ title, children, className }: Props) => (
     <div
         className={cn(
-            'relative rounded-xl overflow-hidden shadow-md border-[1px] border-[#ffffff07] bg-[#ffffff08] p-8',
+            'relative rounded-xl overflow-hidden shadow-md border-[1px] border-cream-50/3 bg-cream-50/3 p-8',
             className,
         )}
     >

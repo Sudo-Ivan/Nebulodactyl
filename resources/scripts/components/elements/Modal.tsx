@@ -138,7 +138,7 @@ const Modal: React.FC<ModalProps> = ({
                                         className={styles.panel}
                                     >
                                         <div className='place-content-between flex items-center m-6'>
-                                            {title && <h2 className={`text-2xl text-zinc-100`}>{title}</h2>}
+                                            {title && <h2 className={`text-2xl text-cream-100`}>{title}</h2>}
                                             {dismissable && (
                                                 <button
                                                     type='button'

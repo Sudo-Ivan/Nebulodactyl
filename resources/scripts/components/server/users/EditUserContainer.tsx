@@ -75,11 +75,11 @@ const EditUserContainer = () => {
             ) : !subuser ? (
                 <div className='flex flex-col items-center justify-center min-h-[60vh] py-12 px-4'>
                     <div className='text-center'>
-                        <div className='w-16 h-16 mx-auto mb-4 rounded-full bg-[#ffffff11] flex items-center justify-center'>
-                            <Person width={22} height={22} className='w-8 h-8 text-zinc-400' fill='currentColor' />
+                        <div className='w-16 h-16 mx-auto mb-4 rounded-full bg-cream-50/7 flex items-center justify-center'>
+                            <Person width={22} height={22} className='w-8 h-8 text-cream-500' fill='currentColor' />
                         </div>
-                        <h3 className='text-lg font-medium text-zinc-200 mb-2'>User not found</h3>
-                        <p className='text-sm text-zinc-400 max-w-sm'>
+                        <h3 className='text-lg font-medium text-cream-100 mb-2'>User not found</h3>
+                        <p className='text-sm text-cream-500 max-w-sm'>
                             The user you&apos;re trying to edit could not be found.
                         </p>
                     </div>

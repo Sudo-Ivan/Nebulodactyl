@@ -187,7 +187,7 @@ const StartupContainer = () => {
             <div className='flex items-center justify-center min-h-[60vh]'>
                 <div className='flex flex-col items-center gap-4'>
                     <Spinner centered size={Spinner.Size.LARGE} />
-                    <p className='text-sm text-neutral-400'>Loading startup configuration...</p>
+                    <p className='text-sm text-cream-500'>Loading startup configuration...</p>
                 </div>
             </div>
         ) : (
@@ -214,12 +214,12 @@ const StartupContainer = () => {
                             back without contacting support.
                         </p>
                     </div>
-                    <p className='text-sm text-neutral-400'>Are you sure you want to continue?</p>
+                    <p className='text-sm text-cream-500'>Are you sure you want to continue?</p>
                 </div>
             </Dialog.Confirm>
             <div className='space-y-6'>
                 <MainPageHeader direction='column' title='Startup Settings'>
-                    <p className='text-sm text-neutral-400 leading-relaxed'>
+                    <p className='text-sm text-cream-500 leading-relaxed'>
                         Configure how your server starts up. These settings control the startup command and environment
                         variables.
                         <span className='text-amber-400 font-medium'>
@@ -232,7 +232,7 @@ const StartupContainer = () => {
                 <div className='space-y-6'>
                     <TitledGreyBox title={'Startup Command'} className='p-6'>
                         <div className='space-y-4 mb-6'>
-                            <p className='text-sm text-neutral-400 leading-relaxed'>
+                            <p className='text-sm text-cream-500 leading-relaxed'>
                                 Configure the command that starts your server. You can edit the raw command or view the
                                 processed version with variables resolved.
                             </p>
@@ -243,13 +243,13 @@ const StartupContainer = () => {
                                     <div>
                                         <label
                                             htmlFor='raw_command'
-                                            className='block text-sm font-medium text-neutral-300 mb-3'
+                                            className='block text-sm font-medium text-cream-400 mb-3'
                                         >
                                             Raw Command
                                         </label>
                                         <textarea
                                             id='raw_command'
-                                            className='w-full h-32 sm:h-36 md:h-40 px-3 py-3 sm:px-4 sm:py-4 text-sm sm:text-base font-mono bg-linear-to-b from-[#ffffff12] to-[#ffffff08] border-2 border-blue-500/30 rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/60 placeholder:text-neutral-500 transition-all touch-manipulation'
+                                            className='w-full h-32 sm:h-36 md:h-40 px-3 py-3 sm:px-4 sm:py-4 text-sm sm:text-base font-mono bg-linear-to-b from-cream-50/7 to-cream-50/3 border-2 border-blue-500/30 rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/60 placeholder:text-neutral-500 transition-all touch-manipulation'
                                             value={commandValue}
                                             onChange={(e) => handleCommandChange(e.target.value)}
                                             placeholder='Enter startup command with variables like {{SERVER_MEMORY}} or {{SERVER_PORT}}...'
@@ -261,12 +261,12 @@ const StartupContainer = () => {
                                         />
                                     </div>
                                     <div>
-                                        <span className='block text-sm font-medium text-neutral-300 mb-3'>
+                                        <span className='block text-sm font-medium text-cream-400 mb-3'>
                                             Live Preview
                                         </span>
                                         <CopyOnClick text={liveProcessedCommand}>
                                             <div className='cursor-pointer group'>
-                                                <div className='w-full min-h-[8rem] sm:min-h-[9rem] md:min-h-[10rem] px-3 py-3 sm:px-4 sm:py-4 font-mono bg-linear-to-b from-[#ffffff06] to-[#ffffff03] border-2 border-green-500/20 rounded-xl text-sm sm:text-base overflow-auto group-hover:border-green-500/40 transition-all'>
+                                                <div className='w-full min-h-[8rem] sm:min-h-[9rem] md:min-h-[10rem] px-3 py-3 sm:px-4 sm:py-4 font-mono bg-linear-to-b from-cream-50/2 to-cream-50/1 border-2 border-green-500/20 rounded-xl text-sm sm:text-base overflow-auto group-hover:border-green-500/40 transition-all'>
                                                     <span
                                                         className='break-all text-green-200'
                                                         style={{
@@ -283,7 +283,7 @@ const StartupContainer = () => {
                                         </CopyOnClick>
                                     </div>
                                 </div>
-                                <div className='flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 border-t border-[#ffffff08]'>
+                                <div className='flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 border-t border-cream-50/3'>
                                     <InputSpinner visible={commandLoading}>
                                         <Button
                                             onClick={updateCommand}
@@ -317,7 +317,7 @@ const StartupContainer = () => {
                                 {data.rawStartupCommand && (
                                     <div className='space-y-3'>
                                         <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3'>
-                                            <span className='text-sm font-medium text-neutral-300'>Raw Command</span>
+                                            <span className='text-sm font-medium text-cream-400'>Raw Command</span>
                                             {canEditCommand && (
                                                 <Button
                                                     variant='secondary'
@@ -331,9 +331,9 @@ const StartupContainer = () => {
                                         </div>
                                         <CopyOnClick text={data.rawStartupCommand}>
                                             <div className='cursor-pointer group'>
-                                                <div className='font-mono bg-linear-to-b from-[#ffffff08] to-[#ffffff05] flex flex-row items-center border border-[#ffffff10] rounded-xl py-3 px-3 sm:py-4 sm:px-4 text-sm sm:text-base min-h-[3.5rem] sm:min-h-[4rem] overflow-auto group-hover:border-[#ffffff20] transition-all'>
+                                                <div className='font-mono bg-linear-to-b from-cream-50/3 to-cream-50/2 flex flex-row items-center border border-cream-50/6 rounded-xl py-3 px-3 sm:py-4 sm:px-4 text-sm sm:text-base min-h-[3.5rem] sm:min-h-[4rem] overflow-auto group-hover:border-cream-50/13 transition-all'>
                                                     <span
-                                                        className='break-all text-neutral-200'
+                                                        className='break-all text-cream-100'
                                                         style={{
                                                             wordBreak: 'break-all',
                                                             overflowWrap: 'break-word',
@@ -349,14 +349,14 @@ const StartupContainer = () => {
                                 )}
                                 <div className='space-y-3'>
                                     <div className='flex flex-col items-center sm:flex-row gap-2'>
-                                        <span className='text-sm font-medium text-neutral-300'>Processed Command</span>
+                                        <span className='text-sm font-medium text-cream-400'>Processed Command</span>
                                         <span className='text-xs text-neutral-500 rounded w-fit'>Read-only</span>
                                     </div>
                                     <CopyOnClick text={data.invocation}>
                                         <div className='cursor-pointer group'>
-                                            <div className='font-mono bg-linear-to-b from-[#ffffff04] to-[#ffffff02] flex flex-row items-center border border-[#ffffff08] rounded-xl py-3 px-3 sm:py-4 sm:px-4 text-sm sm:text-base min-h-[3.5rem] sm:min-h-[4rem] overflow-auto group-hover:border-[#ffffff15] transition-all'>
+                                            <div className='font-mono bg-linear-to-b from-cream-50/2 to-cream-50/1 flex flex-row items-center border border-cream-50/3 rounded-xl py-3 px-3 sm:py-4 sm:px-4 text-sm sm:text-base min-h-[3.5rem] sm:min-h-[4rem] overflow-auto group-hover:border-cream-50/8 transition-all'>
                                                 <span
-                                                    className='break-all text-neutral-300'
+                                                    className='break-all text-cream-400'
                                                     style={{
                                                         wordBreak: 'break-all',
                                                         overflowWrap: 'break-word',
@@ -375,7 +375,7 @@ const StartupContainer = () => {
 
                     <TitledGreyBox title={'Docker Image'} className='p-6'>
                         <div className='space-y-4 mb-6'>
-                            <p className='text-sm text-neutral-400 leading-relaxed'>
+                            <p className='text-sm text-cream-500 leading-relaxed'>
                                 The container image used to run your server. Different images provide different software
                                 versions and configurations.
                             </p>
@@ -387,9 +387,9 @@ const StartupContainer = () => {
                                         <DropdownMenuTrigger asChild>
                                             <button
                                                 type='button'
-                                                className='w-full flex items-center justify-between gap-3 font-medium text-sm sm:text-base px-3 py-3 sm:px-4 sm:py-3 rounded-md bg-linear-to-b from-[#ffffff10] to-[#ffffff09] border border-[#ffffff15] hover:from-[#ffffff15] hover:to-[#ffffff10] hover:border-[#ffffff25] transition-all cursor-pointer touch-manipulation'
+                                                className='w-full flex items-center justify-between gap-3 font-medium text-sm sm:text-base px-3 py-3 sm:px-4 sm:py-3 rounded-md bg-linear-to-b from-cream-50/6 to-cream-50/4 border border-cream-50/8 hover:from-cream-50/8 hover:to-cream-50/6 hover:border-cream-50/15 transition-all cursor-pointer touch-manipulation'
                                             >
-                                                <span className='truncate text-left font-mono text-neutral-200'>
+                                                <span className='truncate text-left font-mono text-cream-100'>
                                                     {Object.keys(data.dockerImages).find(
                                                         (key) => data.dockerImages[key] === variables.dockerImage,
                                                     ) || variables.dockerImage}
@@ -433,9 +433,9 @@ const StartupContainer = () => {
                             </div>
                         ) : (
                             <div className='space-y-4'>
-                                <div className='bg-linear-to-b from-[#ffffff08] to-[#ffffff05] border border-[#ffffff10] rounded-xl py-3 px-3 sm:py-4 sm:px-4 overflow-auto'>
+                                <div className='bg-linear-to-b from-cream-50/3 to-cream-50/2 border border-cream-50/6 rounded-xl py-3 px-3 sm:py-4 sm:px-4 overflow-auto'>
                                     <span
-                                        className='text-sm sm:text-base font-mono break-all text-neutral-200'
+                                        className='text-sm sm:text-base font-mono break-all text-cream-100'
                                         style={{
                                             wordBreak: 'break-all',
                                             overflowWrap: 'break-word',
@@ -490,61 +490,61 @@ const StartupContainer = () => {
                 {data && data.variables.length > 0 && (
                     <div className='space-y-6'>
                         <div className='space-y-3'>
-                            <h3 className='text-2xl font-extrabold text-neutral-200'>Environment Variables</h3>
-                            <p className='text-sm text-neutral-400 leading-relaxed'>
+                            <h3 className='text-2xl font-extrabold text-cream-100'>Environment Variables</h3>
+                            <p className='text-sm text-cream-500 leading-relaxed'>
                                 Configure environment variables that will be available to your server. These variables
                                 can be used to customize server behavior and settings.
                             </p>
                         </div>
 
-                        <div className='bg-linear-to-b from-[#ffffff04] to-[#ffffff02] border border-[#ffffff08] rounded-xl p-4'>
+                        <div className='bg-linear-to-b from-cream-50/2 to-cream-50/1 border border-cream-50/3 rounded-xl p-4'>
                             <div className='space-y-3'>
-                                <h4 className='text-sm font-medium text-neutral-300'>Global Server Variables</h4>
+                                <h4 className='text-sm font-medium text-cream-400'>Global Server Variables</h4>
                                 <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs'>
-                                    <div className='flex justify-between items-center gap-2 py-2 px-3 bg-[#ffffff06] rounded border border-[#ffffff08]'>
-                                        <span className='font-mono text-neutral-400'>{'SERVER_MEMORY'}</span>
+                                    <div className='flex justify-between items-center gap-2 py-2 px-3 bg-cream-50/2 rounded border border-cream-50/3'>
+                                        <span className='font-mono text-cream-500'>{'SERVER_MEMORY'}</span>
                                         <CopyOnClick text={server?.limits?.memory || 'null'}>
-                                            <span className='text-neutral-300 font-mono'>
+                                            <span className='text-cream-400 font-mono'>
                                                 {server?.limits?.memory || 'null'}
                                             </span>
                                         </CopyOnClick>
                                     </div>
-                                    <div className='flex justify-between items-center gap-2 py-2 px-3 bg-[#ffffff06] rounded border border-[#ffffff08]'>
-                                        <span className='font-mono text-neutral-400'>{'SERVER_IP'}</span>
+                                    <div className='flex justify-between items-center gap-2 py-2 px-3 bg-cream-50/2 rounded border border-cream-50/3'>
+                                        <span className='font-mono text-cream-500'>{'SERVER_IP'}</span>
                                         <CopyOnClick text={server?.allocations?.find((a) => a.isDefault)?.ip || 'null'}>
-                                            <span className='text-neutral-300 font-mono'>
+                                            <span className='text-cream-400 font-mono'>
                                                 {server?.allocations?.find((a) => a.isDefault)?.ip || 'null'}
                                             </span>
                                         </CopyOnClick>
                                     </div>
-                                    <div className='flex justify-between items-center gap-2 py-2 px-3 bg-[#ffffff06] rounded border border-[#ffffff08]'>
-                                        <span className='font-mono text-neutral-400'>{'SERVER_PORT'}</span>
+                                    <div className='flex justify-between items-center gap-2 py-2 px-3 bg-cream-50/2 rounded border border-cream-50/3'>
+                                        <span className='font-mono text-cream-500'>{'SERVER_PORT'}</span>
                                         <CopyOnClick
                                             text={server?.allocations?.find((a) => a.isDefault)?.port || 'null'}
                                         >
-                                            <span className='text-neutral-300 font-mono'>
+                                            <span className='text-cream-400 font-mono'>
                                                 {server?.allocations?.find((a) => a.isDefault)?.port || 'null'}
                                             </span>
                                         </CopyOnClick>
                                     </div>
-                                    <div className='flex justify-between items-center gap-2 py-2 px-3 bg-[#ffffff06] rounded border border-[#ffffff08]'>
-                                        <span className='font-mono text-neutral-400'>{'SERVER_UUID'}</span>
+                                    <div className='flex justify-between items-center gap-2 py-2 px-3 bg-cream-50/2 rounded border border-cream-50/3'>
+                                        <span className='font-mono text-cream-500'>{'SERVER_UUID'}</span>
                                         <CopyOnClick text={uuid}>
-                                            <span className='text-neutral-300 font-mono text-xs truncate'>{uuid}</span>
+                                            <span className='text-cream-400 font-mono text-xs truncate'>{uuid}</span>
                                         </CopyOnClick>
                                     </div>
-                                    <div className='flex justify-between items-center gap-2 py-2 px-3 bg-[#ffffff06] rounded border border-[#ffffff08]'>
-                                        <span className='font-mono text-neutral-400'>{'SERVER_NAME'}</span>
+                                    <div className='flex justify-between items-center gap-2 py-2 px-3 bg-cream-50/2 rounded border border-cream-50/3'>
+                                        <span className='font-mono text-cream-500'>{'SERVER_NAME'}</span>
                                         <CopyOnClick text={server?.name || 'null'}>
-                                            <span className='text-neutral-300 font-mono truncate'>
+                                            <span className='text-cream-400 font-mono truncate'>
                                                 {server?.name || 'null'}
                                             </span>
                                         </CopyOnClick>
                                     </div>
-                                    <div className='flex justify-between items-center gap-2 py-2 px-3 bg-[#ffffff06] rounded border border-[#ffffff08]'>
-                                        <span className='font-mono text-neutral-400'>{'SERVER_CPU'}</span>
+                                    <div className='flex justify-between items-center gap-2 py-2 px-3 bg-cream-50/2 rounded border border-cream-50/3'>
+                                        <span className='font-mono text-cream-500'>{'SERVER_CPU'}</span>
                                         <CopyOnClick text={server?.limits?.cpu || 'null'}>
-                                            <span className='text-neutral-300 font-mono'>
+                                            <span className='text-cream-400 font-mono'>
                                                 {server?.limits?.cpu || 'null'}
                                             </span>
                                         </CopyOnClick>
@@ -560,7 +560,7 @@ const StartupContainer = () => {
                                 ))}
                             </div>
                             {data.variables.length > ITEMS_PER_PAGE && (
-                                <div className='mt-6 pt-4 border-t border-[#ffffff10]'>
+                                <div className='mt-6 pt-4 border-t border-cream-50/6'>
                                     <Pagination
                                         data={{
                                             items: paginatedVariables,

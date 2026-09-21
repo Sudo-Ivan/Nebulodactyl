@@ -91,10 +91,10 @@ const ScheduleEditContainer = () => {
             ) : (
                 <div className={`rounded-sm shadow-sm flex flex-col gap-6`}>
                     <div
-                        className={`bg-[#ffffff09] border-[1px] border-[#ffffff11] flex items-center place-content-between flex-col md:flex-row gap-6 p-6 rounded-2xl overflow-hidden`}
+                        className={`bg-cream-50/4 border-[1px] border-cream-50/7 flex items-center place-content-between flex-col md:flex-row gap-6 p-6 rounded-2xl overflow-hidden`}
                     >
                         <div className={`flex-none self-start`}>
-                            <h3 className={`flex items-center text-neutral-100 text-2xl`}>
+                            <h3 className={`flex items-center text-cream-100 text-2xl`}>
                                 {schedule.name}
                                 {schedule.isProcessing ? (
                                     <span

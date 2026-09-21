@@ -30,7 +30,7 @@ const ItemContainer = ({
 
     return (
         <div
-            className={`flex items-center justify-between gap-2 bg-[#3333332a] border-[1px] border-[#ffffff0e] p-4 rounded-lg ${divClasses}`}
+            className={`flex items-center justify-between gap-2 bg-[#3333332a] border-[1px] border-cream-50/5 p-4 rounded-lg ${divClasses}`}
         >
             {icon && (
                 <div className={`w-10 h-10 items-center justify-center hidden sm:flex`}>
@@ -41,7 +41,7 @@ const ItemContainer = ({
                 </div>
             )}
             <div className={`flex flex-1 flex-col`}>
-                <label htmlFor={uuid} className={`text-neutral-300 text-md font-bold ${titleClasses} ${labelClasses}`}>
+                <label htmlFor={uuid} className={`text-cream-400 text-md font-bold ${titleClasses} ${labelClasses}`}>
                     {title}
                 </label>
 

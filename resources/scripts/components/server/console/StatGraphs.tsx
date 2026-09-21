@@ -104,7 +104,7 @@ const StatGraphs = () => {
         <TooltipProvider>
             <div className='flex h-full flex-col gap-4 overflow-y-auto flex-none'>
                 <div>
-                    <div className='group p-4 justify-between relative rounded-xl border border-[#ffffff11] bg-[#110f0d] flex gap-4 text-sm'>
+                    <div className='group p-4 justify-between relative rounded-xl border border-cream-50/7 bg-[#110f0d] flex gap-4 text-sm'>
                         <h3 className='font-extrabold'>IP Address</h3>
                         <CopyOnClick text={allocation}>
                             <div className='font-medium'>{allocation}</div>
@@ -112,14 +112,14 @@ const StatGraphs = () => {
                     </div>
                 </div>
                 <div>
-                    <div className='group p-4 justify-between relative rounded-xl border border-[#ffffff11] bg-[#110f0d] flex gap-4 text-sm'>
+                    <div className='group p-4 justify-between relative rounded-xl border border-cream-50/7 bg-[#110f0d] flex gap-4 text-sm'>
                         <h3 className='font-extrabold'>Uptime</h3>
                         <div className='font-medium'>{formatUptime(uptime)}</div>
                     </div>
                 </div>
                 {description && (
                     <div>
-                        <div className='group p-4 justify-between relative rounded-xl border border-[#ffffff11] flex-col bg-[#110f0d] flex gap-4 text-sm'>
+                        <div className='group p-4 justify-between relative rounded-xl border border-cream-50/7 flex-col bg-[#110f0d] flex gap-4 text-sm'>
                             <h3 className='font-extrabold'>Description</h3>
                             <div className='font-medium'>{description}</div>
                         </div>

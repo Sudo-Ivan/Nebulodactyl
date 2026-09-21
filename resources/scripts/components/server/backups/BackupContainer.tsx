@@ -267,18 +267,18 @@ const BackupContainer = () => {
                         {backups.length === 0 ? (
                             <div className='flex flex-col items-center justify-center min-h-[60vh] py-12 px-4'>
                                 <div className='text-center'>
-                                    <div className='w-16 h-16 mx-auto mb-4 rounded-full bg-[#ffffff11] flex items-center justify-center'>
+                                    <div className='w-16 h-16 mx-auto mb-4 rounded-full bg-cream-50/7 flex items-center justify-center'>
                                         <ArrowDownToLine
                                             width={22}
                                             height={22}
-                                            className='w-6 h-6 text-zinc-400'
+                                            className='w-6 h-6 text-cream-500'
                                             fill=' currentColor'
                                         />
                                     </div>
-                                    <h3 className='text-lg font-medium text-zinc-200 mb-2'>
+                                    <h3 className='text-lg font-medium text-cream-100 mb-2'>
                                         {backupLimit === 0 ? 'Backups unavailable' : 'No backups found'}
                                     </h3>
-                                    <p className='text-sm text-zinc-400 max-w-sm'>
+                                    <p className='text-sm text-cream-500 max-w-sm'>
                                         {backupLimit === 0
                                             ? 'Backups cannot be created for this server.'
                                             : 'Your server does not have any backups. Create one to get started.'}

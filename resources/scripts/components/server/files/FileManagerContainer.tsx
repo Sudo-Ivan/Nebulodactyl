@@ -113,10 +113,10 @@ const FileManagerContainer = () => {
                 </ErrorBoundary>
             </div>
             {!files ? null : !files.length ? (
-                <p className={`text-sm text-zinc-400 text-center`}>This folder is empty.</p>
+                <p className={`text-sm text-cream-500 text-center`}>This folder is empty.</p>
             ) : (
                 <>
-                    <div className='relative p-1 border-[1px] border-[#ffffff12] rounded-md sm:ml-12 sm:mr-12 mx-2'>
+                    <div className='relative p-1 border-[1px] border-cream-50/7 rounded-md sm:ml-12 sm:mr-12 mx-2'>
                         <div className='absolute left-4 top-1/2 pl-2 -translate-y-1/2 pointer-events-none'>
                             <svg
                                 xmlns='http://www.w3.org/2000/svg'
@@ -137,7 +137,7 @@ const FileManagerContainer = () => {
 
                         <input
                             ref={searchInputRef}
-                            className='pl-14 py-4 w-full rounded-lg bg-[#ffffff11] text-sm font-bold outline-none'
+                            className='pl-14 py-4 w-full rounded-lg bg-cream-50/7 text-sm font-bold outline-none'
                             type='text'
                             placeholder='Search...'
                             onChange={(event) => debouncedSearchTerm(event.target.value)}
@@ -145,7 +145,7 @@ const FileManagerContainer = () => {
                     </div>
                     <div
                         data-nebulodactyl-file-manager-files
-                        className='p-1 border-[1px] border-[#ffffff12] rounded-xl sm:ml-12 sm:mr-12 mx-2 bg-[radial-gradient(124.75%_124.75%_at_50.01%_-10.55%,_rgb(16,16,16)_0%,rgb(4,4,4)_100%)]'
+                        className='p-1 border-[1px] border-cream-50/7 rounded-xl sm:ml-12 sm:mr-12 mx-2 bg-[radial-gradient(124.75%_124.75%_at_50.01%_-10.55%,_rgb(16,16,16)_0%,rgb(4,4,4)_100%)]'
                     >
                         <VirtualizedList
                             itemClassName=''

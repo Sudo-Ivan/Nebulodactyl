@@ -216,7 +216,7 @@ const BackupContextMenu = ({ backup }: Props) => {
             <Dialog open={modal === 'rename'} onClose={() => setModal('')} title='Rename Backup'>
                 <div className='space-y-4'>
                     <div>
-                        <label htmlFor='elytra-backup-name' className='block text-sm font-medium text-zinc-200 mb-2'>
+                        <label htmlFor='elytra-backup-name' className='block text-sm font-medium text-cream-100 mb-2'>
                             Backup Name
                         </label>
                         <input
@@ -224,7 +224,7 @@ const BackupContextMenu = ({ backup }: Props) => {
                             type='text'
                             value={newName}
                             onChange={(e) => setNewName(e.target.value)}
-                            className='w-full px-3 py-2 bg-zinc-800 border border-zinc-600 rounded-lg text-zinc-100 placeholder-zinc-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500'
+                            className='w-full px-3 py-2 bg-zinc-800 border border-zinc-600 rounded-lg text-cream-100 placeholder-cream-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500'
                             placeholder='Enter backup name...'
                             maxLength={191}
                         />
@@ -264,8 +264,8 @@ const BackupContextMenu = ({ backup }: Props) => {
                 <FlashMessageRender byKey={'backup:restore'} />
                 <div className='space-y-4'>
                     <div className='space-y-2'>
-                        <p className='text-sm font-medium text-zinc-200'>&quot;{backup.name}&quot;</p>
-                        <p className='text-sm text-zinc-400'>
+                        <p className='text-sm font-medium text-cream-100'>&quot;{backup.name}&quot;</p>
+                        <p className='text-sm text-cream-500'>
                             Your server will be stopped during the restoration process. You will not be able to control
                             the power state, access the file manager, or create additional backups until completed.
                         </p>
@@ -293,13 +293,13 @@ const BackupContextMenu = ({ backup }: Props) => {
 
                     <div className='space-y-3'>
                         <div>
-                            <label htmlFor='restore-password' className='block text-sm font-medium text-zinc-300 mb-1'>
+                            <label htmlFor='restore-password' className='block text-sm font-medium text-cream-400 mb-1'>
                                 Password
                             </label>
                             <input
                                 id='restore-password'
                                 type='password'
-                                className='w-full px-4 py-2 rounded-lg outline-hidden bg-[#ffffff17] text-sm border border-zinc-700 focus:border-brand'
+                                className='w-full px-4 py-2 rounded-lg outline-hidden bg-cream-50/9 text-sm border border-zinc-700 focus:border-brand'
                                 placeholder='Enter your password'
                                 value={restorePassword}
                                 onChange={(e) => setRestorePassword(e.target.value)}
@@ -309,13 +309,13 @@ const BackupContextMenu = ({ backup }: Props) => {
 
                         {hasTwoFactor && (
                             <div>
-                                <label htmlFor='restore-totp' className='block text-sm font-medium text-zinc-300 mb-1'>
+                                <label htmlFor='restore-totp' className='block text-sm font-medium text-cream-400 mb-1'>
                                     Two-Factor Authentication Code
                                 </label>
                                 <input
                                     id='restore-totp'
                                     type='text'
-                                    className='w-full px-4 py-2 rounded-lg outline-hidden bg-[#ffffff17] text-sm border border-zinc-700 focus:border-brand'
+                                    className='w-full px-4 py-2 rounded-lg outline-hidden bg-cream-50/9 text-sm border border-zinc-700 focus:border-brand'
                                     placeholder='6-digit code'
                                     maxLength={6}
                                     value={restoreTotpCode}
@@ -364,7 +364,7 @@ const BackupContextMenu = ({ backup }: Props) => {
             >
                 <FlashMessageRender byKey={'backup:delete'} />
                 <div className='space-y-4'>
-                    <p className='text-sm text-zinc-300'>
+                    <p className='text-sm text-cream-400'>
                         This is a permanent operation. The backup cannot be recovered once deleted.
                     </p>
 
@@ -396,13 +396,13 @@ const BackupContextMenu = ({ backup }: Props) => {
 
                     <div className='space-y-3'>
                         <div>
-                            <label htmlFor='delete-password' className='block text-sm font-medium text-zinc-300 mb-1'>
+                            <label htmlFor='delete-password' className='block text-sm font-medium text-cream-400 mb-1'>
                                 Password
                             </label>
                             <input
                                 id='delete-password'
                                 type='password'
-                                className='w-full px-4 py-2 rounded-lg outline-hidden bg-[#ffffff17] text-sm border border-zinc-700 focus:border-brand'
+                                className='w-full px-4 py-2 rounded-lg outline-hidden bg-cream-50/9 text-sm border border-zinc-700 focus:border-brand'
                                 placeholder='Enter your password'
                                 value={deletePassword}
                                 onChange={(e) => setDeletePassword(e.target.value)}
@@ -412,13 +412,13 @@ const BackupContextMenu = ({ backup }: Props) => {
 
                         {hasTwoFactor && (
                             <div>
-                                <label htmlFor='delete-totp' className='block text-sm font-medium text-zinc-300 mb-1'>
+                                <label htmlFor='delete-totp' className='block text-sm font-medium text-cream-400 mb-1'>
                                     Two-Factor Authentication Code
                                 </label>
                                 <input
                                     id='delete-totp'
                                     type='text'
-                                    className='w-full px-4 py-2 rounded-lg outline-hidden bg-[#ffffff17] text-sm border border-zinc-700 focus:border-brand'
+                                    className='w-full px-4 py-2 rounded-lg outline-hidden bg-cream-50/9 text-sm border border-zinc-700 focus:border-brand'
                                     placeholder='6-digit code'
                                     maxLength={6}
                                     value={deleteTotpCode}

@@ -52,7 +52,7 @@ const ScheduleRow = ({ schedule, onDeleted }: Props) => {
                             <div className='flex flex-row items-center gap-2 text-lg'>
                                 <p className='truncate'>{schedule.name}</p>
                             </div>
-                            <p className='text-xs text-zinc-400'>
+                            <p className='text-xs text-cream-500'>
                                 Last run at:{' '}
                                 {schedule.lastRunAt ? format(schedule.lastRunAt, "MMM do 'at' h:mma") : 'N/A'}
                             </p>

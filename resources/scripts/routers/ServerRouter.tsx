@@ -282,7 +282,7 @@ const ServerRouter = () => {
                                     <DropdownMenuTrigger asChild>
                                         <button
                                             type='button'
-                                            className='w-10 h-10 flex items-center justify-center rounded-md text-white hover:bg-[#ffffff11] p-2 select-none cursor-pointer'
+                                            className='w-10 h-10 flex items-center justify-center rounded-md text-cream-50 hover:bg-cream-50/7 p-2 select-none cursor-pointer'
                                         >
                                             <Ellipsis fill='currentColor' width={26} height={22} />
                                         </button>
@@ -301,7 +301,7 @@ const ServerRouter = () => {
                                     </DropdownMenuContent>
                                 </DropdownMenu>
                             </div>
-                            <div aria-hidden className='mt-8 mb-4 bg-[#ffffff33] min-h-[1px] w-6'></div>
+                            <div aria-hidden className='mt-8 mb-4 bg-cream-50/20 min-h-[1px] w-6'></div>
                             {/* Highlight */}
                             <div
                                 className='absolute bg-brand w-[3px] h-10 left-0 rounded-full pointer-events-none'
@@ -341,10 +341,10 @@ const ServerRouter = () => {
                                 ))}
                             </ul>
                             <div className='shrink-0'>
-                                <div aria-hidden className='mt-8 mb-4 bg-[#ffffff33] min-h-[1px] w-full'></div>
+                                <div aria-hidden className='mt-8 mb-4 bg-cream-50/20 min-h-[1px] w-full'></div>
                                 <StatBlock
                                     title='server'
-                                    className='p-4 bg-[#ffffff09] border-[1px] border-[#ffffff11] shadow-xs rounded-xl text-center hover:cursor-default'
+                                    className='p-4 bg-cream-50/4 border-[1px] border-cream-50/7 shadow-xs rounded-xl text-center hover:cursor-default'
                                 >
                                     {serverName}
                                 </StatBlock>

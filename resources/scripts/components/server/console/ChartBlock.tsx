@@ -10,7 +10,7 @@ interface ChartBlockProps {
 export default ({ title, legend, children, className }: ChartBlockProps) => (
     <div
         className={cn(
-            'group p-4 relative rounded-xl border-[1px] border-[#ffffff11] bg-[#110f0d] flex flex-col gap-2',
+            'group p-4 relative rounded-xl border-[1px] border-cream-50/7 bg-[#110f0d] flex flex-col gap-2',
             className,
         )}
     >

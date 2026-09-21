@@ -154,7 +154,7 @@ const BackupContextMenu = ({ backup }: Props) => {
             <Dialog open={modal === 'rename'} onClose={() => setModal('')} title='Rename Backup'>
                 <div className='space-y-4'>
                     <div>
-                        <label htmlFor='backup-name' className='block text-sm font-medium text-zinc-200 mb-2'>
+                        <label htmlFor='backup-name' className='block text-sm font-medium text-cream-100 mb-2'>
                             Backup Name
                         </label>
                         <input
@@ -162,7 +162,7 @@ const BackupContextMenu = ({ backup }: Props) => {
                             type='text'
                             value={newName}
                             onChange={(e) => setNewName(e.target.value)}
-                            className='w-full px-3 py-2 bg-zinc-800 border border-zinc-600 rounded-lg text-zinc-100 placeholder-zinc-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500'
+                            className='w-full px-3 py-2 bg-zinc-800 border border-zinc-600 rounded-lg text-cream-100 placeholder-cream-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500'
                             placeholder='Enter backup name...'
                             maxLength={191}
                         />

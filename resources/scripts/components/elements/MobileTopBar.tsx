@@ -49,7 +49,7 @@ const MobileTopBar = ({ onMenuToggle, onTriggerLogout, onSelectAdminPanel, rootA
     };
 
     return (
-        <div className='lg:hidden fixed top-0 left-0 right-0 z-50 bg-[#1a1a1a] border-b border-[#ffffff08] h-16 flex items-center justify-between px-4'>
+        <div className='lg:hidden fixed top-0 left-0 right-0 z-50 bg-[#1a1a1a] border-b border-cream-50/3 h-16 flex items-center justify-between px-4'>
             {/* Logo */}
             <NavLink to={'/'} className='flex shrink-0 h-8 w-fit'>
                 <Logo uniqueId='mobile-topbar' />
@@ -61,7 +61,7 @@ const MobileTopBar = ({ onMenuToggle, onTriggerLogout, onSelectAdminPanel, rootA
                     <DropdownMenuTrigger asChild>
                         <button
                             type='button'
-                            className='w-10 h-10 flex items-center justify-center rounded-md text-white hover:bg-[#ffffff11] p-2 cursor-pointer'
+                            className='w-10 h-10 flex items-center justify-center rounded-md text-cream-50 hover:bg-cream-50/7 p-2 cursor-pointer'
                         >
                             <svg
                                 xmlns='http://www.w3.org/2000/svg'
@@ -82,7 +82,7 @@ const MobileTopBar = ({ onMenuToggle, onTriggerLogout, onSelectAdminPanel, rootA
                         {rootAdmin && onSelectAdminPanel && (
                             <DropdownMenuItem onSelect={handleAdminPanel}>
                                 Admin Panel
-                                <span className='ml-2 z-10 rounded-full bg-brand px-2 py-1 text-xs text-white'>
+                                <span className='ml-2 z-10 rounded-full bg-brand px-2 py-1 text-xs text-accent-foreground'>
                                     Staff
                                 </span>
                             </DropdownMenuItem>
@@ -96,7 +96,7 @@ const MobileTopBar = ({ onMenuToggle, onTriggerLogout, onSelectAdminPanel, rootA
                 <button
                     type='button'
                     onClick={handleMenuToggle}
-                    className='w-10 h-10 flex items-center justify-center rounded-md text-white hover:bg-[#ffffff11] p-2 cursor-pointer'
+                    className='w-10 h-10 flex items-center justify-center rounded-md text-cream-50 hover:bg-cream-50/7 p-2 cursor-pointer'
                     aria-label='Toggle navigation menu'
                 >
                     <BarsPlay width={22} height={22} fill='currentColor' />
