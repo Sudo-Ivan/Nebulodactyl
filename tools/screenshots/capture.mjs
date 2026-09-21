@@ -8,11 +8,11 @@
 //   PANEL_PASSWORD login password (default admin)
 //   CHROMIUM_PATH  path to a chromium/chrome binary (autodetected otherwise)
 
-import { chromium } from 'playwright-core';
-import { existsSync, mkdirSync } from 'node:fs';
 import { execSync } from 'node:child_process';
+import { mkdirSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { chromium } from 'playwright-core';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const BASE = process.env.PANEL_URL || 'http://127.0.0.1:8899';
@@ -31,7 +31,7 @@ function findChromium() {
         }
     }
     throw new Error(
-        'No Chromium found. Set CHROMIUM_PATH or install one with: pnpm exec playwright-core install chromium'
+        'No Chromium found. Set CHROMIUM_PATH or install one with: pnpm exec playwright-core install chromium',
     );
 }
 
@@ -63,10 +63,7 @@ await shot('panel-login.png');
 // 2. Sign in, then the server list dashboard
 await page.fill('input[name="user"]', USER);
 await page.fill('input[name="password"]', PASS);
-await Promise.all([
-    page.waitForURL(`${BASE}/`, { timeout: 15000 }),
-    page.click('button[type="submit"]'),
-]);
+await Promise.all([page.waitForURL(`${BASE}/`, { timeout: 15000 }), page.click('button[type="submit"]')]);
 await page.waitForLoadState('networkidle');
 await settle();
 await shot('panel-dark.png');

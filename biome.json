@@ -3,7 +3,14 @@
     "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
     "files": {
         "ignoreUnknown": true,
-        "includes": ["**", "!public", "!database/Seeders", "!resources/scripts/assets/tailwindcss-animate.css"]
+        "includes": [
+            "**",
+            "!public",
+            "!database/Seeders",
+            "!resources/scripts/assets/tailwindcss-animate.css",
+            "!marketing/icons",
+            "!showcase"
+        ]
     },
     "formatter": {
         "enabled": true,

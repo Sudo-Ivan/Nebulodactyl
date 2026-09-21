@@ -203,18 +203,18 @@
         grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
         gap: 20px;
     }
-    figure.shot {
+    .shot {
         border: 1px solid var(--border);
         border-radius: 12px;
         overflow: hidden;
         background: var(--surface);
     }
-    figure.shot img {
+    .shot-img {
         display: block;
         width: 100%;
         height: auto;
     }
-    figure.shot figcaption {
+    .shot figcaption {
         padding: 12px 16px;
         color: var(--muted);
         font-size: 13px;
@@ -365,15 +365,15 @@
             <p class="section-lead">The panel interface in the default dark theme.</p>
             <div class="shots">
                 <figure class="shot">
-                    <img src="showcase/panel-login.png" alt="Nebulodactyl login screen in the dark theme" loading="lazy">
+                    <img class="shot-img" src="showcase/panel-login.png" alt="Nebulodactyl login screen in the dark theme" loading="lazy">
                     <figcaption>Login</figcaption>
                 </figure>
                 <figure class="shot">
-                    <img src="showcase/panel-dark.png" alt="Nebulodactyl server list dashboard in the dark theme" loading="lazy">
+                    <img class="shot-img" src="showcase/panel-dark.png" alt="Nebulodactyl server list dashboard in the dark theme" loading="lazy">
                     <figcaption>Server dashboard</figcaption>
                 </figure>
                 <figure class="shot">
-                    <img src="showcase/panel-console.png" alt="Nebulodactyl server console view in the dark theme" loading="lazy">
+                    <img class="shot-img" src="showcase/panel-console.png" alt="Nebulodactyl server console view in the dark theme" loading="lazy">
                     <figcaption>Server console</figcaption>
                 </figure>
             </div>
