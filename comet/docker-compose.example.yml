@@ -1,0 +1,49 @@
+# Comet node daemon. Works with docker compose or podman-compose.
+#
+# Generate the configuration first from your panel's node admin page:
+#   cd /etc/comet && comet configure --panel-url https://panel.example.com --token <token> --node <id>
+#
+# Podman note: point the daemon at the podman socket instead of docker.sock:
+#   docker:
+#     host: unix:///run/podman/podman.sock
+# in /etc/comet/config.yml, and mount that socket below.
+
+name: comet
+
+services:
+  comet:
+    image: ghcr.io/sudo-ivan/nebulodactyl-comet:canary
+    restart: always
+    networks:
+      - comet0
+    ports:
+      - "8080:8080"
+      - "2022:2022"
+    tty: true
+    environment:
+      TZ: "UTC"
+      COMET_UID: 988
+      COMET_GID: 988
+      COMET_USERNAME: comet
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      # For podman use the podman socket instead:
+      # - "/run/podman/podman.sock:/var/run/docker.sock"
+      - "/etc/comet/:/etc/comet/"
+      - "/var/lib/comet/:/var/lib/comet/"
+      - "/var/log/comet/:/var/log/comet/"
+      - "/tmp/comet/:/tmp/comet/"
+      - "/etc/ssl/certs:/etc/ssl/certs:ro"
+      - "/run/comet:/run/comet"
+      # Required for ssl if you use let's encrypt. uncomment to use.
+      #- "/etc/letsencrypt/:/etc/letsencrypt/"
+
+networks:
+  comet0:
+    name: comet0
+    driver: bridge
+    ipam:
+      config:
+        - subnet: "172.21.0.0/16"
+    driver_opts:
+      com.docker.network.bridge.name: comet0

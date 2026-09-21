@@ -1,0 +1,30 @@
+# Rootless systemd user unit for Comet against a rootless Podman socket.
+#
+# Install to ~/.config/systemd/user/comet.service for the user that owns the
+# podman socket, then:
+#   systemctl --user daemon-reload
+#   systemctl --user enable --now comet
+#   sudo loginctl enable-linger <user>
+#
+# The comet config must set:
+#   docker:
+#     host: unix:///run/user/<uid>/podman/podman.sock
+#   system:
+#     user:
+#       rootless:
+#         enabled: true
+[Unit]
+Description=Nebulodactyl Comet Daemon (rootless)
+After=podman.socket network-online.target
+Wants=network-online.target podman.socket
+
+[Service]
+Type=simple
+WorkingDirectory=%h/.config/comet
+Environment=DOCKER_HOST=unix:///run/user/%U/podman/podman.sock
+ExecStart=%h/.local/bin/comet --config %h/.config/comet/config.yml
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=default.target

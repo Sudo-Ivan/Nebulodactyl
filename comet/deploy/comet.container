@@ -1,0 +1,37 @@
+# Podman Quadlet for Comet. Install to /etc/containers/systemd/comet.container
+# (system mode) or ~/.config/containers/systemd/comet.container (rootless),
+# then run systemctl daemon-reload and systemctl start comet.
+#
+# For rootless use, drop the unit in the user directory, keep the podman
+# socket path under /run/user/<uid>, and enable rootless mode in config.yml.
+[Unit]
+Description=Nebulodactyl Comet Daemon
+After=network-online.target
+Wants=network-online.target
+
+[Container]
+Image=ghcr.io/sudo-ivan/nebulodactyl-comet:canary
+ContainerName=comet
+PublishPort=8080:8080
+PublishPort=2022:2022
+Volume=/var/run/docker.sock:/var/run/docker.sock
+# Rootless podman socket instead:
+# Volume=/run/user/1000/podman/podman.sock:/var/run/docker.sock
+Volume=/etc/comet:/etc/comet:Z
+Volume=/var/lib/comet:/var/lib/comet:Z
+Volume=/var/log/comet:/var/log/comet:Z
+Volume=/tmp/comet:/tmp/comet:Z
+Volume=/run/comet:/run/comet:Z
+Volume=/etc/ssl/certs:/etc/ssl/certs:ro
+Environment=TZ=UTC
+Environment=COMET_UID=988
+Environment=COMET_GID=988
+Environment=COMET_USERNAME=comet
+TTY=true
+
+[Service]
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,20 @@
+# Systemd unit for Comet running as root against the system Docker or Podman
+# socket. Install to /etc/systemd/system/comet.service then:
+#   systemctl daemon-reload && systemctl enable --now comet
+[Unit]
+Description=Nebulodactyl Comet Daemon
+After=docker.service podman.socket network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/etc/comet
+ExecStart=/usr/local/bin/comet
+Restart=on-failure
+RestartSec=5s
+StartLimitInterval=180
+StartLimitBurst=30
+
+[Install]
+WantedBy=multi-user.target

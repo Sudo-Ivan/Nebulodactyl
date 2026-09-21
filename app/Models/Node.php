@@ -158,12 +158,12 @@ class Node extends Model
         'behind_proxy' => false,
         'memory_overallocate' => 0,
         'disk_overallocate' => 0,
-        'daemonBase' => '/var/lib/pterodactyl/volumes',
+        'daemonBase' => '/var/lib/comet/volumes',
         'daemonSFTP' => 2022,
         'daemonListen' => 8080,
         'maintenance_mode' => false,
         'use_separate_fqdns' => false,
-        'daemonType' => 'wings',
+        'daemonType' => 'comet',
         'backupDisk' => 'wings',
     ];
 
