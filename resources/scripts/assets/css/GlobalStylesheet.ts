@@ -10,11 +10,31 @@ export default createGlobalStyle`
         height: 100%;
         width: 100%;
         overflow: hidden;
-        --tw-bg-opacity: 1;
-        background-color: rgb(0 0 0 / var(--tw-bg-opacity));
         font-family: "Plus Jakarta Sans", sans-serif;
         --tw-text-opacity: 1;
         color: rgb(255 255 255 / var(--tw-text-opacity));
+    }
+
+    body {
+        /* Deep-space base with a faint nebula glow and starfield */
+        background-color: #070510;
+        background-image:
+            radial-gradient(60% 45% at 18% 0%, rgb(124 58 237 / 0.14) 0%, transparent 70%),
+            radial-gradient(50% 40% at 85% 15%, rgb(34 211 238 / 0.08) 0%, transparent 70%),
+            radial-gradient(45% 35% at 70% 90%, rgb(109 40 217 / 0.10) 0%, transparent 70%),
+            radial-gradient(1px 1px at 8% 22%, rgb(255 255 255 / 0.55) 50%, transparent 51%),
+            radial-gradient(1px 1px at 22% 68%, rgb(255 255 255 / 0.40) 50%, transparent 51%),
+            radial-gradient(1px 1px at 34% 12%, rgb(255 255 255 / 0.50) 50%, transparent 51%),
+            radial-gradient(1px 1px at 47% 82%, rgb(255 255 255 / 0.35) 50%, transparent 51%),
+            radial-gradient(1px 1px at 58% 30%, rgb(255 255 255 / 0.45) 50%, transparent 51%),
+            radial-gradient(1px 1px at 66% 60%, rgb(255 255 255 / 0.35) 50%, transparent 51%),
+            radial-gradient(1px 1px at 74% 8%, rgb(255 255 255 / 0.50) 50%, transparent 51%),
+            radial-gradient(1px 1px at 83% 44%, rgb(255 255 255 / 0.40) 50%, transparent 51%),
+            radial-gradient(1px 1px at 91% 74%, rgb(255 255 255 / 0.55) 50%, transparent 51%),
+            radial-gradient(1px 1px at 15% 88%, rgb(196 181 253 / 0.50) 50%, transparent 51%),
+            radial-gradient(1px 1px at 52% 52%, rgb(165 243 252 / 0.45) 50%, transparent 51%),
+            radial-gradient(1px 1px at 96% 28%, rgb(196 181 253 / 0.45) 50%, transparent 51%);
+        background-attachment: fixed;
     }
 
     button {
@@ -51,7 +71,7 @@ export default createGlobalStyle`
         border-right-width: 3px;
         border-left-width: 3px;
         -webkit-border-radius: 9px 4px;
-        -webkit-box-shadow: inset 0 0 0 3px hsl(0deg 0% 30%);
+        -webkit-box-shadow: inset 0 0 0 3px hsl(258deg 30% 35%);
     }
 
     ::-webkit-scrollbar-track-piece {
@@ -108,7 +128,7 @@ export default createGlobalStyle`
         overflow: hidden;
         padding: 0;
         outline: none;
-        background: radial-gradient(124.75% 124.75% at 50.01% -10.55%, rgba(46, 46, 46, 0.3) 0%, rgb(26, 26, 26, 0.2) 100%);
+        background: radial-gradient(124.75% 124.75% at 50.01% -10.55%, rgba(76, 61, 130, 0.3) 0%, rgb(23, 18, 40, 0.2) 100%);
         backdrop-filter: blur(20px);
         box-shadow: rgba(0, 0, 0, 0.5) 0px 16px 70px;
         position: relative;
@@ -161,7 +181,7 @@ export default createGlobalStyle`
         margin-right: 8px;
 
         &[data-selected='true'] {
-            background: #3a3a3add;
+            background: #332c4ddd;
             box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 
             svg {
@@ -190,7 +210,7 @@ export default createGlobalStyle`
 
         &:active {
             transition-property: background;
-            background: #3a3a3add;
+            background: #332c4ddd;
         }
 
         svg {

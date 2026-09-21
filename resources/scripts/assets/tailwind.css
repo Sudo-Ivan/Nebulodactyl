@@ -4,40 +4,45 @@
 @plugin "tailwind-scrollbar";
 
 @theme {
-    --color-ring: deepskyblue;
+    --color-ring: #a78bfa;
 
-    --color-brand-50: oklch(0.97 0.0143 57.59);
-    --color-brand-100: oklch(0.9354 0.0323 58.39);
-    --color-brand-200: oklch(0.8798 0.063 58.24);
-    --color-brand-300: oklch(0.818 0.0981 55.75);
-    --color-brand-400: oklch(0.7603 0.1318 54.85);
-    --color-brand-500: oklch(0.7123 0.1602 52.23);
-    --color-brand-600: oklch(0.6276 0.1636 48.48);
-    --color-brand-700: oklch(0.5108 0.1316 48.74);
-    --color-brand-800: oklch(0.3887 0.0962 49.79);
-    --color-brand-900: oklch(0.2451 0.0546 53.64);
+    /* Nebula violet ramp (primary brand accent) */
+    --color-brand-50: oklch(0.962 0.022 300);
+    --color-brand-100: oklch(0.925 0.05 298);
+    --color-brand-200: oklch(0.855 0.095 295);
+    --color-brand-300: oklch(0.775 0.14 292);
+    --color-brand-400: oklch(0.70 0.175 290);
+    --color-brand-500: oklch(0.62 0.20 288);
+    --color-brand-600: oklch(0.53 0.19 287);
+    --color-brand-700: oklch(0.44 0.155 287);
+    --color-brand-800: oklch(0.34 0.115 287);
+    --color-brand-900: oklch(0.24 0.075 287);
 
-    --color-cream-100: #fffdfa;
-    --color-cream-200: #fff8f0;
-    --color-cream-300: #fff5eb;
-    --color-cream-400: #fff1e0;
-    --color-cream-500: #ffedd9;
+    /* Starlight: lavender-tinted light neutrals (legacy cream tokens) */
+    --color-cream-50: #ffffff;
+    --color-cream-100: #fbfaff;
+    --color-cream-200: #f4f1ff;
+    --color-cream-300: #ece7ff;
+    --color-cream-400: #e2daff;
+    --color-cream-500: #d4ccff;
+    --color-cream-600: #c3b8fa;
 
-    --color-mocha-50: #867565;
-    --color-mocha-100: #78695a;
-    --color-mocha-200: #5d5246;
-    --color-mocha-300: #433b32;
-    --color-mocha-400: #29241f;
-    --color-mocha-500: #1d1816;
-    --color-mocha-600: #14110f;
-    --color-mocha-700: #0c0a09;
+    /* Deep space: violet-tinted dark surfaces (legacy mocha tokens) */
+    --color-mocha-50: #716b94;
+    --color-mocha-100: #5d5680;
+    --color-mocha-200: #474064;
+    --color-mocha-300: #332c4d;
+    --color-mocha-400: #221c38;
+    --color-mocha-500: #171228;
+    --color-mocha-600: #100c1d;
+    --color-mocha-700: #090613;
 
-    --color-bg: #0c0a09;
-    --color-bg-raised: #110f0d;
-    --color-bg-lowered: #0c0a09;
+    --color-bg: #090613;
+    --color-bg-raised: #141024;
+    --color-bg-lowered: #070510;
 
     --color-primary: var(--color-cream-400);
-    --color-secondary: #fff6eb9c;
+    --color-secondary: #e2daff99;
 
     --color-inherit: inherit;
     --color-current: currentColor;
@@ -45,11 +50,21 @@
     --color-black: #000000;
     --color-white: #fff;
 
-    --color-brand-grad: radial-gradient(109.26% 109.26% at 49.83% 13.37%, #ff343c 0%, #f06f53 100%);
-    --color-brand: #fa4e49;
+    --color-brand-grad: radial-gradient(109.26% 109.26% at 49.83% 13.37%, #7c3aed 0%, #22d3ee 100%);
+    --color-brand: #8b5cf6;
 
     --color-accent: var(--color-cream-400);
     --color-accent-foreground: var(--color-mocha-500);
+
+    /* Space accents */
+    --color-nebula-300: #c4b5fd;
+    --color-nebula-500: #8b5cf6;
+    --color-nebula-700: #6d28d9;
+    --color-aurora: #22d3ee;
+    --color-comet: #f0abfc;
+    --color-starlight: #e2daff;
+    --color-cosmos: #171228;
+    --color-void: #070510;
 
     --transition-duration-250: 250ms;
 
