@@ -136,3 +136,15 @@ reporting, and export the same variable for the `comet` process (for example
 in the systemd unit or quadlet) to capture daemon errors. `send_default_pii`
 stays off by default, so no IPs or user data are attached unless you opt in
 with `SENTRY_SEND_DEFAULT_PII=true`.
+
+## Single sign-on
+
+The panel supports OpenID Connect login for providers like Authentik,
+Keycloak, Authelia, Zitadel, or Dex. Register the panel at your provider
+with the redirect URI `{APP_URL}/auth/oidc/callback`, then set
+`OIDC_ENABLED=true`, `OIDC_ISSUER`, `OIDC_CLIENT_ID`, and
+`OIDC_CLIENT_SECRET` in the panel environment. The login page then shows
+a "Continue with SSO" button alongside the normal password form. Users
+are matched to existing accounts by the provider subject claim or email,
+and new accounts are created automatically unless `OIDC_AUTO_REGISTER`
+is set to false.
