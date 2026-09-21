@@ -5,6 +5,7 @@ namespace Pterodactyl\Services\Servers;
 use Carbon\CarbonImmutable;
 use Pterodactyl\Models\Node;
 use Pterodactyl\Models\Server;
+use Pterodactyl\Models\Allocation;
 use Pterodactyl\Enums\Daemon\JwtScope;
 use Pterodactyl\Models\ServerTransfer;
 use Illuminate\Database\ConnectionInterface;
@@ -68,25 +69,27 @@ class ServerTransferService
 
     /**
      * Assigns the specified allocations to the specified server.
+     *
+     * The update is conditional on each row still being unassigned on the
+     * target node and fails the transfer if any allocation was claimed
+     * concurrently. Silently skipping them would leave the transfer record
+     * pointing at allocations this server does not own.
+     *
+     * @throws \Throwable
      */
     private function assignAllocationsToServer(Server $server, int $nodeId, int $allocationId, array $additionalAllocations): void
     {
         $allocations = $additionalAllocations;
         $allocations[] = $allocationId;
 
-        $unassigned = $this->allocationRepository->getUnassignedAllocationIds($nodeId);
+        $reserved = Allocation::query()
+            ->whereIn('id', $allocations)
+            ->where('node_id', $nodeId)
+            ->whereNull('server_id')
+            ->update(['server_id' => $server->id]);
 
-        $updateIds = [];
-        foreach ($allocations as $allocation) {
-            if (!in_array($allocation, $unassigned)) {
-                continue;
-            }
-
-            $updateIds[] = $allocation;
-        }
-
-        if (!empty($updateIds)) {
-            $this->allocationRepository->updateWhereIn('id', $updateIds, ['server_id' => $server->id]);
+        if ($reserved !== count($allocations)) {
+            throw new \RuntimeException('One or more requested allocations are no longer available on the target node.');
         }
     }
 }

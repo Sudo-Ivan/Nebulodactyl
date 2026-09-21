@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Pterodactyl\Facades\Activity;
 use Illuminate\Database\ConnectionInterface;
 use Pterodactyl\Http\Controllers\Controller;
+use Pterodactyl\Exceptions\Http\HttpForbiddenException;
 use Pterodactyl\Services\Eggs\EggConfigurationService;
 use Pterodactyl\Repositories\Eloquent\ServerRepository;
 use Pterodactyl\Http\Resources\Wings\ServerConfigurationCollection;
@@ -34,6 +35,20 @@ class ServerDetailsController extends Controller
     public function __invoke(Request $request, string $uuid): JsonResponse
     {
         $server = $this->repository->getByUuid($uuid);
+
+        // The response embeds every environment variable for the server, so
+        // only the owning node (or the destination node of an in-flight
+        // transfer) may read it.
+        /** @var \Pterodactyl\Models\Node|null $node */
+        $node = $request->attributes->get('node');
+        $allowed = !is_null($node) && $server->node_id === $node->id;
+        if (!$allowed && !is_null($node) && !is_null($server->transfer)) {
+            $allowed = $server->transfer->new_node === $node->id
+                || $server->transfer->old_node === $node->id;
+        }
+        if (!$allowed) {
+            throw new HttpForbiddenException('You do not have permission to access this server.');
+        }
 
         return new JsonResponse([
             'settings' => $this->configurationStructureService->handle($server),

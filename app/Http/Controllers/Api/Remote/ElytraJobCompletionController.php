@@ -19,7 +19,7 @@ class ElytraJobCompletionController extends Controller
     public function update(ElytraJobCompleteRequest $request, string $jobId): JsonResponse
     {
         try {
-            $this->elytraJobService->updateJobStatus($jobId, $request->validated());
+            $this->elytraJobService->updateJobStatus($jobId, $request->validated(), $request->attributes->get('node'));
 
             return response()->json([
                 'success' => true,

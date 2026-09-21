@@ -109,8 +109,10 @@ class BackupJob implements Job
     public function processStatusUpdate(ElytraJob $job, array $statusData): void
     {
         $successful = $statusData['successful'] ?? false;
-        $jobType = $statusData['job_type'] ?? '';
-        $operation = $this->getOperationFromJobType($jobType);
+        // The operation must come from the stored job record. Trusting the
+        // request body here would let a daemon report a harmless job while
+        // triggering a destructive handler such as delete_all.
+        $operation = $this->getOperationFromJobType($job->job_type);
 
         $errorMessage = $successful ? null : ($statusData['error_message'] ?? 'Unknown error');
         if ($errorMessage) {

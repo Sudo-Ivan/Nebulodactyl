@@ -9,6 +9,7 @@ use Pterodactyl\Models\Server;
 use Illuminate\Http\JsonResponse;
 use Pterodactyl\Http\Controllers\Controller;
 use Pterodactyl\Repositories\Eloquent\ServerRepository;
+use Pterodactyl\Exceptions\Http\HttpForbiddenException;
 use Pterodactyl\Events\Server\Installed as ServerInstalled;
 use Illuminate\Contracts\Events\Dispatcher as EventDispatcher;
 use Pterodactyl\Http\Requests\Api\Remote\InstallationDataRequest;
@@ -28,6 +29,7 @@ class ServerInstallController extends Controller
     public function index(Request $request, string $uuid): JsonResponse
     {
         $server = $this->repository->getByUuid($uuid);
+        $this->assertNodeAccess($request, $server);
         $egg = $server->egg;
 
         return new JsonResponse([
@@ -46,6 +48,7 @@ class ServerInstallController extends Controller
     public function store(InstallationDataRequest $request, string $uuid): JsonResponse
     {
         $server = $this->repository->getByUuid($uuid);
+        $this->assertNodeAccess($request, $server);
         $status = null;
 
         // Make sure the type of failure is accurate
@@ -74,5 +77,28 @@ class ServerInstallController extends Controller
         }
 
         return new JsonResponse([], Response::HTTP_NO_CONTENT);
+    }
+
+    /**
+     * Only the node that hosts the server (or a node participating in an
+     * active transfer of it) may read install scripts or report results.
+     */
+    private function assertNodeAccess(Request $request, Server $server): void
+    {
+        $node = $request->attributes->get('node');
+        if (is_null($node)) {
+            throw new HttpForbiddenException('You do not have permission to access this server.');
+        }
+
+        if ($server->node_id === $node->id) {
+            return;
+        }
+
+        $transfer = $server->transfer;
+        if (!is_null($transfer) && ($transfer->new_node === $node->id || $transfer->old_node === $node->id)) {
+            return;
+        }
+
+        throw new HttpForbiddenException('You do not have permission to access this server.');
     }
 }

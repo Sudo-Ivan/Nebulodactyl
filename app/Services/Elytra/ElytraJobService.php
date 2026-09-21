@@ -3,6 +3,7 @@
 namespace Pterodactyl\Services\Elytra;
 
 use Carbon\CarbonImmutable;
+use Pterodactyl\Models\Node;
 use Pterodactyl\Models\User;
 use Pterodactyl\Models\Server;
 use Pterodactyl\Models\ElytraJob;
@@ -191,13 +192,25 @@ class ElytraJobService
         })->toArray();
     }
 
-    public function updateJobStatus(string $elytraJobId, array $statusData): void
+    public function updateJobStatus(string $elytraJobId, array $statusData, ?Node $node = null): void
     {
         $job = ElytraJob::where('elytra_job_id', $elytraJobId)->first();
 
         if (!$job) {
             Log::warning('Received status update for unknown job', [
                 'elytra_job_id' => $elytraJobId,
+            ]);
+            return;
+        }
+
+        // A job belongs to a server on a specific node; reject updates from
+        // any other node's token so a compromised node cannot forge job
+        // results (for example a fake backup_delete_all completion) for
+        // servers it does not own.
+        if ($node && $job->server->node_id !== $node->id) {
+            Log::warning('Received status update for a job owned by another node', [
+                'elytra_job_id' => $elytraJobId,
+                'node_id' => $node->id,
             ]);
             return;
         }

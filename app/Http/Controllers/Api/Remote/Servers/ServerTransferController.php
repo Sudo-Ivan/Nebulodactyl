@@ -2,6 +2,7 @@
 
 namespace Pterodactyl\Http\Controllers\Api\Remote\Servers;
 
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 use Pterodactyl\Models\Allocation;
@@ -11,6 +12,7 @@ use Illuminate\Database\ConnectionInterface;
 use Pterodactyl\Http\Controllers\Controller;
 use Pterodactyl\Repositories\Eloquent\ServerRepository;
 use Pterodactyl\Repositories\Wings\DaemonServerRepository;
+use Pterodactyl\Exceptions\Http\HttpForbiddenException;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 use Pterodactyl\Exceptions\Http\Connection\DaemonConnectionException;
 
@@ -31,13 +33,15 @@ class ServerTransferController extends Controller
      *
      * @throws \Throwable
      */
-    public function failure(string $uuid): JsonResponse
+    public function failure(Request $request, string $uuid): JsonResponse
     {
         $server = $this->repository->getByUuid($uuid);
         $transfer = $server->transfer;
         if (is_null($transfer)) {
             throw new ConflictHttpException('Server is not being transferred.');
         }
+
+        $this->assertTransferNode($request, $transfer);
 
         return $this->processFailedTransfer($transfer);
     }
@@ -47,13 +51,15 @@ class ServerTransferController extends Controller
      *
      * @throws \Throwable
      */
-    public function success(string $uuid): JsonResponse
+    public function success(Request $request, string $uuid): JsonResponse
     {
         $server = $this->repository->getByUuid($uuid);
         $transfer = $server->transfer;
         if (is_null($transfer)) {
             throw new ConflictHttpException('Server is not being transferred.');
         }
+
+        $this->assertTransferNode($request, $transfer);
 
         /** @var \Pterodactyl\Models\Server $server */
         $server = $this->connection->transaction(function () use ($server, $transfer) {
@@ -85,6 +91,20 @@ class ServerTransferController extends Controller
         }
 
         return new JsonResponse([], Response::HTTP_NO_CONTENT);
+    }
+
+    /**
+     * Ensure the node reporting the transfer result is one of the two nodes
+     * participating in it. Without this check any node's token could force a
+     * transfer to complete early (deleting the source copy mid-flight) or
+     * release the reserved target allocations.
+     */
+    private function assertTransferNode(Request $request, ServerTransfer $transfer): void
+    {
+        $node = $request->attributes->get('node');
+        if (is_null($node) || ($transfer->old_node !== $node->id && $transfer->new_node !== $node->id)) {
+            throw new HttpForbiddenException('This node is not part of the requested transfer.');
+        }
     }
 
     /**

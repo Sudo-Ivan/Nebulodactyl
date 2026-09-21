@@ -95,6 +95,14 @@ class BackupStatusController extends Controller
         /** @var Backup $model */
         $model = Backup::query()->where('uuid', $backup)->firstOrFail();
 
+        // Same ownership rule as the backup status endpoint: only the node
+        // hosting the server may clear its status and log the restore event.
+        /** @var \Pterodactyl\Models\Node $node */
+        $node = $request->attributes->get('node');
+        if ($model->server->node_id !== $node->id) {
+            throw new HttpForbiddenException('You do not have permission to access that backup.');
+        }
+
         $model->server->update(['status' => null]);
 
         Activity::event($request->boolean('successful') ? 'server:backup.restore-complete' : 'server.backup.restore-failed')

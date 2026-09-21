@@ -45,8 +45,10 @@ class NebulaEnrollmentController extends Controller
             throw new BadRequestHttpException('public_key must be a base64 encoded X25519 public key.');
         }
 
-        $groups = $request->input('groups', config('nebula.groups'));
-        $groups = is_array($groups) ? array_values(array_filter($groups, 'is_string')) : config('nebula.groups');
+        // Groups are assigned by the panel only. Accepting them from the
+        // request would let a node sign itself into arbitrary firewall
+        // groups such as the lighthouse or panel groups.
+        $groups = array_values(array_filter((array) config('nebula.groups'), 'is_string'));
 
         /** @var NebulaHost|null $host */
         $host = NebulaHost::query()->where('node_id', $node->id)->whereNull('revoked_at')->first();
