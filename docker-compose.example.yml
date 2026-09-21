@@ -5,6 +5,14 @@
 #   cp .env.example .env   (or let install.sh do all of this for you)
 #   docker compose up -d
 #
+# Podman: this file works unchanged under podman. Either install
+# podman-compose, or run docker CLI against the Podman socket:
+#   systemctl --user enable --now podman.socket
+#   export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/podman/podman.sock
+#   docker compose up -d
+# Rootless pods cannot bind ports below 1024, so set HTTP_PORT=8080 and
+# HTTPS_PORT=8443 in .env when running rootless.
+#
 # Values like ${DB_PASSWORD} are read from the .env file in this directory.
 # install.sh generates them for you. If you write .env by hand, set at least
 # APP_URL, DB_PASSWORD, and DB_ROOT_PASSWORD.

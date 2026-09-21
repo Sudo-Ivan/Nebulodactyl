@@ -61,6 +61,10 @@ class AssetComposer
         'release' => config('sentry.release'),
         'tracesSampleRate' => config('sentry.traces_sample_rate'),
       ],
+      'oidc' => [
+        'enabled' => (bool) config('oidc.enabled'),
+        'displayName' => config('oidc.display_name', 'SSO'),
+      ],
     ]);
   }
 

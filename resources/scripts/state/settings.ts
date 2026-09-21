@@ -21,6 +21,10 @@ export interface SiteSettings {
         release?: string | null;
         tracesSampleRate?: number | null;
     };
+    oidc?: {
+        enabled?: boolean;
+        displayName?: string;
+    };
 }
 
 export interface SettingsStore {

@@ -9,8 +9,8 @@ import Captcha, { getCaptchaResponse } from '@/components/elements/Captcha';
 import Field from '@/components/elements/Field';
 
 import CaptchaManager from '@/lib/captcha';
-
 import useFlash from '@/plugins/useFlash';
+import type { SiteSettings } from '@/state/settings';
 
 import SecondaryLink from '../ui/secondary-link';
 
@@ -29,6 +29,7 @@ interface ErrorResponse {
 function LoginContainer() {
     const { clearFlashes, clearAndAddHttpError } = useFlash();
     const navigate = useNavigate();
+    const oidc = (window as unknown as { SiteConfiguration?: SiteSettings }).SiteConfiguration?.oidc;
 
     const onSubmit = (values: Values, { setSubmitting }: FormikHelpers<Values>) => {
         // clearFlashes();
@@ -138,6 +139,22 @@ function LoginContainer() {
                             Forgot your password?
                         </SecondaryLink>
                     </div>
+
+                    {oidc?.enabled && (
+                        <div className='mt-6'>
+                            <div className='flex items-center gap-3 mb-4'>
+                                <div className='h-px flex-1 bg-cream-50/10' />
+                                <span className='text-xs text-secondary uppercase tracking-wide'>or</span>
+                                <div className='h-px flex-1 bg-cream-50/10' />
+                            </div>
+                            <a
+                                href='/auth/oidc'
+                                className='block w-full text-center rounded-lg border border-cream-50/10 bg-cream-50/5 p-2 px-4 text-sm font-bold text-cream-100 hover:bg-cream-50/10 transition-colors no-underline'
+                            >
+                                Continue with {oidc.displayName || 'SSO'}
+                            </a>
+                        </div>
+                    )}
                 </LoginFormContainer>
             )}
         </Formik>

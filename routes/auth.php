@@ -48,5 +48,9 @@ Route::post('/logout', [Auth\LoginController::class, 'logout'])
     ->middleware('auth')
     ->name('auth.logout');
 
+// OIDC single sign-on. These routes 404 when OIDC is disabled in config.
+Route::get('/oidc', [Auth\OidcController::class, 'redirect'])->name('auth.oidc');
+Route::get('/oidc/callback', [Auth\OidcController::class, 'callback'])->name('auth.oidc.callback');
+
 // Catch any other combinations of routes and pass them off to the React component.
 Route::fallback([Auth\LoginController::class, 'index']);
