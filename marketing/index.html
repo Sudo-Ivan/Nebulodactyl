@@ -4,53 +4,84 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nebulodactyl - game server panel with Nebula overlay support</title>
-<meta name="description" content="Nebulodactyl is a Hydrodactyl/Pterodactyl-based game server management panel with a space theme and Nebula overlay network support.">
+<meta name="description" content="Nebulodactyl is a Hydrodactyl/Pterodactyl-based game server management panel with Nebula overlay networking and a monochrome space theme.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <style>
     :root {
-        --void: #070510;
-        --bg: #090613;
-        --raised: #141024;
-        --surface: #171228;
-        --border: #332c4d;
-        --text: #e2daff;
-        --muted: #716b94;
-        --violet: #8b5cf6;
-        --violet-deep: #6d28d9;
-        --cyan: #22d3ee;
+        --void: #050506;
+        --bg: #0a0a0b;
+        --raised: #16161a;
+        --surface: #101013;
+        --border: #1f1f24;
+        --text: #fafafa;
+        --muted: #a1a1aa;
+        --faint: #71717a;
+        --warn: #fb923c;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-        background-color: var(--void);
+        background-color: var(--bg);
         background-image:
-            radial-gradient(60% 45% at 18% 0%, rgb(124 58 237 / 0.14) 0%, transparent 70%),
-            radial-gradient(50% 40% at 85% 15%, rgb(34 211 238 / 0.08) 0%, transparent 70%),
-            radial-gradient(45% 35% at 70% 90%, rgb(109 40 217 / 0.10) 0%, transparent 70%),
-            radial-gradient(1px 1px at 8% 22%, rgb(255 255 255 / 0.55) 50%, transparent 51%),
-            radial-gradient(1px 1px at 22% 68%, rgb(255 255 255 / 0.40) 50%, transparent 51%),
-            radial-gradient(1px 1px at 34% 12%, rgb(255 255 255 / 0.50) 50%, transparent 51%),
-            radial-gradient(1px 1px at 47% 82%, rgb(255 255 255 / 0.35) 50%, transparent 51%),
-            radial-gradient(1px 1px at 58% 30%, rgb(255 255 255 / 0.45) 50%, transparent 51%),
-            radial-gradient(1px 1px at 74% 8%, rgb(255 255 255 / 0.50) 50%, transparent 51%),
-            radial-gradient(1px 1px at 83% 44%, rgb(255 255 255 / 0.40) 50%, transparent 51%),
-            radial-gradient(1px 1px at 91% 74%, rgb(255 255 255 / 0.55) 50%, transparent 51%),
-            radial-gradient(1px 1px at 15% 88%, rgb(196 181 253 / 0.50) 50%, transparent 51%),
-            radial-gradient(1px 1px at 52% 52%, rgb(165 243 252 / 0.45) 50%, transparent 51%),
-            radial-gradient(1px 1px at 96% 28%, rgb(196 181 253 / 0.45) 50%, transparent 51%);
+            radial-gradient(24rem 12rem at 88% -15%, rgb(255 255 255 / 0.10), transparent 70%),
+            radial-gradient(40% 30% at 15% 100%, rgb(255 255 255 / 0.04), transparent 70%);
         background-attachment: fixed;
         color: var(--text);
         font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
         line-height: 1.6;
         min-height: 100vh;
+        position: relative;
     }
-    a { color: var(--cyan); text-decoration: none; }
+    body::before, body::after {
+        content: '';
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+    }
+    body::before {
+        background-image:
+            radial-gradient(1px 1px at 8% 22%, rgb(255 255 255 / 0.90) 50%, transparent 51%),
+            radial-gradient(1px 1px at 22% 68%, rgb(255 255 255 / 0.55) 50%, transparent 51%),
+            radial-gradient(1px 1px at 34% 12%, rgb(255 255 255 / 0.70) 50%, transparent 51%),
+            radial-gradient(1px 1px at 47% 82%, rgb(255 255 255 / 0.45) 50%, transparent 51%),
+            radial-gradient(1px 1px at 58% 30%, rgb(255 255 255 / 0.60) 50%, transparent 51%),
+            radial-gradient(1px 1px at 66% 60%, rgb(255 255 255 / 0.45) 50%, transparent 51%),
+            radial-gradient(1px 1px at 74% 8%, rgb(255 255 255 / 0.70) 50%, transparent 51%),
+            radial-gradient(1px 1px at 83% 44%, rgb(255 255 255 / 0.55) 50%, transparent 51%),
+            radial-gradient(1px 1px at 91% 74%, rgb(255 255 255 / 0.80) 50%, transparent 51%);
+        animation: twinkle 4s ease-in-out infinite;
+    }
+    body::after {
+        background-image:
+            radial-gradient(1px 1px at 15% 88%, rgb(255 255 255 / 0.50) 50%, transparent 51%),
+            radial-gradient(1px 1px at 52% 52%, rgb(255 255 255 / 0.65) 50%, transparent 51%),
+            radial-gradient(1px 1px at 96% 28%, rgb(255 255 255 / 0.55) 50%, transparent 51%),
+            radial-gradient(1px 1px at 40% 40%, rgb(255 255 255 / 0.40) 50%, transparent 51%),
+            radial-gradient(1px 1px at 70% 90%, rgb(255 255 255 / 0.50) 50%, transparent 51%),
+            radial-gradient(1px 1px at 5% 55%, rgb(255 255 255 / 0.60) 50%, transparent 51%),
+            radial-gradient(1px 1px at 88% 90%, rgb(255 255 255 / 0.45) 50%, transparent 51%);
+        animation: twinkle 6.5s ease-in-out infinite reverse;
+    }
+    @keyframes twinkle {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.35; }
+    }
+    @keyframes rise {
+        0% { opacity: 0; transform: translateY(14px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+    a { color: var(--text); text-decoration: none; }
     a:hover { text-decoration: underline; }
-    .wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+    .wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
 
     header {
         border-bottom: 1px solid var(--border);
         padding: 20px 0;
+        position: relative;
+        z-index: 1;
+        background: rgb(10 10 11 / 0.78);
+        backdrop-filter: blur(14px);
     }
     header .wrap {
         display: flex;
@@ -62,8 +93,9 @@
         align-items: center;
         gap: 12px;
         font-weight: 700;
-        font-size: 18px;
-        letter-spacing: 1px;
+        font-size: 15px;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
         color: var(--text);
     }
     .brand img { width: 34px; height: 32px; }
@@ -73,21 +105,19 @@
         font-size: 14px;
         margin-left: 24px;
     }
-    nav a:hover { color: var(--text); }
+    nav a:hover { color: var(--text); text-decoration: none; }
 
     .hero {
         text-align: center;
         padding: 110px 0 90px;
+        animation: rise 0.6s ease-out both;
     }
     .hero img.logo { width: 110px; height: auto; margin-bottom: 28px; }
     h1 {
         font-size: clamp(42px, 7vw, 72px);
         font-weight: 800;
-        letter-spacing: 4px;
-        background: linear-gradient(90deg, #c4b5fd 0%, #a78bfa 55%, #67e8f9 100%);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
+        letter-spacing: 0.22em;
+        color: var(--text);
     }
     .tagline {
         color: var(--muted);
@@ -102,19 +132,21 @@
         border-radius: 10px;
         font-weight: 600;
         font-size: 15px;
+        transition: border-color 0.2s, transform 0.2s, background 0.2s;
     }
-    .btn:hover { text-decoration: none; }
+    .btn:hover { text-decoration: none; transform: translateY(-1px); }
     .btn-primary {
-        background: linear-gradient(135deg, var(--violet) 0%, var(--violet-deep) 100%);
-        color: #fff;
+        background: var(--text);
+        color: var(--bg);
     }
     .btn-ghost {
         border: 1px solid var(--border);
         color: var(--text);
-        background: rgb(23 18 40 / 0.6);
+        background: rgb(22 22 26 / 0.6);
     }
+    .btn-ghost:hover { border-color: var(--faint); }
 
-    section { padding: 64px 0; }
+    section { padding: 64px 0; position: relative; z-index: 1; }
     h2 {
         font-size: 26px;
         font-weight: 700;
@@ -127,22 +159,24 @@
         gap: 16px;
     }
     .card {
-        background: rgb(20 16 36 / 0.7);
+        background: rgb(16 16 19 / 0.7);
         border: 1px solid var(--border);
         border-radius: 12px;
         padding: 22px;
         backdrop-filter: blur(6px);
+        transition: border-color 0.2s;
     }
+    .card:hover { border-color: #2a2a31; }
     .card h3 {
         font-size: 15px;
-        color: var(--cyan);
+        color: var(--text);
         margin-bottom: 8px;
         font-weight: 600;
     }
     .card p { color: var(--muted); font-size: 14px; }
 
     pre {
-        background: var(--bg);
+        background: var(--surface);
         border: 1px solid var(--border);
         border-radius: 10px;
         padding: 18px 20px;
@@ -153,8 +187,8 @@
     code { font-family: ui-monospace, "SF Mono", Menlo, monospace; }
 
     .note {
-        border-left: 3px solid var(--violet);
-        background: rgb(139 92 246 / 0.08);
+        border-left: 3px solid var(--warn);
+        background: rgb(251 146 60 / 0.08);
         padding: 14px 18px;
         border-radius: 0 8px 8px 0;
         color: var(--muted);
@@ -167,7 +201,11 @@
         padding: 32px 0 48px;
         color: var(--muted);
         font-size: 13px;
+        position: relative;
+        z-index: 1;
     }
+    footer a { color: var(--muted); }
+    footer a:hover { color: var(--text); }
 </style>
 </head>
 <body>
@@ -176,7 +214,7 @@
     <div class="wrap">
         <a class="brand" href="./">
             <img src="favicon.svg" alt="Nebulodactyl logo">
-            NEBULODACTYL
+            Nebulodactyl
         </a>
         <nav>
             <a href="#features">Features</a>
@@ -193,8 +231,8 @@
             <img class="logo" src="favicon.svg" alt="">
             <h1>NEBULODACTYL</h1>
             <p class="tagline">
-                A game server management panel forked from Hydrodactyl, with a space
-                theme and support for joining nodes over a Nebula overlay network.
+                A game server management panel forked from Hydrodactyl, with a
+                monochrome space theme and first-class Nebula overlay networking.
             </p>
             <div class="actions">
                 <a class="btn btn-primary" href="https://github.com/Sudo-Ivan/Nebulodactyl">View on GitHub</a>
@@ -208,12 +246,16 @@
             <h2>What you get</h2>
             <div class="grid">
                 <div class="card">
-                    <h3>Space theme</h3>
-                    <p>A nebula-inspired color scheme with deep-space backgrounds, starfield accents, and a violet/cyan palette.</p>
+                    <h3>Nebula overlay</h3>
+                    <p>The panel signs node certificates and routes daemon traffic over a mutually authenticated Nebula mesh. Nodes enroll themselves with the nebulod agent.</p>
                 </div>
                 <div class="card">
-                    <h3>Nebula overlay</h3>
-                    <p>Run panel-to-node traffic over a mutually authenticated Nebula overlay instead of exposing daemons publicly.</p>
+                    <h3>nebulod agent</h3>
+                    <p>A small Go daemon on each node: enrolls with the panel, renders the nebula config, supervises the tunnel, and serves health and metrics on the overlay.</p>
+                </div>
+                <div class="card">
+                    <h3>Space theme</h3>
+                    <p>Monochrome void palette with a twinkling starfield and ambient glow, matching the quad4.io aesthetic.</p>
                 </div>
                 <div class="card">
                     <h3>Client panel</h3>
@@ -224,20 +266,16 @@
                     <p>Native plugin and mod installer for Minecraft servers backed by Modrinth, Hangar, and Spiget.</p>
                 </div>
                 <div class="card">
-                    <h3>S3 backups</h3>
-                    <p>Per-node backup storage with any S3-compatible provider.</p>
+                    <h3>Runs anywhere</h3>
+                    <p>Behind Coolify, Traefik, nginx, or Caddy with trusted proxy support and a health endpoint built in.</p>
+                </div>
+                <div class="card">
+                    <h3>Your database</h3>
+                    <p>MySQL, MariaDB, PostgreSQL, or SQLite for small self-hosted installs.</p>
                 </div>
                 <div class="card">
                     <h3>Signed artifacts</h3>
                     <p>Images and releases ship with Cosign keyless signatures, SBOMs, SLSA provenance, and OpenVEX documents.</p>
-                </div>
-                <div class="card">
-                    <h3>Your database</h3>
-                    <p>MySQL, MariaDB, or PostgreSQL. Pick what you already run.</p>
-                </div>
-                <div class="card">
-                    <h3>Modern stack</h3>
-                    <p>Laravel 13, React 19, TypeScript, and Tailwind CSS, formatted and linted with Biome.</p>
                 </div>
             </div>
         </div>
@@ -248,14 +286,16 @@
             <h2>Nebula overlay networking</h2>
             <p style="color: var(--muted); max-width: 720px;">
                 Nebula is a mutually authenticated, peer-to-peer overlay network originally
-                built at Slack. Nebulodactyl nodes can join the same overlay, so the panel
-                reaches each daemon over encrypted tunnels pinned to host certificates.
-                Lighthouses handle discovery and NAT traversal, and group-based firewall
-                rules keep node ports closed to anything outside your fleet.
+                built at Slack. The panel acts as the certificate authority: each node
+                enrolls once with its daemon token, receives a signed certificate and an
+                allocated overlay address, and the panel then prefers the overlay IP for
+                all daemon traffic. Lighthouses handle discovery and NAT traversal, and
+                group-based firewall rules keep node ports closed to anything outside
+                your fleet.
             </p>
             <div class="note">
-                Configuration lives in config/nebula.php, with a full host example in
-                examples/nebula/config.example.yml.
+                Panel config lives in config/nebula.php. Initialize the CA with
+                php artisan nebula:init-ca, then run agent/nebulod on each node.
             </div>
         </div>
     </section>
@@ -266,11 +306,11 @@
             <pre><code>git clone https://github.com/Sudo-Ivan/Nebulodactyl.git
 cd Nebulodactyl
 cp .env.example .env
-cp docker-compose.example.yml docker-compose.yml
 docker compose up -d</code></pre>
             <div class="note">
                 Pre-release software under active development. Review the upstream
-                Hydrodactyl docs before installing.
+                Hydrodactyl docs before installing. See examples/coolify/ for a
+                reverse proxy deployment.
             </div>
         </div>
     </section>
@@ -284,7 +324,6 @@ docker compose up -d</code></pre>
         </p>
         <p style="margin-top: 8px;">
             <a href="https://github.com/Sudo-Ivan/Nebulodactyl">Repository</a> &middot;
-            <a href="https://github.com/Sudo-Ivan/Nebulodactyl/issues">Issues</a> &middot;
             <a href="https://hydrodactyl.dev/docs/hydrodactyl">Upstream docs</a>
         </p>
     </div>

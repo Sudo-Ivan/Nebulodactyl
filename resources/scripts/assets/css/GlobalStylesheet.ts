@@ -16,25 +16,57 @@ export default createGlobalStyle`
     }
 
     body {
-        /* Deep-space base with a faint nebula glow and starfield */
-        background-color: #070510;
+        /* quad4 scheme: near-black canvas with a faint white glow */
+        background-color: #0a0a0b;
         background-image:
-            radial-gradient(60% 45% at 18% 0%, rgb(124 58 237 / 0.14) 0%, transparent 70%),
-            radial-gradient(50% 40% at 85% 15%, rgb(34 211 238 / 0.08) 0%, transparent 70%),
-            radial-gradient(45% 35% at 70% 90%, rgb(109 40 217 / 0.10) 0%, transparent 70%),
-            radial-gradient(1px 1px at 8% 22%, rgb(255 255 255 / 0.55) 50%, transparent 51%),
-            radial-gradient(1px 1px at 22% 68%, rgb(255 255 255 / 0.40) 50%, transparent 51%),
-            radial-gradient(1px 1px at 34% 12%, rgb(255 255 255 / 0.50) 50%, transparent 51%),
-            radial-gradient(1px 1px at 47% 82%, rgb(255 255 255 / 0.35) 50%, transparent 51%),
-            radial-gradient(1px 1px at 58% 30%, rgb(255 255 255 / 0.45) 50%, transparent 51%),
-            radial-gradient(1px 1px at 66% 60%, rgb(255 255 255 / 0.35) 50%, transparent 51%),
-            radial-gradient(1px 1px at 74% 8%, rgb(255 255 255 / 0.50) 50%, transparent 51%),
-            radial-gradient(1px 1px at 83% 44%, rgb(255 255 255 / 0.40) 50%, transparent 51%),
-            radial-gradient(1px 1px at 91% 74%, rgb(255 255 255 / 0.55) 50%, transparent 51%),
-            radial-gradient(1px 1px at 15% 88%, rgb(196 181 253 / 0.50) 50%, transparent 51%),
-            radial-gradient(1px 1px at 52% 52%, rgb(165 243 252 / 0.45) 50%, transparent 51%),
-            radial-gradient(1px 1px at 96% 28%, rgb(196 181 253 / 0.45) 50%, transparent 51%);
+            radial-gradient(24rem 12rem at 88% -15%, rgb(255 255 255 / 0.10), transparent 70%),
+            radial-gradient(40% 30% at 15% 100%, rgb(255 255 255 / 0.04), transparent 70%);
         background-attachment: fixed;
+    }
+
+    /* Starfield layers: two sheets of fixed dots twinkling out of phase */
+    body::before,
+    body::after {
+        content: '';
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    body::before {
+        background-image:
+            radial-gradient(1px 1px at 8% 22%, rgb(255 255 255 / 0.90) 50%, transparent 51%),
+            radial-gradient(1px 1px at 22% 68%, rgb(255 255 255 / 0.55) 50%, transparent 51%),
+            radial-gradient(1px 1px at 34% 12%, rgb(255 255 255 / 0.70) 50%, transparent 51%),
+            radial-gradient(1px 1px at 47% 82%, rgb(255 255 255 / 0.45) 50%, transparent 51%),
+            radial-gradient(1px 1px at 58% 30%, rgb(255 255 255 / 0.60) 50%, transparent 51%),
+            radial-gradient(1px 1px at 66% 60%, rgb(255 255 255 / 0.45) 50%, transparent 51%),
+            radial-gradient(1px 1px at 74% 8%, rgb(255 255 255 / 0.70) 50%, transparent 51%),
+            radial-gradient(1px 1px at 83% 44%, rgb(255 255 255 / 0.55) 50%, transparent 51%),
+            radial-gradient(1px 1px at 91% 74%, rgb(255 255 255 / 0.80) 50%, transparent 51%);
+        animation: twinkle 4s ease-in-out infinite;
+    }
+
+    body::after {
+        background-image:
+            radial-gradient(1px 1px at 15% 88%, rgb(255 255 255 / 0.50) 50%, transparent 51%),
+            radial-gradient(1px 1px at 52% 52%, rgb(255 255 255 / 0.65) 50%, transparent 51%),
+            radial-gradient(1px 1px at 96% 28%, rgb(255 255 255 / 0.55) 50%, transparent 51%),
+            radial-gradient(1px 1px at 40% 40%, rgb(255 255 255 / 0.40) 50%, transparent 51%),
+            radial-gradient(1px 1px at 70% 90%, rgb(255 255 255 / 0.50) 50%, transparent 51%),
+            radial-gradient(1px 1px at 5% 55%, rgb(255 255 255 / 0.60) 50%, transparent 51%),
+            radial-gradient(1px 1px at 88% 90%, rgb(255 255 255 / 0.45) 50%, transparent 51%);
+        animation: twinkle 6.5s ease-in-out infinite reverse;
+    }
+
+    #app {
+        z-index: 1;
+    }
+
+    @keyframes twinkle {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.35; }
     }
 
     button {
@@ -71,7 +103,7 @@ export default createGlobalStyle`
         border-right-width: 3px;
         border-left-width: 3px;
         -webkit-border-radius: 9px 4px;
-        -webkit-box-shadow: inset 0 0 0 3px hsl(258deg 30% 35%);
+        -webkit-box-shadow: inset 0 0 0 3px hsl(240deg 5% 26%);
     }
 
     ::-webkit-scrollbar-track-piece {
@@ -128,7 +160,7 @@ export default createGlobalStyle`
         overflow: hidden;
         padding: 0;
         outline: none;
-        background: radial-gradient(124.75% 124.75% at 50.01% -10.55%, rgba(76, 61, 130, 0.3) 0%, rgb(23, 18, 40, 0.2) 100%);
+        background: radial-gradient(124.75% 124.75% at 50.01% -10.55%, rgba(90, 90, 98, 0.3) 0%, rgb(16, 16, 19, 0.2) 100%);
         backdrop-filter: blur(20px);
         box-shadow: rgba(0, 0, 0, 0.5) 0px 16px 70px;
         position: relative;
@@ -181,7 +213,7 @@ export default createGlobalStyle`
         margin-right: 8px;
 
         &[data-selected='true'] {
-            background: #332c4ddd;
+            background: #1f1f24dd;
             box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 
             svg {
@@ -210,7 +242,7 @@ export default createGlobalStyle`
 
         &:active {
             transition-property: background;
-            background: #332c4ddd;
+            background: #1f1f24dd;
         }
 
         svg {

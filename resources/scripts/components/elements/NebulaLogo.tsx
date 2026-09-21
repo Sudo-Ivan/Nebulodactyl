@@ -37,9 +37,9 @@ const Logo = ({ className, uniqueId }: { className?: string; uniqueId?: string }
             </g>
             <defs>
                 <radialGradient id={_gradientId} cx='0.5' cy='0.15' r='1'>
-                    <stop offset='0%' stopColor='#a78bfa' />
-                    <stop offset='55%' stopColor='#8b5cf6' />
-                    <stop offset='100%' stopColor='#22d3ee' />
+                    <stop offset='0%' stopColor='#fafafa' />
+                    <stop offset='55%' stopColor='#d4d4d8' />
+                    <stop offset='100%' stopColor='#71717a' />
                 </radialGradient>
                 <clipPath id='clip0_136_35'>
                     <rect width='100' height='92' fill='white' />
