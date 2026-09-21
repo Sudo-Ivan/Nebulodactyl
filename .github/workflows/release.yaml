@@ -1,30 +1,85 @@
-name: Create & Build Release
+name: Release
+
 on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Version to create (e.g., 1.0.0)'
+        description: 'Version to release (e.g. 1.0.0)'
         required: true
         type: string
       release_type:
-        description: 'Type of release'
+        description: 'Release type'
         required: true
         type: choice
         options:
           - release
           - prerelease
-        default: stable
+        default: release
 
-permissions:
-  contents: write
-  packages: write
-  actions: read
+permissions: {}
 
 jobs:
   release:
-    name: Create Release
-    uses: ./.github/workflows/release-action.yaml
-    with:
-      version: ${{ inputs.version }}
-      release_type: ${{ inputs.release_type }}
+    name: Create release
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    env:
+      VERSION: ${{ inputs.version }}
+      RELEASE_TYPE: ${{ inputs.release_type }}
+    steps:
+      - name: Harden the runner
+        uses: step-security/harden-runner@e14015d583714f6e62063499dc959a02595150a1 # v2.21.1
+        with:
+          egress-policy: audit
 
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: master
+
+      - name: Validate inputs
+        run: |
+          if [[ ! "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Invalid version: $VERSION"
+            exit 1
+          fi
+
+      - name: Update version in config/app.php
+        run: sed -i "s/'version' => '[^']*'/'version' => 'v${VERSION}'/" config/app.php
+
+      - name: Commit version bump
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add config/app.php
+          git commit -m "ci: bump v${VERSION}" || echo "No changes to commit"
+
+      - name: Create release archive
+        run: |
+          rm -rf node_modules tests CODE_OF_CONDUCT.md CONTRIBUTING.md
+          tar -czf panel.tar.gz --exclude='.*' * .env.example
+
+      - name: Generate checksum
+        id: checksum
+        run: |
+          sum=$(sha256sum panel.tar.gz | cut -d' ' -f1)
+          echo "$sum  panel.tar.gz" > checksum.txt
+          echo "checksum=$sum" >> "$GITHUB_OUTPUT"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65 # v2
+        with:
+          tag_name: v${{ inputs.version }}
+          target_commitish: master
+          name: Release v${{ inputs.version }}
+          generate_release_notes: true
+          draft: true
+          prerelease: ${{ inputs.release_type == 'prerelease' }}
+          files: |
+            panel.tar.gz
+            checksum.txt
+          body: |
+            **SHA256 checksum:**
+            `${{ steps.checksum.outputs.checksum }}`
