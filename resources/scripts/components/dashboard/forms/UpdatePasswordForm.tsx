@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import updateAccountPassword from '@/api/account/updateAccountPassword';
 import { httpErrorToHuman } from '@/api/http';
 import Field from '@/components/elements/Field';
+import PasswordStrengthMeter from '@/components/elements/PasswordStrengthMeter';
 import Spinner from '@/components/elements/Spinner';
 import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
 import { Button } from '@/components/ui/button';
@@ -76,6 +77,7 @@ const UpdatePasswordForm = () => {
                                     'Your new password should be at least 8 characters in length and unique to this website.'
                                 }
                             />
+                            <PasswordStrengthMeter name='password' />
                         </div>
                         <div className={`mt-6`}>
                             <Field

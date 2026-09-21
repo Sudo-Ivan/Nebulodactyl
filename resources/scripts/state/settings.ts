@@ -10,6 +10,11 @@ export interface SiteSettings {
         url: string;
         icon: string;
     }[];
+    theme?: {
+        accent?: string | null;
+        accentForeground?: string | null;
+        defaultTheme?: 'dark' | 'light' | 'system';
+    };
 }
 
 export interface SettingsStore {

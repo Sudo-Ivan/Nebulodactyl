@@ -1,8 +1,20 @@
 <!DOCTYPE html>
 <!-- Copyright (c) 2025-Present BlueprintFramework, parent collaborators, and contributors -->
-<html data-nebulodactyl-html lang="en" style="background-color: #11100E; height: 100%; width: 100%; margin: 0; padding: 0;">
+<html data-nebulodactyl-html lang="en" style="height: 100%; width: 100%; margin: 0; padding: 0;">
     <head>
         <title>{{ config('app.name', 'Panel') }}</title>
+        <script>
+            // Set the color theme before first paint to avoid a flash. The
+            // React app re-applies this once it boots, this just covers the
+            // loading window.
+            (function () {
+                var t = null;
+                try { t = localStorage.getItem('nebulodactyl:theme'); } catch (e) {}
+                if (t !== 'dark' && t !== 'light') { t = 'dark'; }
+                document.documentElement.dataset.theme = t;
+                document.documentElement.style.backgroundColor = t === 'light' ? '#fafafa' : '#0a0a0b';
+            })();
+        </script>
 
         @section('meta')
             <meta charset="utf-8">
@@ -63,7 +75,7 @@
         @viteReactRefresh
         @vite('resources/scripts/index.tsx')
     </head>
-    <body data-nebulodactyl-body class="{{ $css['body'] }}" style="background-color: #11100E; height: 100%; width: 100%; margin: 0; padding: 0;">
+    <body data-nebulodactyl-body class="{{ $css['body'] }}" style="height: 100%; width: 100%; margin: 0; padding: 0;">
         @section('content')
             @yield('above-container')
             @yield('container')

@@ -39,6 +39,13 @@ class AssetComposer
       'timezone' => config('app.timezone') ?? '',
       'logo' => $logoUrl,
       'customNavItems' => $this->getCustomNavItems(),
+      'theme' => [
+        'accent' => config('branding.accent'),
+        'accentForeground' => config('branding.accent_foreground'),
+        'defaultTheme' => in_array(config('branding.default_theme'), ['dark', 'light', 'system'], true)
+          ? config('branding.default_theme')
+          : 'dark',
+      ],
       'captcha' => [
         'enabled' => $this->captcha->getDefaultDriver() !== 'none',
         'provider' => $this->captcha->getDefaultDriver(),

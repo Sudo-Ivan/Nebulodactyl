@@ -105,11 +105,11 @@ export default memo(function Sidebar({ navItems, bottomNavItems = [], className,
     return (
         <div
             className={cn(
-                'sidebar-container flex-col shrink-0 rounded-lg px-8 select-none overflow-y-auto relative [scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
+                'sidebar-container flex-col shrink-0 rounded-lg select-none overflow-y-auto relative [scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
                 className,
             )}
         >
-            <div className='sidebar-indicator absolute bg-mocha-400 border border-mocha-300 left-8 rounded-xl pointer-events-none' />
+            <div className='sidebar-indicator absolute bg-mocha-400 border border-mocha-300 rounded-xl pointer-events-none' />
             <ul className='sidebar-nav-main flex flex-col text-sm'>
                 {navItems.map((item, index) => {
                     const isActive = currentActiveTab === item.tabName;

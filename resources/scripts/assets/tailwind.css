@@ -86,6 +86,67 @@
     }
 }
 
+/* Light theme: the dark palette uses inverted ramps, so a light theme is a
+   matter of flipping the surface (mocha) and text (cream) scales. Component
+   classes keep working because they reference the same tokens. */
+html[data-theme="light"] {
+    color-scheme: light;
+
+    --color-ring: #71717a;
+
+    --color-brand-50: #18181b;
+    --color-brand-100: #27272a;
+    --color-brand-200: #3f3f46;
+    --color-brand-300: #52525b;
+    --color-brand-400: #3f3f46;
+    --color-brand-500: #52525b;
+    --color-brand-600: #71717a;
+    --color-brand-700: #a1a1aa;
+    --color-brand-800: #d4d4d8;
+    --color-brand-900: #e9e9ec;
+
+    --color-cream-50: #18181b;
+    --color-cream-100: #27272a;
+    --color-cream-200: #3f3f46;
+    --color-cream-300: #52525b;
+    --color-cream-400: #3f3f46;
+    --color-cream-500: #52525b;
+    --color-cream-600: #71717a;
+
+    --color-mocha-50: #d4d4d8;
+    --color-mocha-100: #e4e4e7;
+    --color-mocha-200: #ececef;
+    --color-mocha-300: #f4f4f5;
+    --color-mocha-400: #fafafa;
+    --color-mocha-500: #fbfbfb;
+    --color-mocha-600: #fcfcfc;
+    --color-mocha-700: #ffffff;
+
+    --color-bg: #fafafa;
+    --color-bg-raised: #ffffff;
+    --color-bg-lowered: #f4f4f5;
+
+    --color-primary: #27272a;
+    --color-secondary: #3f3f4699;
+    --color-brand: #27272a;
+    --color-brand-grad: radial-gradient(109.26% 109.26% at 49.83% 13.37%, #52525b 0%, #18181b 100%);
+    --color-accent: #27272a;
+    --color-accent-foreground: #fafafa;
+
+    --color-nebula-300: #3f3f46;
+    --color-nebula-500: #52525b;
+    --color-nebula-700: #a1a1aa;
+    --color-aurora: #52525b;
+    --color-comet: #27272a;
+    --color-starlight: #18181b;
+    --color-cosmos: #f4f4f5;
+    --color-void: #fafafa;
+}
+
+html[data-theme="dark"] {
+    color-scheme: dark;
+}
+
 /* ambient glow motion */
 @keyframes twinkle {
     0%,

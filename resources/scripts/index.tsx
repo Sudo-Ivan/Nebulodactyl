@@ -1,6 +1,14 @@
 import { createRoot } from 'react-dom/client';
 
 import App from '@/components/App';
+import { applyBranding, applyTheme, currentTheme } from '@/lib/theme';
+import type { SiteSettings } from '@/state/settings';
+
+// Apply theme and brand overrides before the first paint so there is no
+// flash of the wrong theme.
+const siteConfiguration = (window as unknown as { SiteConfiguration?: SiteSettings }).SiteConfiguration;
+applyBranding(siteConfiguration);
+applyTheme(currentTheme(siteConfiguration));
 
 const container = document.getElementById('app');
 if (container) {

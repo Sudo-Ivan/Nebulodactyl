@@ -8,14 +8,15 @@
     --sidebar-margin-base: 0.75rem;
     --sidebar-padding: 2rem;
     --sidebar-full-width: 300px;
-    --sidebar-minimized-width: 128px;
+    --sidebar-minimized-width: 76px;
 }
 
 body[data-sidebar-minimized="true"] {
     --sidebar-width: var(--sidebar-minimized-width);
-    --nav-item-height: 60px;
-    --nav-item-spacing: 4px;
-    --indicator-height: 60px;
+    --sidebar-padding: 0.5rem;
+    --nav-item-height: 48px;
+    --nav-item-spacing: 2px;
+    --indicator-height: 48px;
 }
 
 body[data-sidebar-minimized="false"] {
@@ -32,6 +33,8 @@ body[data-sidebar-minimized] {
 /* width transitions */
 .sidebar-container {
     width: var(--sidebar-width);
+    padding-left: var(--sidebar-padding);
+    padding-right: var(--sidebar-padding);
 }
 .sidebar-logo-container {
     box-sizing: border-box;
@@ -89,6 +92,7 @@ body[data-sidebar-minimized="false"] .sidebar-logo-name {
 
 .sidebar-indicator {
     height: var(--indicator-height);
+    left: var(--sidebar-padding);
     opacity: 0;
     width: var(--indicator-width);
     transition:
@@ -105,8 +109,8 @@ body[data-sidebar-minimized="false"] .sidebar-logo-name {
 }
 
 body[data-sidebar-minimized="true"] .nav-item {
-    /* 64px height, 4px used for padding */
-    @apply size-16 flex-col justify-center text-center;
+    /* 48px chip inside the slim rail */
+    @apply size-12 flex-col justify-center text-center;
 }
 body[data-sidebar-minimized="false"] .nav-item {
     /* 32px height, 8px used for padding */

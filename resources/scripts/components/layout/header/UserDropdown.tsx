@@ -1,8 +1,10 @@
 import {
     ArrowDown01Icon,
     Logout03Icon,
+    Moon02Icon,
     ServerStack02Icon,
     Settings02Icon,
+    Sun03Icon,
     UserShield02Icon,
 } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
@@ -18,6 +20,7 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { sha256Hash } from '@/lib/helpers';
+import { toggleTheme } from '@/lib/theme';
 
 import { Button } from '../../ui/button';
 
@@ -44,6 +47,7 @@ export default function UserDropdown({ serverId }: UserDropdownProps) {
     const email = useStoreState((state) => state.user.data?.email);
     const navigate = useNavigate();
     const [emailHash, setEmailHash] = useState<string>('');
+    const [isDark, setIsDark] = useState<boolean>(document.documentElement.dataset.theme !== 'light');
 
     useEffect(() => {
         const computeEmailHash = async () => {
@@ -71,6 +75,15 @@ export default function UserDropdown({ serverId }: UserDropdownProps) {
             link: {
                 href: '/account',
                 external: false,
+            },
+            type: 'item',
+        },
+        {
+            id: 'theme-toggle',
+            label: isDark ? 'Light theme' : 'Dark theme',
+            icon: () => <HugeiconsIcon size={16} strokeWidth={2} icon={isDark ? Sun03Icon : Moon02Icon} />,
+            onSelect: () => {
+                setIsDark(toggleTheme() === 'dark');
             },
             type: 'item',
         },

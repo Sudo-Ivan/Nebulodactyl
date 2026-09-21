@@ -15,6 +15,10 @@ export default createGlobalStyle`
         color: rgb(255 255 255 / var(--tw-text-opacity));
     }
 
+    html[data-theme='light'], html[data-theme='light'] body, html[data-theme='light'] #app {
+        color: #18181b;
+    }
+
     body {
         /* near-black canvas with a faint white glow */
         background-color: #0a0a0b;
@@ -22,6 +26,19 @@ export default createGlobalStyle`
             radial-gradient(24rem 12rem at 88% -15%, rgb(255 255 255 / 0.10), transparent 70%),
             radial-gradient(40% 30% at 15% 100%, rgb(255 255 255 / 0.04), transparent 70%);
         background-attachment: fixed;
+    }
+
+    html[data-theme='light'] body {
+        background-color: #fafafa;
+        background-image:
+            radial-gradient(24rem 12rem at 88% -15%, rgb(24 24 27 / 0.06), transparent 70%),
+            radial-gradient(40% 30% at 15% 100%, rgb(24 24 27 / 0.03), transparent 70%);
+    }
+
+    /* stars belong to the dark sky */
+    html[data-theme='light'] body::before,
+    html[data-theme='light'] body::after {
+        display: none;
     }
 
     /* Starfield layers: two sheets of fixed dots twinkling out of phase */
@@ -289,5 +306,49 @@ export default createGlobalStyle`
 
     input::placeholder {
         color: #ffffff55 !important;
+    }
+
+    html[data-theme='light'] input::placeholder {
+        color: #18181b66 !important;
+    }
+
+    html[data-theme='light'] [cmdk-dialog] {
+        background: #18181b33;
+    }
+
+    html[data-theme='light'] [cmdk-root] {
+        background: rgb(255 255 255 / 0.92);
+        box-shadow: rgba(0, 0, 0, 0.18) 0px 16px 70px;
+    }
+
+    html[data-theme='light'] [cmdk-input] {
+        color: #18181b;
+        border-bottom-color: #18181b22;
+
+        &::placeholder {
+            color: #a1a1aa;
+        }
+    }
+
+    html[data-theme='light'] [cmdk-item] {
+        &[data-selected='true'] {
+            background: #e9e9ecdd;
+
+            svg {
+                color: #18181b;
+            }
+        }
+
+        &[data-disabled='true'], &[data-disabled='true'] svg {
+            color: #a1a1aa;
+        }
+
+        &:active {
+            background: #e9e9ecdd;
+        }
+
+        svg {
+            color: #3f3f46;
+        }
     }
 `;

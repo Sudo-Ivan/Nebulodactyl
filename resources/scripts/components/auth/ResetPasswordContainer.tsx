@@ -9,6 +9,7 @@ import Captcha, { getCaptchaResponse } from '@/components/elements/Captcha';
 import ContentBox from '@/components/elements/ContentBox';
 import Field from '@/components/elements/Field';
 import Input from '@/components/elements/Input';
+import PasswordStrengthMeter from '@/components/elements/PasswordStrengthMeter';
 import CaptchaManager from '@/lib/captcha';
 
 import useFlash from '@/plugins/useFlash';
@@ -126,6 +127,7 @@ function ResetPasswordContainer() {
                                 type={'password'}
                                 description={'Passwords must be at least 8 characters in length.'}
                             />
+                            <PasswordStrengthMeter name='password' />
                         </div>
                         <div className={`mt-6`}>
                             <Field label={'Confirm New Password'} name={'password_confirmation'} type={'password'} />

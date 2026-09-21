@@ -5,6 +5,7 @@ import { object, string } from 'yup';
 
 import setupAdmin from '@/api/auth/setup';
 import Field from '@/components/elements/Field';
+import PasswordStrengthMeter from '@/components/elements/PasswordStrengthMeter';
 import FlashMessageRender from '@/components/FlashMessageRender';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -64,49 +65,6 @@ const schema = object().shape({
 });
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
-
-function scorePassword(pw: string): number {
-    if (!pw) return 0;
-    let score = 0;
-    if (pw.length >= 8) score++;
-    if (pw.length >= 12) score++;
-    if (/[a-z]/.test(pw) && /[A-Z]/.test(pw)) score++;
-    if (/\d/.test(pw)) score++;
-    if (/[^A-Za-z0-9]/.test(pw)) score++;
-    return Math.min(4, Math.max(0, score));
-}
-
-const STRENGTH = [
-    { label: 'Too short', className: 'bg-[#d36666]' },
-    { label: 'Weak', className: 'bg-[#d36666]' },
-    { label: 'Fair', className: 'bg-mocha-50' },
-    { label: 'Good', className: 'bg-brand-400' },
-    { label: 'Strong', className: 'bg-brand-500' },
-];
-
-const PasswordStrength = ({ value }: { value: string }) => {
-    if (!value) return null;
-    const score = scorePassword(value);
-    // scorePassword() always returns 0-4 and STRENGTH has one entry per value.
-    const { label, className } = STRENGTH[score] ?? { label: '', className: '' };
-
-    return (
-        <div className='flex items-center gap-3 mt-2.5'>
-            <div className='flex gap-1 flex-1'>
-                {[0, 1, 2, 3].map((i) => (
-                    <div
-                        key={i}
-                        className={cn(
-                            'h-1 flex-1 rounded-full transition-colors duration-200',
-                            i < score ? className : 'bg-white/8',
-                        )}
-                    />
-                ))}
-            </div>
-            <span className='text-xs text-secondary tabular-nums w-14 text-right'>{label}</span>
-        </div>
-    );
-};
 
 const StepTracker = ({ current }: { current: number }) => (
     <div className='flex items-center gap-3'>
@@ -332,7 +290,7 @@ const SetupContainer = () => {
                                             label='Password'
                                             disabled={isSubmitting}
                                         />
-                                        <PasswordStrength value={values.password} />
+                                        <PasswordStrengthMeter name='password' />
                                     </div>
                                     <Field
                                         id='password_confirmation'
