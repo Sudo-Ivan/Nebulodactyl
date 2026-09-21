@@ -134,6 +134,11 @@ const ServerRow = ({ server, className, hideGroup }: { server: Server; className
                                 {server.group.name}
                             </span>
                         )}
+                        {stats?.health === 'unhealthy' && (
+                            <span className='inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-semibold bg-yellow-500/10 text-yellow-500 border border-yellow-500/20'>
+                                Unhealthy
+                            </span>
+                        )}
                     </div>
                 </div>
             </div>
@@ -154,9 +159,13 @@ const ServerRow = ({ server, className, hideGroup }: { server: Server; className
                                     ? 'Transferring'
                                     : server.status === 'installing'
                                       ? 'Installing'
-                                      : server.status === 'restoring_backup'
-                                        ? 'Restoring Backup'
-                                        : 'Unavailable'}
+                                      : server.status === 'install_failed'
+                                        ? 'Install Failed'
+                                        : server.status === 'reinstall_failed'
+                                          ? 'Reinstall Failed'
+                                          : server.status === 'restoring_backup'
+                                            ? 'Restoring Backup'
+                                            : 'Unavailable'}
                             </span>
                         </div>
                     ) : (

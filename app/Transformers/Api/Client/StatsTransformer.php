@@ -20,6 +20,7 @@ class StatsTransformer extends BaseClientTransformer
         return [
             'current_state' => Arr::get($data, 'state', 'stopped'),
             'is_suspended' => Arr::get($data, 'is_suspended', false),
+            'health' => Arr::get($data, 'health'),
             'resources' => [
                 'memory_bytes' => Arr::get($data, 'utilization.memory_bytes', 0),
                 'cpu_absolute' => Arr::get($data, 'utilization.cpu_absolute', 0),

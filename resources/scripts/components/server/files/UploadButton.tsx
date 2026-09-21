@@ -1,6 +1,5 @@
-import axios from 'axios';
 import { useEffect, useRef, useState } from 'react';
-import getFileUploadUrl from '@/api/server/files/getFileUploadUrl';
+import uploadFile from '@/api/server/files/uploadFile';
 import { ModalMask } from '@/components/elements/Modal';
 import FadeTransition from '@/components/elements/transitions/FadeTransition';
 import { Button } from '@/components/ui/button';
@@ -27,7 +26,7 @@ const UploadButton = () => {
     const name = ServerContext.useStoreState((state) => state.server.data?.name);
     const uuid = ServerContext.useStoreState((state) => state.server.data?.uuid);
     const directory = ServerContext.useStoreState((state) => state.files.directory);
-    const { clearFileUploads, removeFileUpload, pushFileUpload } = ServerContext.useStoreActions(
+    const { clearFileUploads, removeFileUpload, pushFileUpload, setUploadProgress } = ServerContext.useStoreActions(
         (actions) => actions.files,
     );
 
@@ -68,19 +67,9 @@ const UploadButton = () => {
             });
 
             return () =>
-                getFileUploadUrl(uuid).then((url) =>
-                    axios
-                        .post(
-                            url,
-                            { files: file },
-                            {
-                                signal: controller.signal,
-                                headers: { 'Content-Type': 'multipart/form-data' },
-                                params: { directory },
-                            },
-                        )
-                        .then(() => timeouts.push(setTimeout(() => removeFileUpload(file.name), 500))),
-                );
+                uploadFile(uuid, file, directory, controller.signal, (loaded) =>
+                    setUploadProgress({ name: file.name, loaded }),
+                ).then(() => timeouts.push(setTimeout(() => removeFileUpload(file.name), 500)));
         });
 
         Promise.all(uploads.map((fn) => fn()))
