@@ -19,7 +19,12 @@ return new class extends Migration
             ->update(['daemonType' => 'wings']);
 
         // Flip the column default so newly created nodes use Wings.
-        if (DB::connection()->getPdo()->getAttribute(PDO::ATTR_DRIVER_NAME) === 'pgsql') {
+        $driver = DB::connection()->getPdo()->getAttribute(PDO::ATTR_DRIVER_NAME);
+        if ($driver === 'sqlite') {
+            Schema::table('nodes', function (Blueprint $table) {
+                $table->string('daemonType', 16)->default('wings')->change();
+            });
+        } elseif ($driver === 'pgsql') {
             DB::statement('ALTER TABLE nodes ALTER COLUMN "daemonType" SET DEFAULT \'wings\'');
         } else {
             DB::statement("ALTER TABLE nodes ALTER COLUMN daemonType SET DEFAULT 'wings'");
@@ -31,7 +36,12 @@ return new class extends Migration
      */
     public function down(): void
     {
-        if (DB::connection()->getPdo()->getAttribute(PDO::ATTR_DRIVER_NAME) === 'pgsql') {
+        $driver = DB::connection()->getPdo()->getAttribute(PDO::ATTR_DRIVER_NAME);
+        if ($driver === 'sqlite') {
+            Schema::table('nodes', function (Blueprint $table) {
+                $table->string('daemonType', 16)->default('elytra')->change();
+            });
+        } elseif ($driver === 'pgsql') {
             DB::statement('ALTER TABLE nodes ALTER COLUMN "daemonType" SET DEFAULT \'elytra\'');
         } else {
             DB::statement("ALTER TABLE nodes ALTER COLUMN daemonType SET DEFAULT 'elytra'");

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class AddNullableFieldLastrun extends Migration
@@ -11,14 +12,18 @@ class AddNullableFieldLastrun extends Migration
    */
   public function up()
   {
-    $table = DB::getQueryGrammar()->wrapTable('tasks');
+    $driver = DB::getDriverName();
 
-    if (DB::getDriverName() === 'pgsql') {
+    if ($driver === 'sqlite') {
+      Schema::table('tasks', function (Blueprint $table) {
+        $table->timestamp('last_run')->nullable()->change();
+      });
+    } elseif ($driver === 'pgsql') {
       // PostgreSQL-specific syntax
-      DB::statement('ALTER TABLE ' . $table . ' ALTER COLUMN last_run DROP NOT NULL;');
+      DB::statement('ALTER TABLE ' . DB::getQueryGrammar()->wrapTable('tasks') . ' ALTER COLUMN last_run DROP NOT NULL;');
     } else {
       // MySQL/MariaDB-specific syntax
-      DB::statement('ALTER TABLE ' . $table . ' CHANGE `last_run` `last_run` TIMESTAMP NULL;');
+      DB::statement('ALTER TABLE ' . DB::getQueryGrammar()->wrapTable('tasks') . ' CHANGE `last_run` `last_run` TIMESTAMP NULL;');
     }
   }
 
@@ -27,14 +32,18 @@ class AddNullableFieldLastrun extends Migration
    */
   public function down()
   {
-    $table = DB::getQueryGrammar()->wrapTable('tasks');
+    $driver = DB::getDriverName();
 
-    if (DB::getDriverName() === 'pgsql') {
+    if ($driver === 'sqlite') {
+      Schema::table('tasks', function (Blueprint $table) {
+        $table->timestamp('last_run')->nullable(false)->change();
+      });
+    } elseif ($driver === 'pgsql') {
       // PostgreSQL-specific syntax
-      DB::statement('ALTER TABLE ' . $table . ' ALTER COLUMN last_run SET NOT NULL;');
+      DB::statement('ALTER TABLE ' . DB::getQueryGrammar()->wrapTable('tasks') . ' ALTER COLUMN last_run SET NOT NULL;');
     } else {
       // MySQL/MariaDB-specific syntax
-      DB::statement('ALTER TABLE ' . $table . ' CHANGE `last_run` `last_run` TIMESTAMP;');
+      DB::statement('ALTER TABLE ' . DB::getQueryGrammar()->wrapTable('tasks') . ' CHANGE `last_run` `last_run` TIMESTAMP;');
     }
   }
 }

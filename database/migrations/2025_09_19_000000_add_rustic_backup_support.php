@@ -47,6 +47,17 @@ return new class extends Migration
                         ->comment('Rustic snapshot ID for rustic backups');
                 });
                 break;
+
+            case 'sqlite':
+                Schema::table('backups', function (Blueprint $table) {
+                    // SQLite cannot add constraints to existing tables, so the
+                    // disk value set is enforced at the application level here.
+                    $table->string('disk')->default('wings')->change();
+
+                    $table->string('snapshot_id', 64)
+                        ->nullable();
+                });
+                break;
         }
     }
 
@@ -81,6 +92,13 @@ return new class extends Migration
                     ");
 
                     // Drop rustic-specific column
+                    $table->dropColumn('snapshot_id');
+                });
+                break;
+
+            case 'sqlite':
+                Schema::table('backups', function (Blueprint $table) {
+                    $table->string('disk')->default('wings')->change();
                     $table->dropColumn('snapshot_id');
                 });
                 break;

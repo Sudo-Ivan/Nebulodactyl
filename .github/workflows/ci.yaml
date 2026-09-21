@@ -269,6 +269,9 @@ jobs:
         run: composer install --no-interaction --prefer-dist
 
       - name: Prepare environment
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: ${{ github.workspace }}/database/testing.sqlite
         run: |
           cp .env.ci .env
           touch database/testing.sqlite
@@ -277,4 +280,9 @@ jobs:
           echo "DB_DATABASE=$PWD/database/testing.sqlite" >> .env
 
       - name: Run tests
+        # phpunit.xml sets DB_DATABASE=testing, so the real env var must
+        # win over the .env file value.
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: ${{ github.workspace }}/database/testing.sqlite
         run: php vendor/bin/phpunit
