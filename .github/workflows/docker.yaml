@@ -14,12 +14,15 @@ concurrency:
 
 jobs:
   build:
-    name: Build and push image
+    name: Build, scan, sign and attest image
     runs-on: ubuntu-24.04
     timeout-minutes: 60
     permissions:
       contents: read
       packages: write
+      id-token: write
+      attestations: write
+      security-events: write
     steps:
       - name: Harden the runner
         uses: step-security/harden-runner@e14015d583714f6e62063499dc959a02595150a1 # v2.21.1
@@ -45,25 +48,128 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Compute image tags
-        id: tags
-        env:
-          REF_NAME: ${{ github.ref_name }}
-          REF_TYPE: ${{ github.ref_type }}
-        run: |
-          image="ghcr.io/${GITHUB_REPOSITORY,,}"
-          if [ "$REF_TYPE" = "tag" ]; then
-            echo "tags=${image}:${REF_NAME},${image}:latest" >> "$GITHUB_OUTPUT"
-          else
-            echo "tags=${image}:canary" >> "$GITHUB_OUTPUT"
-          fi
+      # Generates dynamic OCI labels/annotations (source, revision, version,
+      # created, url, licenses) plus tags for branch and semver pushes.
+      - name: Image metadata
+        id: meta
+        uses: docker/metadata-action@c299e40c65443455700f0fdfc63efafe5b349051 # v5
+        with:
+          images: ghcr.io/${{ github.repository }}
+          tags: |
+            type=raw,value=canary,enable=${{ github.ref_name == 'master' }}
+            type=semver,pattern={{version}}
+            type=raw,value=latest,enable=${{ startsWith(github.ref, 'refs/tags/') }}
 
+      # sbom/provenance make BuildKit attach an SPDX SBOM and a SLSA
+      # provenance attestation to the image manifest in GHCR.
       - name: Build and push
+        id: build
         uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6
         with:
           context: .
           push: true
           platforms: linux/amd64,linux/arm64
-          tags: ${{ steps.tags.outputs.tags }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          annotations: ${{ steps.meta.outputs.annotations }}
+          sbom: true
+          provenance: mode=max
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+      - name: Install cosign
+        uses: sigstore/cosign-installer@6f9f17788090df1f26f669e9d70d6ae9567deba6 # v4.1.2
+
+      - name: Set image reference
+        id: image
+        env:
+          DIGEST: ${{ steps.build.outputs.digest }}
+        run: |
+          name="ghcr.io/${GITHUB_REPOSITORY,,}"
+          echo "name=$name" >> "$GITHUB_OUTPUT"
+          echo "ref=$name@$DIGEST" >> "$GITHUB_OUTPUT"
+
+      # Keyless signing via GitHub OIDC -> Fulcio, recorded in Rekor.
+      - name: Sign image (keyless)
+        env:
+          IMAGE_REF: ${{ steps.image.outputs.ref }}
+        run: cosign sign --yes "$IMAGE_REF"
+
+      - name: Scan image (SARIF)
+        uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1 # 0.35.0
+        with:
+          image-ref: ${{ steps.image.outputs.ref }}
+          format: sarif
+          output: trivy-results.sarif
+          severity: CRITICAL,HIGH
+          ignore-unfixed: true
+          vuln-type: os,library
+
+      - name: Upload scan results to code scanning
+        uses: github/codeql-action/upload-sarif@1c5b675653bb5c22dbe9b12b556ec555138e09fd # v4
+        with:
+          sarif_file: trivy-results.sarif
+          category: container
+
+      - name: Scan image (JSON for OpenVEX)
+        uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1 # 0.35.0
+        with:
+          image-ref: ${{ steps.image.outputs.ref }}
+          format: json
+          output: trivy-results.json
+          severity: CRITICAL,HIGH
+          ignore-unfixed: true
+          vuln-type: os,library
+
+      # Emits an OpenVEX document listing each finding as
+      # "under_investigation", bound to the image digest as the product.
+      - name: Generate OpenVEX document
+        env:
+          DIGEST: ${{ steps.build.outputs.digest }}
+        run: |
+          repo_lc="${GITHUB_REPOSITORY,,}"
+          purl="pkg:oci/${repo_lc##*/}@${DIGEST}?repository_url=ghcr.io/${repo_lc}"
+          jq \
+            --arg id "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" \
+            --arg ts "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+            --arg purl "$purl" \
+            '{
+              "@context": "https://openvex.dev/ns/v0.2.0",
+              "@id": $id,
+              "author": "Nebulodactyl CI",
+              "timestamp": $ts,
+              "version": 1,
+              "statements": (
+                [.Results[]?.Vulnerabilities[]?.VulnerabilityID]
+                | unique
+                | map({
+                    vulnerability: {name: .},
+                    products: [{"@id": $purl}],
+                    status: "under_investigation"
+                  })
+              )
+            }' trivy-results.json > openvex.json
+          jq '.statements | length' openvex.json
+
+      # Attaches the OpenVEX doc to the image as a signed attestation.
+      - name: Attest OpenVEX to image
+        env:
+          IMAGE_REF: ${{ steps.image.outputs.ref }}
+        run: cosign attest --yes --predicate openvex.json --type https://openvex.dev/ns/v0.2.0 "$IMAGE_REF"
+
+      - name: Attest build provenance
+        uses: actions/attest-build-provenance@977bb373ede98d70efdf65b84cb5f73e068dcc2a # v3
+        with:
+          subject-name: ${{ steps.image.outputs.name }}
+          subject-digest: ${{ steps.build.outputs.digest }}
+          push-to-registry: true
+
+      - name: Upload scan artifacts
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: image-security-${{ github.sha }}
+          path: |
+            trivy-results.json
+            trivy-results.sarif
+            openvex.json
+          retention-days: 30
