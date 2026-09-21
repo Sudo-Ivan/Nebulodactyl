@@ -180,3 +180,12 @@ a "Continue with SSO" button alongside the normal password form. Users
 are matched to existing accounts by the provider subject claim or email,
 and new accounts are created automatically unless `OIDC_AUTO_REGISTER`
 is set to false.
+
+Provider groups can be mapped to the panel admin role. Set
+`OIDC_ADMIN_GROUPS` to a comma separated list of provider group names,
+and `OIDC_GROUPS_CLAIM` to the claim that carries the user's group list
+(default `groups`). Members of a mapped group are granted `root_admin`
+when their account is first linked or created. Set
+`OIDC_SYNC_ADMIN_ROLE=true` to instead mirror group membership on every
+login, which also removes `root_admin` when the user leaves the mapped
+groups.
