@@ -38,7 +38,7 @@ class TwoFactorSetupServiceTest extends TestCase
 
         $this->config->shouldReceive('get')
             ->with('app.name')
-            ->andReturn('Hydrodactyl');
+            ->andReturn('Nebulodactyl');
 
         $this->encrypter->shouldReceive('encrypt')
             ->once()

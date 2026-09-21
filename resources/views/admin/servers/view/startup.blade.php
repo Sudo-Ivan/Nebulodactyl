@@ -116,7 +116,7 @@
     $(document).ready(function () {
         $('#pEggId').select2({placeholder: 'Select a Nest Egg'}).on('change', function () {
             var selectedEgg = _.isNull($(this).val()) ? $(this).find('option').first().val() : $(this).val();
-            var parentChain = _.get(Hydrodactyl.nests, $("#pNestId").val());
+            var parentChain = _.get(Nebulodactyl.nests, $("#pNestId").val());
             var objectChain = _.get(parentChain, 'eggs.' + selectedEgg);
 
             const images = _.get(objectChain, 'docker_images', [])
@@ -126,7 +126,7 @@
                 let opt = document.createElement('option');
                 opt.value = images[keys[i]];
                 opt.innerText = keys[i] + " (" + images[keys[i]] + ")";
-                if (objectChain.id === parseInt(Hydrodactyl.server.egg_id) && Hydrodactyl.server.image == opt.value) {
+                if (objectChain.id === parseInt(Nebulodactyl.server.egg_id) && Nebulodactyl.server.image == opt.value) {
                     opt.selected = true
                 }
                 $('#pDockerImage').append(opt);
@@ -135,9 +135,9 @@
                 $('#pDockerImageCustom').val('');
             })
 
-            if (objectChain.id === parseInt(Hydrodactyl.server.egg_id)) {
-                if ($('#pDockerImage').val() != Hydrodactyl.server.image) {
-                    $('#pDockerImageCustom').val(Hydrodactyl.server.image);
+            if (objectChain.id === parseInt(Nebulodactyl.server.egg_id)) {
+                if ($('#pDockerImage').val() != Nebulodactyl.server.image) {
+                    $('#pDockerImageCustom').val(Nebulodactyl.server.image);
                 }
             }
 
@@ -149,7 +149,7 @@
 
             $('#appendVariablesTo').html('');
             $.each(_.get(objectChain, 'variables', []), function (i, item) {
-                var setValue = _.get(Hydrodactyl.server_variables, item.env_variable, item.default_value);
+                var setValue = _.get(Nebulodactyl.server_variables, item.env_variable, item.default_value);
                 var isRequired = (item.required === 1) ? '<span class="label label-danger">Required</span> ' : '';
                 var dataAppend = ' \
                     <div class="col-xs-12"> \
@@ -173,7 +173,7 @@
 
         $('#pNestId').select2({placeholder: 'Select a Nest'}).on('change', function () {
             $('#pEggId').html('').select2({
-                data: $.map(_.get(Hydrodactyl.nests, $(this).val() + '.eggs', []), function (item) {
+                data: $.map(_.get(Nebulodactyl.nests, $(this).val() + '.eggs', []), function (item) {
                     return {
                         id: item.id,
                         text: item.name,
@@ -181,8 +181,8 @@
                 }),
             });
 
-            if (_.isObject(_.get(Hydrodactyl.nests, $(this).val() + '.eggs.' + Hydrodactyl.server.egg_id))) {
-                $('#pEggId').val(Hydrodactyl.server.egg_id);
+            if (_.isObject(_.get(Nebulodactyl.nests, $(this).val() + '.eggs.' + Nebulodactyl.server.egg_id))) {
+                $('#pEggId').val(Nebulodactyl.server.egg_id);
             }
 
             $('#pEggId').change();

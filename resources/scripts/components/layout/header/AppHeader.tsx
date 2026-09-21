@@ -1,7 +1,7 @@
 import { LayoutSideContent } from '@gravity-ui/icons';
 import { Fragment, memo } from 'react';
 import { NavLink } from 'react-router-dom';
-import Logo from '@/components/elements/HydroLogo';
+import Logo from '@/components/elements/NebulaLogo';
 import { Button } from '@/components/ui/button';
 import { useHeader } from '@/contexts/HeaderContext';
 import { useSidebar } from '@/contexts/SidebarContext';
@@ -37,7 +37,7 @@ const getSiteName = () => {
 
     return typeof siteConfiguration?.name === 'string' && siteConfiguration.name.trim().length > 0
         ? siteConfiguration.name
-        : 'Hydrodactyl';
+        : 'Nebulodactyl';
 };
 
 const LogoSection = memo(() => {
@@ -46,11 +46,11 @@ const LogoSection = memo(() => {
     return (
         <NavLink
             to={'/'}
-            className='sidebar-logo-link flex items-center shrink-0 h-8 min-w-0 gap-3 hydrodactyl'
+            className='sidebar-logo-link flex items-center shrink-0 h-8 min-w-0 gap-3 nebulodactyl'
             aria-label={`${siteName} home page`}
         >
             <Logo className='flex h-8 w-8 shrink-0 object-contain' />
-            <span className='sidebar-logo-name hydrodactyl-logo content-center truncate text-sm font-semibold leading-none tracking-wide text-cream-50'>
+            <span className='sidebar-logo-name nebulodactyl-logo content-center truncate text-sm font-semibold leading-none tracking-wide text-cream-50'>
                 {siteName}
             </span>
         </NavLink>

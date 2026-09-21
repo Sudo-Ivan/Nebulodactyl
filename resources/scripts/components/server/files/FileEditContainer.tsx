@@ -135,7 +135,7 @@ const FileEditContainer = () => {
                 </div>
             </ErrorBoundary>
 
-            {['.hydroignore', '.pteroignore'].includes(filename) ? (
+            {['.nebulaignore', '.pteroignore'].includes(filename) ? (
                 <div className={`mb-4 p-4 border-l-4 bg-neutral-900 rounded-sm border-cyan-400`}>
                     <p className={`text-neutral-300 text-sm`}>
                         You&apos;re editing a{' '}

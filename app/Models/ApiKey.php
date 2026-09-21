@@ -199,7 +199,7 @@ class ApiKey extends Model
   {
     Assert::oneOf($type, [self::TYPE_ACCOUNT, self::TYPE_APPLICATION]);
 
-    return $type === self::TYPE_ACCOUNT ? 'hydro_' : 'hydro_';
+    return $type === self::TYPE_ACCOUNT ? 'nebula_' : 'nebula_';
   }
 
   /**

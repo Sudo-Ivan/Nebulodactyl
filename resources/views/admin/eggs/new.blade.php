@@ -150,7 +150,7 @@
     });
     $('#pNestId').on('change', function (event) {
         $('#pConfigFrom').html('<option value="">None</option>').select2({
-            data: $.map(_.get(Hydrodactyl.nests, $(this).val() + '.eggs', []), function (item) {
+            data: $.map(_.get(Nebulodactyl.nests, $(this).val() + '.eggs', []), function (item) {
                 return {
                     id: item.id,
                     text: item.name + ' <' + item.author + '>',

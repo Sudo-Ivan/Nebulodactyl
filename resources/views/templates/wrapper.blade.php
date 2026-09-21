@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- Copyright (c) 2025-Present BlueprintFramework, parent collaborators, and contributors -->
-<html data-hydrodactyl-html lang="en" style="background-color: #11100E; height: 100%; width: 100%; margin: 0; padding: 0;">
+<html data-nebulodactyl-html lang="en" style="background-color: #11100E; height: 100%; width: 100%; margin: 0; padding: 0;">
     <head>
         <title>{{ config('app.name', 'Panel') }}</title>
 
@@ -30,7 +30,7 @@
             <link rel="icon" type="image/svg+xml" href="/favicons/favicon.svg" />
             <link rel="shortcut icon" href="/favicons/favicon.ico" />
             <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
-            <meta name="apple-mobile-web-app-title" content="Hydrodactyl" />
+            <meta name="apple-mobile-web-app-title" content="Nebulodactyl" />
             <link rel="manifest" href="/favicons/site.webmanifest" />
 
             <meta name="theme-color" content="#000000">
@@ -40,7 +40,7 @@
         @section('user-data')
             @if(!is_null(Auth::user()))
                 <script>
-                    window.HydrodactylUser = {!! json_encode(Auth::user()->toVueObject()) !!};
+                    window.NebulodactylUser = {!! json_encode(Auth::user()->toVueObject()) !!};
                 </script>
             @endif
             @if(!empty($siteConfiguration))
@@ -63,7 +63,7 @@
         @viteReactRefresh
         @vite('resources/scripts/index.tsx')
     </head>
-    <body data-hydrodactyl-body class="{{ $css['body'] }}" style="background-color: #11100E; height: 100%; width: 100%; margin: 0; padding: 0;">
+    <body data-nebulodactyl-body class="{{ $css['body'] }}" style="background-color: #11100E; height: 100%; width: 100%; margin: 0; padding: 0;">
         @section('content')
             @yield('above-container')
             @yield('container')

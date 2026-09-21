@@ -12,7 +12,7 @@ return [
 
     'cdn' => [
         'cache_time' => 60,
-        'url' => 'https://blueprint.zip/api/latest/hydrodactyl',
+        'url' => 'https://blueprint.zip/api/latest/nebulodactyl',
     ],
 
     /*

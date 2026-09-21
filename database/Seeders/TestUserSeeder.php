@@ -15,10 +15,10 @@ class TestUserSeeder extends Seeder
         // while seeding these fixture accounts.
         \Illuminate\Database\Eloquent\Model::unguard();
 
-        User::query()->updateOrCreate(['email' => 'admin@hydrodactyl.dev'], [
+        User::query()->updateOrCreate(['email' => 'admin@nebulodactyl.dev'], [
             'uuid' => Uuid::uuid4()->toString(),
             'username' => 'admin',
-            'email' => 'admin@hydrodactyl.dev',
+            'email' => 'admin@nebulodactyl.dev',
             'name_first' => 'Admin',
             'name_last' => 'User',
             'password' => bcrypt('admin'),
@@ -29,10 +29,10 @@ class TestUserSeeder extends Seeder
             'updated_at' => Carbon::now(),
         ]);
 
-        User::query()->updateOrCreate(['email' => 'test@hydrodactyl.dev'], [
+        User::query()->updateOrCreate(['email' => 'test@nebulodactyl.dev'], [
             'uuid' => Uuid::uuid4()->toString(),
             'username' => 'test',
-            'email' => 'test@hydrodactyl.dev',
+            'email' => 'test@nebulodactyl.dev',
             'name_first' => 'Test',
             'name_last' => 'User',
             'password' => bcrypt('test'),

@@ -27,7 +27,7 @@
   <link rel="icon" type="image/svg+xml" href="/favicons/favicon.svg" />
   <link rel="shortcut icon" href="/favicons/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Hydrodactyl" />
+  <meta name="apple-mobile-web-app-title" content="Nebulodactyl" />
   <link rel="manifest" href="/favicons/site.webmanifest" />
 
   <meta name="theme-color" content="#000000">
@@ -86,7 +86,7 @@
                 <path d="M35.1293 92L39.2242 59.3897L44.8276 60.4695L14.2241 81.2019L0 57.0141L32.7586 45.3521V47.7277L0 33.4742L14.2241 8.85446L45.6896 33.2582L39.2242 34.1221L34.4828 0H65.5172L61.4225 33.9061L56.681 32.8263L85.7759 8.85446L100 33.4742L66.1638 47.7277V45.5681L99.569 57.0141L85.3448 81.2019L57.5431 59.3897H61.638L66.1638 92H35.1293Z" fill="#52A9FF" />
             </svg>
           @endif
-          <b>{{ config('app.name', 'Hydrodactyl') }}</b>
+          <b>{{ config('app.name', 'Nebulodactyl') }}</b>
         </span>
       </a>
       <nav class="navbar navbar-static-top">
@@ -216,7 +216,7 @@
         <strong><i class="fa fa-fw fa-clock-o"></i></strong> {{ round(microtime(true) - LARAVEL_START, 3) }}s
       </div>
       Copyright &copy; 2015 - {{ date('Y') }} <a href="https://blueprint.zip/">BlueprintFramework</a> and <a
-        href="https://hydrodactyl.dev">Hydrodactyl</a>.
+        href="https://github.com/Sudo-Ivan/Nebulodactyl">Nebulodactyl</a>.
     </footer>
   </div>
   @section('footer-scripts')

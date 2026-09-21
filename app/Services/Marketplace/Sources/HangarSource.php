@@ -170,7 +170,7 @@ class HangarSource extends AbstractMarketplaceSource
      */
     protected function downloadHosts(): array
     {
-        $hosts = config('hydrodactyl.marketplace.sources.hangar.download_hosts', ['hangar.papermc.io']);
+        $hosts = config('nebulodactyl.marketplace.sources.hangar.download_hosts', ['hangar.papermc.io']);
 
         return is_array($hosts) ? array_values(array_map('strval', $hosts)) : ['hangar.papermc.io'];
     }
@@ -197,12 +197,12 @@ class HangarSource extends AbstractMarketplaceSource
 
     protected function url(string $path): string
     {
-        return rtrim((string) config('hydrodactyl.marketplace.sources.hangar.base_url'), '/') . '/' . ltrim($path, '/');
+        return rtrim((string) config('nebulodactyl.marketplace.sources.hangar.base_url'), '/') . '/' . ltrim($path, '/');
     }
 
     protected function webUrl(string $path): string
     {
-        return rtrim((string) config('hydrodactyl.marketplace.sources.hangar.web_url'), '/') . '/' . ltrim($path, '/');
+        return rtrim((string) config('nebulodactyl.marketplace.sources.hangar.web_url'), '/') . '/' . ltrim($path, '/');
     }
 
     /**
@@ -217,7 +217,7 @@ class HangarSource extends AbstractMarketplaceSource
         if (!is_numeric($id)) {
             return null;
         }
-        $base = rtrim((string) config('hydrodactyl.marketplace.sources.hangar.cdn_url', 'https://hangarcdn.papermc.io'), '/');
+        $base = rtrim((string) config('nebulodactyl.marketplace.sources.hangar.cdn_url', 'https://hangarcdn.papermc.io'), '/');
 
         return $base . '/avatars/project/' . (int) $id . '.webp';
     }

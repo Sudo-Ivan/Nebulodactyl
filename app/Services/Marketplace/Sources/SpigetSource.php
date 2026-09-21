@@ -125,19 +125,19 @@ class SpigetSource extends AbstractMarketplaceSource
      */
     protected function downloadHosts(): array
     {
-        $hosts = config('hydrodactyl.marketplace.sources.spiget.download_hosts', ['api.spiget.org']);
+        $hosts = config('nebulodactyl.marketplace.sources.spiget.download_hosts', ['api.spiget.org']);
 
         return is_array($hosts) ? array_values(array_map('strval', $hosts)) : ['api.spiget.org'];
     }
 
     protected function url(string $path): string
     {
-        return rtrim((string) config('hydrodactyl.marketplace.sources.spiget.base_url'), '/') . '/' . ltrim($path, '?/');
+        return rtrim((string) config('nebulodactyl.marketplace.sources.spiget.base_url'), '/') . '/' . ltrim($path, '?/');
     }
 
     protected function webUrl(string $path): string
     {
-        return rtrim((string) config('hydrodactyl.marketplace.sources.spiget.web_url'), '/') . '/' . ltrim($path, '/');
+        return rtrim((string) config('nebulodactyl.marketplace.sources.spiget.web_url'), '/') . '/' . ltrim($path, '/');
     }
 
     /**

@@ -1,4 +1,4 @@
-<h1 align="center">Hydrodactyl — Local Development</h1>
+<h1 align="center">Nebulodactyl — Local Development</h1>
 
 <p align="center">
   <img src="https://shieldcn.dev/badge/Formatted%20with-Biome-93c5fd.svg?logo=biome" alt="Formatted with Biome">
@@ -7,7 +7,7 @@
 
 <br/>
 
-This guide covers setting up a local Hydrodactyl development environment. For production deployments, see the [Installation Guide](https://hydrodactyl.dev/docs/hydrodactyl/installation).
+This guide covers setting up a local Nebulodactyl development environment. For production deployments, see the [Installation Guide](https://hydrodactyl.dev/docs/hydrodactyl/installation).
 
 > [!NOTE]
 > A full walkthrough is also available in the [Local Development Guide](https://hydrodactyl.dev/docs/hydrodactyl/local-development).

@@ -12,7 +12,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '@/components/elements/DropdownMenu';
-import Logo from '@/components/elements/HydroLogo';
+import Logo from '@/components/elements/NebulaLogo';
 import MainSidebar from '@/components/elements/MainSidebar';
 import MainWrapper from '@/components/elements/MainWrapper';
 import { DashboardMobileMenu } from '@/components/elements/MobileFullScreenMenu';
@@ -145,7 +145,7 @@ const DashboardRouter = () => {
                         </DropdownMenu>
                     </div>
                     <div aria-hidden className='mt-8 mb-4 bg-[#ffffff33] min-h-[1px] w-6'></div>
-                    <ul data-hydrodactyl-subnav-routes-wrapper='' className='hydrodactyl-subnav-routes-wrapper'>
+                    <ul data-nebulodactyl-subnav-routes-wrapper='' className='nebulodactyl-subnav-routes-wrapper'>
                         <NavLink to={'/'} end className='flex flex-row items-center' ref={NavigationHome}>
                             <House width={22} height={22} fill='currentColor' />
                             <p>Servers</p>
@@ -168,8 +168,8 @@ const DashboardRouter = () => {
                 <Suspense fallback={null}>
                     <MainWrapper className='w-full'>
                         <main
-                            data-hydrodactyl-main=''
-                            data-hydrodactyl-transitionrouter=''
+                            data-nebulodactyl-main=''
+                            data-nebulodactyl-transitionrouter=''
                             className='relative inset-[1px] w-full h-full overflow-y-auto overflow-x-hidden rounded-md bg-[#08080875]'
                         >
                             <Routes>

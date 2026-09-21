@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import Logo from '@/components/elements/HydroLogo';
+import Logo from '@/components/elements/NebulaLogo';
 import SetupContainer from '@/components/setup/SetupContainer';
 
 // `window.SetupRequired` is injected by the backend (templates/wrapper.blade.php)
@@ -34,7 +34,7 @@ const SetupRouter = () => {
                     <div className='flex items-center gap-3 h-6 absolute right-(--page-padding) top-(--page-padding) text-lg text-cream-300'>
                         <Logo className='h-full w-auto' />
                         <div className='border-l border-cream-300/20 h-full' />
-                        <span className='text-sm tracking-wide'>Hydrodactyl</span>
+                        <span className='text-sm tracking-wide'>Nebulodactyl</span>
                     </div>
 
                     <div className='absolute inset-0 flex flex-col justify-end p-(--page-padding) gap-3'>

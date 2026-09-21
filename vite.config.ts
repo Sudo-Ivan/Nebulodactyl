@@ -85,10 +85,10 @@ export default defineConfig({
     },
 
     define: {
-        'import.meta.env.VITE_HYDRODACTYL_VERSION': JSON.stringify(laravelVersion),
+        'import.meta.env.VITE_NEBULODACTYL_VERSION': JSON.stringify(laravelVersion),
         'import.meta.env.VITE_COMMIT_HASH': JSON.stringify(commitHash),
         'import.meta.env.VITE_BRANCH_NAME': JSON.stringify(branchName),
-        'import.meta.env.VITE_HYDRODACTYL_BUILD_NUMBER': JSON.stringify(packageJson.buildNumber),
+        'import.meta.env.VITE_NEBULODACTYL_BUILD_NUMBER': JSON.stringify(packageJson.buildNumber),
         'process.env': {},
         'process.platform': null,
         'process.version': null,
@@ -110,7 +110,7 @@ export default defineConfig({
                     '@swc/plugin-styled-components',
                     {
                         pure: true,
-                        namespace: 'hydrodactyl',
+                        namespace: 'nebulodactyl',
                     },
                 ],
             ],

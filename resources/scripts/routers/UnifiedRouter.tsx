@@ -32,7 +32,7 @@ import { httpErrorToHuman } from '@/api/http';
 import getNests from '@/api/nests/getNests';
 import CommandMenu from '@/components/elements/commandk/CmdK';
 import ErrorBoundary from '@/components/elements/ErrorBoundary';
-import Logo from '@/components/elements/HydroLogo';
+import Logo from '@/components/elements/NebulaLogo';
 import MainWrapper from '@/components/elements/MainWrapper';
 import PermissionRoute from '@/components/elements/PermissionRoute';
 import { NotFound, ServerError } from '@/components/elements/ScreenBlock';
@@ -399,7 +399,7 @@ const UnifiedRouter = () => {
                                     {/* server loading state */}
                                     {isServerRoute && !error && (!uuid || !id) && (
                                         <div className='flex items-center justify-center h-full opacity-10'>
-                                            <div className='p-1 hydrodactyl-logo1 '>
+                                            <div className='p-1 nebulodactyl-logo1 '>
                                                 <Logo />
                                             </div>
                                         </div>

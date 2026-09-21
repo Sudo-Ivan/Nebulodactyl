@@ -13,7 +13,7 @@ import CaptchaManager from '@/lib/captcha';
 
 import useFlash from '@/plugins/useFlash';
 
-import Logo from '../elements/HydroLogo';
+import Logo from '../elements/NebulaLogo';
 
 interface Values {
     password: string;

@@ -13,7 +13,7 @@ const MainSidebar = styled.nav`
     background: rgba(0, 0, 0, 0.6);
     border: 1px solid rgba(255, 255, 255, 0.08);
 
-    & > .hydrodactyl-subnav-routes-wrapper {
+    & > .nebulodactyl-subnav-routes-wrapper {
         display: flex;
         flex-direction: column;
         font-size: 14px;

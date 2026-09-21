@@ -34,7 +34,7 @@ class AssetComposer
     };
 
     $view->with('siteConfiguration', [
-      'name' => config('app.name') ?? 'Hydrodactyl',
+      'name' => config('app.name') ?? 'Nebulodactyl',
       'locale' => config('app.locale') ?? 'en',
       'timezone' => config('app.timezone') ?? '',
       'logo' => $logoUrl,

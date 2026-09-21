@@ -20,7 +20,7 @@
           <h3 class="box-title">System Information</h3>
         </div>
         <div class="box-body">
-          You are running Hydrodactyl panel version <code>{{ config('app.version') }}</code>.
+          You are running Nebulodactyl panel version <code>{{ config('app.version') }}</code>.
         </div>
       </div>
     </div>
@@ -33,12 +33,12 @@
         class="fa fa-fw fa-support"></i> Get Help <small>(via Discord)</small></button></a>
     </div>
     <div class="col-xs-6 col-sm-3 text-center">
-    <a href="https://hydrodactyl.dev"><button class="btn btn-primary" style="width:100%;"><i
+    <a href="https://hydrodactyl.dev/docs/hydrodactyl"><button class="btn btn-primary" style="width:100%;"><i
         class="fa fa-fw fa-link"></i> Documentation</button></a>
     </div>
     <div class="clearfix visible-xs-block">&nbsp;</div>
     <div class="col-xs-6 col-sm-3 text-center">
-    <a href="https://github.com/BlueprintFramework/hydrodactyl"><button class="btn btn-primary" style="width:100%;"><i
+    <a href="https://github.com/Sudo-Ivan/Nebulodactyl"><button class="btn btn-primary" style="width:100%;"><i
         class="fa fa-fw fa-support"></i> Github</button></a>
     </div>
     <div class="col-xs-6 col-sm-3 text-center">
@@ -55,7 +55,7 @@
           <h4 class="modal-title"><i class="fa fa-fw fa-heart" style="color:#e74c3c;"></i> Support the Project</h4>
         </div>
         <div class="modal-body">
-          <p style="margin-bottom:16px;">Hydrodactyl is built and maintained by volunteers. If you'd like to help, here are a few ways:</p>
+          <p style="margin-bottom:16px;">Nebulodactyl is built and maintained by volunteers. If you'd like to help, here are a few ways:</p>
           <div class="list-group" style="margin-bottom:0;">
             <a href="https://ko-fi.com/naterfute" target="_blank" rel="noopener" class="list-group-item support-item">
               <h4 class="list-group-item-heading"><i class="fa fa-fw fa-coffee"></i> Ko-Fi</h4>
@@ -63,13 +63,13 @@
             </a>
             <a href="https://bpfw.io/donate" target="_blank" rel="noopener" class="list-group-item support-item">
               <h4 class="list-group-item-heading"><i class="fa fa-fw fa-gift"></i> Blueprint</h4>
-              <p class="list-group-item-text">Donate to the nonprofit funding Hydrodactyl development.</p>
+              <p class="list-group-item-text">Donate to the nonprofit funding Nebulodactyl development.</p>
             </a>
             <a href="https://discord.gg/sK686yHdaK" target="_blank" rel="noopener" class="list-group-item support-item">
               <h4 class="list-group-item-heading"><i class="fa fa-fw fa-comments"></i> Discord</h4>
               <p class="list-group-item-text">Join the community, ask questions, and stay up to date.</p>
             </a>
-            <a href="https://github.com/BlueprintFramework/hydrodactyl" target="_blank" rel="noopener" class="list-group-item support-item">
+            <a href="https://github.com/Sudo-Ivan/Nebulodactyl" target="_blank" rel="noopener" class="list-group-item support-item">
               <h4 class="list-group-item-heading"><i class="fa fa-fw fa-star"></i> Share</h4>
               <p class="list-group-item-text">Star the repo on GitHub and share it with someone who might find it useful!</p>
             </a>

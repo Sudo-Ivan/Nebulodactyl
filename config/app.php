@@ -24,7 +24,7 @@ return [
   |
   */
 
-  'name' => env('APP_NAME', 'Hydrodactyl'),
+  'name' => env('APP_NAME', 'Nebulodactyl'),
 
   'custom_nav_items' => '[]',
 

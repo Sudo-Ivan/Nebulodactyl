@@ -1,13 +1,18 @@
 {
-    "name": "blueprintframework/hydrodactyl",
-    "description": "Hydrodactyl is the Pterodactyl-based game server panel that's faster, smaller, safer, and more accessible.",
+    "name": "sudo-ivan/nebulodactyl",
+    "description": "Nebulodactyl is a Hydrodactyl/Pterodactyl-based game server panel with a space theme and Nebula overlay network support.",
     "license": "Apache-2.0",
     "authors": [
+        {
+            "name": "Ivan",
+            "email": "ivan@quad4.io",
+            "role": "Maintainer"
+        },
         {
             "name": "Naterfute",
             "email": "naterfute@blueprint.zip",
             "homepage": "https://naterfute.dev",
-            "role": "Maintainer"
+            "role": "Upstream maintainer (Hydrodactyl)"
         }
     ],
     "require": {
@@ -65,7 +70,7 @@
         "files": ["app/helpers.php"],
         "psr-4": {
             "Pterodactyl\\": "app/",
-            "Hydrodactyl\\": "app/",
+            "Nebulodactyl\\": "app/",
             "Database\\Factories\\": "database/Factories/",
             "Database\\Seeders\\": "database/Seeders/"
         }
@@ -73,7 +78,7 @@
     "autoload-dev": {
         "psr-4": {
             "Pterodactyl\\Tests\\": "tests/",
-            "Hydrodactyl\\Tests\\": "tests/"
+            "Nebulodactyl\\Tests\\": "tests/"
         }
     },
     "config": {

@@ -1,5 +1,5 @@
 domains:
-    - hydrodactyl
+    - nebulodactyl
 php_version: "8.5"
 js_runtime: pnpm
 framework: laravel

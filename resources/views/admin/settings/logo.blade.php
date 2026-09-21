@@ -6,7 +6,7 @@
 @endsection
 
 @section('content-header')
-  <h1>Branding<small>Customize your Hydrodactyl logo.</small></h1>
+  <h1>Branding<small>Customize your Nebulodactyl logo.</small></h1>
   <ol class="breadcrumb">
     <li><a href="{{ route('admin.index') }}">Admin</a></li>
     <li><a href="{{ route('admin.settings') }}">Settings</a></li>

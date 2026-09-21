@@ -3,7 +3,7 @@ import { HugeiconsIcon, type IconSvgElement } from '@hugeicons/react';
 import { memo, type RefObject, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 
-import Logo from '@/components/elements/HydroLogo';
+import Logo from '@/components/elements/NebulaLogo';
 import { useSidebar } from '@/contexts/SidebarContext';
 import { cn } from '@/lib/utils';
 
@@ -77,8 +77,8 @@ const MobileSidebarPanel = memo<{ navItems: NavItemData[]; bottomNavItems: NavIt
                     <div className='mobile-sidebar-logo h-16 flex items-center flex-none'>
                         <NavLink
                             to='/'
-                            className='flex h-8 w-fit shrink-0 items-center hydrodactyl-logo'
-                            aria-label='Hydrodactyl home page'
+                            className='flex h-8 w-fit shrink-0 items-center nebulodactyl-logo'
+                            aria-label='Nebulodactyl home page'
                         >
                             <Logo className='h-8 w-8 shrink-0 object-contain' />
                         </NavLink>

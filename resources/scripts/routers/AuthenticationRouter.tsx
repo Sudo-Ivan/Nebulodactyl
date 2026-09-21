@@ -4,7 +4,7 @@ import ForgotPasswordContainer from '@/components/auth/ForgotPasswordContainer';
 import LoginCheckpointContainer from '@/components/auth/LoginCheckpointContainer';
 import LoginContainer from '@/components/auth/LoginContainer';
 import ResetPasswordContainer from '@/components/auth/ResetPasswordContainer';
-import Logo from '@/components/elements/HydroLogo';
+import Logo from '@/components/elements/NebulaLogo';
 import { NotFound } from '@/components/elements/ScreenBlock';
 
 const AuthenticationRouter = () => {

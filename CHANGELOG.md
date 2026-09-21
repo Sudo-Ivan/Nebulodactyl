@@ -2,12 +2,12 @@
 
 <br/>
 
-This file is a running track of new features and fixes for each version of the Hydrodactyl panel.
+This file is a running track of new features and fixes for each version of the Nebulodactyl panel.
 
 This project follows [Semantic Versioning](http://semver.org) guidelines.
 
 > [!NOTE]
-> Hydrodactyl is currently in active development (`canary`). Version `v6.0.0` marks the first release under the Hydrodactyl name, which is a fork of [Pyrodactyl](https://github.com/pyrohost/pyrodactyl). Releases before `v6.0.0` are part of the Pyrodactyl history.
+> Nebulodactyl is currently in active development (`canary`). Version `v6.0.0` marks the first release under the Nebulodactyl name, which is a fork of [Pyrodactyl](https://github.com/pyrohost/pyrodactyl). Releases before `v6.0.0` are part of the Pyrodactyl history.
 
 ## [Unreleased]
 
@@ -40,7 +40,7 @@ This project follows [Semantic Versioning](http://semver.org) guidelines.
 - Copy-to-clipboard on server IP addresses.
 
 ### Changed
-- Renamed remaining Pterodactyl references to Hydrodactyl names.
+- Renamed remaining Pterodactyl references to Nebulodactyl names.
 - Increased rate-limit on the files/pull endpoint.
 - Removed the API limit on marketplace downloads.
 
@@ -76,7 +76,7 @@ This project follows [Semantic Versioning](http://semver.org) guidelines.
 ## v6.2.0 - 7/07/26
 
 ### Added
-- Hydrodactyl favicon and logo across the panel.
+- Nebulodactyl favicon and logo across the panel.
 - Server sorting, filtering, and search on the dashboard.
 - New game server eggs.
 - Expanded test matrix covering MySQL, MariaDB, and PostgreSQL on PHP 8.4 and 8.5.
@@ -109,7 +109,7 @@ This project follows [Semantic Versioning](http://semver.org) guidelines.
 
 ### Changed
 - Dropped PHP 8.3 support.
-- Rebranded remaining `pyro` references to Hydrodactyl.
+- Rebranded remaining `pyro` references to Nebulodactyl.
 
 ### Fixed
 - Server status icon missing.
@@ -128,7 +128,7 @@ This project follows [Semantic Versioning](http://semver.org) guidelines.
 ## v6.0.2 - 7/02/26
 
 ### Fixed
-- Variable names changed from `pyro` to `hydrodactyl` across the codebase.
+- Variable names changed from `pyro` to `nebulodactyl` across the codebase.
 
 ## v6.0.1 - 7/02/26
 
@@ -138,10 +138,10 @@ This project follows [Semantic Versioning](http://semver.org) guidelines.
 
 ## v6.0.0 - 7/02/26
 
-The first release under the Hydrodactyl name.
+The first release under the Nebulodactyl name.
 
 ### Added
-- **Rebrand** from Pyrodactyl to Hydrodactyl.
+- **Rebrand** from Pyrodactyl to Nebulodactyl.
 - Reworked **software page** with game selection and review flows.
 - S3-compatible **backup support** (per-node).
 - New local development environment using [Lerd](./.lerd.yaml) and automated setup.
@@ -156,7 +156,7 @@ The first release under the Hydrodactyl name.
 
 ---
 
-## Pre-Hydrodactyl history
+## Pre-Nebulodactyl history
 
 The following releases were published under the **Pyrodactyl** project before the fork:
 

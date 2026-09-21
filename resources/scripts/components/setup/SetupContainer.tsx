@@ -280,7 +280,7 @@ const SetupContainer = () => {
                                             Welcome.
                                         </h2>
                                         <p className='text-sm text-secondary leading-relaxed'>
-                                            This is a fresh Hydrodactyl installation — no administrator account exists
+                                            This is a fresh Nebulodactyl installation — no administrator account exists
                                             yet. We&apos;ll create your first account, grant it full panel access, and
                                             sign you right in. It only takes a moment.
                                         </p>

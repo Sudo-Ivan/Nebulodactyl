@@ -16,7 +16,7 @@ import {
     DropdownMenuTrigger,
 } from '@/components/elements/DropdownMenu';
 import ErrorBoundary from '@/components/elements/ErrorBoundary';
-import Logo from '@/components/elements/HydroLogo';
+import Logo from '@/components/elements/NebulaLogo';
 import MainSidebar from '@/components/elements/MainSidebar';
 import MainWrapper from '@/components/elements/MainWrapper';
 import { ServerMobileMenu } from '@/components/elements/MobileFullScreenMenu';
@@ -324,8 +324,8 @@ const ServerRouter = () => {
                             <ul
                                 ref={navContainerRef}
                                 onScroll={handleScroll}
-                                data-hydrodactyl-subnav-routes-wrapper=''
-                                className='hydrodactyl-subnav-routes-wrapper flex-grow overflow-y-auto'
+                                data-nebulodactyl-subnav-routes-wrapper=''
+                                className='nebulodactyl-subnav-routes-wrapper flex-grow overflow-y-auto'
                             >
                                 {/* Dynamic navigation items from routes config */}
                                 {navRoutes.map((route) => (
@@ -357,8 +357,8 @@ const ServerRouter = () => {
                             <TransferListener />
                             <WebsocketHandler />
                             <main
-                                data-hydrodactyl-main=''
-                                data-hydrodactyl-transitionrouter=''
+                                data-nebulodactyl-main=''
+                                data-nebulodactyl-transitionrouter=''
                                 className='relative inset-[1px] w-full h-full overflow-y-auto overflow-x-hidden rounded-md bg-[#08080875]'
                             >
                                 {inConflictState &&

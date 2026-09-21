@@ -17,7 +17,7 @@ abstract class AbstractMarketplaceSource implements MarketplaceSource
 
     public function __construct()
     {
-        $this->cacheTtl = (int) config('hydrodactyl.marketplace.cache_ttl', 120);
+        $this->cacheTtl = (int) config('nebulodactyl.marketplace.cache_ttl', 120);
     }
 
     /**
@@ -29,12 +29,12 @@ abstract class AbstractMarketplaceSource implements MarketplaceSource
     {
         $version = config('app.version', 'unknown');
 
-        return "hydrodactyl/{$version} (hydrodactyl.dev)";
+        return "nebulodactyl/{$version} (github.com/Sudo-Ivan/Nebulodactyl)";
     }
 
     protected function timeout(): int
     {
-        return (int) config('hydrodactyl.marketplace.timeout', 15);
+        return (int) config('nebulodactyl.marketplace.timeout', 15);
     }
 
     /**

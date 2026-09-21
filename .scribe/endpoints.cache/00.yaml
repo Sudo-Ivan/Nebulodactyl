@@ -37,12 +37,12 @@ endpoints:
           <html>
 
           <head>
-              <title>Hydrodactyl API Reference</title>
+              <title>Nebulodactyl API Reference</title>
               <meta charset="utf-8" />
               <meta name="viewport" content="width=device-width, initial-scale=1" />
               <script id="browser-logger-active">
           (function() {
-              const ENDPOINT = 'http://hydrodactyl.test/_boost/browser-logs';
+              const ENDPOINT = 'http://nebulodactyl.test/_boost/browser-logs';
               const logQueue = [];
               let flushTimeout = null;
 
@@ -235,7 +235,7 @@ endpoints:
               <script src="https://cdn.jsdelivr.net/npm/@scalar/api-reference"></script>
 
               <script>
-                 Scalar.createApiReference('#app', {"theme":"kepler","layout":"modern","proxyUrl":"https:\/\/proxy.scalar.com","showSidebar":true,"hideModels":false,"hideDownloadButton":false,"hideTestRequestButton":false,"hideSearch":false,"darkMode":true,"forceDarkModeState":"dark","hideDarkModeToggle":true,"searchHotKey":"k","metaData":{"title":"Hydrodactyl API Reference"},"favicon":"","hiddenClients":[],"defaultHttpClient":{"targetId":"shell","clientKey":"curl"},"withDefaultFonts":true,"defaultOpenAllTags":false,"_integration":"laravel","url":"\/docs\/openapi.yaml"})
+                 Scalar.createApiReference('#app', {"theme":"kepler","layout":"modern","proxyUrl":"https:\/\/proxy.scalar.com","showSidebar":true,"hideModels":false,"hideDownloadButton":false,"hideTestRequestButton":false,"hideSearch":false,"darkMode":true,"forceDarkModeState":"dark","hideDarkModeToggle":true,"searchHotKey":"k","metaData":{"title":"Nebulodactyl API Reference"},"favicon":"","hiddenClients":[],"defaultHttpClient":{"targetId":"shell","clientKey":"curl"},"withDefaultFonts":true,"defaultOpenAllTags":false,"_integration":"laravel","url":"\/docs\/openapi.yaml"})
               </script>
           </body>
 

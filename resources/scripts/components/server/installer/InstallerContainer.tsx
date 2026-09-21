@@ -41,7 +41,7 @@ const PAGE_SIZE = 24;
 const ALL_PROVIDERS = 'all';
 
 /** localStorage key for the user's last-opened section (plugin/mod). */
-const TAB_STORAGE_KEY = 'hydrodactyl:installer:tab';
+const TAB_STORAGE_KEY = 'nebulodactyl:installer:tab';
 
 /**
  * Read the user's last-used section from localStorage so they don't have to

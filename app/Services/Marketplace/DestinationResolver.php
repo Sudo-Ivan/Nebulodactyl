@@ -18,7 +18,7 @@ class DestinationResolver
      */
     public function directory(string $type): string
     {
-        return (string) config('hydrodactyl.marketplace.destinations.' . $type, $type === 'plugin' ? 'plugins' : 'mods');
+        return (string) config('nebulodactyl.marketplace.destinations.' . $type, $type === 'plugin' ? 'plugins' : 'mods');
     }
 
     /**

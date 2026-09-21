@@ -53,7 +53,7 @@ services:
             context: .
             args:
                 DEV: "true"
-        image: hydrodactyl:develop
+        image: nebulodactyl:develop
         restart: no
         ports:
             - '3000:80'
@@ -94,7 +94,7 @@ services:
             HASHIDS_LENGTH: 8
             WINGS_INTERNAL_IP: 'wings'
             WINGS_DIR: '${PWD}/srv/'
-            HYDRODACTYL_DOCKER_DEV: 'true'
+            NEBULODACTYL_DOCKER_DEV: 'true'
             MAIL_HOST: 'mailhog'
             MAIL_PORT: 1025
             MAIL_DRIVER: 'smtp'
@@ -102,7 +102,7 @@ services:
             AWS_DEFAULT_REGION: 'us-east-1'
             AWS_ACCESS_KEY_ID: 'garage'
             AWS_SECRET_ACCESS_KEY: 'garage'
-            AWS_BACKUPS_BUCKET: 'hydrodactyl'
+            AWS_BACKUPS_BUCKET: 'nebulodactyl'
             AWS_ENDPOINT: 'http://garage:3900'
             AWS_USE_PATH_STYLE_ENDPOINT: 'true'
 

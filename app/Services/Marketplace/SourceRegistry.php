@@ -61,7 +61,7 @@ class SourceRegistry
 
     protected function makeModrinth(): ?MarketplaceSource
     {
-        if (!config('hydrodactyl.marketplace.sources.modrinth.enabled', true)) {
+        if (!config('nebulodactyl.marketplace.sources.modrinth.enabled', true)) {
             return null;
         }
 
@@ -70,7 +70,7 @@ class SourceRegistry
 
     protected function makeHangar(): ?MarketplaceSource
     {
-        if (!config('hydrodactyl.marketplace.sources.hangar.enabled', true)) {
+        if (!config('nebulodactyl.marketplace.sources.hangar.enabled', true)) {
             return null;
         }
 
@@ -79,7 +79,7 @@ class SourceRegistry
 
     protected function makeSpiget(): ?MarketplaceSource
     {
-        if (!config('hydrodactyl.marketplace.sources.spiget.enabled', true)) {
+        if (!config('nebulodactyl.marketplace.sources.spiget.enabled', true)) {
             return null;
         }
 

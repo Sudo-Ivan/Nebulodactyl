@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Hydrodactyl API Documentation</title>
+    <title>Nebulodactyl API Documentation</title>
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 
@@ -26,7 +26,7 @@
             </style>
 
     <script>
-        var tryItOutBaseUrl = "http://hydrodactyl.test";
+        var tryItOutBaseUrl = "http://nebulodactyl.test";
         var useCsrf = Boolean();
         var csrfUrl = "/sanctum/csrf-cookie";
     </script>
@@ -782,7 +782,7 @@ the server, and the user can keep trying to restore, or just use the reinstall b
     <div class="content">
         <h1 id="introduction">Introduction</h1>
 <aside>
-    <strong>Base URL</strong>: <code>http://hydrodactyl.test</code>
+    <strong>Base URL</strong>: <code>http://nebulodactyl.test</code>
 </aside>
 <pre><code>This documentation aims to provide all the information you need to work with our API.
 
@@ -809,14 +809,14 @@ You can switch the language used with the tabs at the top right (or from the nav
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/application/panel/status" \
+    --get "http://nebulodactyl.test/api/application/panel/status" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/application/panel/status"
+    "http://nebulodactyl.test/api/application/panel/status"
 );
 
 const headers = {
@@ -945,14 +945,14 @@ the request.</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/application/users" \
+    --get "http://nebulodactyl.test/api/application/users" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/application/users"
+    "http://nebulodactyl.test/api/application/users"
 );
 
 const headers = {
@@ -1080,14 +1080,14 @@ were defined in the request.</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/application/users/53a19ab0-1df9-48f0-a70f-ee3cdcdb73db" \
+    --get "http://nebulodactyl.test/api/application/users/53a19ab0-1df9-48f0-a70f-ee3cdcdb73db" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/application/users/53a19ab0-1df9-48f0-a70f-ee3cdcdb73db"
+    "http://nebulodactyl.test/api/application/users/53a19ab0-1df9-48f0-a70f-ee3cdcdb73db"
 );
 
 const headers = {
@@ -1227,14 +1227,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/application/users/external/architecto" \
+    --get "http://nebulodactyl.test/api/application/users/external/architecto" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/application/users/external/architecto"
+    "http://nebulodactyl.test/api/application/users/external/architecto"
 );
 
 const headers = {
@@ -1375,7 +1375,7 @@ header on successful creation.</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/application/users" \
+    "http://nebulodactyl.test/api/application/users" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -1393,7 +1393,7 @@ header on successful creation.</h2>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/application/users"
+    "http://nebulodactyl.test/api/application/users"
 );
 
 const headers = {
@@ -1618,14 +1618,14 @@ on successful deletion.</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://hydrodactyl.test/api/application/users/53a19ab0-1df9-48f0-a70f-ee3cdcdb73db" \
+    "http://nebulodactyl.test/api/application/users/53a19ab0-1df9-48f0-a70f-ee3cdcdb73db" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/application/users/53a19ab0-1df9-48f0-a70f-ee3cdcdb73db"
+    "http://nebulodactyl.test/api/application/users/53a19ab0-1df9-48f0-a70f-ee3cdcdb73db"
 );
 
 const headers = {
@@ -1742,14 +1742,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/application/nodes" \
+    --get "http://nebulodactyl.test/api/application/nodes" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/application/nodes"
+    "http://nebulodactyl.test/api/application/nodes"
 );
 
 const headers = {
@@ -1878,7 +1878,7 @@ to this endpoint and get back a list of all Nodes satisfying the requirements.</
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/application/nodes/deployable" \
+    --get "http://nebulodactyl.test/api/application/nodes/deployable" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -1894,7 +1894,7 @@ to this endpoint and get back a list of all Nodes satisfying the requirements.</
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/application/nodes/deployable"
+    "http://nebulodactyl.test/api/application/nodes/deployable"
 );
 
 const headers = {
@@ -2081,14 +2081,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/application/nodes/04ab367f-0fd1-4290-9074-340adeae0e0e" \
+    --get "http://nebulodactyl.test/api/application/nodes/04ab367f-0fd1-4290-9074-340adeae0e0e" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/application/nodes/04ab367f-0fd1-4290-9074-340adeae0e0e"
+    "http://nebulodactyl.test/api/application/nodes/04ab367f-0fd1-4290-9074-340adeae0e0e"
 );
 
 const headers = {
@@ -2230,14 +2230,14 @@ with, and the node is known.</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/application/nodes/04ab367f-0fd1-4290-9074-340adeae0e0e/configuration" \
+    --get "http://nebulodactyl.test/api/application/nodes/04ab367f-0fd1-4290-9074-340adeae0e0e/configuration" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/application/nodes/04ab367f-0fd1-4290-9074-340adeae0e0e/configuration"
+    "http://nebulodactyl.test/api/application/nodes/04ab367f-0fd1-4290-9074-340adeae0e0e/configuration"
 );
 
 const headers = {
@@ -2378,7 +2378,7 @@ status response on success.</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/application/nodes" \
+    "http://nebulodactyl.test/api/application/nodes" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -2407,7 +2407,7 @@ status response on success.</h2>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/application/nodes"
+    "http://nebulodactyl.test/api/application/nodes"
 );
 
 const headers = {
@@ -2793,14 +2793,14 @@ currently attached to it.</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://hydrodactyl.test/api/application/nodes/04ab367f-0fd1-4290-9074-340adeae0e0e" \
+    "http://nebulodactyl.test/api/application/nodes/04ab367f-0fd1-4290-9074-340adeae0e0e" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/application/nodes/04ab367f-0fd1-4290-9074-340adeae0e0e"
+    "http://nebulodactyl.test/api/application/nodes/04ab367f-0fd1-4290-9074-340adeae0e0e"
 );
 
 const headers = {
@@ -2917,14 +2917,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/application/nodes/04ab367f-0fd1-4290-9074-340adeae0e0e/allocations" \
+    --get "http://nebulodactyl.test/api/application/nodes/04ab367f-0fd1-4290-9074-340adeae0e0e/allocations" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/application/nodes/04ab367f-0fd1-4290-9074-340adeae0e0e/allocations"
+    "http://nebulodactyl.test/api/application/nodes/04ab367f-0fd1-4290-9074-340adeae0e0e/allocations"
 );
 
 const headers = {
@@ -3064,7 +3064,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/application/nodes/04ab367f-0fd1-4290-9074-340adeae0e0e/allocations" \
+    "http://nebulodactyl.test/api/application/nodes/04ab367f-0fd1-4290-9074-340adeae0e0e/allocations" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -3079,7 +3079,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/application/nodes/04ab367f-0fd1-4290-9074-340adeae0e0e/allocations"
+    "http://nebulodactyl.test/api/application/nodes/04ab367f-0fd1-4290-9074-340adeae0e0e/allocations"
 );
 
 const headers = {
@@ -3243,14 +3243,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://hydrodactyl.test/api/application/nodes/04ab367f-0fd1-4290-9074-340adeae0e0e/allocations/1" \
+    "http://nebulodactyl.test/api/application/nodes/04ab367f-0fd1-4290-9074-340adeae0e0e/allocations/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/application/nodes/04ab367f-0fd1-4290-9074-340adeae0e0e/allocations/1"
+    "http://nebulodactyl.test/api/application/nodes/04ab367f-0fd1-4290-9074-340adeae0e0e/allocations/1"
 );
 
 const headers = {
@@ -3379,14 +3379,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/application/locations" \
+    --get "http://nebulodactyl.test/api/application/locations" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/application/locations"
+    "http://nebulodactyl.test/api/application/locations"
 );
 
 const headers = {
@@ -3513,14 +3513,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/application/locations/1" \
+    --get "http://nebulodactyl.test/api/application/locations/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/application/locations/1"
+    "http://nebulodactyl.test/api/application/locations/1"
 );
 
 const headers = {
@@ -3661,7 +3661,7 @@ new location attached.</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/application/locations" \
+    "http://nebulodactyl.test/api/application/locations" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -3673,7 +3673,7 @@ new location attached.</h2>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/application/locations"
+    "http://nebulodactyl.test/api/application/locations"
 );
 
 const headers = {
@@ -3807,14 +3807,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://hydrodactyl.test/api/application/locations/1" \
+    "http://nebulodactyl.test/api/application/locations/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/application/locations/1"
+    "http://nebulodactyl.test/api/application/locations/1"
 );
 
 const headers = {
@@ -3931,7 +3931,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/application/servers" \
+    --get "http://nebulodactyl.test/api/application/servers" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -3942,7 +3942,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/application/servers"
+    "http://nebulodactyl.test/api/application/servers"
 );
 
 const headers = {
@@ -4086,14 +4086,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a" \
+    --get "http://nebulodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a"
+    "http://nebulodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a"
 );
 
 const headers = {
@@ -4233,14 +4233,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/application/servers/external/architecto" \
+    --get "http://nebulodactyl.test/api/application/servers/external/architecto" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/application/servers/external/architecto"
+    "http://nebulodactyl.test/api/application/servers/external/architecto"
 );
 
 const headers = {
@@ -4380,7 +4380,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/application/servers" \
+    "http://nebulodactyl.test/api/application/servers" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -4425,7 +4425,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/application/servers"
+    "http://nebulodactyl.test/api/application/servers"
 );
 
 const headers = {
@@ -4998,14 +4998,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a/suspend" \
+    "http://nebulodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a/suspend" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a/suspend"
+    "http://nebulodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a/suspend"
 );
 
 const headers = {
@@ -5122,14 +5122,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a/unsuspend" \
+    "http://nebulodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a/unsuspend" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a/unsuspend"
+    "http://nebulodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a/unsuspend"
 );
 
 const headers = {
@@ -5246,14 +5246,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a/reinstall" \
+    "http://nebulodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a/reinstall" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a/reinstall"
+    "http://nebulodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a/reinstall"
 );
 
 const headers = {
@@ -5370,14 +5370,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://hydrodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a" \
+    "http://nebulodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a"
+    "http://nebulodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a"
 );
 
 const headers = {
@@ -5494,14 +5494,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://hydrodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a/architecto" \
+    "http://nebulodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a/architecto" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a/architecto"
+    "http://nebulodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a/architecto"
 );
 
 const headers = {
@@ -5631,14 +5631,14 @@ server.</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a/databases" \
+    --get "http://nebulodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a/databases" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a/databases"
+    "http://nebulodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a/databases"
 );
 
 const headers = {
@@ -5778,14 +5778,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a/databases/16" \
+    --get "http://nebulodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a/databases/16" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a/databases/16"
+    "http://nebulodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a/databases/16"
 );
 
 const headers = {
@@ -5937,7 +5937,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a/databases" \
+    "http://nebulodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a/databases" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -5950,7 +5950,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a/databases"
+    "http://nebulodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a/databases"
 );
 
 const headers = {
@@ -6110,14 +6110,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a/databases/16/reset-password" \
+    "http://nebulodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a/databases/16/reset-password" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a/databases/16/reset-password"
+    "http://nebulodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a/databases/16/reset-password"
 );
 
 const headers = {
@@ -6246,14 +6246,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://hydrodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a/databases/16" \
+    "http://nebulodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a/databases/16" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a/databases/16"
+    "http://nebulodactyl.test/api/application/servers/98296a05-b75f-42ea-b206-9b7031d5547a/databases/16"
 );
 
 const headers = {
@@ -6382,14 +6382,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/application/nests" \
+    --get "http://nebulodactyl.test/api/application/nests" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/application/nests"
+    "http://nebulodactyl.test/api/application/nests"
 );
 
 const headers = {
@@ -6516,14 +6516,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/application/nests/784cda76-49c9-4d77-bea2-16da77475106" \
+    --get "http://nebulodactyl.test/api/application/nests/784cda76-49c9-4d77-bea2-16da77475106" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/application/nests/784cda76-49c9-4d77-bea2-16da77475106"
+    "http://nebulodactyl.test/api/application/nests/784cda76-49c9-4d77-bea2-16da77475106"
 );
 
 const headers = {
@@ -6663,14 +6663,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/application/nests/784cda76-49c9-4d77-bea2-16da77475106/eggs" \
+    --get "http://nebulodactyl.test/api/application/nests/784cda76-49c9-4d77-bea2-16da77475106/eggs" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/application/nests/784cda76-49c9-4d77-bea2-16da77475106/eggs"
+    "http://nebulodactyl.test/api/application/nests/784cda76-49c9-4d77-bea2-16da77475106/eggs"
 );
 
 const headers = {
@@ -6810,14 +6810,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/application/nests/784cda76-49c9-4d77-bea2-16da77475106/eggs/05d97f0d-093e-4b9e-8127-c5ff9a1c7188" \
+    --get "http://nebulodactyl.test/api/application/nests/784cda76-49c9-4d77-bea2-16da77475106/eggs/05d97f0d-093e-4b9e-8127-c5ff9a1c7188" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/application/nests/784cda76-49c9-4d77-bea2-16da77475106/eggs/05d97f0d-093e-4b9e-8127-c5ff9a1c7188"
+    "http://nebulodactyl.test/api/application/nests/784cda76-49c9-4d77-bea2-16da77475106/eggs/05d97f0d-093e-4b9e-8127-c5ff9a1c7188"
 );
 
 const headers = {
@@ -6970,14 +6970,14 @@ request, including servers the user has access to as a subuser.</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client" \
+    --get "http://nebulodactyl.test/api/client" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client"
+    "http://nebulodactyl.test/api/client"
 );
 
 const headers = {
@@ -7105,14 +7105,14 @@ accessible to the current user. Used to populate the category filter dropdown.</
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/filter-options" \
+    --get "http://nebulodactyl.test/api/client/filter-options" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/filter-options"
+    "http://nebulodactyl.test/api/client/filter-options"
 );
 
 const headers = {
@@ -7239,14 +7239,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/permissions" \
+    --get "http://nebulodactyl.test/api/client/permissions" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/permissions"
+    "http://nebulodactyl.test/api/client/permissions"
 );
 
 const headers = {
@@ -7373,14 +7373,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/version" \
+    --get "http://nebulodactyl.test/api/client/version" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/version"
+    "http://nebulodactyl.test/api/client/version"
 );
 
 const headers = {
@@ -7507,14 +7507,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/nests" \
+    --get "http://nebulodactyl.test/api/client/nests" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/nests"
+    "http://nebulodactyl.test/api/client/nests"
 );
 
 const headers = {
@@ -7641,14 +7641,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/nests/784cda76-49c9-4d77-bea2-16da77475106" \
+    --get "http://nebulodactyl.test/api/client/nests/784cda76-49c9-4d77-bea2-16da77475106" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/nests/784cda76-49c9-4d77-bea2-16da77475106"
+    "http://nebulodactyl.test/api/client/nests/784cda76-49c9-4d77-bea2-16da77475106"
 );
 
 const headers = {
@@ -7788,14 +7788,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/account" \
+    --get "http://nebulodactyl.test/api/client/account" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/account"
+    "http://nebulodactyl.test/api/client/account"
 );
 
 const headers = {
@@ -7924,14 +7924,14 @@ will return a 400 error.</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/account/two-factor" \
+    --get "http://nebulodactyl.test/api/client/account/two-factor" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/account/two-factor"
+    "http://nebulodactyl.test/api/client/account/two-factor"
 );
 
 const headers = {
@@ -8058,14 +8058,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/account/two-factor" \
+    "http://nebulodactyl.test/api/client/account/two-factor" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/account/two-factor"
+    "http://nebulodactyl.test/api/client/account/two-factor"
 );
 
 const headers = {
@@ -8170,14 +8170,14 @@ is valid.</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/account/two-factor/disable" \
+    "http://nebulodactyl.test/api/client/account/two-factor/disable" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/account/two-factor/disable"
+    "http://nebulodactyl.test/api/client/account/two-factor/disable"
 );
 
 const headers = {
@@ -8281,7 +8281,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://hydrodactyl.test/api/client/account/email" \
+    "http://nebulodactyl.test/api/client/account/email" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -8292,7 +8292,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/account/email"
+    "http://nebulodactyl.test/api/client/account/email"
 );
 
 const headers = {
@@ -8414,7 +8414,7 @@ out immediately.</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://hydrodactyl.test/api/client/account/password" \
+    "http://nebulodactyl.test/api/client/account/password" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -8425,7 +8425,7 @@ out immediately.</h2>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/account/password"
+    "http://nebulodactyl.test/api/client/account/password"
 );
 
 const headers = {
@@ -8546,14 +8546,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/account/activity" \
+    --get "http://nebulodactyl.test/api/client/account/activity" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/account/activity"
+    "http://nebulodactyl.test/api/client/account/activity"
 );
 
 const headers = {
@@ -8680,14 +8680,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/account/api-keys" \
+    --get "http://nebulodactyl.test/api/client/account/api-keys" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/account/api-keys"
+    "http://nebulodactyl.test/api/client/account/api-keys"
 );
 
 const headers = {
@@ -8814,7 +8814,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/account/api-keys" \
+    "http://nebulodactyl.test/api/client/account/api-keys" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -8828,7 +8828,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/account/api-keys"
+    "http://nebulodactyl.test/api/client/account/api-keys"
 );
 
 const headers = {
@@ -8966,14 +8966,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://hydrodactyl.test/api/client/account/api-keys/architecto" \
+    "http://nebulodactyl.test/api/client/account/api-keys/architecto" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/account/api-keys/architecto"
+    "http://nebulodactyl.test/api/client/account/api-keys/architecto"
 );
 
 const headers = {
@@ -9091,14 +9091,14 @@ user account.</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/account/ssh-keys" \
+    --get "http://nebulodactyl.test/api/client/account/ssh-keys" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/account/ssh-keys"
+    "http://nebulodactyl.test/api/client/account/ssh-keys"
 );
 
 const headers = {
@@ -9225,7 +9225,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/account/ssh-keys" \
+    "http://nebulodactyl.test/api/client/account/ssh-keys" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -9237,7 +9237,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/account/ssh-keys"
+    "http://nebulodactyl.test/api/client/account/ssh-keys"
 );
 
 const headers = {
@@ -9371,7 +9371,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/account/ssh-keys/remove" \
+    "http://nebulodactyl.test/api/client/account/ssh-keys/remove" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -9382,7 +9382,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/account/ssh-keys/remove"
+    "http://nebulodactyl.test/api/client/account/ssh-keys/remove"
 );
 
 const headers = {
@@ -9504,14 +9504,14 @@ client using the API.</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a" \
+    --get "http://nebulodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a"
+    "http://nebulodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a"
 );
 
 const headers = {
@@ -9651,14 +9651,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/resources" \
+    --get "http://nebulodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/resources" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/resources"
+    "http://nebulodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/resources"
 );
 
 const headers = {
@@ -9798,14 +9798,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/subdomain" \
+    --get "http://nebulodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/subdomain" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/subdomain"
+    "http://nebulodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/subdomain"
 );
 
 const headers = {
@@ -9945,7 +9945,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/subdomain" \
+    "http://nebulodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/subdomain" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -9957,7 +9957,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/subdomain"
+    "http://nebulodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/subdomain"
 );
 
 const headers = {
@@ -10104,14 +10104,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://hydrodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/subdomain" \
+    "http://nebulodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/subdomain" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/subdomain"
+    "http://nebulodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/subdomain"
 );
 
 const headers = {
@@ -10228,7 +10228,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/subdomain/check-availability" \
+    "http://nebulodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/subdomain/check-availability" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -10240,7 +10240,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/subdomain/check-availability"
+    "http://nebulodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/subdomain/check-availability"
 );
 
 const headers = {
@@ -10387,7 +10387,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/marketplace/search" \
+    --get "http://nebulodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/marketplace/search" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -10404,7 +10404,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/marketplace/search"
+    "http://nebulodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/marketplace/search"
 );
 
 const headers = {
@@ -10641,7 +10641,7 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/marketplace/project" \
+    --get "http://nebulodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/marketplace/project" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -10656,7 +10656,7 @@ Must be one of:
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/marketplace/project"
+    "http://nebulodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/marketplace/project"
 );
 
 const headers = {
@@ -10867,7 +10867,7 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/marketplace/resolve" \
+    --get "http://nebulodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/marketplace/resolve" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -10881,7 +10881,7 @@ Must be one of:
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/marketplace/resolve"
+    "http://nebulodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/marketplace/resolve"
 );
 
 const headers = {
@@ -11082,14 +11082,14 @@ real jar files when rendering the &quot;Installed&quot; view.</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/marketplace/installed" \
+    --get "http://nebulodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/marketplace/installed" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/marketplace/installed"
+    "http://nebulodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/marketplace/installed"
 );
 
 const headers = {
@@ -11230,7 +11230,7 @@ after a successful daemon pull.</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/marketplace/installed" \
+    "http://nebulodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/marketplace/installed" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -11247,7 +11247,7 @@ after a successful daemon pull.</h2>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/marketplace/installed"
+    "http://nebulodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/marketplace/installed"
 );
 
 const headers = {
@@ -11462,7 +11462,7 @@ frontend (via the existing file-delete endpoint).</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://hydrodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/marketplace/installed" \
+    "http://nebulodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/marketplace/installed" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -11475,7 +11475,7 @@ frontend (via the existing file-delete endpoint).</h2>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/marketplace/installed"
+    "http://nebulodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/marketplace/installed"
 );
 
 const headers = {
@@ -11639,14 +11639,14 @@ than a hard-coded list (auto-supports loaders Modrinth adds later).</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/marketplace/loaders" \
+    --get "http://nebulodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/marketplace/loaders" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/marketplace/loaders"
+    "http://nebulodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/marketplace/loaders"
 );
 
 const headers = {
@@ -11786,14 +11786,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/marketplace/game-versions" \
+    --get "http://nebulodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/marketplace/game-versions" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/marketplace/game-versions"
+    "http://nebulodactyl.test/api/client/servers/98296a05-b75f-42ea-b206-9b7031d5547a/marketplace/game-versions"
 );
 
 const headers = {
@@ -11934,14 +11934,14 @@ client using the API.</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a" \
+    --get "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a"
 );
 
 const headers = {
@@ -12083,14 +12083,14 @@ as well as ensure that user's only perform actions they're allowed to.</p>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/websocket" \
+    --get "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/websocket" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/websocket"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/websocket"
 );
 
 const headers = {
@@ -12232,14 +12232,14 @@ a flood of unnecessary API calls.</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/resources" \
+    --get "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/resources" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/resources"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/resources"
 );
 
 const headers = {
@@ -12379,14 +12379,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/activity" \
+    --get "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/activity" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/activity"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/activity"
 );
 
 const headers = {
@@ -12526,7 +12526,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/command" \
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/command" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -12537,7 +12537,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/command"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/command"
 );
 
 const headers = {
@@ -12671,7 +12671,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/power" \
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/power" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -12682,7 +12682,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/power"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/power"
 );
 
 const headers = {
@@ -12818,14 +12818,14 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/databases" \
+    --get "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/databases" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/databases"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/databases"
 );
 
 const headers = {
@@ -12966,14 +12966,14 @@ the caller.</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/databases/16/rotate-password" \
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/databases/16/rotate-password" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/databases/16/rotate-password"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/databases/16/rotate-password"
 );
 
 const headers = {
@@ -13102,14 +13102,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/databases/16" \
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/databases/16" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/databases/16"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/databases/16"
 );
 
 const headers = {
@@ -13238,7 +13238,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/list" \
+    --get "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/list" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -13249,7 +13249,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/list"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/list"
 );
 
 const headers = {
@@ -13406,7 +13406,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/contents" \
+    --get "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/contents" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -13417,7 +13417,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/contents"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/contents"
 );
 
 const headers = {
@@ -13575,7 +13575,7 @@ download a given file.</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/download" \
+    --get "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/download" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -13586,7 +13586,7 @@ download a given file.</h2>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/download"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/download"
 );
 
 const headers = {
@@ -13743,7 +13743,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/rename" \
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/rename" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -13760,7 +13760,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/rename"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/rename"
 );
 
 const headers = {
@@ -13936,7 +13936,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/copy" \
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/copy" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -13947,7 +13947,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/copy"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/copy"
 );
 
 const headers = {
@@ -14081,7 +14081,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/write" \
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/write" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -14092,7 +14092,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/write"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/write"
 );
 
 const headers = {
@@ -14226,7 +14226,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/compress" \
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/compress" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -14240,7 +14240,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/compress"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/compress"
 );
 
 const headers = {
@@ -14391,7 +14391,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/decompress" \
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/decompress" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -14403,7 +14403,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/decompress"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/decompress"
 );
 
 const headers = {
@@ -14550,7 +14550,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/delete" \
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/delete" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -14564,7 +14564,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/delete"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/delete"
 );
 
 const headers = {
@@ -14715,7 +14715,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/create-folder" \
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/create-folder" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -14727,7 +14727,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/create-folder"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/create-folder"
 );
 
 const headers = {
@@ -14874,7 +14874,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/chmod" \
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/chmod" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -14891,7 +14891,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/chmod"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/chmod"
 );
 
 const headers = {
@@ -15067,7 +15067,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/pull" \
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/pull" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -15082,7 +15082,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/pull"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/pull"
 );
 
 const headers = {
@@ -15288,14 +15288,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/upload" \
+    --get "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/upload" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/upload"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/files/upload"
 );
 
 const headers = {
@@ -15435,14 +15435,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/schedules" \
+    --get "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/schedules" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/schedules"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/schedules"
 );
 
 const headers = {
@@ -15582,7 +15582,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/schedules" \
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/schedules" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -15600,7 +15600,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/schedules"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/schedules"
 );
 
 const headers = {
@@ -15845,14 +15845,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3" \
+    --get "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3"
 );
 
 const headers = {
@@ -16004,7 +16004,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3" \
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -16022,7 +16022,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3"
 );
 
 const headers = {
@@ -16280,14 +16280,14 @@ to pass. This does not care about the schedule state.</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3/execute" \
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3/execute" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3/execute"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3/execute"
 );
 
 const headers = {
@@ -16416,14 +16416,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3" \
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3"
 );
 
 const headers = {
@@ -16552,7 +16552,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3/tasks" \
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3/tasks" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -16567,7 +16567,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3/tasks"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3/tasks"
 );
 
 const headers = {
@@ -16777,7 +16777,7 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3/tasks/3" \
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3/tasks/3" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -16792,7 +16792,7 @@ Must be one of:
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3/tasks/3"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3/tasks/3"
 );
 
 const headers = {
@@ -17015,14 +17015,14 @@ for this schedule their sequence IDs are decremented properly.</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3/tasks/3" \
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3/tasks/3" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3/tasks/3"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3/tasks/3"
 );
 
 const headers = {
@@ -17164,14 +17164,14 @@ they are currently assigned as the primary for this server.</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations" \
+    --get "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations"
 );
 
 const headers = {
@@ -17311,14 +17311,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations" \
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations"
 );
 
 const headers = {
@@ -17435,7 +17435,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations/1" \
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -17446,7 +17446,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations/1"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations/1"
 );
 
 const headers = {
@@ -17592,14 +17592,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations/1/primary" \
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations/1/primary" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations/1/primary"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations/1/primary"
 );
 
 const headers = {
@@ -17728,14 +17728,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations/1" \
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations/1"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations/1"
 );
 
 const headers = {
@@ -17864,14 +17864,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/users" \
+    --get "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/users" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/users"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/users"
 );
 
 const headers = {
@@ -18011,7 +18011,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/users" \
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/users" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -18025,7 +18025,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/users"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/users"
 );
 
 const headers = {
@@ -18176,14 +18176,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/wings/architecto/users/53a19ab0-1df9-48f0-a70f-ee3cdcdb73db" \
+    --get "http://nebulodactyl.test/api/client/servers/wings/architecto/users/53a19ab0-1df9-48f0-a70f-ee3cdcdb73db" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/architecto/users/53a19ab0-1df9-48f0-a70f-ee3cdcdb73db"
+    "http://nebulodactyl.test/api/client/servers/wings/architecto/users/53a19ab0-1df9-48f0-a70f-ee3cdcdb73db"
 );
 
 const headers = {
@@ -18335,7 +18335,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/users/53a19ab0-1df9-48f0-a70f-ee3cdcdb73db" \
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/users/53a19ab0-1df9-48f0-a70f-ee3cdcdb73db" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -18348,7 +18348,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/users/53a19ab0-1df9-48f0-a70f-ee3cdcdb73db"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/users/53a19ab0-1df9-48f0-a70f-ee3cdcdb73db"
 );
 
 const headers = {
@@ -18498,14 +18498,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/users/53a19ab0-1df9-48f0-a70f-ee3cdcdb73db" \
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/users/53a19ab0-1df9-48f0-a70f-ee3cdcdb73db" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/users/53a19ab0-1df9-48f0-a70f-ee3cdcdb73db"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/users/53a19ab0-1df9-48f0-a70f-ee3cdcdb73db"
 );
 
 const headers = {
@@ -18635,14 +18635,14 @@ result set.</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/backups" \
+    --get "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/backups" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/backups"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/backups"
 );
 
 const headers = {
@@ -18782,7 +18782,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/backups" \
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/backups" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -18795,7 +18795,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/backups"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/backups"
 );
 
 const headers = {
@@ -18965,14 +18965,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80" \
+    --get "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80"
 );
 
 const headers = {
@@ -19126,14 +19126,14 @@ which the user is redirected to.</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80/download" \
+    --get "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80/download" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80/download"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80/download"
 );
 
 const headers = {
@@ -19285,14 +19285,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80/lock" \
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80/lock" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80/lock"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80/lock"
 );
 
 const headers = {
@@ -19425,14 +19425,14 @@ Otherwise, the archive will simply be unpacked over the existing files.</p>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80/restore" \
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80/restore" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80/restore"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80/restore"
 );
 
 const headers = {
@@ -19562,14 +19562,14 @@ being stored.</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80" \
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80"
 );
 
 const headers = {
@@ -19698,14 +19698,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/startup" \
+    --get "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/startup" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/startup"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/startup"
 );
 
 const headers = {
@@ -19845,7 +19845,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/startup/variable" \
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/startup/variable" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -19856,7 +19856,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/startup/variable"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/startup/variable"
 );
 
 const headers = {
@@ -20002,7 +20002,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/startup/command" \
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/startup/command" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -20013,7 +20013,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/startup/command"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/startup/command"
 );
 
 const headers = {
@@ -20147,14 +20147,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/startup/command/default" \
+    --get "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/startup/command/default" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/startup/command/default"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/startup/command/default"
 );
 
 const headers = {
@@ -20294,14 +20294,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/startup/command/process" \
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/startup/command/process" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/startup/command/process"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/startup/command/process"
 );
 
 const headers = {
@@ -20418,7 +20418,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/settings/rename" \
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/settings/rename" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -20430,7 +20430,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/settings/rename"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/settings/rename"
 );
 
 const headers = {
@@ -20577,14 +20577,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/settings/reinstall" \
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/settings/reinstall" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/settings/reinstall"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/settings/reinstall"
 );
 
 const headers = {
@@ -20701,7 +20701,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/settings/egg/preview" \
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/settings/egg/preview" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -20713,7 +20713,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/settings/egg/preview"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/settings/egg/preview"
 );
 
 const headers = {
@@ -20860,7 +20860,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/settings/egg/apply" \
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/settings/egg/apply" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -20879,7 +20879,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/settings/egg/apply"
+    "http://nebulodactyl.test/api/client/servers/wings/98296a05-b75f-42ea-b206-9b7031d5547a/settings/egg/apply"
 );
 
 const headers = {
@@ -21116,14 +21116,14 @@ client using the API.</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a" \
+    --get "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a"
 );
 
 const headers = {
@@ -21265,14 +21265,14 @@ as well as ensure that user's only perform actions they're allowed to.</p>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/websocket" \
+    --get "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/websocket" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/websocket"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/websocket"
 );
 
 const headers = {
@@ -21414,14 +21414,14 @@ a flood of unnecessary API calls.</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/resources" \
+    --get "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/resources" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/resources"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/resources"
 );
 
 const headers = {
@@ -21561,14 +21561,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/activity" \
+    --get "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/activity" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/activity"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/activity"
 );
 
 const headers = {
@@ -21708,7 +21708,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/command" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/command" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -21719,7 +21719,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/command"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/command"
 );
 
 const headers = {
@@ -21853,7 +21853,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/power" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/power" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -21864,7 +21864,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/power"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/power"
 );
 
 const headers = {
@@ -22000,14 +22000,14 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/databases" \
+    --get "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/databases" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/databases"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/databases"
 );
 
 const headers = {
@@ -22148,14 +22148,14 @@ the caller.</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/databases/16/rotate-password" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/databases/16/rotate-password" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/databases/16/rotate-password"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/databases/16/rotate-password"
 );
 
 const headers = {
@@ -22284,14 +22284,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/databases/16" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/databases/16" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/databases/16"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/databases/16"
 );
 
 const headers = {
@@ -22420,7 +22420,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/list" \
+    --get "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/list" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -22431,7 +22431,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/list"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/list"
 );
 
 const headers = {
@@ -22588,7 +22588,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/contents" \
+    --get "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/contents" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -22599,7 +22599,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/contents"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/contents"
 );
 
 const headers = {
@@ -22757,7 +22757,7 @@ download a given file.</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/download" \
+    --get "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/download" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -22768,7 +22768,7 @@ download a given file.</h2>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/download"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/download"
 );
 
 const headers = {
@@ -22925,7 +22925,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/rename" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/rename" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -22942,7 +22942,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/rename"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/rename"
 );
 
 const headers = {
@@ -23118,7 +23118,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/copy" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/copy" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -23129,7 +23129,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/copy"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/copy"
 );
 
 const headers = {
@@ -23263,7 +23263,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/write" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/write" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -23274,7 +23274,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/write"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/write"
 );
 
 const headers = {
@@ -23408,7 +23408,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/compress" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/compress" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -23422,7 +23422,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/compress"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/compress"
 );
 
 const headers = {
@@ -23573,7 +23573,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/decompress" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/decompress" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -23585,7 +23585,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/decompress"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/decompress"
 );
 
 const headers = {
@@ -23732,7 +23732,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/delete" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/delete" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -23746,7 +23746,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/delete"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/delete"
 );
 
 const headers = {
@@ -23897,7 +23897,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/create-folder" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/create-folder" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -23909,7 +23909,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/create-folder"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/create-folder"
 );
 
 const headers = {
@@ -24056,7 +24056,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/chmod" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/chmod" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -24073,7 +24073,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/chmod"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/chmod"
 );
 
 const headers = {
@@ -24249,7 +24249,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/pull" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/pull" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -24264,7 +24264,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/pull"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/pull"
 );
 
 const headers = {
@@ -24470,14 +24470,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/upload" \
+    --get "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/upload" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/upload"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/files/upload"
 );
 
 const headers = {
@@ -24617,14 +24617,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/schedules" \
+    --get "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/schedules" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/schedules"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/schedules"
 );
 
 const headers = {
@@ -24764,7 +24764,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/schedules" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/schedules" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -24782,7 +24782,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/schedules"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/schedules"
 );
 
 const headers = {
@@ -25027,14 +25027,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3" \
+    --get "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3"
 );
 
 const headers = {
@@ -25186,7 +25186,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -25204,7 +25204,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3"
 );
 
 const headers = {
@@ -25462,14 +25462,14 @@ to pass. This does not care about the schedule state.</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3/execute" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3/execute" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3/execute"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3/execute"
 );
 
 const headers = {
@@ -25598,14 +25598,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3"
 );
 
 const headers = {
@@ -25734,7 +25734,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3/tasks" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3/tasks" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -25749,7 +25749,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3/tasks"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3/tasks"
 );
 
 const headers = {
@@ -25959,7 +25959,7 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3/tasks/3" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3/tasks/3" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -25974,7 +25974,7 @@ Must be one of:
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3/tasks/3"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3/tasks/3"
 );
 
 const headers = {
@@ -26197,14 +26197,14 @@ for this schedule their sequence IDs are decremented properly.</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3/tasks/3" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3/tasks/3" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3/tasks/3"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/schedules/3/tasks/3"
 );
 
 const headers = {
@@ -26346,14 +26346,14 @@ they are currently assigned as the primary for this server.</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations" \
+    --get "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations"
 );
 
 const headers = {
@@ -26493,14 +26493,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations"
 );
 
 const headers = {
@@ -26617,7 +26617,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations/1" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -26628,7 +26628,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations/1"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations/1"
 );
 
 const headers = {
@@ -26774,14 +26774,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations/1/primary" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations/1/primary" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations/1/primary"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations/1/primary"
 );
 
 const headers = {
@@ -26910,14 +26910,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations/1" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations/1"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/network/allocations/1"
 );
 
 const headers = {
@@ -27046,14 +27046,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/users" \
+    --get "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/users" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/users"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/users"
 );
 
 const headers = {
@@ -27193,7 +27193,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/users" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/users" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -27207,7 +27207,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/users"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/users"
 );
 
 const headers = {
@@ -27358,14 +27358,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/elytra/architecto/users/53a19ab0-1df9-48f0-a70f-ee3cdcdb73db" \
+    --get "http://nebulodactyl.test/api/client/servers/elytra/architecto/users/53a19ab0-1df9-48f0-a70f-ee3cdcdb73db" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/architecto/users/53a19ab0-1df9-48f0-a70f-ee3cdcdb73db"
+    "http://nebulodactyl.test/api/client/servers/elytra/architecto/users/53a19ab0-1df9-48f0-a70f-ee3cdcdb73db"
 );
 
 const headers = {
@@ -27517,7 +27517,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/users/53a19ab0-1df9-48f0-a70f-ee3cdcdb73db" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/users/53a19ab0-1df9-48f0-a70f-ee3cdcdb73db" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -27530,7 +27530,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/users/53a19ab0-1df9-48f0-a70f-ee3cdcdb73db"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/users/53a19ab0-1df9-48f0-a70f-ee3cdcdb73db"
 );
 
 const headers = {
@@ -27680,14 +27680,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/users/53a19ab0-1df9-48f0-a70f-ee3cdcdb73db" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/users/53a19ab0-1df9-48f0-a70f-ee3cdcdb73db" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/users/53a19ab0-1df9-48f0-a70f-ee3cdcdb73db"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/users/53a19ab0-1df9-48f0-a70f-ee3cdcdb73db"
 );
 
 const headers = {
@@ -27816,14 +27816,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/jobs" \
+    --get "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/jobs" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/jobs"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/jobs"
 );
 
 const headers = {
@@ -27963,14 +27963,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/jobs" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/jobs" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/jobs"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/jobs"
 );
 
 const headers = {
@@ -28087,14 +28087,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/jobs/architecto" \
+    --get "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/jobs/architecto" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/jobs/architecto"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/jobs/architecto"
 );
 
 const headers = {
@@ -28246,14 +28246,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/jobs/architecto" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/jobs/architecto" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/jobs/architecto"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/jobs/architecto"
 );
 
 const headers = {
@@ -28382,14 +28382,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups" \
+    --get "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups"
 );
 
 const headers = {
@@ -28529,7 +28529,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -28542,7 +28542,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups"
 );
 
 const headers = {
@@ -28712,14 +28712,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups/delete-all" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups/delete-all" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups/delete-all"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups/delete-all"
 );
 
 const headers = {
@@ -28836,14 +28836,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups/bulk-delete" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups/bulk-delete" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups/bulk-delete"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups/bulk-delete"
 );
 
 const headers = {
@@ -28960,14 +28960,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80" \
+    --get "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80"
 );
 
 const headers = {
@@ -29119,14 +29119,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80/download" \
+    --get "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80/download" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80/download"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80/download"
 );
 
 const headers = {
@@ -29278,14 +29278,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80/restore" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80/restore" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80/restore"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80/restore"
 );
 
 const headers = {
@@ -29414,7 +29414,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80/rename" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80/rename" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -29425,7 +29425,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80/rename"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80/rename"
 );
 
 const headers = {
@@ -29571,14 +29571,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80/lock" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80/lock" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80/lock"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80/lock"
 );
 
 const headers = {
@@ -29707,14 +29707,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80"
 );
 
 const headers = {
@@ -29843,14 +29843,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/startup" \
+    --get "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/startup" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/startup"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/startup"
 );
 
 const headers = {
@@ -29990,7 +29990,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/startup/variable" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/startup/variable" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -30001,7 +30001,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/startup/variable"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/startup/variable"
 );
 
 const headers = {
@@ -30147,7 +30147,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/startup/command" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/startup/command" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -30158,7 +30158,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/startup/command"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/startup/command"
 );
 
 const headers = {
@@ -30292,14 +30292,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/startup/command/default" \
+    --get "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/startup/command/default" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/startup/command/default"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/startup/command/default"
 );
 
 const headers = {
@@ -30439,14 +30439,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/startup/command/process" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/startup/command/process" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/startup/command/process"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/startup/command/process"
 );
 
 const headers = {
@@ -30563,7 +30563,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/settings/rename" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/settings/rename" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -30575,7 +30575,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/settings/rename"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/settings/rename"
 );
 
 const headers = {
@@ -30722,14 +30722,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/settings/reinstall" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/settings/reinstall" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/settings/reinstall"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/settings/reinstall"
 );
 
 const headers = {
@@ -30846,7 +30846,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/settings/egg/preview" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/settings/egg/preview" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -30858,7 +30858,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/settings/egg/preview"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/settings/egg/preview"
 );
 
 const headers = {
@@ -31005,7 +31005,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/settings/egg/apply" \
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/settings/egg/apply" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -31024,7 +31024,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/settings/egg/apply"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/settings/egg/apply"
 );
 
 const headers = {
@@ -31260,14 +31260,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/operations" \
+    --get "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/operations" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/operations"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/operations"
 );
 
 const headers = {
@@ -31407,14 +31407,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/operations/architecto" \
+    --get "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/operations/architecto" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/operations/architecto"
+    "http://nebulodactyl.test/api/client/servers/elytra/98296a05-b75f-42ea-b206-9b7031d5547a/operations/architecto"
 );
 
 const headers = {
@@ -31568,7 +31568,7 @@ based credentials.</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/remote/sftp/auth" \
+    "http://nebulodactyl.test/api/remote/sftp/auth" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -31581,7 +31581,7 @@ based credentials.</h2>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/remote/sftp/auth"
+    "http://nebulodactyl.test/api/remote/sftp/auth"
 );
 
 const headers = {
@@ -31730,14 +31730,14 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/remote/servers" \
+    --get "http://nebulodactyl.test/api/remote/servers" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/remote/servers"
+    "http://nebulodactyl.test/api/remote/servers"
 );
 
 const headers = {
@@ -31866,14 +31866,14 @@ a Wings reboot would completely stop those processes.</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/remote/servers/reset" \
+    "http://nebulodactyl.test/api/remote/servers/reset" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/remote/servers/reset"
+    "http://nebulodactyl.test/api/remote/servers/reset"
 );
 
 const headers = {
@@ -31977,7 +31977,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/remote/activity" \
+    "http://nebulodactyl.test/api/remote/activity" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -31996,7 +31996,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/remote/activity"
+    "http://nebulodactyl.test/api/remote/activity"
 );
 
 const headers = {
@@ -32198,14 +32198,14 @@ that the state of the server matches the Panel at all times.</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/remote/servers/98296a05-b75f-42ea-b206-9b7031d5547a" \
+    --get "http://nebulodactyl.test/api/remote/servers/98296a05-b75f-42ea-b206-9b7031d5547a" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/remote/servers/98296a05-b75f-42ea-b206-9b7031d5547a"
+    "http://nebulodactyl.test/api/remote/servers/98296a05-b75f-42ea-b206-9b7031d5547a"
 );
 
 const headers = {
@@ -32344,14 +32344,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/remote/servers/98296a05-b75f-42ea-b206-9b7031d5547a/install" \
+    --get "http://nebulodactyl.test/api/remote/servers/98296a05-b75f-42ea-b206-9b7031d5547a/install" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/remote/servers/98296a05-b75f-42ea-b206-9b7031d5547a/install"
+    "http://nebulodactyl.test/api/remote/servers/98296a05-b75f-42ea-b206-9b7031d5547a/install"
 );
 
 const headers = {
@@ -32490,7 +32490,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/remote/servers/98296a05-b75f-42ea-b206-9b7031d5547a/install" \
+    "http://nebulodactyl.test/api/remote/servers/98296a05-b75f-42ea-b206-9b7031d5547a/install" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -32502,7 +32502,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/remote/servers/98296a05-b75f-42ea-b206-9b7031d5547a/install"
+    "http://nebulodactyl.test/api/remote/servers/98296a05-b75f-42ea-b206-9b7031d5547a/install"
 );
 
 const headers = {
@@ -32669,14 +32669,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/remote/servers/98296a05-b75f-42ea-b206-9b7031d5547a/rustic-config" \
+    --get "http://nebulodactyl.test/api/remote/servers/98296a05-b75f-42ea-b206-9b7031d5547a/rustic-config" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/remote/servers/98296a05-b75f-42ea-b206-9b7031d5547a/rustic-config"
+    "http://nebulodactyl.test/api/remote/servers/98296a05-b75f-42ea-b206-9b7031d5547a/rustic-config"
 );
 
 const headers = {
@@ -32816,7 +32816,7 @@ backup sizes need to be recalculated to account for deduplication.</p>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/remote/servers/98296a05-b75f-42ea-b206-9b7031d5547a/backup-sizes" \
+    "http://nebulodactyl.test/api/remote/servers/98296a05-b75f-42ea-b206-9b7031d5547a/backup-sizes" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -32833,7 +32833,7 @@ backup sizes need to be recalculated to account for deduplication.</p>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/remote/servers/98296a05-b75f-42ea-b206-9b7031d5547a/backup-sizes"
+    "http://nebulodactyl.test/api/remote/servers/98296a05-b75f-42ea-b206-9b7031d5547a/backup-sizes"
 );
 
 const headers = {
@@ -33009,14 +33009,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/remote/servers/98296a05-b75f-42ea-b206-9b7031d5547a/transfer/failure" \
+    --get "http://nebulodactyl.test/api/remote/servers/98296a05-b75f-42ea-b206-9b7031d5547a/transfer/failure" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/remote/servers/98296a05-b75f-42ea-b206-9b7031d5547a/transfer/failure"
+    "http://nebulodactyl.test/api/remote/servers/98296a05-b75f-42ea-b206-9b7031d5547a/transfer/failure"
 );
 
 const headers = {
@@ -33155,14 +33155,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/remote/servers/98296a05-b75f-42ea-b206-9b7031d5547a/transfer/success" \
+    --get "http://nebulodactyl.test/api/remote/servers/98296a05-b75f-42ea-b206-9b7031d5547a/transfer/success" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/remote/servers/98296a05-b75f-42ea-b206-9b7031d5547a/transfer/success"
+    "http://nebulodactyl.test/api/remote/servers/98296a05-b75f-42ea-b206-9b7031d5547a/transfer/success"
 );
 
 const headers = {
@@ -33301,14 +33301,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/remote/servers/98296a05-b75f-42ea-b206-9b7031d5547a/transfer/failure" \
+    "http://nebulodactyl.test/api/remote/servers/98296a05-b75f-42ea-b206-9b7031d5547a/transfer/failure" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/remote/servers/98296a05-b75f-42ea-b206-9b7031d5547a/transfer/failure"
+    "http://nebulodactyl.test/api/remote/servers/98296a05-b75f-42ea-b206-9b7031d5547a/transfer/failure"
 );
 
 const headers = {
@@ -33425,14 +33425,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/remote/servers/98296a05-b75f-42ea-b206-9b7031d5547a/transfer/success" \
+    "http://nebulodactyl.test/api/remote/servers/98296a05-b75f-42ea-b206-9b7031d5547a/transfer/success" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/remote/servers/98296a05-b75f-42ea-b206-9b7031d5547a/transfer/success"
+    "http://nebulodactyl.test/api/remote/servers/98296a05-b75f-42ea-b206-9b7031d5547a/transfer/success"
 );
 
 const headers = {
@@ -33549,14 +33549,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://hydrodactyl.test/api/remote/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80" \
+    --get "http://nebulodactyl.test/api/remote/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/remote/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80"
+    "http://nebulodactyl.test/api/remote/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80"
 );
 
 const headers = {
@@ -33695,14 +33695,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://hydrodactyl.test/api/remote/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80" \
+    "http://nebulodactyl.test/api/remote/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/remote/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80"
+    "http://nebulodactyl.test/api/remote/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80"
 );
 
 const headers = {
@@ -33819,7 +33819,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/remote/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80" \
+    "http://nebulodactyl.test/api/remote/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -33840,7 +33840,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/remote/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80"
+    "http://nebulodactyl.test/api/remote/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80"
 );
 
 const headers = {
@@ -34081,14 +34081,14 @@ table tracking for this restoration.</p>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://hydrodactyl.test/api/remote/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80/restore" \
+    "http://nebulodactyl.test/api/remote/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80/restore" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/remote/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80/restore"
+    "http://nebulodactyl.test/api/remote/backups/42b7ae7d-5420-4ccb-bf36-fb8cff31cf80/restore"
 );
 
 const headers = {
@@ -34205,7 +34205,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://hydrodactyl.test/api/remote/elytra-jobs/architecto" \
+    "http://nebulodactyl.test/api/remote/elytra-jobs/architecto" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -34228,7 +34228,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://hydrodactyl.test/api/remote/elytra-jobs/architecto"
+    "http://nebulodactyl.test/api/remote/elytra-jobs/architecto"
 );
 
 const headers = {

@@ -2,7 +2,7 @@
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability in Hydrodactyl, please report it privately by emailing **[naterfute@blueprint.zip](mailto:naterfute@blueprint.zip)**.
+If you discover a security vulnerability in Nebulodactyl, please report it privately by emailing **[ivan@quad4.io](mailto:ivan@quad4.io)**.
 
 > [!WARNING]
 > **Please do not report security vulnerabilities through public channels or GitHub Issues.** Public disclosure before a fix is available may put users and deployments at risk.
@@ -13,7 +13,7 @@ When reporting a vulnerability, please include as much relevant information as p
 
 * A description of the vulnerability and its potential impact.
 * Steps to reproduce the issue.
-* The affected Hydrodactyl version(s).
+* The affected Nebulodactyl version(s).
 * Any relevant logs, screenshots, or proof-of-concept information.
 
 ## Disclosure Process
@@ -22,4 +22,4 @@ Once a vulnerability has been confirmed, we will work to develop and release an 
 
 For affected versions, we will create a **GitHub Security Advisory** and coordinate public disclosure. We generally aim to disclose the vulnerability **two to four weeks after a release containing the fix**, giving users reasonable time to update their installations.
 
-We appreciate responsible disclosure and the time taken by security researchers and community members to help keep Hydrodactyl secure.
+We appreciate responsible disclosure and the time taken by security researchers and community members to help keep Nebulodactyl secure.

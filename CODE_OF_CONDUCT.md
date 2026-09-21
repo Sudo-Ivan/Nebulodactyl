@@ -2,7 +2,7 @@
 
 <br/>
 
-Hydrodactyl is a project of the [Blueprint Framework](https://blueprint.zip) and is governed by the Blueprint community code of conduct.
+Nebulodactyl is a fork of Hydrodactyl, a project of the [Blueprint Framework](https://blueprint.zip), and is governed by the Blueprint community code of conduct.
 
 ## Our commitment
 

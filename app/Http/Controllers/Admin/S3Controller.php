@@ -134,7 +134,7 @@ class S3Controller extends Controller
             $client = new S3Client($config);
 
             $bucket = $request->input('bucket_name');
-            $key = '_hydrodactyl_test_' . time();
+            $key = '_nebulodactyl_test_' . time();
 
             $message = "This is an upload test, If your reading this, it succeeded, happy Servering";
             $content = str_repeat($message . "\n", (int) (10 * 1024 * 1024 / (strlen($message) + 1)));

@@ -47,7 +47,7 @@ services:
         image: redis:alpine
         restart: no
     panel:
-        image: ghcr.io/blueprintframework/hydrodactyl:latest
+        image: ghcr.io/sudo-ivan/nebulodactyl:latest
         restart: no
         ports:
             - '80:80'

@@ -254,7 +254,7 @@ class ModrinthSource extends AbstractMarketplaceSource
      */
     protected function downloadHosts(): array
     {
-        $hosts = config('hydrodactyl.marketplace.sources.modrinth.download_hosts', ['cdn.modrinth.com']);
+        $hosts = config('nebulodactyl.marketplace.sources.modrinth.download_hosts', ['cdn.modrinth.com']);
 
         return is_array($hosts) ? array_values(array_map('strval', $hosts)) : ['cdn.modrinth.com'];
     }
@@ -300,12 +300,12 @@ class ModrinthSource extends AbstractMarketplaceSource
 
     private function url(string $path): string
     {
-        return rtrim((string) config('hydrodactyl.marketplace.sources.modrinth.base_url'), '/') . '/' . ltrim($path, '/');
+        return rtrim((string) config('nebulodactyl.marketplace.sources.modrinth.base_url'), '/') . '/' . ltrim($path, '/');
     }
 
     private function webUrl(string $path): string
     {
-        return rtrim((string) config('hydrodactyl.marketplace.sources.modrinth.web_url'), '/') . '/' . ltrim($path, '/');
+        return rtrim((string) config('nebulodactyl.marketplace.sources.modrinth.web_url'), '/') . '/' . ltrim($path, '/');
     }
 
     private function nullableString(mixed $value): ?string

@@ -22,5 +22,5 @@ php artisan p:bucket:make \
   --bucket-name="$BUCKET" \
   --use-path-style-endpoint="$PATH_STYLE" \
   --enabled=1 \
-  --name="Hydrodactyl" \
-  --description="Hydrodactyl"
+  --name="Nebulodactyl" \
+  --description="Nebulodactyl"
