@@ -94,7 +94,7 @@ function LoginContainer() {
         >
             {({ isSubmitting }) => (
                 <LoginFormContainer className='mx-auto flex w-full max-w-md flex-col gap-6 rounded-2xl border border-cream-500/10 bg-bg-raised p-8 shadow-xl shadow-black/40'>
-                    <TitleSection title='Login' />
+                    <TitleSection title='Sign in' subtitle='Use your panel account to continue.' />
                     <div className=''>
                         <Field
                             id='user'

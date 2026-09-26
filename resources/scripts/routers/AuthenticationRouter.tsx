@@ -7,47 +7,63 @@ import ResetPasswordContainer from '@/components/auth/ResetPasswordContainer';
 import Logo from '@/components/elements/NebulaLogo';
 import { NotFound } from '@/components/elements/ScreenBlock';
 
-const AuthenticationRouter = () => {
-    return (
-        <div
-            className={
-                'absolute w-full h-full flex justify-center items-center rounded-md [--page-padding:--spacing(8)]'
-            }
-        >
-            <div
-                style={{
-                    backgroundImage: 'url(/assets/auth-noise.png)',
-                    backgroundSize: '1920px 1080px',
-                    backgroundRepeat: 'repeat',
-                    backgroundPosition: '0 0',
-                }}
-                className='pointer-events-none fixed inset-0 z-1 opacity-[0.4]'
-            ></div>
-            <div className='flex size-full flex-col lg:flex-row'>
-                <div className='w-full max-w-4xl z-2 flex items-start sm:items-center bg-bg-lowered min-h-dvh lg:min-h-0 px-6 py-8 sm:px-[calc(var(--page-padding)*3)] overflow-y-auto'>
-                    <Routes>
-                        <Route path='login' element={<LoginContainer />} />
-                        <Route path='login/checkpoint/*' element={<LoginCheckpointContainer />} />
-                        <Route path='password' element={<ForgotPasswordContainer />} />
-                        <Route path='password/reset/:token' element={<ResetPasswordContainer />} />
-                        <Route path='*' element={<NotFound />} />
-                    </Routes>
-                </div>
-                <div className='hidden lg:block w-full relative'>
-                    <div className='flex items-center gap-4 h-6 absolute right-(--page-padding) top-(--page-padding) text-lg'>
-                        <Logo className='h-full w-full flex inset-0' />
-                        <div className='border-l border-gray-200 h-full' />
-                        Games
-                    </div>
+import './auth-scene.css';
 
-                    {/* Gradients */}
-                    <div className='opacity-50'>
-                        <div className='absolute inset-0 bg-gradient-to-tr from-transparent via-brand-400/5 to-brand-600/10' />
-                        <div className='absolute inset-0 bg-gradient-to-tr to-transparent via-brand-400/5 from-brand-600/10' />
-                        <div className='absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-brand-500/13 to-transparent' />
-                    </div>
-                </div>
+const getSiteName = () => {
+    const siteConfiguration = (window as Record<string, unknown>).SiteConfiguration as { name?: unknown } | undefined;
+
+    return typeof siteConfiguration?.name === 'string' && siteConfiguration.name.trim().length > 0
+        ? siteConfiguration.name
+        : 'Nebulodactyl';
+};
+
+const AuthScene = () => {
+    const siteName = getSiteName();
+
+    return (
+        <aside className='relative hidden min-h-dvh flex-1 flex-col justify-between px-14 py-12 xl:px-20 lg:flex'>
+            <div className='flex items-center gap-3'>
+                <Logo className='h-9 w-9' uniqueId='auth-scene' />
+                <span className='text-sm font-medium tracking-wide text-cream-300'>{siteName}</span>
             </div>
+            <div className='max-w-lg'>
+                <h1 className='text-4xl font-semibold tracking-tight text-cream-100 xl:text-5xl'>
+                    Game servers, from one panel.
+                </h1>
+                <p className='mt-4 max-w-md text-sm leading-6 text-cream-400'>
+                    Console, files, backups, and schedules for the machines you already run. Nodes can join over a
+                    Nebula overlay and keep panel traffic on your private network.
+                </p>
+            </div>
+            <ul className='max-w-lg list-none divide-y divide-cream-500/15 border-y border-cream-500/15 text-sm text-cream-300'>
+                <li className='py-3'>Private network or overlay</li>
+                <li className='py-3'>Mods and plugins from the panel</li>
+                <li className='py-3'>Backups on any S3-compatible store</li>
+            </ul>
+        </aside>
+    );
+};
+
+const AuthenticationRouter = () => {
+    const siteName = getSiteName();
+
+    return (
+        <div className='absolute inset-0 flex min-h-dvh w-full'>
+            <div className='auth-scene pointer-events-none absolute inset-0' aria-hidden='true' />
+            <div className='relative z-2 flex min-h-dvh w-full flex-col justify-center overflow-y-auto px-6 py-10 lg:w-[32rem] lg:shrink-0 lg:border-r lg:border-cream-500/10 lg:bg-bg/92 lg:px-8'>
+                <div className='mb-8 flex items-center gap-3 lg:hidden'>
+                    <Logo className='h-8 w-8' uniqueId='auth-mobile' />
+                    <span className='text-sm font-semibold tracking-wide text-cream-100'>{siteName}</span>
+                </div>
+                <Routes>
+                    <Route path='login' element={<LoginContainer />} />
+                    <Route path='login/checkpoint/*' element={<LoginCheckpointContainer />} />
+                    <Route path='password' element={<ForgotPasswordContainer />} />
+                    <Route path='password/reset/:token' element={<ResetPasswordContainer />} />
+                    <Route path='*' element={<NotFound />} />
+                </Routes>
+            </div>
+            <AuthScene />
         </div>
     );
 };
