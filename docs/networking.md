@@ -37,7 +37,7 @@ SESSION_SECURE_COOKIE=true
 ```
 
 Use `TRUSTED_PROXIES=*` only when the panel port cannot be reached except
-through the proxy. A ready-made Compose stack with Traefik labels lives in
+through the proxy. A ready-made Compose stack for Coolify lives in
 `examples/coolify/`.
 
 Whatever proxy you use must forward WebSocket upgrades. The server console

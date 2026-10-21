@@ -26,13 +26,22 @@ the proxy addresses explicitly instead so clients cannot spoof
    `HASHIDS_SALT`.
 3. Coolify handles TLS and routing automatically. The container exposes a
    `/healthz` endpoint that Coolify uses for health checks, and the image
-   carries a matching `HEALTHCHECK` instruction.
+   carries a matching `HEALTHCHECK` instruction. Set Ports Exposes to
+   `8080`: that is the port nginx listens on inside the container.
 
 ## WebSockets
 
-The console websocket connects to the node daemon directly, not through
-the panel proxy, so no proxy configuration is needed for it. If you proxy
-the daemon too, forward the `Upgrade` and `Connection` headers.
+The console websocket goes from the browser to the node daemon directly,
+not through the panel, so the node FQDN must be reachable over `wss` with
+a valid certificate from the browser. An http node cannot be used from an
+https panel because browsers block mixed content.
+
+If the daemon is proxied by Traefik or Coolify too, mark the node Behind
+Proxy, set the node's Daemon Port in the panel to the public port (443),
+and keep the daemon's own listen port in its local config. Traefik
+forwards `Upgrade` headers by default, so no extra labels are needed. The
+Comet daemon sends a ping every 25 seconds, so idle consoles stay open
+behind proxies with idle timeouts.
 
 ## SQLite
 

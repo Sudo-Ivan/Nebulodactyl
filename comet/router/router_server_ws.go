@@ -15,6 +15,11 @@ import (
 	"golang.org/x/time/rate"
 )
 
+// websocketKeepaliveInterval is how often a ping is sent on console
+// websockets so that proxies with idle timeouts do not drop quiet
+// connections.
+const websocketKeepaliveInterval = 25 * time.Second
+
 var expectedCloseCodes = []int{
 	ws.CloseGoingAway,
 	ws.CloseAbnormalClosure,
@@ -95,6 +100,28 @@ func getServerWebsocket(c *gin.Context) {
 		case <-s.Context().Done():
 			cancel()
 			break
+		}
+	}()
+
+	// Send a periodic ping so proxies with idle timeouts (nginx 60s,
+	// Cloudflare 100s, Traefik) do not drop a quiet console connection.
+	// Browsers answer pings with pongs automatically and WriteControl is
+	// safe to call concurrently with other writers.
+	go func() {
+		ticker := time.NewTicker(websocketKeepaliveInterval)
+		defer ticker.Stop()
+
+		for {
+			select {
+			case <-ctx.Done():
+				return
+			case <-ticker.C:
+				if err := handler.Connection.WriteControl(ws.PingMessage, nil, time.Now().Add(10*time.Second)); err != nil {
+					handler.Logger().WithError(err).Debug("failed to send websocket keepalive ping")
+					cancel()
+					return
+				}
+			}
 		}
 	}()
 

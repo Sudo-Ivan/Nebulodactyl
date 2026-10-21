@@ -36,7 +36,7 @@ class Comet implements Daemon
             'allowed_mounts' => $node->mounts->pluck('source')->toArray(),
             'remote' => route('index'),
             'allowed_origins' => [
-                config('app.url'),
+                rtrim((string) config('app.url'), '/'),
             ],
         ];
     }
