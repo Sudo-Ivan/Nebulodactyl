@@ -57,7 +57,7 @@
         "motion": "^14.2.0",
         "pathe": "^2.0.3",
         "qrcode.react": "^4.2.0",
-        "react": "^19.3.0",
+        "react": "^19.3.1",
         "react-chartjs-2": "^5.3.1",
         "react-dom": "^19.3.0",
         "react-fast-compare": "^3.2.2",
